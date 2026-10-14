@@ -2,7 +2,9 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Project } from "@/lib/content";
+import { site } from "@site";
 import { ArrowRight } from "@/components/ui/icons";
+import { Glyph } from "@/components/ui/Glyph";
 import { SectionHeading } from "./SectionHeading";
 
 /**
@@ -38,9 +40,10 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
       className="card card-strong stack-in group grid overflow-hidden transition-colors hover:border-accent focus-visible:border-accent lg:min-h-[480px] lg:grid-cols-[1fr_1.2fr]"
     >
       <div className="flex flex-col p-7 sm:p-9">
-        <div className="flex items-baseline gap-4">
+        <div className="flex items-center gap-4">
           <span className="font-mono text-[44px] font-light leading-none text-accent">{p.number}</span>
           <span className="label text-faint">{dict.kinds[p.kind]}</span>
+          <Glyph shape={site.kindShapes[p.kind]} className="ml-auto h-14 w-14" />
         </div>
         <h3 className="mt-6 text-[26px] leading-tight tracking-tight transition-colors group-hover:text-accent sm:text-[30px]">
           {p.title}

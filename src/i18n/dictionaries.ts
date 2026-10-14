@@ -10,7 +10,7 @@ export interface Dictionary {
   nav: { projects: string; services: string; contact: string; hire: string; skip: string; language: string };
   role: string;
   kinds: Record<ProjectKind, string>;
-  hero: { eyebrow: string; title: string; intro: string; cta: string; seeProjects: string };
+  hero: { eyebrow: string; title: string; intro: string; cta: string; seeProjects: string; steps: [string, string, string] };
   projects: { eyebrow: string; title: string; intro: string; viewCase: string };
   services: {
     eyebrow: string;
@@ -42,44 +42,45 @@ export interface Dictionary {
 
 const en: Dictionary = {
   meta: {
-    title: "Icaro Torres — Data & Automation Portfolio",
+    title: "Business Automation & AI Integration | Google Sheets, n8n, Apps Script",
     description:
-      "Portfolio of Icaro Torres, freelance data & automation specialist: Power BI and Google Sheets dashboards, Apps Script automation, data cleaning and automated reports.",
+      "Icaro Torres connects the tools small businesses and online stores already use, automates the manual work and adds AI where it saves time. Google Sheets, Apps Script, n8n, Make, Claude and OpenAI APIs, plus clear dashboards.",
   },
   nav: { projects: "Projects", services: "Services", contact: "Contact", hire: "Hire me", skip: "Skip to content", language: "Language" },
-  role: "Data & Automation Freelancer",
-  kinds: { dashboard: "Dashboard / BI", automation: "Automation / Apps Script", cleaning: "Data cleaning / AI" },
+  role: "Business Automation & AI Integration",
+  kinds: { integration: "Integration", automation: "Automation", ai: "AI integration", extraction: "Data extraction", dashboard: "Dashboard" },
   hero: {
     eyebrow: "Icaro Torres",
     title: "My portfolio",
     intro:
-      "I turn messy spreadsheets into clear dashboards and automations that give people their hours back. Here's some of my work.",
+      "I connect the tools your business already uses, automate the manual work and add AI where it actually saves time. Plus clear dashboards to see the results.",
     cta: "Hire me on Upwork",
     seeProjects: "See projects",
+    steps: ["Connect", "Automate", "See results"],
   },
   projects: {
     eyebrow: "Work",
     title: "Projects",
-    intro: "Click any one to see how it was done.",
+    intro: "Workflows built for small businesses and online stores. Open one to see the problem, the build and the result.",
     viewCase: "View case study",
   },
   services: {
     eyebrow: "Services",
     title: "How I can help",
     items: [
-      { title: "Dashboards & reports", tools: "Power BI · Google Sheets · Looker Studio", body: "Your numbers in one clear view, built on the tools you already use." },
-      { title: "Sheets & Apps Script automation", tools: "Apps Script · Sheets · Forms · Gmail", body: "The copy-paste work, done for you every day." },
-      { title: "Data cleaning & import", tools: "Python · SQL · Power Query", body: "Messy exports turned into one table you can trust." },
-      { title: "AI-assisted analysis", tools: "Python · LLM APIs · Sheets", body: "Thousands of reviews or answers sorted by topic, checked by a human." },
+      { title: "Process automation", tools: "Google Sheets · Apps Script · n8n · Make", body: "Connect the tools you already use and stop copy-pasting. Orders, forms, stock and emails that update themselves." },
+      { title: "AI integration", tools: "Claude & OpenAI APIs · n8n · Apps Script", body: "AI inside the workflows you already have: classify requests, summarize text, draft replies. A person still checks what matters." },
+      { title: "Data extraction & cleanup", tools: "Python · SQL · Power Query", body: "CSV, Excel, PDF and web data turned into clean, usable tables." },
+      { title: "Dashboards & reporting", tools: "Power BI · Google Sheets · Looker Studio", body: "Clear reports that show what the automation saves and where the money goes." },
     ],
   },
   contact: {
     eyebrow: "Contact",
     title: "Let's talk?",
-    body: "Send me a message on Upwork.",
+    body: "Tell me what you still do by hand. Send me a message on Upwork.",
     cta: "Hire me on Upwork",
   },
-  footer: { note: "Demo projects use public or fictitious data" },
+  footer: { note: "Demo projects use public, simulated or fictitious data" },
   project: {
     allProjects: "All projects",
     project: "Project",
@@ -103,44 +104,45 @@ const en: Dictionary = {
 
 const pt: Dictionary = {
   meta: {
-    title: "Icaro Torres — Portfólio de Dados e Automação",
+    title: "Automação de Processos e Integração de IA | Google Sheets, n8n, Apps Script",
     description:
-      "Portfólio de Icaro Torres, freelancer de dados e automação: dashboards em Power BI e Google Sheets, automações com Apps Script, limpeza de dados e relatórios automáticos.",
+      "Icaro Torres conecta as ferramentas que pequenas empresas e lojas online já usam, automatiza o trabalho manual e adiciona IA onde ela realmente economiza tempo. Google Sheets, Apps Script, n8n, Make, APIs da Claude e da OpenAI, além de dashboards claros.",
   },
   nav: { projects: "Projetos", services: "Serviços", contact: "Contato", hire: "Contratar", skip: "Pular para o conteúdo", language: "Idioma" },
-  role: "Freelancer de Dados e Automação",
-  kinds: { dashboard: "Dashboard / BI", automation: "Automação / Apps Script", cleaning: "Limpeza de dados / IA" },
+  role: "Automação de Processos e Integração de IA",
+  kinds: { integration: "Integração", automation: "Automação", ai: "Integração de IA", extraction: "Extração de dados", dashboard: "Dashboard" },
   hero: {
     eyebrow: "Icaro Torres",
     title: "Meu portfólio",
     intro:
-      "Transformo planilhas bagunçadas em dashboards claros e automações que devolvem horas da semana. Aqui estão alguns trabalhos.",
+      "Conecto as ferramentas que sua empresa já usa, automatizo o trabalho manual e adiciono IA onde ela realmente economiza tempo. E dashboards claros para ver os resultados.",
     cta: "Contratar no Upwork",
     seeProjects: "Ver projetos",
+    steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
   projects: {
     eyebrow: "Trabalhos",
     title: "Projetos",
-    intro: "Clique em um para ver como foi feito.",
+    intro: "Fluxos feitos para pequenas empresas e lojas online. Abra um para ver o problema, a solução e o resultado.",
     viewCase: "Ver estudo de caso",
   },
   services: {
     eyebrow: "Serviços",
     title: "Como posso ajudar",
     items: [
-      { title: "Dashboards e relatórios", tools: "Power BI · Google Sheets · Looker Studio", body: "Seus números numa visão clara, nas ferramentas que você já usa." },
-      { title: "Automação com Sheets e Apps Script", tools: "Apps Script · Sheets · Forms · Gmail", body: "O trabalho de copiar e colar, feito sozinho todo dia." },
-      { title: "Limpeza e importação de dados", tools: "Python · SQL · Power Query", body: "Exportações bagunçadas viram uma tabela confiável." },
-      { title: "Análise com apoio de IA", tools: "Python · APIs de LLM · Sheets", body: "Milhares de avaliações ou respostas organizadas por tema, com conferência humana." },
+      { title: "Automação de processos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecte as ferramentas que você já usa e pare de copiar e colar. Pedidos, formulários, estoque e e-mails que se atualizam sozinhos." },
+      { title: "Integração de IA", tools: "APIs da Claude e da OpenAI · n8n · Apps Script", body: "IA dentro dos fluxos que você já tem: classificar pedidos, resumir textos, rascunhar respostas. Uma pessoa continua conferindo o que importa." },
+      { title: "Extração e limpeza de dados", tools: "Python · SQL · Power Query", body: "Dados de CSV, Excel, PDF e da web viram tabelas limpas e prontas para usar." },
+      { title: "Dashboards e relatórios", tools: "Power BI · Google Sheets · Looker Studio", body: "Relatórios claros que mostram o que a automação economiza e para onde vai o dinheiro." },
     ],
   },
   contact: {
     eyebrow: "Contato",
     title: "Vamos conversar?",
-    body: "Me mande uma mensagem pelo Upwork.",
+    body: "Me conte o que você ainda faz à mão. Mande uma mensagem pelo Upwork.",
     cta: "Contratar no Upwork",
   },
-  footer: { note: "Projetos de demonstração com dados públicos ou fictícios" },
+  footer: { note: "Projetos de demonstração com dados públicos, simulados ou fictícios" },
   project: {
     allProjects: "Todos os projetos",
     project: "Projeto",
@@ -164,44 +166,45 @@ const pt: Dictionary = {
 
 const es: Dictionary = {
   meta: {
-    title: "Icaro Torres — Portafolio de Datos y Automatización",
+    title: "Automatización de Procesos e Integración de IA | Google Sheets, n8n, Apps Script",
     description:
-      "Portafolio de Icaro Torres, freelancer de datos y automatización: dashboards en Power BI y Google Sheets, automatizaciones con Apps Script, limpieza de datos e informes automáticos.",
+      "Icaro Torres conecta las herramientas que ya usan las pequeñas empresas y tiendas online, automatiza el trabajo manual y añade IA donde de verdad ahorra tiempo. Google Sheets, Apps Script, n8n, Make, APIs de Claude y OpenAI, además de dashboards claros.",
   },
   nav: { projects: "Proyectos", services: "Servicios", contact: "Contacto", hire: "Contratar", skip: "Saltar al contenido", language: "Idioma" },
-  role: "Freelancer de Datos y Automatización",
-  kinds: { dashboard: "Dashboard / BI", automation: "Automatización / Apps Script", cleaning: "Limpieza de datos / IA" },
+  role: "Automatización de Procesos e Integración de IA",
+  kinds: { integration: "Integración", automation: "Automatización", ai: "Integración de IA", extraction: "Extracción de datos", dashboard: "Dashboard" },
   hero: {
     eyebrow: "Icaro Torres",
     title: "Mi portafolio",
     intro:
-      "Convierto hojas de cálculo desordenadas en dashboards claros y automatizaciones que devuelven horas a la semana. Aquí hay algunos trabajos.",
+      "Conecto las herramientas que tu empresa ya usa, automatizo el trabajo manual y añado IA donde de verdad ahorra tiempo. Y dashboards claros para ver los resultados.",
     cta: "Contratar en Upwork",
     seeProjects: "Ver proyectos",
+    steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
   projects: {
     eyebrow: "Trabajos",
     title: "Proyectos",
-    intro: "Haz clic en uno para ver cómo se hizo.",
+    intro: "Flujos hechos para pequeñas empresas y tiendas online. Abre uno para ver el problema, la solución y el resultado.",
     viewCase: "Ver caso de estudio",
   },
   services: {
     eyebrow: "Servicios",
     title: "Cómo puedo ayudar",
     items: [
-      { title: "Dashboards e informes", tools: "Power BI · Google Sheets · Looker Studio", body: "Tus números en una vista clara, con las herramientas que ya usas." },
-      { title: "Automatización con Sheets y Apps Script", tools: "Apps Script · Sheets · Forms · Gmail", body: "El trabajo de copiar y pegar, hecho solo cada día." },
-      { title: "Limpieza e importación de datos", tools: "Python · SQL · Power Query", body: "Exportaciones desordenadas convertidas en una tabla confiable." },
-      { title: "Análisis con apoyo de IA", tools: "Python · APIs de LLM · Sheets", body: "Miles de reseñas o respuestas ordenadas por tema, con revisión humana." },
+      { title: "Automatización de procesos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecta las herramientas que ya usas y deja de copiar y pegar. Pedidos, formularios, stock y correos que se actualizan solos." },
+      { title: "Integración de IA", tools: "APIs de Claude y OpenAI · n8n · Apps Script", body: "IA dentro de los flujos que ya tienes: clasificar solicitudes, resumir textos, redactar respuestas. Una persona sigue revisando lo importante." },
+      { title: "Extracción y limpieza de datos", tools: "Python · SQL · Power Query", body: "Datos de CSV, Excel, PDF y la web convertidos en tablas limpias y listas para usar." },
+      { title: "Dashboards e informes", tools: "Power BI · Google Sheets · Looker Studio", body: "Informes claros que muestran lo que ahorra la automatización y adónde va el dinero." },
     ],
   },
   contact: {
     eyebrow: "Contacto",
     title: "¿Hablamos?",
-    body: "Envíame un mensaje por Upwork.",
+    body: "Cuéntame qué sigues haciendo a mano. Envíame un mensaje por Upwork.",
     cta: "Contratar en Upwork",
   },
-  footer: { note: "Proyectos de demostración con datos públicos o ficticios" },
+  footer: { note: "Proyectos de demostración con datos públicos, simulados o ficticios" },
   project: {
     allProjects: "Todos los proyectos",
     project: "Proyecto",

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { meta } = getDictionary(lang);
   return {
     metadataBase: new URL(site.url),
-    title: { default: meta.title, template: `%s — ${site.name}` },
+    title: { default: `${meta.title} — ${site.name}`, template: `%s — ${site.name}` },
     description: meta.description,
     alternates: { canonical: `/${lang}/`, languages: languageAlternates("/") },
     openGraph: {

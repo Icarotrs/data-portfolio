@@ -2,7 +2,7 @@
   "order": 3,
   "number": "03",
   "title": "Messy Data Importer",
-  "kind": "cleaning",
+  "kind": "extraction",
   "summary": "A messy CSV or PDF export goes in; a clean, normalized spreadsheet with a summary tab comes out.",
   "stack": [
     "Python (pandas, pdfplumber)",

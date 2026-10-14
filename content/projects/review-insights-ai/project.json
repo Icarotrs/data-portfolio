@@ -2,7 +2,7 @@
   "order": 6,
   "number": "06",
   "title": "Customer Review Insights with AI",
-  "kind": "cleaning",
+  "kind": "ai",
   "summary": "Thousands of product reviews tagged by topic and sentiment with AI, then turned into a dashboard of what to fix first.",
   "stack": [
     "Python",

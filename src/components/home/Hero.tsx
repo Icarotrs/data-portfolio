@@ -3,16 +3,21 @@ import { site } from "@site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { LinkButton } from "@/components/ui/LinkButton";
+import { Glyph } from "@/components/ui/Glyph";
 
-const tools = ["Power BI", "Google Sheets", "Apps Script", "SQL", "Python"];
+const tools = ["Google Sheets", "Apps Script", "n8n", "Make", "Claude & OpenAI APIs", "Power BI"];
 
-/** Intro: the title types itself like a command prompt; two project screenshots on the right. */
+/**
+ * Intro: the title types itself like a command prompt; on the right, the
+ * home composition (site.config.ts → homeShapes): connected nodes, a torus
+ * and a cube, linked by lines with pulses running along them.
+ */
 export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const title = dict.hero.title;
   return (
-    <section aria-labelledby="hero-title" className="mx-auto grid max-w-[1120px] items-center gap-12 lg:min-h-[calc(100dvh-12rem)] lg:grid-cols-[1.05fr_1fr]">
+    <section aria-labelledby="hero-title" className="mx-auto grid max-w-[1120px] items-center gap-6 lg:min-h-[calc(100dvh-12rem)] lg:grid-cols-[1.1fr_1fr]">
       <div className="card rise p-7 sm:p-10" style={{ "--i": 0 } as CSSProperties}>
-        <p className="label text-accent" style={{ "--i": 0 } as CSSProperties}>
+        <p className="label text-accent">
           {dict.hero.eyebrow} · {dict.role}
         </p>
         <h1 id="hero-title" className="mt-5 font-mono text-[34px] leading-[1.1] tracking-normal sm:text-[52px]">
@@ -22,7 +27,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           </span>
           <span aria-hidden="true" className="caret" />
         </h1>
-        <p className="rise mt-6 max-w-[54ch] text-pretty text-[17px] leading-relaxed text-muted" style={{ "--i": 14 } as CSSProperties}>
+        <p className="rise mt-6 max-w-[52ch] text-pretty text-[17px] leading-relaxed text-muted" style={{ "--i": 14 } as CSSProperties}>
           {dict.hero.intro}
         </p>
         <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--i": 15 } as CSSProperties}>
@@ -38,23 +43,46 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         </p>
       </div>
 
-      <div aria-hidden="true" className="relative hidden h-[480px] sm:block">
-        <div className="card rise absolute right-0 top-0 w-[86%] rotate-[2.5deg] overflow-hidden p-0" style={{ "--i": 3 } as CSSProperties}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
-          <img src="/projects/form-to-sheet-automation/sheet.webp" alt="" width={1600} height={1000} className="block h-auto w-full" />
-        </div>
-        <div className="card rise absolute bottom-0 left-0 w-[88%] -rotate-[2deg] overflow-hidden p-0" style={{ "--i": 5 } as CSSProperties}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
-          <img
-            src="/projects/ecommerce-profit-dashboard/overview.webp"
-            alt=""
-            width={1600}
-            height={1000}
-            fetchPriority="high"
-            className="block h-auto w-full"
-          />
-        </div>
-      </div>
+      <Composition steps={dict.hero.steps} />
     </section>
+  );
+}
+
+// Positions in % of the panel: nodes top-left, torus centre-right, cube bottom-left.
+const SPOTS = [
+  { x: 26, y: 26 },
+  { x: 72, y: 46 },
+  { x: 32, y: 78 },
+];
+
+function Composition({ steps }: { steps: [string, string, string] }) {
+  return (
+    <div aria-hidden="true" className="card rise relative hidden h-[480px] overflow-hidden sm:block" style={{ "--i": 3 } as CSSProperties}>
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        {SPOTS.slice(1).map((b, i) => {
+          const a = SPOTS[i];
+          return (
+            <g key={i}>
+              <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--line-strong)" strokeWidth="1" strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />
+              <circle r="0.9" className="glyph-pulse" fill="var(--accent)">
+                <animateMotion dur="2.6s" begin={`${i * 1.3}s`} repeatCount="indefinite" path={`M${a.x},${a.y} L${b.x},${b.y}`} />
+              </circle>
+            </g>
+          );
+        })}
+      </svg>
+      {site.homeShapes.map((shape, i) => (
+        <div
+          key={shape}
+          className="absolute flex w-[38%] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
+          style={{ left: `${SPOTS[i].x}%`, top: `${SPOTS[i].y}%` }}
+        >
+          <Glyph shape={shape} className="aspect-square w-full max-w-[150px]" />
+          <span className="label text-faint">
+            <span className="text-accent">0{i + 1}</span> {steps[i]}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }

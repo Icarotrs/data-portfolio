@@ -17,7 +17,7 @@
   --line: rgb(60 30 10 / 0.12);
   --line-strong: rgb(60 30 10 / 0.28);
   --card: rgb(255 251 247 / 0.62);
-  --card-strong: rgb(255 251 247 / 0.84);
+  --card-strong: rgb(255 251 247 / 0.95);
   --card-2: rgb(255 248 242 / 0.5);
   --card-border: rgb(255 255 255 / 0.7);
   --card-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 20px 50px -30px rgb(90 40 10 / 0.45);
@@ -37,7 +37,7 @@
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.24);
   --card: rgb(18 10 8 / 0.66);
-  --card-strong: rgb(18 10 8 / 0.86);
+  --card-strong: rgb(18 10 8 / 0.95);
   --card-2: rgb(255 255 255 / 0.04);
   --card-border: rgb(255 255 255 / 0.1);
   --card-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 30px 60px -30px rgb(0 0 0 / 0.8);
@@ -320,4 +320,85 @@ body {
   padding: 0.1em 0.35em;
   border: 1px solid var(--line);
   border-radius: 3px;
+}
+
+/* ── Glyphs: one animated shape per project type ──────────────
+   Transforms and opacity only (compositor-friendly). Reduced motion
+   freezes them (see the global rule at the top) and hides the pulses. */
+.glyph {
+  color: var(--fg);
+  overflow: visible;
+}
+.glyph-spin {
+  animation: glyph-spin 14s linear infinite;
+}
+.glyph-move {
+  transform: translate(var(--x0), var(--y0));
+  animation: glyph-move 6s cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0ms) infinite;
+}
+.glyph-rise {
+  transform-box: view-box;
+  animation: glyph-rise 3.2s cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0ms) infinite alternate;
+}
+@keyframes glyph-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes glyph-move {
+  0%,
+  18% {
+    transform: translate(var(--x0), var(--y0));
+  }
+  45%,
+  72% {
+    transform: translate(var(--x1), var(--y1));
+  }
+  100% {
+    transform: translate(var(--x0), var(--y0));
+  }
+}
+@keyframes glyph-rise {
+  from {
+    transform: scaleY(0.55);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.glyph-cube-wrap {
+  display: grid;
+  place-items: center;
+  perspective: 600px;
+  container-type: inline-size;
+}
+.glyph-cube {
+  --half: 28cqi;
+  position: relative;
+  width: 56cqi;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  animation: glyph-cube 12s linear infinite;
+}
+.glyph-cube span {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid color-mix(in srgb, var(--fg) 55%, transparent);
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+.glyph-cube span.accent {
+  border-color: var(--accent);
+}
+@keyframes glyph-cube {
+  from {
+    transform: rotateX(-24deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-24deg) rotateY(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glyph-pulse {
+    display: none;
+  }
 }
