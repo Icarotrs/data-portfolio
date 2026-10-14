@@ -56,7 +56,6 @@ npm run upwork            # only the Upwork texts (no browser needed)
 | `exports/covers/<slug>.png` | 1600×1200 cover for the Upwork portfolio |
 | `exports/upwork/<slug>.txt` | Title, description (≤ 600 chars), skills, result |
 | `public/og/*.png` | 1200×630 social preview images |
-| `public/fallback/bg-*.webp` | Background for browsers without WebGL2 |
 
 Options: `--theme=light` (default `dark`), `--only=covers,og,upwork`. The script uses `playwright-core` with a local Chromium; set `CHROME_PATH` if it cannot find one. It screenshots internal pages under `/render/` (not linked, `noindex`, disallowed in `robots.txt`).
 
