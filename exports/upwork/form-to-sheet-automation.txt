@@ -1,0 +1,14 @@
+TITLE
+Form-to-Sheet Automation
+
+DESCRIPTION (444/600 characters)
+Google Forms to Google Sheets automation with Apps Script: every response is cleaned and written into a formatted sheet without breaking formulas, dropdowns or formatting, the thing the default form link always breaks. A weekly summary is exported as a PDF and emailed every Monday. No add-ons or paid tools. Saves about 3 hours a week of copy-paste (estimate). Demo uses fictitious data. Stack: Google Forms, Google Sheets, Apps Script, Gmail.
+
+SKILLS
+Google Forms, Google Sheets, Apps Script, Gmail
+
+RESULT
+Zero manual copy-paste: every response lands in the right row and a PDF summary goes out every Monday.
+
+COVER
+exports/covers/form-to-sheet-automation.png

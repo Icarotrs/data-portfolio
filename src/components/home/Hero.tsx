@@ -20,7 +20,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         <p className="label text-accent">
           {dict.hero.eyebrow} · {dict.role}
         </p>
-        <h1 id="hero-title" className="mt-5 font-mono text-[34px] leading-[1.1] tracking-normal sm:text-[52px]">
+        <h1 id="hero-title" className="mt-5 font-mono text-[28px] leading-[1.1] tracking-normal min-[420px]:text-[34px] sm:text-[52px]">
           <span aria-hidden="true" className="text-accent">&gt;&nbsp;</span>
           <span className="type" style={{ "--n": title.length } as CSSProperties}>
             {title}
@@ -65,7 +65,7 @@ function Composition({ steps }: { steps: [string, string, string] }) {
             <g key={i}>
               <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--line-strong)" strokeWidth="1" strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />
               <circle r="0.9" className="glyph-pulse" fill="var(--accent)">
-                <animateMotion dur="2.6s" begin={`${i * 1.3}s`} repeatCount="indefinite" path={`M${a.x},${a.y} L${b.x},${b.y}`} />
+                <animateMotion dur="2.6s" begin={`-${i * 1.3}s`} repeatCount="indefinite" path={`M${a.x},${a.y} L${b.x},${b.y}`} />
               </circle>
             </g>
           );

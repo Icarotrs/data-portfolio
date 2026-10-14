@@ -14,7 +14,7 @@
   ],
   "result": "Each order is logged and classified within about a minute; risky, rush and VIP orders reach the team before they ship.",
   "metric": {
-    "value": "~5 h",
+    "value": "~5h",
     "label": "of manual order review saved per week",
     "basis": "estimated"
   },

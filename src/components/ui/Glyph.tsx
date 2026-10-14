@@ -43,7 +43,7 @@ function Nodes({ className }: Props) {
       ))}
       {links.map(([a, b], i) => (
         <circle key={`p${i}`} r="2.6" className="glyph-pulse" fill="var(--accent)">
-          <animateMotion dur={`${1.8 + (i % 3) * 0.5}s`} begin={`${i * 0.35}s`} repeatCount="indefinite" path={`M${n[a][0]},${n[a][1]} L${n[b][0]},${n[b][1]}`} />
+          <animateMotion dur={`${1.8 + (i % 3) * 0.5}s`} begin={`-${i * 0.35}s`} repeatCount="indefinite" path={`M${n[a][0]},${n[a][1]} L${n[b][0]},${n[b][1]}`} />
         </circle>
       ))}
       {n.map(([x, y], i) => (

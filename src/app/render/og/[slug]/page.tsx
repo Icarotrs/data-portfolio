@@ -20,7 +20,7 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
       <div className="page-bg absolute inset-0" />
       {/* eslint-disable-next-line @next/next/no-img-element -- static export */}
       <img
-        src={`/projects/${project?.slug ?? "ecommerce-profit-dashboard"}/${project?.media.screenshots[0]?.src.split("/").pop() ?? "overview.webp"}`}
+        src={project?.media.screenshots[0]?.src ?? "/projects/shopify-ai-order-alerts/n8n-workflow.webp"}
         alt=""
         className="card absolute -right-24 top-16 w-[68%] -rotate-[3deg] p-0"
       />
@@ -32,16 +32,17 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
               : `${site.name} · ${en.role}`}
           </p>
           <h1 className="mt-4 text-balance text-5xl font-normal leading-[1.05] tracking-tight">
-            {project ? project.title : `${site.name} — ${en.role}`}
+            {project ? project.title : en.meta.title}
           </h1>
           <p className="mt-5 text-xl leading-snug text-muted">
             {project ? (
               <>
                 <span className="font-mono font-normal text-fg">{project.metric.value}</span>{" "}
                 {project.metric.label}
+                {project.metric.basis && ` (${project.metric.basis})`}
               </>
             ) : (
-              "Power BI · Google Sheets · Apps Script · SQL · Python"
+              "Connect your tools, automate the manual work, add AI where it saves time."
             )}
           </p>
         </div>

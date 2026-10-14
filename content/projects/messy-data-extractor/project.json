@@ -12,7 +12,7 @@
   ],
   "result": "Supplier files with mixed dates, prices and column layouts become one consistent table in seconds, with a log of every fix.",
   "metric": {
-    "value": "~4 h",
+    "value": "~4h",
     "label": "of retyping supplier files saved per week",
     "basis": "estimated"
   },

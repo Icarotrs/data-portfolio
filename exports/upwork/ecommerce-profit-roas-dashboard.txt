@@ -1,0 +1,14 @@
+TITLE
+E-commerce Profit & ROAS Dashboard
+
+DESCRIPTION (470/600 characters)
+Power BI dashboard for an online store that shows real profit, not just revenue: net margin per product and per order after shipping, marketplace and payment fees, with loss-making products flagged. A marketing tab compares ad spend and sales per channel (ROAS, cost per new customer) and shows where to move the budget. Built on the public Olist dataset (~99k orders); product cost and ad spend are simulated and labeled. Stack: Power BI, DAX, Power Query, SQL, Python.
+
+SKILLS
+Power BI, DAX, Power Query, SQL, Python (pandas)
+
+RESULT
+Real net margin for ~99k orders, loss-making products flagged, and a marketing tab showing 61% of ad spend returned under 3×.
+
+COVER
+exports/covers/ecommerce-profit-roas-dashboard.png

@@ -1,0 +1,14 @@
+TITLE
+Low-Stock Alerts
+
+DESCRIPTION (456/600 characters)
+Low-stock alerts in Google Sheets + Apps Script for a small online store. Daily sales are imported, and every product gets days of stock left, a reorder point based on supplier lead time and a suggested order quantity. Every morning a script emails purchasing the products that will run out before a new order can arrive, 1 to 3 weeks ahead (simulated data). No paid apps; works with a Shopify or any store export. Stack: Google Sheets, Apps Script, Gmail.
+
+SKILLS
+Google Sheets, Apps Script, Gmail, Shopify export
+
+RESULT
+Stock-outs are caught 1 to 3 weeks early, with a suggested order quantity for every product.
+
+COVER
+exports/covers/low-stock-alerts.png

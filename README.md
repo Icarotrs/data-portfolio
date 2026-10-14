@@ -1,17 +1,22 @@
-# Data & Automation Portfolio
+# Icaro Torres — Business Automation & AI Integration
 
-Personal portfolio for a freelance data & automation specialist (Power BI, Google Sheets, Apps Script, SQL, Python). It is built to be linked from an Upwork profile: every call to action goes to Upwork, and the repo also produces the cover images and description texts for the Upwork portfolio section.
+**Business Automation & AI Integration | Google Sheets, n8n, Apps Script**
+
+Freelance portfolio for small businesses and e-commerce stores in the US: connecting the tools a business already uses, automating manual work and adding AI where it saves time, plus dashboards to see the results. It is built to be linked from an Upwork profile: every call to action goes to Upwork (no email, phone or contact form), and the repo also produces the cover images and description texts for the Upwork portfolio section.
+
+Projects, in order: Shopify → Sheets → AI → Alerts (n8n) · Form → Sheet Automation · Low-Stock Alerts · AI Review Classifier · Messy Data Extractor · E-commerce Profit & ROAS Dashboard.
 
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
-- Simple opaque theme: solid cards, no canvas, no WebGL, no blur
+- Blurred orange background (a static image, `public/bg/*.webp`, made by `scripts/render-bg.mjs`) with frosted-glass cards, square corners and accent corner ticks
+- One animated shape per project type (`site.config.ts → kindShapes`, drawn by `src/components/ui/Glyph.tsx` in SVG/CSS, no canvas): integration → connected nodes with pulses, automation → spinning torus, ai → particles forming clusters, extraction → particles lining up into a grid, dashboard → 3D bars. The home page shows nodes, torus and cube together
 - Scroll-driven animations in pure CSS (`animation-timeline: view()`): sections rise in, project cards stack on top of each other while you scroll, screenshots zoom in. Browsers without support (or with reduced motion) show everything static
 - The hero title types itself like a command prompt (CSS only)
 - Three languages: English, Portuguese and Spanish (`/en/`, `/pt/`, `/es/`)
 
 ## Configuration
 
-`site.config.ts` holds the name, site URL, links (Upwork, LinkedIn, GitHub) and the list of project kinds. Never add email or phone: contact goes through Upwork.
+`site.config.ts` holds the name, site URL, links (Upwork, LinkedIn, GitHub), the project kinds and the kind → shape map. Never add email or phone: contact goes through Upwork.
 
 ## Languages
 
@@ -25,16 +30,23 @@ Personal portfolio for a freelance data & automation specialist (Power BI, Googl
 Each project is a folder in `content/projects/<slug>/`:
 
 - `project.json` — metadata in English (validated at build time):
-   - `order`, `number`, `title`, `kind` (`dashboard`, `automation`, `cleaning`), `summary`
-   - `stack` (array), `result` (one sentence), `metric` (`value` + `label`)
-   - `media.screenshots` (`src` + `alt`), optional `note`, `links`
+   - `order`, `number`, `title`, `kind` (`integration`, `automation`, `ai`, `extraction`, `dashboard`), `summary`
+   - `stack` (array), `result` (one sentence), `metric` (`value` + `label`, and `basis`: `estimated` or `simulated` when the number is not measured; the page shows the label)
+   - optional `flow` (`[{ tool, label }]`), drawn as a step diagram on the project page
+   - `media.screenshots` (`src` + `alt`), `media.video`, optional `note`, `links`
    - `upworkBlurb` (≤ 600 characters, English, for Upwork)
-   - `i18n.pt` / `i18n.es` — translated `title`, `summary`, `result`, `metricLabel`, `note`, `alts`
-- `story.en.mdx` (required), `story.pt.mdx`, `story.es.mdx` — the case study; missing languages fall back to English.
+   - `i18n.pt` / `i18n.es` — translated `title`, `summary`, `result`, `metricLabel`, `note`, `alts`, `flow`
+- `story.en.mdx` (required), `story.pt.mdx`, `story.es.mdx` — "Problem" and "What I built"; missing languages fall back to English.
+
+A project page reads: problem → what I built → demo (flow diagram, video, screens) → tools → result with a number.
+
+## n8n workflow
+
+`integrations/n8n/shopify-ai-order-alerts/` holds the importable workflow of project 01 (`workflow.json`), sample Shopify orders, a script that sends them to the webhook and a README with the setup steps.
 
 ## Project screenshots
 
-The screenshots on project pages are rendered from HTML mock-ups of the real deliverables (Power BI reports, Google Sheets, emails, PDF reports, terminal runs) with fictitious, deterministic data:
+The screenshots on project pages are rendered from HTML mock-ups of the real deliverables (n8n, Power BI, Google Sheets, Apps Script, Slack, Gmail, PDF reports, terminal runs) with fictitious, deterministic data:
 
 ```bash
 npm run shots                                   # all projects
@@ -75,9 +87,13 @@ Commit the regenerated `public/og` files so they deploy.
 ## Project structure
 
 ```
-site.config.ts                 name, URL, links, project kinds
+site.config.ts                 name, URL, links, project kinds, kind → shape map
 content/projects/<slug>/       project.json + story.<lang>.mdx
-scripts/shots/                 HTML mock-ups for project screenshots
+integrations/n8n/              importable n8n workflow for project 01
+scripts/shots/                 HTML mock-ups for screenshots and demo videos
+scripts/render-shots.mjs       screenshots → public/projects/<slug>/*.webp
+scripts/render-videos.mjs      demo videos → public/projects/<slug>/demo.mp4/.webm
+scripts/render-bg.mjs          page background → public/bg/*.webp
 scripts/render-assets.mjs      covers, OG images, Upwork texts
 src/app/[lang]/                home and project pages (en, pt, es)
 src/app/(root)/                / → language redirect
