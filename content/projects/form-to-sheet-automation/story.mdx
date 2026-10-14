@@ -1,0 +1,11 @@
+## Problem
+
+A small business collected order requests through a Google Form. The default "link to sheet" dumped responses into a raw tab, so someone copied rows by hand into the real sheet every day — and every paste risked overwriting formulas, dropdowns and formatting. The weekly summary was built manually on Friday afternoons.
+
+## What I built
+
+- An Apps Script `onFormSubmit` trigger that reads each response, cleans it (trimmed text, normalized phone and date formats) and appends it to the **formatted** table — formulas, validation and conditional formatting stay intact.
+- A lock so two simultaneous submissions never write to the same row.
+- A summary tab driven by formulas (totals per week, per product, per status).
+- A time-driven trigger that exports the summary tab as a **PDF** every Monday at 8am and emails it to the owner.
+- A small "Settings" tab so the owner can change recipients and schedule without touching code.
