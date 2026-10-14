@@ -1,10 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LOCALES, LOCALE_LABELS, LOCALE_STORAGE_KEY, type Locale } from "@/i18n/config";
 
-/** EN · PT · ES — same page in another language; remembers the choice. */
+/**
+ * EN · PT · ES — same page in another language; remembers the choice.
+ * Plain <a> on purpose: a language change swaps the whole document
+ * (<html lang>), and a full load lets the theme script run again so the
+ * chosen theme is kept.
+ */
 export function LanguageSwitch({ lang, label }: { lang: Locale; label: string }) {
   const pathname = usePathname() ?? `/${lang}/`;
   const rest = pathname.replace(/^\/(en|pt|es)(?=\/|$)/, "");
@@ -13,7 +17,7 @@ export function LanguageSwitch({ lang, label }: { lang: Locale; label: string })
       {LOCALES.map((l, i) => (
         <span key={l} className="flex items-center gap-1">
           {i > 0 && <span aria-hidden="true" className="text-faint">·</span>}
-          <Link
+          <a
             href={`/${l}${rest || "/"}`}
             hrefLang={LOCALE_LABELS[l].htmlLang}
             lang={LOCALE_LABELS[l].htmlLang}
@@ -27,7 +31,7 @@ export function LanguageSwitch({ lang, label }: { lang: Locale; label: string })
             className={`label px-0.5 transition-colors hover:text-accent ${l === lang ? "text-accent" : "text-faint"}`}
           >
             {LOCALE_LABELS[l].short}
-          </Link>
+          </a>
         </span>
       ))}
     </nav>
