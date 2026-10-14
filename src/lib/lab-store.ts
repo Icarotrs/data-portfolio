@@ -1,6 +1,7 @@
 /**
  * Interactive background state ("lab"):
  *   - filter panel positions the visitor dragged (saved in localStorage)
+ *   - the position of the small "add image" card
  *   - images the visitor added (kept in memory as object URLs; never uploaded)
  *
  * Positions are percentages of the viewport, like site.config.ts.
@@ -28,12 +29,16 @@ export interface UserImage {
 interface LabState {
   boxes: Partial<Record<BoxSet, Record<number, Point>>>;
   images: UserImage[];
+  /** Position of the "add image" card, % of the viewport. */
+  slot: Point;
 }
+
+const DEFAULT_SLOT: Point = { x: 2.5, y: 36 };
 
 const STORAGE_KEY = "lab-boxes";
 export const MAX_IMAGES = 4;
 
-let state: LabState = { boxes: {}, images: [] };
+let state: LabState = { boxes: {}, images: [], slot: DEFAULT_SLOT };
 let loaded = false;
 const listeners = new Set<() => void>();
 
@@ -71,8 +76,12 @@ export const labStore = {
     save();
   },
 
+  moveSlot(p: Point) {
+    emit({ ...state, slot: p });
+  },
+
   resetLayout() {
-    emit({ ...state, boxes: {} });
+    emit({ ...state, boxes: {}, slot: DEFAULT_SLOT });
     save();
   },
 
@@ -92,10 +101,10 @@ export const labStore = {
               url,
               name: file.name,
               aspect: img.naturalWidth / img.naturalHeight || 1,
-              // Cascade new images near the left of the central column.
-              x: 8 + n * 3,
-              y: 22 + n * 6,
-              w: 22,
+              // Cascade new images next to the "add image" card.
+              x: Math.min(state.slot.x + 13 + n * 3, 70),
+              y: Math.min(Math.max(state.slot.y - 10 + n * 6, 2), 70),
+              w: 20,
             },
           ],
         });

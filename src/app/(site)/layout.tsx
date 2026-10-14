@@ -1,5 +1,4 @@
 import { Background } from "@/components/background/Background";
-import { SectionObserver } from "@/components/background/SectionObserver";
 import { SiteFrame } from "@/components/layout/SiteFrame";
 
 export default function SiteLayout({ children }: LayoutProps<"/">) {
@@ -12,9 +11,8 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
         Skip to content
       </a>
       <Background />
-      <SectionObserver />
       <SiteFrame />
-      <main id="main" className="pointer-events-none relative z-20 w-full px-4 pb-24 pt-20 sm:pt-28 [&>*]:pointer-events-auto">
+      <main id="main" className="pointer-events-none relative z-20 w-full px-4 pb-16 pt-20 sm:pt-24 [&>*]:pointer-events-auto">
         {children}
       </main>
     </>

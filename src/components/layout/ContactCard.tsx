@@ -2,10 +2,10 @@ import { site } from "@site";
 import { LinkButton } from "@/components/ui/LinkButton";
 
 /** Last section on every page: the only call to action is Upwork. */
-export function ContactCard() {
+export function ContactCard({ fill = false }: { fill?: boolean }) {
   return (
-    <section id="contact" data-section="contact" aria-labelledby="contact-title" className="scroll-mt-24">
-      <div className="glass p-7 sm:p-9">
+    <section aria-labelledby="contact-title" className={fill ? "h-full" : undefined}>
+      <div className={`glass p-7 sm:p-9 ${fill ? "flex h-full flex-col justify-center" : ""}`}>
         <p className="label text-accent">Contact</p>
         <h2 id="contact-title" className="mt-4 text-[26px] leading-tight tracking-tight">
           Have a report that eats your week?

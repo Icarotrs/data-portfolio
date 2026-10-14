@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const dataNote = project.note?.split(". ")[0].replace(/\.$/, "");
 
   return (
-    <article data-section="project" className="mx-auto flex max-w-[1040px] flex-col gap-5">
+    <article className="mx-auto flex max-w-[1040px] flex-col gap-5">
       <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4 pb-2">
         <Link href="/#projects" className="label inline-flex items-center gap-2 text-on-bg hover:text-accent">
           <ArrowLeft className="h-3.5 w-3.5" />

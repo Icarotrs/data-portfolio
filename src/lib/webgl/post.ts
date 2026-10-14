@@ -101,9 +101,8 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
   uniform vec2 uRes;          // drawing buffer size in device px
   uniform float uDpr;         // device px per CSS px
   uniform float uTime;
-  uniform vec3 uBase;         // granite, dark tone
-  uniform vec3 uBase2;        // granite, light tone
-  uniform vec3 uFleck;        // granite flecks
+  uniform vec3 uBase;         // background, edge tone
+  uniform vec3 uBase2;        // background, centre tone
   uniform vec3 uInk;          // tone the filters draw with
   uniform vec3 uAccent;       // orange highlight
   uniform float uVignette;
@@ -119,27 +118,16 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return fract(p.x * p.y);
   }
 
-  float vnoise(vec2 p) {
-    vec2 i = floor(p), f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-    return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
-  }
-
   float bayer2(vec2 a) { a = floor(a); return fract(dot(a, vec2(0.5, a.y * 0.75))); }
   float bayer4(vec2 a) { return bayer2(0.5 * a) * 0.25 + bayer2(a); }
   float bayer8(vec2 a) { return bayer4(0.5 * a) * 0.25 + bayer2(a); }
 
-  // The background "image": polished granite. Static multi-scale grain in
-  // CSS pixels (stable across screens), sparse flecks, a soft vignette and
-  // a faint warm glow at the bottom.
+  // The background: a smooth dark gradient with a soft vignette and a faint
+  // warm glow at the bottom. No texture: grain lives on the cards only.
   vec3 field(vec2 px) {
-    vec2 q = px / uDpr;
-    float n = vnoise(q * 0.8) * 0.45 + vnoise(q * 0.22) * 0.35 + vnoise(q * 0.035) * 0.2;
-    vec3 c = mix(uBase, uBase2, n);
-    float fleck = step(0.965, hash(floor(q * 0.6)));
-    c = mix(c, uFleck, fleck * 0.55);
     vec2 uv = px / uRes;
     vec2 d = (uv - 0.5) * vec2(uRes.x / uRes.y, 1.0);
+    vec3 c = mix(uBase2, uBase, smoothstep(0.0, 0.95, length(d)));
     c *= mix(1.0 - uVignette, 1.0, smoothstep(1.1, 0.25, length(d)));
     c += uAccent * 0.07 * exp(-dot(uv - vec2(0.5, -0.05), uv - vec2(0.5, -0.05)) * 5.0);
     return c;
@@ -150,7 +138,7 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return s.rgb + field(px) * (1.0 - s.a);
   }
 
-  // How far a colour sits from the granite towards the ink tone (0..1).
+  // How far a colour sits from the background towards the ink tone (0..1).
   float amountOf(vec3 c) {
     vec3 base = mix(uBase, uBase2, 0.5);
     vec3 d = uInk - base;
@@ -176,7 +164,7 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return mix(field(px) * 0.8, uInk, mask * 0.9);
   }
 
-  // Heat-map pixelation: granite → orange → ink, like a spectral readout.
+  // Heat-map pixelation: background → orange → ink, like a spectral readout.
   vec3 fPixelate(vec2 px, vec2 o) {
     float cell = 14.0 * uDpr;
     vec2 id = floor((px - o) / cell);
@@ -232,7 +220,6 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
       else col = fHalftone(px, o);
       break;
     }
-    col += (hash(px + fract(uTime * 0.37) * 731.0) - 0.5) * 0.02;
     outColor = vec4(col, 1.0);
   }
 `;

@@ -4,7 +4,7 @@ import { UserImageLayer } from "./UserImageLayer";
 
 /**
  * Fixed full-viewport background:
- *   1. CSS granite (instant, always there)
+ *   1. CSS gradient (instant, always there)
  *   2. Pre-rendered image, only when WebGL2 is unavailable
  *   3. WebGL scene (shapes + visitor images + filters), faded in once loaded
  *   4. Filter panels and image frames (DOM, drive the shader; movable on home)

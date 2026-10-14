@@ -4,15 +4,14 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Theme tokens ─────────────────────────────────────────────
-   Granite: blacks and dark greys with orange highlights (dark), or a
-   light polished stone (light). Cards are opaque enough to keep text at
+   Blacks and dark greys with orange highlights (dark), or light stone
+   greys (light). Cards are opaque enough to keep text at
    WCAG AA over any part of the background. */
 :root {
   color-scheme: light;
   /* Background "image" (drawn by the WebGL shader, or by CSS as fallback) */
   --g-base: #c4c4c1;
   --g-base2: #dcdcd9;
-  --g-fleck: #a2a29f;
   --bg: #cfcfcc; /* solid fallback / theme-color */
   --shape-line: #2a2a2a;
   --ink: #161616;
@@ -26,6 +25,8 @@
   --on-bg: #151515;
   --on-bg-muted: #333333;
   --card: rgb(246 246 244 / 0.86);
+  /* Fine grain shown on cards only (dark specks on light cards). */
+  --card-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --card-border: rgb(255 255 255 / 0.7);
   --card-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.35);
   --accent: #b83c0b;
@@ -38,7 +39,6 @@
   color-scheme: dark;
   --g-base: #0b0b0c;
   --g-base2: #1c1c1e;
-  --g-fleck: #4a4a4c;
   --bg: #121213;
   --shape-line: #d6d6d6;
   --ink: #e6e6e6;
@@ -52,6 +52,7 @@
   --on-bg: #ededed;
   --on-bg-muted: #a8a8a8;
   --card: rgb(17 17 18 / 0.8);
+  --card-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .14 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --card-border: rgb(255 255 255 / 0.08);
   --card-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
   --accent: #ff7a33;
@@ -115,7 +116,8 @@ body {
 /* ── Cards: opaque frosted glass, small radius ────────────── */
 /* Unlayered on purpose: the 10px radius wins over rounded-* utilities. */
 .glass {
-  background: var(--card);
+  background-color: var(--card);
+  background-image: var(--card-noise);
   border: 1px solid var(--card-border);
   border-radius: 10px;
   box-shadow: var(--card-shadow);
@@ -218,4 +220,20 @@ body {
 }
 .prose-story-lg h2 {
   color: var(--accent);
+}
+
+/* Home panels: a short slide when switching. Motion only: fading the
+   panel would switch off the cards' backdrop blur mid-animation. */
+@keyframes panel-in {
+  from {
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .deck-panel:not([hidden]) {
+    animation: panel-in 260ms ease-out;
+  }
 }

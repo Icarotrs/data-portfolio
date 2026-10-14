@@ -16,7 +16,7 @@ import { Batch, Transform, cube, icosahedron, pyramid, type Batches, type Colors
  * Background renderer, plain WebGL2 (no 3D library):
  *   1. Scene → offscreen texture: visitor images (from the Image lab), then
  *      three simple wireframe solids on a slow carousel around the centre.
- *   2. Post: one full-screen shader draws the granite background, composites
+ *   2. Post: one full-screen shader draws the smooth background, composites
  *      the scene and applies each filter panel's effect inside its rectangle.
  *
  * Filter panels and image frames are DOM elements; their rectangles are the
@@ -144,7 +144,6 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     gl!.useProgram(postProgram.program);
     gl!.uniform3fv(postProgram.u("uBase"), pick("--g-base", "#c4c4c1", "#0b0b0c"));
     gl!.uniform3fv(postProgram.u("uBase2"), pick("--g-base2", "#dcdcd9", "#1c1c1e"));
-    gl!.uniform3fv(postProgram.u("uFleck"), pick("--g-fleck", "#a2a29f", "#4a4a4c"));
     gl!.uniform3fv(postProgram.u("uInk"), pick("--ink", "#161616", "#e6e6e6"));
     gl!.uniform3fv(postProgram.u("uAccent"), accent);
     gl!.uniform1f(postProgram.u("uVignette"), dark ? 0.35 : 0.12);
@@ -325,7 +324,7 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     gl!.bindTexture(gl!.TEXTURE_2D, sceneTex);
     gl!.generateMipmap(gl!.TEXTURE_2D);
 
-    // Pass 2: granite + composite + filter panels → screen.
+    // Pass 2: background + composite + filter panels → screen.
     gl!.bindFramebuffer(gl!.FRAMEBUFFER, null);
     gl!.useProgram(postProgram.program);
     const u = postProgram.u;

@@ -5,8 +5,9 @@ Personal portfolio for a freelance data & automation specialist (Power BI, Googl
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
 - **WebGL2** background (no 3D library): three simple wireframe solids on a slow carousel, rendered through movable "filter panels" (dither, ASCII, pixelate, noise, frost, halftone) by a single post-processing shader
-- Granite theme (blacks and dark greys with orange highlights; light stone variant), opaque frosted cards, mono corner details (menu, clock, theme switch, links)
-- **Image lab**: visitors drop their own images into the background and drag them (and the panels) under the effects — images never leave the browser
+- One-screen home: the side menu (or the pager / ← → keys) switches a single central panel — Home, Projects, Services, Contact — with no page scroll. Links like `/#projects` open a panel directly
+- Dark greys with orange highlights (light stone variant), a smooth background, opaque frosted cards with fine grain, mono corner details (menu, clock, theme switch, links)
+- **Add-image card**: a small movable card on the home page; visitors drop their own images into the background and drag them (and the panels) under the effects — images never leave the browser
 - Case-study pages in an editorial layout: outcome first, fact strip, story with a sticky summary, large screenshots
 - Content in **JSON + MDX**, validated at build time
 
@@ -53,9 +54,9 @@ The site intentionally has no email, phone or contact form — all contact goes 
 
 **Shapes.** Three simple wireframe solids (a cube, a square pyramid and an icosahedron) with orange vertices orbit the centre of the screen on a slow 3D carousel. They are plain vertex lists in `src/lib/webgl/shapes.ts`; orbit radius, size and speed are in `buildShapes()` in `src/lib/webgl/engine.ts`.
 
-**Filter boxes.** `site.config.ts → filterBoxes` has one list per breakpoint (`desktop` ≥ 1024px, `tablet` 640–1023px, `mobile` < 640px). Each box is `{ filter, x, y, w, h }` in % of the viewport, with `filter` one of `dither`, `ascii`, `pixelate`, `noise`, `frost`, `halftone`. Up to 8 boxes per breakpoint. On the home page visitors can drag the panels (mouse anywhere on a panel, touch on its label tab, or Tab + arrow keys); their positions are saved in `localStorage` and the Image lab has a *Reset panels* button.
+**Filter boxes.** `site.config.ts → filterBoxes` has one list per breakpoint (`desktop` ≥ 1024px, `tablet` 640–1023px, `mobile` < 640px). Each box is `{ filter, x, y, w, h }` in % of the viewport, with `filter` one of `dither`, `ascii`, `pixelate`, `noise`, `frost`, `halftone`. Up to 8 boxes per breakpoint. On the home page visitors can drag the panels (mouse anywhere on a panel, touch on its label tab, or Tab + arrow keys); their positions are saved in `localStorage` and the add-image card has a *Reset* button.
 
-**Image lab.** `src/components/lab/ImageLab.tsx` lets visitors add up to 4 images. Each becomes a movable frame on the home page; the engine draws the image into the background at the frame's rectangle, so the filter panels process it. Images are object URLs in the browser and are never uploaded.
+**Add-image card.** On the home page (large screens) a small card next to the menu accepts dropped or chosen images (up to 4). Each becomes a movable frame; the engine draws the image into the background at the frame's rectangle, so the filter panels process it. Images are object URLs in the browser and are never uploaded. The card's *Reset* puts the panels back. Code: `src/components/background/UserImageLayer.tsx`.
 
 The boxes are real DOM elements (`src/components/background/FilterBoxLayer.tsx`); the WebGL engine reads their on-screen rectangles and passes them to the shader (`src/lib/webgl/post.ts`), so what you see outlined is exactly where the filter applies.
 
@@ -98,7 +99,7 @@ src/app/render/                internal pages for asset screenshots
 src/components/background/     background, canvas loader, filter boxes
 src/components/chrome/         decorative viewport details
 src/lib/content.ts             loads and validates projects
-src/lib/section-store.ts       section in view (side menu)
+src/lib/deck-store.ts          which home panel is showing (URL hash)
 src/lib/lab-store.ts           dragged panel positions + visitor images
 src/lib/use-draggable.ts       mouse / touch / keyboard dragging
 src/lib/webgl/                 engine, shapes and shaders
