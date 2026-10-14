@@ -40,7 +40,7 @@ export const site = {
   links: {
     upwork: "https://www.upwork.com/freelancers/~YOUR_PROFILE_ID",
     linkedin: "https://www.linkedin.com/in/YOUR_PROFILE",
-    github: "https://github.com/YOUR_USERNAME",
+    github: "https://github.com/Icarotrs",
   },
 
   // ── Background: project kind → 3D shape ─────────────────────
