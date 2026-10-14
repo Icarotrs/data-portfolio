@@ -13,8 +13,8 @@
   --bg: #eceef2;
   --bg-2: #e2e5ea;
   --fg: #0d1015;
-  --muted: #3e4550;
-  --faint: #6a7280;
+  --muted: #353b45;
+  --faint: #535a66;
   --line: rgb(13 16 21 / 0.1);
   --line-strong: rgb(13 16 21 / 0.28);
   --accent: #1d4fd8;
@@ -34,12 +34,12 @@
   --bg-2: #0c0d10;
   --fg: #eceef2;
   --muted: #b0b7c3;
-  --faint: #8a93a1;
+  --faint: #9aa2af;
   --line: rgb(236 238 242 / 0.09);
   --line-strong: rgb(236 238 242 / 0.26);
   --accent: #8fb0ff;
   --accent-fg: #050506;
-  --glass: rgb(12 13 16 / 0.8);
+  --glass: rgb(12 13 16 / 0.84);
   --glass-strong: rgb(14 15 19 / 0.9);
   --glass-border: rgb(236 238 242 / 0.1);
   --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset,

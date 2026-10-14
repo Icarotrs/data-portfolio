@@ -4,7 +4,12 @@
   "title": "Messy Data Importer",
   "kind": "cleaning",
   "summary": "A messy CSV or PDF export goes in; a clean, normalized spreadsheet with a summary tab comes out.",
-  "stack": ["Python (pandas, pdfplumber)", "Google Sheets", "Apps Script", "SQL"],
+  "stack": [
+    "Python (pandas, pdfplumber)",
+    "Google Sheets",
+    "Apps Script",
+    "SQL"
+  ],
   "result": "Supplier exports with mixed date, currency and column formats become one consistent table in seconds.",
   "metric": {
     "value": "1 click",
@@ -16,12 +21,20 @@
     "demo": ""
   },
   "media": {
-    "cover": "/projects/messy-data-importer/cover.png",
     "screenshots": [
-      { "src": "", "alt": "Before: raw CSV with merged headers, mixed date formats and currency symbols" },
-      { "src": "", "alt": "After: normalized table and summary tab in Google Sheets" }
+      {
+        "src": "",
+        "alt": "Before: raw CSV with merged headers, mixed date formats and currency symbols"
+      },
+      {
+        "src": "",
+        "alt": "After: normalized table and summary tab in Google Sheets"
+      }
     ],
-    "video": { "src": "", "poster": "" }
+    "video": {
+      "src": "",
+      "poster": ""
+    }
   },
   "upworkBlurb": "Data cleaning and import pipeline: messy CSV or PDF exports (merged headers, mixed date formats, currency symbols, duplicated rows, split columns) are parsed, cleaned and normalized into one consistent spreadsheet, with a summary tab and a log of every fix applied. Runs as a Python script or directly in Google Sheets with Apps Script. Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script."
 }
