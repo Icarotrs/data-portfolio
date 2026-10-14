@@ -196,3 +196,12 @@ body {
   border: 1px solid var(--line);
   border-radius: 4px;
 }
+
+/* ── Filter boxes before WebGL takes over ─────────────────── */
+.filter-box {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+[data-webgl="on"] .filter-box {
+  background-image: none;
+}
