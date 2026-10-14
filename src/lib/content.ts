@@ -137,6 +137,16 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
   };
 }
 
+/** Every screenshot, video and poster must exist in public/, or the build fails. */
+function checkMedia(p: Project) {
+  const files = [...p.media.screenshots.map((s) => s.src), p.media.video?.src, p.media.video?.poster];
+  for (const src of files) {
+    if (src && !fs.existsSync(path.join(process.cwd(), "public", src))) {
+      fail(p.slug, `media file "${src}" does not exist in public/`);
+    }
+  }
+}
+
 let cache: Project[] | null = null;
 
 export function getProjects(): Project[] {
@@ -153,7 +163,9 @@ export function getProjects(): Project[] {
       if (!fs.existsSync(path.join(PROJECTS_DIR, slug, "story.en.mdx"))) {
         throw new Error(`content/projects/${slug}/story.en.mdx is missing`);
       }
-      return validate(slug, JSON.parse(fs.readFileSync(file, "utf8")));
+      const project = validate(slug, JSON.parse(fs.readFileSync(file, "utf8")));
+      checkMedia(project);
+      return project;
     })
     .sort((a, b) => a.order - b.order);
   return cache;

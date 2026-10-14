@@ -24,17 +24,17 @@
   "media": {
     "screenshots": [
       {
-        "src": "/projects/messy-data-importer/before-after.webp",
+        "src": "/projects/messy-data-extractor/before-after.webp",
         "alt": "Before and after: a messy supplier CSV turned into a clean, consistent sheet"
       },
       {
-        "src": "/projects/messy-data-importer/run-log.webp",
+        "src": "/projects/messy-data-extractor/run-log.webp",
         "alt": "Import run: files detected, fixes applied and price changes vs. the last import"
       }
     ],
     "video": {
-      "src": "/projects/messy-data-importer/demo.mp4",
-      "poster": "/projects/messy-data-importer/before-after.webp"
+      "src": "/projects/messy-data-extractor/demo.mp4",
+      "poster": "/projects/messy-data-extractor/before-after.webp"
     }
   },
   "upworkBlurb": "Data extraction and cleanup pipeline: tables are extracted from messy CSV, Excel and PDF files (merged headers, mixed date formats, currency text, duplicates, split columns), normalized and merged into one clean Google Sheet with a summary tab and a log of every fix. Runs as a Python script on a schedule or from a menu in Google Sheets. Saves about 4 hours a week of retyping (estimate). Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script.",
