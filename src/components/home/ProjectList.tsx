@@ -2,17 +2,14 @@ import Link from "next/link";
 import { site } from "@site";
 import type { Project } from "@/lib/content";
 import { ArrowUpRight } from "@/components/ui/icons";
-import { SectionHeading } from "./SectionHeading";
 
 export function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <section id="projects" data-icon-theme="projects" aria-labelledby="projects-title" className="scroll-mt-24">
-      <SectionHeading
-        id="projects-title"
-        eyebrow={`Projects · ${String(projects.length).padStart(2, "0")}`}
-        title="Selected work"
-      />
-      <ul className="mt-6 grid gap-4">
+      <h2 id="projects-title" className="label mb-4 text-on-bg">
+        Selected projects · {String(projects.length).padStart(2, "0")}
+      </h2>
+      <ul className="flex flex-col gap-4">
         {projects.map((p) => (
           <li key={p.slug}>
             <ProjectCard project={p} />
@@ -25,38 +22,20 @@ export function ProjectList({ projects }: { projects: Project[] }) {
 
 function ProjectCard({ project: p }: { project: Project }) {
   return (
-    <Link
-      href={`/projects/${p.slug}/`}
-      className="glass reveal group grid gap-5 rounded-2xl p-5 transition-[border-color,transform] hover:-translate-y-0.5 hover:border-line-strong sm:grid-cols-[4.5rem_1fr_auto] sm:p-7"
-    >
-      <span className="font-mono text-3xl font-light tracking-tight text-faint sm:text-4xl">
-        {p.number}
-      </span>
-      <div className="min-w-0">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
-          {site.kindLabels[p.kind]}
+    <Link href={`/projects/${p.slug}/`} className="glass reveal group block p-7 transition-colors sm:p-8">
+      <div className="flex items-start justify-between gap-4">
+        <p className="label text-faint">
+          {p.number} · {site.kindLabels[p.kind]}
         </p>
-        <h3 className="text-silver mt-1.5 text-xl font-semibold tracking-tight sm:text-2xl">{p.title}</h3>
-        <p className="mt-2 text-pretty text-muted">{p.summary}</p>
-        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Stack">
-          {p.stack.map((s) => (
-            <li
-              key={s}
-              className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[11px] text-muted"
-            >
-              {s}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 flex gap-3 border-t border-line pt-4 text-sm">
-          <span className="shrink-0 font-mono font-semibold text-fg">{p.metric.value}</span>
-          <span className="text-muted">{p.result}</span>
-        </p>
+        <ArrowUpRight className="h-4 w-4 shrink-0 text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
       </div>
-      <span className="hidden h-10 w-10 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:bg-fg group-hover:text-bg sm:inline-flex">
-        <ArrowUpRight className="h-4 w-4" />
-        <span className="sr-only">Open project</span>
-      </span>
+      <h3 className="mt-5 text-[22px] leading-tight tracking-tight">{p.title}</h3>
+      <p className="mt-2 text-pretty text-[15px] leading-relaxed text-muted">{p.summary}</p>
+      <p className="label mt-5 text-faint">{p.stack.join(" · ")}</p>
+      <p className="mt-5 flex gap-3 border-t border-line pt-4 text-sm">
+        <span className="shrink-0 font-mono font-medium">{p.metric.value}</span>
+        <span className="text-muted">{p.result}</span>
+      </p>
     </Link>
   );
 }

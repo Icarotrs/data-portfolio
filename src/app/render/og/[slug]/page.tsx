@@ -20,19 +20,19 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
       <ThemeScope theme={project ? project.kind : "intro"} />
       <Background stillTime={RENDER_STILL_TIME} />
       <div className="relative z-10 flex h-full items-end p-14">
-        <div className="glass-strong w-[760px] rounded-3xl p-10">
+        <div className="glass w-[760px] p-10">
           <p className="font-mono text-sm uppercase tracking-[0.2em] text-faint">
             {project
               ? `Project ${project.number} · ${site.kindLabels[project.kind]}`
               : `${site.name} · ${site.role}`}
           </p>
-          <h1 className="mt-4 text-balance text-5xl font-semibold leading-[1.05] tracking-tight">
+          <h1 className="mt-4 text-balance text-5xl font-normal leading-[1.05] tracking-tight">
             {project ? project.title : site.title}
           </h1>
           <p className="mt-5 text-xl leading-snug text-muted">
             {project ? (
               <>
-                <span className="font-mono font-semibold text-fg">{project.metric.value}</span>{" "}
+                <span className="font-mono font-normal text-fg">{project.metric.value}</span>{" "}
                 {project.metric.label}
               </>
             ) : (

@@ -13,7 +13,7 @@ export function MediaGallery({ project }: { project: Project }) {
       </h2>
       {video && (
         <video
-          className="glass w-full rounded-2xl"
+          className="glass w-full"
           src={video.src}
           poster={video.poster}
           controls
@@ -21,10 +21,10 @@ export function MediaGallery({ project }: { project: Project }) {
           playsInline
         />
       )}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4">
         {screenshots.map((s, i) =>
           s.src ? (
-            <figure key={i} className="glass reveal overflow-hidden rounded-2xl">
+            <figure key={i} className="glass reveal overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element -- static export, images are pre-sized */}
               <img src={s.src} alt={s.alt} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
               <figcaption className="p-4 text-sm text-muted">{s.alt}</figcaption>
@@ -32,14 +32,14 @@ export function MediaGallery({ project }: { project: Project }) {
           ) : (
             <figure
               key={i}
-              className="glass reveal flex aspect-[4/3] flex-col justify-between rounded-2xl p-5"
+              className="glass reveal flex aspect-[16/10] flex-col justify-between p-6"
             >
-              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+              <span className="label text-faint">
                 Screenshot {String(i + 1).padStart(2, "0")} · coming soon
               </span>
               <div
                 aria-hidden="true"
-                className="mx-auto my-4 w-full flex-1 rounded-lg border border-dashed border-line-strong"
+                className="mx-auto my-4 w-full flex-1 rounded-[4px] border border-dashed border-line-strong"
                 style={{
                   backgroundImage:
                     "linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px)",

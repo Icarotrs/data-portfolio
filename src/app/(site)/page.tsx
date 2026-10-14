@@ -5,10 +5,10 @@ import { Services } from "@/components/home/Services";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-20 sm:gap-28">
+    <>
       <Hero />
       <ProjectList projects={getProjects()} />
       <Services />
-    </div>
+    </>
   );
 }

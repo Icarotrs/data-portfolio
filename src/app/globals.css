@@ -4,63 +4,72 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Theme tokens ─────────────────────────────────────────────
-   Light: cool grays. Dark: deep black.
-   Glass opacity is high enough that text stays AA (≥ 4.5:1) even when a
-   bright filtered pixel sits behind a card (worst case checked against
-   pure white / pure black behind the glass). */
+   A warm, atmospheric gradient background (peach → burnt orange by day,
+   rust → black by night) with soft dark shapes, and opaque frosted cards
+   on top. Card opacity keeps text at WCAG AA over any part of the
+   background. */
 :root {
   color-scheme: light;
-  --bg: #eceef2;
-  --bg-2: #e2e5ea;
-  --fg: #0d1015;
-  --muted: #353b45;
-  --faint: #535a66;
-  --line: rgb(13 16 21 / 0.1);
-  --line-strong: rgb(13 16 21 / 0.28);
-  --accent: #1d4fd8;
-  --accent-fg: #ffffff;
-  --glass: linear-gradient(135deg, rgb(255 255 255 / 0.66), rgb(255 255 255 / 0.36));
-  --glass-strong: linear-gradient(135deg, rgb(255 255 255 / 0.82), rgb(255 255 255 / 0.6));
-  --glass-border: rgb(255 255 255 / 0.85);
-  --glass-shadow: 0 0 0 1px rgb(13 16 21 / 0.06), inset 0 1px 0 rgb(255 255 255 / 0.9),
-    0 24px 48px -28px rgb(13 16 21 / 0.35);
-  --silver: linear-gradient(180deg, #0d1015 30%, #3b4350 100%);
-  --cta: #0d1015;
-  --cta-fg: #f5f6f8;
+  /* Background "image" (drawn by the WebGL shader, or by CSS as fallback) */
+  --bg-top: #f2c7a6;
+  --bg-bottom: #d0703f;
+  --bg-glow: #f7d6bb;
+  --bg-shade: #3b1a10;
+  --bg: #d98a62; /* solid fallback / theme-color */
+  /* Orbiting icons */
+  --ink: #fff5ee;
+  --ink-accent: #3b1a10;
+
+  --fg: #1c120e;
+  --muted: #47332a;
+  --faint: #634a3f;
+  --line: rgb(28 18 14 / 0.12);
+  --line-strong: rgb(28 18 14 / 0.26);
+  --on-bg: #1c120e; /* text placed directly on the background */
+  --on-bg-muted: #2a1a13;
+  --card: rgb(255 249 245 / 0.8);
+  --card-border: rgb(255 255 255 / 0.55);
+  --card-shadow: 0 30px 60px -30px rgb(59 26 16 / 0.35);
+  --cta: #1c120e;
+  --cta-fg: #fff7f2;
+  --accent: #9a3d17;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #050506;
-  --bg-2: #0c0d10;
-  --fg: #eceef2;
-  --muted: #b0b7c3;
-  --faint: #9aa2af;
-  --line: rgb(236 238 242 / 0.09);
-  --line-strong: rgb(236 238 242 / 0.26);
-  --accent: #8fb0ff;
-  --accent-fg: #050506;
-  /* Frosted dark glass: translucent white over black, bright hairline edge. */
-  --glass: linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.03) 60%, rgb(255 255 255 / 0.05));
-  --glass-strong: linear-gradient(135deg, rgb(30 31 35 / 0.82), rgb(14 15 18 / 0.78));
-  --glass-border: rgb(255 255 255 / 0.15);
-  --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), inset 0 -1px 0 rgb(255 255 255 / 0.03),
-    0 30px 60px -30px rgb(0 0 0 / 0.9);
-  --silver: linear-gradient(180deg, #ffffff 25%, #b9bec7 100%);
-  --cta: #eceef2;
-  --cta-fg: #050506;
+  --bg-top: #1b0d08;
+  --bg-bottom: #722c15;
+  --bg-glow: #b9562c;
+  --bg-shade: #050303;
+  --bg: #2a130b;
+  --ink: #ffe8da;
+  --ink-accent: #ff9b66;
+
+  --fg: #f7efe9;
+  --muted: #dccbc0;
+  --faint: #bba398;
+  --line: rgb(255 240 230 / 0.1);
+  --line-strong: rgb(255 240 230 / 0.24);
+  --on-bg: #f7efe9;
+  --on-bg-muted: #d6c2b6;
+  --card: rgb(22 13 10 / 0.64);
+  --card-border: rgb(255 240 230 / 0.1);
+  --card-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.7);
+  --cta: #f7efe9;
+  --cta-fg: #1a0d08;
+  --accent: #ffb08a;
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-bg-2: var(--bg-2);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-on-bg: var(--on-bg);
+  --color-on-bg-muted: var(--on-bg-muted);
   --color-accent: var(--accent);
-  --color-accent-fg: var(--accent-fg);
   --color-cta: var(--cta);
   --color-cta-fg: var(--cta-fg);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -98,45 +107,37 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
 
-/* ── Glass cards (frosted glassmorphism) ──────────────────── */
-/* Unlayered on purpose: the 14px radius wins over rounded-* utilities. */
+/* ── Cards: opaque frosted glass, small radius ────────────── */
+/* Unlayered on purpose: the 10px radius wins over rounded-* utilities. */
 .glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(22px) saturate(1.4);
-  backdrop-filter: blur(22px) saturate(1.4);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+  backdrop-filter: blur(28px) saturate(1.3);
 }
 
-.glass-strong {
-  background: var(--glass-strong);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(22px) saturate(1.4);
-  backdrop-filter: blur(22px) saturate(1.4);
-}
-
-/* Silver headline text, like engraved glass. */
-.text-silver {
-  background: var(--silver);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Small mono labels used across the layout. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* ── Scroll-driven reveal (CSS only, no JS) ──────────────── */
+/* Motion only (no fade), so text never drops below AA contrast. */
 @keyframes reveal {
   from {
-    opacity: 0;
-    transform: translateY(32px) scale(0.98);
+    transform: translateY(36px) scale(0.985);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
@@ -145,26 +146,18 @@ body {
     .reveal {
       animation: reveal linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 40%;
+      animation-range: entry 0% entry 35%;
     }
   }
 }
 
-/* ── CSS-only background (shown before / without WebGL) ───── */
+/* ── CSS background (shown before / without WebGL) ────────── */
 .bg-css {
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(120% 80% at 70% 20%, var(--bg-2) 0%, transparent 60%),
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:
-    100% 100%,
-    64px 64px,
-    64px 64px;
-  background-position:
-    0 0,
-    -1px -1px,
-    -1px -1px;
+  background:
+    radial-gradient(45% 40% at 60% 70%, var(--bg-shade) 0%, transparent 75%),
+    radial-gradient(30% 28% at 50% 5%, color-mix(in srgb, var(--bg-shade) 40%, transparent) 0%, transparent 75%),
+    radial-gradient(55% 45% at 45% 96%, var(--bg-glow) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
 }
 
 .bg-fallback {
@@ -184,11 +177,11 @@ body {
 /* ── Prose for MDX stories ────────────────────────────────── */
 .prose-story h2 {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
-  margin: 2.25rem 0 0.75rem;
+  margin: 2rem 0 0.75rem;
 }
 .prose-story h2:first-child {
   margin-top: 0;
@@ -214,29 +207,19 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.7em;
+  top: 0.75em;
   width: 0.5rem;
   height: 1px;
   background: var(--fg);
 }
 .prose-story strong {
   color: var(--fg);
-  font-weight: 600;
+  font-weight: 500;
 }
 .prose-story code {
   font-family: var(--font-mono);
   font-size: 0.85em;
   padding: 0.1em 0.35em;
   border: 1px solid var(--line);
-  border-radius: 4px;
-}
-
-/* ── Filter boxes before WebGL takes over ─────────────────── */
-.filter-box {
-  background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px);
-  background-size: 6px 6px;
-}
-[data-webgl="on"] .filter-box,
-[data-webgl="off"] .filter-box {
-  background-image: none;
+  border-radius: 3px;
 }

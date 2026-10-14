@@ -38,6 +38,8 @@ export const site = {
   name: "Icaro",
   role: "Data & Automation Freelancer",
   title: "E-commerce Profit Dashboards | Power BI & Google Sheets",
+  /** Short headline for the hero card. */
+  headline: "Profit dashboards and automations for e-commerce, built in Power BI & Google Sheets.",
   valueProp:
     "I turn messy store data into dashboards and automations that show your real profit per product and per order — and keep updating themselves.",
   /** Production URL, used for Open Graph and sitemap. No trailing slash. */
@@ -80,12 +82,12 @@ export const site = {
   filterBoxes: {
     // >= 1024px
     desktop: [
-      { filter: "dither", x: 6, y: 16, w: 17, h: 26 },
+      { filter: "dither", x: 6, y: 33, w: 17, h: 26 },
       { filter: "ascii", x: 56, y: 9, w: 19, h: 24 },
       { filter: "halftone", x: 77, y: 38, w: 17, h: 30 },
       { filter: "frost", x: 30, y: 54, w: 24, h: 22 },
       { filter: "pixelate", x: 61, y: 74, w: 14, h: 18 },
-      { filter: "noise", x: 9, y: 70, w: 13, h: 17 },
+      { filter: "noise", x: 9, y: 64, w: 13, h: 17 },
     ],
     // 640–1023px
     tablet: [

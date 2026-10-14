@@ -31,13 +31,12 @@ function Box({ box, index }: { box: FilterBox; index: number }) {
     <div
       data-filter-box
       data-filter={box.filter}
-      className="filter-box absolute border border-line-strong"
+      className="absolute rounded-[3px] border border-[color-mix(in_srgb,var(--on-bg)_16%,transparent)]"
       style={{ left: `${box.x}%`, top: `${box.y}%`, width: `${box.w}%`, height: `${box.h}%` }}
     >
-      <span className="absolute -top-px left-[-1px] -translate-y-full bg-fg px-1.5 py-px font-mono text-[9px] uppercase leading-tight tracking-widest text-bg">
-        {box.label ?? box.filter} · {String(index + 1).padStart(2, "0")}
+      <span className="absolute left-2 top-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-[color-mix(in_srgb,var(--on-bg)_55%,transparent)]">
+        {box.label ?? box.filter} / {String(index + 1).padStart(2, "0")}
       </span>
-      <span className="absolute -bottom-[3px] -right-[3px] h-[5px] w-[5px] bg-fg" />
     </div>
   );
 }

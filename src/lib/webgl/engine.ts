@@ -62,11 +62,11 @@ interface Ring {
 
 function ringsFor(width: number): Ring[] {
   if (width < 640) {
-    return [{ insetX: 0.09, insetY: 0.1, count: 12, size: 30, speed: 1 / 110, alpha: 0.85 }];
+    return [{ insetX: 0.09, insetY: 0.1, count: 10, size: 26, speed: 1 / 110, alpha: 0.5 }];
   }
   return [
-    { insetX: 0.085, insetY: 0.12, count: 20, size: 40, speed: 1 / 120, alpha: 0.9 },
-    { insetX: 0.26, insetY: 0.3, count: 11, size: 32, speed: 1 / 85, alpha: 0.65 },
+    { insetX: 0.085, insetY: 0.12, count: 16, size: 32, speed: 1 / 130, alpha: 0.62 },
+    { insetX: 0.26, insetY: 0.3, count: 9, size: 26, speed: 1 / 95, alpha: 0.4 },
   ];
 }
 
@@ -229,7 +229,7 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
       ringProgress[r] = ringProgress[r] ?? Math.random();
       for (let slot = 0; slot < ring.count; slot++) {
         const seed = hash(r, slot);
-        icons.push({ ring: r, slot, seed, tile: CARET_TILE, next: CARET_TILE, start: NaN, accent: seed < 0.18 ? 1 : 0 });
+        icons.push({ ring: r, slot, seed, tile: CARET_TILE, next: CARET_TILE, start: NaN, accent: seed < 0.15 ? 1 : 0 });
       }
     });
     instanceData = new Float32Array(icons.length * FLOATS_PER_ICON);
@@ -257,21 +257,20 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     wake(instant ? 0 : TYPE_SECONDS + 1.2);
   }
 
-  // ── Theme colors ───────────────────────────────────────────
-  let fg: number[] = [0, 0, 0];
+  // ── Theme colors (CSS custom properties) ───────────────────
   function applyColors() {
     const dark = document.documentElement.dataset.theme === "dark";
-    const bg = cssColor("--bg", dark ? "#050506" : "#eceef2");
-    fg = cssColor("--fg", dark ? "#eceef2" : "#0d1015");
-    const accent = cssColor("--accent", dark ? "#8fb0ff" : "#1d4fd8");
-    const frost = dark ? bg.map((v, i) => v + (fg[i] - v) * 0.14) : [1, 1, 1];
+    const pick = (name: string, light: string, night: string) => cssColor(name, dark ? night : light);
     gl!.useProgram(postProgram.program);
-    gl!.uniform3fv(postProgram.uniforms.uBg, bg);
-    gl!.uniform3fv(postProgram.uniforms.uFg, fg);
-    gl!.uniform3fv(postProgram.uniforms.uFrost, frost);
+    gl!.uniform3fv(postProgram.uniforms.uTop, pick("--bg-top", "#f2c7a6", "#1b0d08"));
+    gl!.uniform3fv(postProgram.uniforms.uBottom, pick("--bg-bottom", "#d0703f", "#722c15"));
+    gl!.uniform3fv(postProgram.uniforms.uGlow, pick("--bg-glow", "#f7d6bb", "#b9562c"));
+    gl!.uniform3fv(postProgram.uniforms.uShade, pick("--bg-shade", "#3b1a10", "#050303"));
+    const ink = pick("--ink", "#fff5ee", "#ffe8da");
+    gl!.uniform3fv(postProgram.uniforms.uInk, ink);
     gl!.useProgram(iconProgram.program);
-    gl!.uniform3fv(iconProgram.uniforms.uFg, fg);
-    gl!.uniform3fv(iconProgram.uniforms.uAccent, accent);
+    gl!.uniform3fv(iconProgram.uniforms.uFg, ink);
+    gl!.uniform3fv(iconProgram.uniforms.uAccent, pick("--ink-accent", "#3b1a10", "#ff9b66"));
     wake(0);
   }
   const themeObserver = new MutationObserver(applyColors);

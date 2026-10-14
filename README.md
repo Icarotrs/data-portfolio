@@ -5,7 +5,7 @@ Personal portfolio for a freelance data & automation specialist (Power BI, Googl
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
 - **WebGL2** background (no 3D library): small line icons orbit the page and are rendered through "filter boxes" (dither, ASCII, pixelate, noise, frost, halftone) by a single post-processing shader
-- Frosted **glassmorphism** cards and CSS scroll-driven reveals
+- Warm gradient background with film grain, opaque frosted cards in a single centered column, mono corner details (menu, clock, theme switch, links) and CSS scroll-driven reveals
 - Content in **JSON + MDX**, validated at build time
 
 ## Run it
@@ -64,7 +64,7 @@ The boxes are real DOM elements (`src/components/background/FilterBoxLayer.tsx`)
 - Pixel ratio capped at 1.5; rendering pauses when the tab is hidden.
 - `prefers-reduced-motion`: a static frame, redrawn only when something changes.
 - No WebGL2 → a pre-rendered background image. Software-only WebGL (no GPU) → the lightweight CSS background. Add `?forcegl` to the URL to force WebGL anyway (testing).
-- Glass cards are opaque enough to keep text at WCAG AA contrast over any background pixel.
+- Cards are opaque enough to keep text at WCAG AA contrast over any part of the background; reveal animations move but never fade text.
 
 ## Generated assets
 

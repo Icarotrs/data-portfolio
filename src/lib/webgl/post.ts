@@ -85,14 +85,16 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
   precision highp float;
   out vec4 outColor;
 
-  uniform sampler2D tScene;
+  uniform sampler2D tScene;   // icons, premultiplied over transparent
   uniform sampler2D tGlyph;
   uniform vec2 uRes;          // drawing buffer size in device px
   uniform float uDpr;         // device px per CSS px
   uniform float uTime;
-  uniform vec3 uBg;
-  uniform vec3 uFg;
-  uniform vec3 uFrost;
+  uniform vec3 uTop;          // background gradient, top
+  uniform vec3 uBottom;       // background gradient, bottom
+  uniform vec3 uGlow;         // warm glow, lower left
+  uniform vec3 uShade;        // dark soft shapes
+  uniform vec3 uInk;          // light tone used by the filters
   uniform vec4 uBoxes[${MAX_BOXES}];   // x0, y0, x1, y1 in device px (origin bottom-left)
   uniform float uBoxType[${MAX_BOXES}];
   uniform int uBoxCount;
@@ -105,51 +107,51 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return fract(p.x * p.y);
   }
 
-  // Ordered dither thresholds (Bayer 8x8), in [0, 1).
   float bayer2(vec2 a) { a = floor(a); return fract(dot(a, vec2(0.5, a.y * 0.75))); }
   float bayer4(vec2 a) { return bayer2(0.5 * a) * 0.25 + bayer2(a); }
   float bayer8(vec2 a) { return bayer4(0.5 * a) * 0.25 + bayer2(a); }
 
-  // Background field: soft moving gradient + 64px grid, so filters also
-  // have something to work on where no shape is present.
-  vec3 field(vec2 px, float lod) {
-    vec2 uv = px / uRes;
-    float g = 0.5 + 0.5 * sin(uv.x * 2.3 + uTime * 0.05) * cos(uv.y * 1.9 - uTime * 0.04);
-    float v = 0.02 + 0.05 * g * (1.0 - 0.6 * length(uv - vec2(0.7, 0.75)));
-    vec2 cell = mod(px, 64.0 * uDpr);
-    float line = (cell.x < uDpr || cell.y < uDpr) ? 1.0 : 0.0;
-    v += line * 0.09 * (1.0 - clamp(lod, 0.0, 1.0));
-    return mix(uBg, uFg, v);
+  float blob(vec2 p, vec2 c, float k) { vec2 d = p - c; return exp(-dot(d, d) * k); }
+
+  // The background "image": warm vertical gradient, a glow and two dark
+  // soft shapes drifting very slowly.
+  vec3 field(vec2 px) {
+    vec2 uv = px / uRes;               // y up
+    float aspect = uRes.x / uRes.y;
+    vec2 p = vec2(uv.x * aspect, uv.y);
+    vec3 c = mix(uBottom, uTop, smoothstep(0.0, 1.0, uv.y));
+    c = mix(c, uGlow, 0.6 * blob(p, vec2((0.45 + 0.04 * sin(uTime * 0.05)) * aspect, 0.04), 3.2));
+    c = mix(c, uShade, 0.9 * blob(p, vec2((0.6 + 0.04 * sin(uTime * 0.07)) * aspect, 0.3 + 0.05 * cos(uTime * 0.05)), 4.5));
+    c = mix(c, uShade, 0.35 * blob(p, vec2((0.5 + 0.03 * cos(uTime * 0.06)) * aspect, 0.95), 7.0));
+    return c;
   }
 
-  // Scene (premultiplied, transparent background) composited over the field.
   vec3 sceneAt(vec2 px, float lod) {
     vec4 s = textureLod(tScene, px / uRes, lod);
-    return s.rgb + field(px, lod) * (1.0 - s.a);
+    return s.rgb + field(px) * (1.0 - s.a);
   }
 
-  // Position of a color between background (0) and foreground (1).
-  float amountOf(vec3 c) {
-    vec3 d = uFg - uBg;
-    return clamp(dot(c - uBg, d) / max(dot(d, d), 1e-4), 0.0, 1.0);
-  }
+  float luma(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }
 
+  // Filters keep the local background hue: they choose between a darker
+  // and a lighter version of the colour underneath.
   vec3 fDither(vec2 px, vec2 o) {
     float cell = 2.0 * uDpr;
     vec2 id = floor((px - o) / cell);
-    float a = amountOf(sceneAt(o + (id + 0.5) * cell, 0.0));
-    return (a - 0.02) * 1.2 > bayer8(id) ? uFg : uBg;
+    vec3 c = sceneAt(o + (id + 0.5) * cell, 0.0);
+    float t = luma(c) * 1.35 - 0.12;
+    return t > bayer8(id) ? mix(c, uInk, 0.4) : c * 0.84;
   }
 
   vec3 fAscii(vec2 px, vec2 o) {
     vec2 cell = vec2(8.0, 14.0) * uDpr;
     vec2 id = floor((px - o) / cell);
     vec2 local = fract((px - o) / cell);
-    float a = amountOf(sceneAt(o + (id + 0.5) * cell, log2(cell.x)));
-    a = pow(clamp(a * 1.6, 0.0, 1.0), 0.8);
-    float index = floor(a * (GLYPH_COUNT - 0.001));
+    vec3 c = sceneAt(o + (id + 0.5) * cell, log2(cell.x));
+    float t = clamp(luma(c) * 1.5 - 0.15, 0.0, 1.0);
+    float index = floor(t * (GLYPH_COUNT - 0.001));
     float mask = texture(tGlyph, vec2((index + local.x) / GLYPH_COUNT, local.y)).r;
-    return mix(uBg, uFg, mask * 0.92);
+    return mix(c * 0.86, mix(c, uInk, 0.6), mask);
   }
 
   vec3 fPixelate(vec2 px, vec2 o) {
@@ -157,10 +159,11 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     vec2 id = floor((px - o) / cell);
     vec2 local = fract((px - o) / cell);
     vec3 c = sceneAt(o + (id + 0.5) * cell, log2(cell));
-    float a = floor(clamp(amountOf(c) * 1.5, 0.0, 1.0) * 5.0 + 0.5) / 5.0;
-    vec3 col = mix(uBg, uFg, a);
+    // Posterize brightness only, so the hue of the background survives.
+    float l = max(luma(c), 1e-3);
+    c *= (floor(l * 7.0 + 0.5) / 7.0) / l;
     float gap = (local.x < 1.0 / cell || local.y < 1.0 / cell) ? 1.0 : 0.0;
-    return mix(col, uBg, gap * 0.6);
+    return c * (1.0 - 0.12 * gap);
   }
 
   vec3 fNoise(vec2 px, vec2 o) {
@@ -168,15 +171,13 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     float shift = (hash(vec2(row, floor(uTime * 12.0))) - 0.5) * 6.0 * uDpr;
     vec3 c = sceneAt(px + vec2(shift, 0.0), 0.0);
     float n = hash(px + floor(uTime * 24.0) * 17.0);
-    return clamp(c + (n - 0.5) * 0.24, 0.0, 1.0);
+    return clamp(c + (n - 0.5) * 0.2, 0.0, 1.0);
   }
 
   vec3 fFrost(vec2 px, vec2 o) {
-    float lod = 3.5;
     float j = 6.0 * uDpr;
-    vec3 c = (sceneAt(px + vec2(j, j), lod) + sceneAt(px - vec2(j, j), lod)) * 0.5;
-    c = mix(c, uFrost, 0.38);
-    return c + (hash(px) - 0.5) * 0.03;
+    vec3 c = (sceneAt(px + vec2(j, j), 4.0) + sceneAt(px - vec2(j, j), 4.0)) * 0.5;
+    return mix(c, vec3(1.0), 0.18) + (hash(px) - 0.5) * 0.04;
   }
 
   vec3 fHalftone(vec2 px, vec2 o) {
@@ -185,11 +186,11 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     vec2 rp = rot * (px - o);
     vec2 id = floor(rp / cell);
     vec2 center = (id + 0.5) * cell;
-    float a = amountOf(sceneAt(o + transpose(rot) * center, log2(cell)));
-    float r = sqrt(clamp((a - 0.035) * 1.6, 0.0, 1.0)) * 0.62 * cell;
-    float d = length(rp - center);
-    float mask = 1.0 - smoothstep(r - 0.75 * uDpr, r + 0.75 * uDpr, d);
-    return mix(uBg, uFg, mask);
+    vec3 c = sceneAt(o + transpose(rot) * center, log2(cell));
+    float t = clamp(luma(c) * 1.4 - 0.1, 0.0, 1.0);
+    float r = sqrt(t) * 0.6 * cell;
+    float mask = 1.0 - smoothstep(r - 0.75 * uDpr, r + 0.75 * uDpr, length(rp - center));
+    return mix(c * 0.86, mix(c, uInk, 0.5), mask);
   }
 
   void main() {
@@ -209,6 +210,8 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
       else col = fHalftone(px, o);
       break;
     }
+    // Film grain over everything, like the reference photo backgrounds.
+    col += (hash(px + fract(uTime * 0.37) * 731.0) - 0.5) * 0.035;
     outColor = vec4(col, 1.0);
   }
 `;
