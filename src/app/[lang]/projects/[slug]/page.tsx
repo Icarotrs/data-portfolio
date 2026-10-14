@@ -8,7 +8,6 @@ import { getProject, getProjects, localize, storyLocale } from "@/lib/content";
 import { ContactCard } from "@/components/layout/ContactCard";
 import { FlowDiagram } from "@/components/project/FlowDiagram";
 import { MediaGallery } from "@/components/project/MediaGallery";
-import { Glyph } from "@/components/ui/Glyph";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/icons";
 
@@ -78,7 +77,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
       </nav>
 
       {/* Header: what it is */}
-      <header className="card grid gap-8 p-7 sm:p-10 md:grid-cols-[minmax(0,1fr)_160px]">
+      <header className="card p-7 sm:p-10">
         <div>
           <p className="label text-accent">
             {project.number} · {dict.kinds[project.kind]}
@@ -103,7 +102,6 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
             )}
           </div>
         </div>
-        <Glyph shape={site.kindShapes[project.kind]} className="hidden aspect-square w-full self-center md:block" />
       </header>
 
       {/* 01 Problem · 02 What I built */}

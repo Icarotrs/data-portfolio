@@ -9,14 +9,14 @@ Projects, in order: Shopify → Sheets → AI → Alerts (n8n) · Form → Sheet
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
 - Blurred orange background (a static image, `public/bg/*.webp`, made by `scripts/render-bg.mjs`) with frosted-glass cards, square corners and accent corner ticks
-- One animated shape per project type (`site.config.ts → kindShapes`, drawn by `src/components/ui/Glyph.tsx` in SVG/CSS, no canvas): integration → connected nodes with pulses, automation → spinning torus, ai → particles forming clusters, extraction → particles lining up into a grid, dashboard → 3D bars. The home page shows nodes, torus and cube together
+- Home page composition: connected nodes with pulses, a spinning torus and a wireframe cube (`site.config.ts → homeShapes`, drawn by `src/components/ui/Glyph.tsx` in SVG/CSS, no canvas). Project cards and pages have no animated shapes
 - Scroll-driven animations in pure CSS (`animation-timeline: view()`): sections rise in, project cards stack on top of each other while you scroll, screenshots zoom in. Browsers without support (or with reduced motion) show everything static
 - The hero title types itself like a command prompt (CSS only)
 - Three languages: English, Portuguese and Spanish (`/en/`, `/pt/`, `/es/`)
 
 ## Configuration
 
-`site.config.ts` holds the name, site URL, links (Upwork, LinkedIn, GitHub), the project kinds and the kind → shape map. Never add email or phone: contact goes through Upwork.
+`site.config.ts` holds the name, site URL, links (Upwork, LinkedIn, GitHub), the project kinds and the home shapes. Never add email or phone: contact goes through Upwork.
 
 ## Languages
 
@@ -87,7 +87,7 @@ Commit the regenerated `public/og` files so they deploy.
 ## Project structure
 
 ```
-site.config.ts                 name, URL, links, project kinds, kind → shape map
+site.config.ts                 name, URL, links, project kinds, home shapes
 content/projects/<slug>/       project.json + story.<lang>.mdx
 integrations/n8n/              importable n8n workflow for project 01
 scripts/shots/                 HTML mock-ups for screenshots and demo videos

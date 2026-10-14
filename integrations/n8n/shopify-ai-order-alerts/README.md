@@ -56,5 +56,10 @@ flowchart LR
 
 - Cost: one short request per order, typically a fraction of a cent.
 - Shopify signs webhooks with HMAC. For production you can verify the `X-Shopify-Hmac-Sha256` header in a Code node with your webhook secret; it is left out here to keep the demo simple.
-- What was tested: both Code nodes, run against the three sample orders (`test-orders/`), including the "no AI answer" fallback. The live calls to Claude, Google Sheets, Slack and Gmail need your credentials and were not run in the demo.
+- What was tested:
+  - `workflow.json` imports cleanly into n8n 2.43.5;
+  - a copy of the workflow ran end to end in n8n with the three sample orders sent by `send-test-orders.mjs` to the webhook. The Claude API was replaced by a local mock that checked the request (model, `anthropic-version` header, JSON schema), and the Sheets, Slack and Gmail steps were left out;
+  - both Code nodes, including the "no AI answer" fallback.
+
+  The live calls to Claude, Google Sheets, Slack and Gmail need your credentials and were not run.
 - The data in `test-orders/` is fictitious.

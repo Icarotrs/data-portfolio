@@ -1,6 +1,4 @@
-import { site } from "@site";
 import { getDictionary } from "@/i18n/dictionaries";
-import { Glyph } from "@/components/ui/Glyph";
 import { getProject, getProjects } from "@/lib/content";
 
 const en = getDictionary("en");
@@ -32,7 +30,6 @@ export default async function RenderCover({ params }: PageProps<"/render/cover/[
             <p className="font-mono text-lg uppercase tracking-[0.2em] text-faint">
               {en.kinds[project.kind]}
             </p>
-            <Glyph shape={site.kindShapes[project.kind]} className="ml-auto h-28 w-28 self-center" />
           </div>
           <h1 className="mt-6 text-balance text-7xl font-normal leading-[1.02] tracking-tight">
             {project.title}

@@ -19,17 +19,9 @@ Review list before deploying. Branch `main-1tqb61`.
 - Metadata, Open Graph and the README use the new positioning.
 - Contact is still Upwork only: no email, phone or form.
 
-## 3. Type → shape map (`site.config.ts → kindShapes`)
-These are light SVG/CSS animations, no WebGL, drawn by `src/components/ui/Glyph.tsx`.
-
-| Type | Shape |
-| --- | --- |
-| integration | connected nodes with pulses running along the links |
-| automation | spinning torus |
-| ai | particle cloud that gathers into clusters |
-| extraction | scattered particles that line up into a grid |
-| dashboard | 3D bars |
-| home page | nodes + torus + cube, joined by lines with pulses ("Connect · Automate · See results") |
+## 3. Animated shapes
+- Home page only: connected nodes with pulses, a spinning torus and a wireframe cube, joined by lines ("Connect · Automate · See results"). Light SVG/CSS, no WebGL.
+- The per-type shapes on the project cards and pages were removed at your request; the cards show number, type, title, summary, result and tools.
 
 ## 4. Projects (new order)
 
@@ -58,6 +50,8 @@ These are light SVG/CSS animations, no WebGL, drawn by `src/components/ui/Glyph.
 - `workflow.json`, ready to import: webhook → clean-up → Claude API (JSON with a schema) → read the answer → Google Sheets → "needs a person?" → Slack + Gmail;
 - three test orders and `send-test-orders.mjs`;
 - a README with the setup steps and the flow diagram.
+
+Tested here: the import into n8n 2.43.5, and an end-to-end run with the three test orders (with the Claude API mocked; Sheets, Slack and Gmail need your credentials).
 
 ## 6. Upwork
 - Covers (1600×1200): `exports/covers/<slug>.png`.

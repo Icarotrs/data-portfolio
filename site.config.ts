@@ -5,7 +5,7 @@
 
 export type ProjectKind = "integration" | "automation" | "ai" | "extraction" | "dashboard";
 /** Animated shapes (src/components/ui/Glyph.tsx). */
-export type Shape = "nodes" | "torus" | "clusters" | "grid" | "bars" | "cube";
+export type Shape = "nodes" | "torus" | "cube";
 export const site = {
   // ── Identity ────────────────────────────────────────────────
   // Interface texts (headline, intro, services…) are per language in
@@ -25,14 +25,6 @@ export const site = {
   projectKinds: ["integration", "automation", "ai", "extraction", "dashboard"] as ProjectKind[],
 
   // ── Shapes ──────────────────────────────────────────────────
-  /** Which animated shape stands for each project type. */
-  kindShapes: {
-    integration: "nodes", // small nodes joined by lines, pulses along the links
-    automation: "torus", // spinning torus
-    ai: "clusters", // particles gathering into groups
-    extraction: "grid", // scattered particles lining up into a grid
-    dashboard: "bars", // 3D bars
-  } as Record<ProjectKind, Shape>,
   /** The composition on the home page: connected nodes, torus and cube. */
   homeShapes: ["nodes", "torus", "cube"] as Shape[],
 };
