@@ -23,14 +23,14 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" data-icon-theme="services" aria-labelledby="services-title" className="scroll-mt-24">
+    <section id="services" data-section="services" aria-labelledby="services-title" className="scroll-mt-24">
       <h2 id="services-title" className="label mb-4 text-on-bg">
         Services · {String(services.length).padStart(2, "0")}
       </h2>
       <ul className="flex flex-col gap-4">
         {services.map((s, i) => (
-          <li key={s.title} className="glass reveal p-7 sm:p-8">
-            <p className="label text-faint">S{i + 1}</p>
+          <li key={s.title} className="glass p-7 sm:p-8">
+            <p className="label text-accent">S{i + 1}</p>
             <h3 className="mt-4 text-[20px] leading-tight tracking-tight">{s.title}</h3>
             <p className="mt-2 text-pretty text-[15px] leading-relaxed text-muted">{s.body}</p>
             <p className="label mt-4 text-faint">{s.tools}</p>

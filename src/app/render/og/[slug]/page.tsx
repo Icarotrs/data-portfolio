@@ -1,7 +1,6 @@
 import { site } from "@site";
 import { getProject, getProjects } from "@/lib/content";
 import { Background } from "@/components/background/Background";
-import { ThemeScope } from "@/components/background/ThemeScope";
 import { RENDER_STILL_TIME } from "../../still";
 
 export const dynamicParams = false;
@@ -17,7 +16,6 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
-      <ThemeScope theme={project ? project.kind : "intro"} />
       <Background stillTime={RENDER_STILL_TIME} />
       <div className="relative z-10 flex h-full items-end p-14">
         <div className="glass w-[760px] p-10">

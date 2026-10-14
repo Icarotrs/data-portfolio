@@ -4,9 +4,9 @@ import { LinkButton } from "@/components/ui/LinkButton";
 /** Last section on every page: the only call to action is Upwork. */
 export function ContactCard() {
   return (
-    <section id="contact" data-icon-theme="contact" aria-labelledby="contact-title" className="scroll-mt-24">
-      <div className="glass reveal p-7 sm:p-9">
-        <p className="label text-faint">Contact</p>
+    <section id="contact" data-section="contact" aria-labelledby="contact-title" className="scroll-mt-24">
+      <div className="glass p-7 sm:p-9">
+        <p className="label text-accent">Contact</p>
         <h2 id="contact-title" className="mt-4 text-[26px] leading-tight tracking-tight">
           Have a report that eats your week?
         </h2>
@@ -17,10 +17,10 @@ export function ContactCard() {
           <LinkButton href={site.links.upwork} external>
             Hire me on Upwork
           </LinkButton>
-          <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-fg">
+          <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-accent">
             LinkedIn
           </a>
-          <a href={site.links.github} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-fg">
+          <a href={site.links.github} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-accent">
             GitHub
           </a>
         </div>

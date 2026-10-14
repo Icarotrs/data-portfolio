@@ -40,44 +40,55 @@ export const FULLSCREEN_VERTEX = /* glsl */ `#version 300 es
   }
 `;
 
-/**
- * Icons pass: instanced quads sampling the icon atlas. Output is
- * premultiplied alpha over a transparent target.
- */
-export const ICON_VERTEX = /* glsl */ `#version 300 es
-  in vec2 aCorner;            // -0.5..0.5
-  in vec4 aA;                 // x, y (CSS px), size (CSS px), rotation
-  in vec4 aB;                 // tile, alpha, scale x, accent
-  uniform vec2 uView;         // viewport in CSS px
-  uniform vec2 uGrid;         // atlas columns, rows
-  out vec2 vUv;
-  out float vAlpha;
-  out float vAccent;
+/** Shapes pass: lines, points and triangles with per-vertex colour. */
+export const SHAPE_VERTEX = /* glsl */ `#version 300 es
+  in vec3 aPos;
+  in vec4 aColor;
+  uniform mat4 uViewProj;
+  uniform float uPointScale;   // device px per world unit at distance 1
+  out vec4 vColor;
   void main() {
-    vec2 c = aCorner * vec2(aB.z, 1.0) * aA.z;
-    float s = sin(aA.w), k = cos(aA.w);
-    vec2 p = aA.xy + mat2(k, s, -s, k) * c;
-    vec2 clip = p / uView * 2.0 - 1.0;
-    gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);
-    vec2 cell = vec2(mod(aB.x, uGrid.x), floor(aB.x / uGrid.x));
-    vUv = (cell + aCorner + 0.5) / uGrid;
-    vAlpha = aB.y;
-    vAccent = aB.w;
+    gl_Position = uViewProj * vec4(aPos, 1.0);
+    gl_PointSize = uPointScale / gl_Position.w;
+    vColor = vec4(aColor.rgb * aColor.a, aColor.a);
   }
 `;
 
-export const ICON_FRAGMENT = /* glsl */ `#version 300 es
+export const SHAPE_FRAGMENT = /* glsl */ `#version 300 es
   precision mediump float;
-  uniform sampler2D uAtlas;
-  uniform vec3 uFg;
-  uniform vec3 uAccent;
-  in vec2 vUv;
-  in float vAlpha;
-  in float vAccent;
+  uniform float uRound;        // 1 when drawing points: make them round
+  in vec4 vColor;
   out vec4 outColor;
   void main() {
-    float m = texture(uAtlas, vUv).a * vAlpha;
-    outColor = vec4(mix(uFg, uAccent, vAccent) * m, m);
+    if (uRound > 0.5) {
+      vec2 c = gl_PointCoord - 0.5;
+      if (dot(c, c) > 0.25) discard;
+    }
+    outColor = vColor;
+  }
+`;
+
+/** Visitor images: one textured quad at a CSS-pixel rectangle. */
+export const IMAGE_VERTEX = /* glsl */ `#version 300 es
+  uniform vec4 uRect;          // x, y, w, h in CSS px (origin top-left)
+  uniform vec2 uView;          // viewport in CSS px
+  out vec2 vUv;
+  void main() {
+    vec2 corner = vec2(gl_VertexID == 1 || gl_VertexID == 3 ? 1.0 : 0.0, gl_VertexID >= 2 ? 1.0 : 0.0);
+    vec2 p = uRect.xy + corner * uRect.zw;
+    vec2 clip = p / uView * 2.0 - 1.0;
+    gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);
+    vUv = corner;
+  }
+`;
+
+export const IMAGE_FRAGMENT = /* glsl */ `#version 300 es
+  precision mediump float;
+  uniform sampler2D uImage;
+  in vec2 vUv;
+  out vec4 outColor;
+  void main() {
+    outColor = vec4(texture(uImage, vUv).rgb, 1.0);
   }
 `;
 
@@ -85,16 +96,17 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
   precision highp float;
   out vec4 outColor;
 
-  uniform sampler2D tScene;   // icons, premultiplied over transparent
+  uniform sampler2D tScene;   // shapes + images, premultiplied over transparent
   uniform sampler2D tGlyph;
   uniform vec2 uRes;          // drawing buffer size in device px
   uniform float uDpr;         // device px per CSS px
   uniform float uTime;
-  uniform vec3 uTop;          // background gradient, top
-  uniform vec3 uBottom;       // background gradient, bottom
-  uniform vec3 uGlow;         // warm glow, lower left
-  uniform vec3 uShade;        // dark soft shapes
-  uniform vec3 uInk;          // light tone used by the filters
+  uniform vec3 uBase;         // granite, dark tone
+  uniform vec3 uBase2;        // granite, light tone
+  uniform vec3 uFleck;        // granite flecks
+  uniform vec3 uInk;          // tone the filters draw with
+  uniform vec3 uAccent;       // orange highlight
+  uniform float uVignette;
   uniform vec4 uBoxes[${MAX_BOXES}];   // x0, y0, x1, y1 in device px (origin bottom-left)
   uniform float uBoxType[${MAX_BOXES}];
   uniform int uBoxCount;
@@ -107,22 +119,29 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return fract(p.x * p.y);
   }
 
+  float vnoise(vec2 p) {
+    vec2 i = floor(p), f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
+  }
+
   float bayer2(vec2 a) { a = floor(a); return fract(dot(a, vec2(0.5, a.y * 0.75))); }
   float bayer4(vec2 a) { return bayer2(0.5 * a) * 0.25 + bayer2(a); }
   float bayer8(vec2 a) { return bayer4(0.5 * a) * 0.25 + bayer2(a); }
 
-  float blob(vec2 p, vec2 c, float k) { vec2 d = p - c; return exp(-dot(d, d) * k); }
-
-  // The background "image": warm vertical gradient, a glow and two dark
-  // soft shapes drifting very slowly.
+  // The background "image": polished granite. Static multi-scale grain in
+  // CSS pixels (stable across screens), sparse flecks, a soft vignette and
+  // a faint warm glow at the bottom.
   vec3 field(vec2 px) {
-    vec2 uv = px / uRes;               // y up
-    float aspect = uRes.x / uRes.y;
-    vec2 p = vec2(uv.x * aspect, uv.y);
-    vec3 c = mix(uBottom, uTop, smoothstep(0.0, 1.0, uv.y));
-    c = mix(c, uGlow, 0.6 * blob(p, vec2((0.45 + 0.04 * sin(uTime * 0.05)) * aspect, 0.04), 3.2));
-    c = mix(c, uShade, 0.9 * blob(p, vec2((0.6 + 0.04 * sin(uTime * 0.07)) * aspect, 0.3 + 0.05 * cos(uTime * 0.05)), 4.5));
-    c = mix(c, uShade, 0.35 * blob(p, vec2((0.5 + 0.03 * cos(uTime * 0.06)) * aspect, 0.95), 7.0));
+    vec2 q = px / uDpr;
+    float n = vnoise(q * 0.8) * 0.45 + vnoise(q * 0.22) * 0.35 + vnoise(q * 0.035) * 0.2;
+    vec3 c = mix(uBase, uBase2, n);
+    float fleck = step(0.965, hash(floor(q * 0.6)));
+    c = mix(c, uFleck, fleck * 0.55);
+    vec2 uv = px / uRes;
+    vec2 d = (uv - 0.5) * vec2(uRes.x / uRes.y, 1.0);
+    c *= mix(1.0 - uVignette, 1.0, smoothstep(1.1, 0.25, length(d)));
+    c += uAccent * 0.07 * exp(-dot(uv - vec2(0.5, -0.05), uv - vec2(0.5, -0.05)) * 5.0);
     return c;
   }
 
@@ -131,16 +150,19 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     return s.rgb + field(px) * (1.0 - s.a);
   }
 
-  float luma(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }
+  // How far a colour sits from the granite towards the ink tone (0..1).
+  float amountOf(vec3 c) {
+    vec3 base = mix(uBase, uBase2, 0.5);
+    vec3 d = uInk - base;
+    return clamp(dot(c - base, d) / max(dot(d, d), 1e-4), 0.0, 1.0);
+  }
 
-  // Filters keep the local background hue: they choose between a darker
-  // and a lighter version of the colour underneath.
   vec3 fDither(vec2 px, vec2 o) {
     float cell = 2.0 * uDpr;
     vec2 id = floor((px - o) / cell);
     vec3 c = sceneAt(o + (id + 0.5) * cell, 0.0);
-    float t = luma(c) * 1.35 - 0.12;
-    return t > bayer8(id) ? mix(c, uInk, 0.4) : c * 0.84;
+    float t = amountOf(c) * 1.2 + 0.03;
+    return t > bayer8(id) ? mix(c, uInk, 0.75) : field(px) * 0.85;
   }
 
   vec3 fAscii(vec2 px, vec2 o) {
@@ -148,22 +170,22 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     vec2 id = floor((px - o) / cell);
     vec2 local = fract((px - o) / cell);
     vec3 c = sceneAt(o + (id + 0.5) * cell, log2(cell.x));
-    float t = clamp(luma(c) * 1.5 - 0.15, 0.0, 1.0);
+    float t = pow(clamp(amountOf(c) * 1.6 + 0.05, 0.0, 1.0), 0.8);
     float index = floor(t * (GLYPH_COUNT - 0.001));
     float mask = texture(tGlyph, vec2((index + local.x) / GLYPH_COUNT, local.y)).r;
-    return mix(c * 0.86, mix(c, uInk, 0.6), mask);
+    return mix(field(px) * 0.8, uInk, mask * 0.9);
   }
 
+  // Heat-map pixelation: granite → orange → ink, like a spectral readout.
   vec3 fPixelate(vec2 px, vec2 o) {
     float cell = 14.0 * uDpr;
     vec2 id = floor((px - o) / cell);
     vec2 local = fract((px - o) / cell);
     vec3 c = sceneAt(o + (id + 0.5) * cell, log2(cell));
-    // Posterize brightness only, so the hue of the background survives.
-    float l = max(luma(c), 1e-3);
-    c *= (floor(l * 7.0 + 0.5) / 7.0) / l;
+    float t = floor(clamp(amountOf(c) * 1.8, 0.0, 1.0) * 6.0 + 0.5) / 6.0;
+    vec3 col = t < 0.5 ? mix(field(px) * 0.9, uAccent, t * 2.0) : mix(uAccent, uInk, t * 2.0 - 1.0);
     float gap = (local.x < 1.0 / cell || local.y < 1.0 / cell) ? 1.0 : 0.0;
-    return c * (1.0 - 0.12 * gap);
+    return mix(col, field(px) * 0.7, gap * 0.7);
   }
 
   vec3 fNoise(vec2 px, vec2 o) {
@@ -171,13 +193,13 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     float shift = (hash(vec2(row, floor(uTime * 12.0))) - 0.5) * 6.0 * uDpr;
     vec3 c = sceneAt(px + vec2(shift, 0.0), 0.0);
     float n = hash(px + floor(uTime * 24.0) * 17.0);
-    return clamp(c + (n - 0.5) * 0.2, 0.0, 1.0);
+    return clamp(c + (n - 0.5) * 0.22, 0.0, 1.0);
   }
 
   vec3 fFrost(vec2 px, vec2 o) {
     float j = 6.0 * uDpr;
     vec3 c = (sceneAt(px + vec2(j, j), 4.0) + sceneAt(px - vec2(j, j), 4.0)) * 0.5;
-    return mix(c, vec3(1.0), 0.18) + (hash(px) - 0.5) * 0.04;
+    return mix(c, mix(uBase2, uInk, 0.25), 0.3) + (hash(px) - 0.5) * 0.04;
   }
 
   vec3 fHalftone(vec2 px, vec2 o) {
@@ -187,10 +209,10 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
     vec2 id = floor(rp / cell);
     vec2 center = (id + 0.5) * cell;
     vec3 c = sceneAt(o + transpose(rot) * center, log2(cell));
-    float t = clamp(luma(c) * 1.4 - 0.1, 0.0, 1.0);
+    float t = clamp(amountOf(c) * 1.4 + 0.04, 0.0, 1.0);
     float r = sqrt(t) * 0.6 * cell;
     float mask = 1.0 - smoothstep(r - 0.75 * uDpr, r + 0.75 * uDpr, length(rp - center));
-    return mix(c * 0.86, mix(c, uInk, 0.5), mask);
+    return mix(field(px) * 0.85, uInk, mask * 0.9);
   }
 
   void main() {
@@ -210,8 +232,7 @@ export const POST_FRAGMENT = /* glsl */ `#version 300 es
       else col = fHalftone(px, o);
       break;
     }
-    // Film grain over everything, like the reference photo backgrounds.
-    col += (hash(px + fract(uTime * 0.37) * 731.0) - 0.5) * 0.035;
+    col += (hash(px + fract(uTime * 0.37) * 731.0) - 0.5) * 0.02;
     outColor = vec4(col, 1.0);
   }
 `;

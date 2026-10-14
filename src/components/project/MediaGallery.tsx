@@ -1,55 +1,54 @@
 import type { Project } from "@/lib/content";
 
 /**
- * Screenshots and video. Entries with an empty `src` render as labeled
- * placeholders so the layout is ready before real captures exist.
+ * Screenshots and video: the first item large, the rest in two columns.
+ * Entries with an empty `src` render as labelled placeholders.
  */
 export function MediaGallery({ project }: { project: Project }) {
   const { screenshots, video } = project.media;
+  if (!video && screenshots.length === 0) return null;
   return (
-    <section aria-labelledby="media-title" className="grid gap-4">
-      <h2 id="media-title" className="sr-only">
-        Screenshots
+    <section aria-labelledby="media-title" className="mt-6 flex flex-col gap-5">
+      <h2 id="media-title" className="label text-on-bg">
+        Screenshots · {String(screenshots.length).padStart(2, "0")}
       </h2>
       {video && (
-        <video
-          className="glass w-full"
-          src={video.src}
-          poster={video.poster}
-          controls
-          preload="none"
-          playsInline
-        />
+        <video className="glass w-full" src={video.src} poster={video.poster} controls preload="none" playsInline />
       )}
-      <div className="grid gap-4">
-        {screenshots.map((s, i) =>
-          s.src ? (
-            <figure key={i} className="glass reveal overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element -- static export, images are pre-sized */}
-              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="p-4 text-sm text-muted">{s.alt}</figcaption>
-            </figure>
-          ) : (
-            <figure
-              key={i}
-              className="glass reveal flex aspect-[16/10] flex-col justify-between p-6"
-            >
-              <span className="label text-faint">
-                Screenshot {String(i + 1).padStart(2, "0")} · coming soon
-              </span>
+      <div className="grid gap-5 sm:grid-cols-2">
+        {screenshots.map((s, i) => {
+          // First item full width; an odd one out at the end also spans both columns.
+          const wide = i === 0 || (i === screenshots.length - 1 && (screenshots.length - 1) % 2 === 1);
+          return (
+          <figure key={i} className={`glass overflow-hidden ${wide ? "sm:col-span-2" : ""}`}>
+            {s.src ? (
+              // eslint-disable-next-line @next/next/no-img-element -- static export, images are pre-sized
+              <img
+                src={s.src}
+                alt={s.alt}
+                loading="lazy"
+                decoding="async"
+                className={`w-full object-cover ${wide ? "aspect-[16/9]" : "aspect-[4/3]"}`}
+              />
+            ) : (
               <div
                 aria-hidden="true"
-                className="mx-auto my-4 w-full flex-1 rounded-[4px] border border-dashed border-line-strong"
+                className={`m-5 mb-0 flex items-center justify-center rounded-[4px] border border-dashed border-line-strong ${
+                  wide ? "aspect-[16/8]" : "aspect-[4/3]"
+                }`}
                 style={{
                   backgroundImage:
                     "linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px)",
                   backgroundSize: "24px 24px",
                 }}
-              />
-              <figcaption className="text-sm text-muted">{s.alt}</figcaption>
-            </figure>
-          ),
-        )}
+              >
+                <span className="label text-faint">Screenshot {String(i + 1).padStart(2, "0")} · coming soon</span>
+              </div>
+            )}
+            <figcaption className="p-5 text-sm text-muted">{s.alt}</figcaption>
+          </figure>
+          );
+        })}
       </div>
     </section>
   );

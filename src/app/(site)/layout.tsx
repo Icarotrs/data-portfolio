@@ -1,6 +1,5 @@
 import { Background } from "@/components/background/Background";
 import { SectionObserver } from "@/components/background/SectionObserver";
-import { ContactCard } from "@/components/layout/ContactCard";
 import { SiteFrame } from "@/components/layout/SiteFrame";
 
 export default function SiteLayout({ children }: LayoutProps<"/">) {
@@ -15,12 +14,8 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
       <Background />
       <SectionObserver />
       <SiteFrame />
-      <main
-        id="main"
-        className="relative z-20 mx-auto flex w-full max-w-[560px] flex-col gap-16 px-4 pb-24 pt-20 sm:gap-24 sm:pt-28"
-      >
+      <main id="main" className="pointer-events-none relative z-20 w-full px-4 pb-24 pt-20 sm:pt-28 [&>*]:pointer-events-auto">
         {children}
-        <ContactCard />
       </main>
     </>
   );

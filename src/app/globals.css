@@ -4,60 +4,60 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Theme tokens ─────────────────────────────────────────────
-   A warm, atmospheric gradient background (peach → burnt orange by day,
-   rust → black by night) with soft dark shapes, and opaque frosted cards
-   on top. Card opacity keeps text at WCAG AA over any part of the
-   background. */
+   Granite: blacks and dark greys with orange highlights (dark), or a
+   light polished stone (light). Cards are opaque enough to keep text at
+   WCAG AA over any part of the background. */
 :root {
   color-scheme: light;
   /* Background "image" (drawn by the WebGL shader, or by CSS as fallback) */
-  --bg-top: #f2c7a6;
-  --bg-bottom: #d0703f;
-  --bg-glow: #f7d6bb;
-  --bg-shade: #3b1a10;
-  --bg: #d98a62; /* solid fallback / theme-color */
-  /* Orbiting icons */
-  --ink: #fff5ee;
-  --ink-accent: #3b1a10;
+  --g-base: #c4c4c1;
+  --g-base2: #dcdcd9;
+  --g-fleck: #a2a29f;
+  --bg: #cfcfcc; /* solid fallback / theme-color */
+  --shape-line: #2a2a2a;
+  --ink: #161616;
+  --accent-gl: #e8591a;
 
-  --fg: #1c120e;
-  --muted: #47332a;
-  --faint: #634a3f;
-  --line: rgb(28 18 14 / 0.12);
-  --line-strong: rgb(28 18 14 / 0.26);
-  --on-bg: #1c120e; /* text placed directly on the background */
-  --on-bg-muted: #2a1a13;
-  --card: rgb(255 249 245 / 0.8);
-  --card-border: rgb(255 255 255 / 0.55);
-  --card-shadow: 0 30px 60px -30px rgb(59 26 16 / 0.35);
-  --cta: #1c120e;
-  --cta-fg: #fff7f2;
-  --accent: #9a3d17;
+  --fg: #151515;
+  --muted: #3c3c3c;
+  --faint: #575757;
+  --line: rgb(21 21 21 / 0.12);
+  --line-strong: rgb(21 21 21 / 0.26);
+  --on-bg: #151515;
+  --on-bg-muted: #333333;
+  --card: rgb(246 246 244 / 0.86);
+  --card-border: rgb(255 255 255 / 0.7);
+  --card-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.35);
+  --accent: #b83c0b;
+  --accent-fg: #ffffff;
+  --cta: #b83c0b;
+  --cta-fg: #ffffff;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg-top: #1b0d08;
-  --bg-bottom: #722c15;
-  --bg-glow: #b9562c;
-  --bg-shade: #050303;
-  --bg: #2a130b;
-  --ink: #ffe8da;
-  --ink-accent: #ff9b66;
+  --g-base: #0b0b0c;
+  --g-base2: #1c1c1e;
+  --g-fleck: #4a4a4c;
+  --bg: #121213;
+  --shape-line: #d6d6d6;
+  --ink: #e6e6e6;
+  --accent-gl: #ff6a1f;
 
-  --fg: #f7efe9;
-  --muted: #dccbc0;
-  --faint: #bba398;
-  --line: rgb(255 240 230 / 0.1);
-  --line-strong: rgb(255 240 230 / 0.24);
-  --on-bg: #f7efe9;
-  --on-bg-muted: #d6c2b6;
-  --card: rgb(22 13 10 / 0.64);
-  --card-border: rgb(255 240 230 / 0.1);
-  --card-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.7);
-  --cta: #f7efe9;
-  --cta-fg: #1a0d08;
-  --accent: #ffb08a;
+  --fg: #ededed;
+  --muted: #bdbdbd;
+  --faint: #9a9a9a;
+  --line: rgb(255 255 255 / 0.09);
+  --line-strong: rgb(255 255 255 / 0.22);
+  --on-bg: #ededed;
+  --on-bg-muted: #a8a8a8;
+  --card: rgb(17 17 18 / 0.8);
+  --card-border: rgb(255 255 255 / 0.08);
+  --card-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --accent: #ff7a33;
+  --accent-fg: #111111;
+  --cta: #ff6a1f;
+  --cta-fg: #111111;
 }
 
 @theme inline {
@@ -70,6 +70,7 @@
   --color-on-bg: var(--on-bg);
   --color-on-bg-muted: var(--on-bg-muted);
   --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
   --color-cta: var(--cta);
   --color-cta-fg: var(--cta-fg);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -107,7 +108,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--fg);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -131,33 +132,17 @@ body {
   text-transform: uppercase;
 }
 
-/* ── Scroll-driven reveal (CSS only, no JS) ──────────────── */
-/* Motion only (no fade), so text never drops below AA contrast. */
-@keyframes reveal {
-  from {
-    transform: translateY(36px) scale(0.985);
-  }
-  to {
-    transform: none;
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 35%;
-    }
-  }
-}
-
 /* ── CSS background (shown before / without WebGL) ────────── */
 .bg-css {
-  background:
-    radial-gradient(45% 40% at 60% 70%, var(--bg-shade) 0%, transparent 75%),
-    radial-gradient(30% 28% at 50% 5%, color-mix(in srgb, var(--bg-shade) 40%, transparent) 0%, transparent 75%),
-    radial-gradient(55% 45% at 45% 96%, var(--bg-glow) 0%, transparent 70%),
-    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  background-color: var(--g-base);
+  background-image:
+    radial-gradient(60% 40% at 50% 105%, color-mix(in srgb, var(--accent-gl) 10%, transparent), transparent 70%),
+    radial-gradient(120% 90% at 50% 50%, var(--g-base2), var(--g-base) 75%);
+}
+
+/* Visitor images are drawn by WebGL when it runs; the <img> is the fallback. */
+[data-webgl="on"] .user-image-img {
+  visibility: hidden;
 }
 
 .bg-fallback {
@@ -222,4 +207,15 @@ body {
   padding: 0.1em 0.35em;
   border: 1px solid var(--line);
   border-radius: 3px;
+}
+
+/* Larger reading size for case studies. */
+.prose-story-lg p,
+.prose-story-lg li {
+  font-size: 16.5px;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+.prose-story-lg h2 {
+  color: var(--accent);
 }

@@ -1,19 +1,11 @@
 /**
  * site.config.ts — the ONE file to edit for personal info, links,
- * background icons and filter boxes.
+ * background shapes and filter boxes.
  */
 
-import type { IconName } from "./src/lib/icons/names";
 
 export type ProjectKind = "dashboard" | "automation" | "cleaning";
-/** A section "theme": picks which icons orbit the page while it is in view. */
-export type IconTheme =
-  | "intro"
-  | "projects"
-  | "services"
-  | "contact"
-  | "code"
-  | ProjectKind;
+export type ShapeId = "cube-bars" | "torus" | "particle-sphere";
 export type FilterType =
   | "dither"
   | "ascii"
@@ -54,20 +46,13 @@ export const site = {
     github: "https://github.com/Icarotrs",
   },
 
-  // ── Background: icons orbiting the page ─────────────────────
-  // Small line icons travel in a loop around the viewport. Each page
-  // section has a theme; when you scroll into it, the icons "type" into a
-  // random pick from that theme's list. Icon names: src/lib/icons/names.ts
-  iconThemes: {
-    intro: ["coffee", "key-a", "clock", "frog", "star", "braces", "tag", "rocket", "bulb", "heart", "key-cmd", "planet", "cactus"],
-    projects: ["bar-chart", "pie-chart", "trend", "sheet", "database", "sigma", "percent", "dollar", "magnifier", "coffee", "star", "monitor"],
-    services: ["gear", "envelope", "bolt", "loop", "clock", "arrow-fn", "fn", "check", "cloud", "terminal", "frog", "key-enter"],
-    contact: ["chat", "check", "star", "heart", "coffee", "frog", "smiley", "planet", "key-esc", "rocket"],
-    code: ["braces", "tag", "arrow-fn", "fn", "semicolon", "hash", "and", "brackets", "lambda", "binary", "terminal", "key-cmd", "mouse"],
-    dashboard: ["bar-chart", "pie-chart", "trend", "sigma", "percent", "dollar", "database", "sheet", "monitor", "coffee"],
-    automation: ["gear", "loop", "clock", "bolt", "envelope", "check", "arrow-fn", "terminal", "key-enter", "frog"],
-    cleaning: ["magnifier", "sheet", "database", "check", "sigma", "hash", "brackets", "binary", "cactus", "star"],
-  } satisfies Record<IconTheme, IconName[]>,
+  // ── Background: three large shapes on a slow carousel ──────
+  // One shape per project kind, orbiting the center of the screen.
+  shapes: {
+    dashboard: "cube-bars",
+    automation: "torus",
+    cleaning: "particle-sphere",
+  } satisfies Record<ProjectKind, ShapeId>,
 
   /** Human labels for project kinds. */
   kindLabels: {
@@ -80,29 +65,29 @@ export const site = {
   // Boxes are fixed in the viewport; shapes drift behind them and are
   // rendered through each box's filter. x/y/w/h are % of the viewport.
   filterBoxes: {
-    // >= 1024px
+    // >= 1024px — hugging the central column
     desktop: [
-      { filter: "dither", x: 6, y: 33, w: 17, h: 26 },
-      { filter: "ascii", x: 56, y: 9, w: 19, h: 24 },
-      { filter: "halftone", x: 77, y: 38, w: 17, h: 30 },
-      { filter: "frost", x: 30, y: 54, w: 24, h: 22 },
-      { filter: "pixelate", x: 61, y: 74, w: 14, h: 18 },
-      { filter: "noise", x: 9, y: 64, w: 13, h: 17 },
+      { filter: "dither", x: 20, y: 14, w: 15, h: 24 },
+      { filter: "ascii", x: 63, y: 9, w: 17, h: 22 },
+      { filter: "halftone", x: 66, y: 38, w: 15, h: 28 },
+      { filter: "frost", x: 23, y: 48, w: 17, h: 20 },
+      { filter: "pixelate", x: 58, y: 72, w: 14, h: 17 },
+      { filter: "noise", x: 20, y: 74, w: 12, h: 15 },
     ],
     // 640–1023px
     tablet: [
-      { filter: "dither", x: 6, y: 12, w: 26, h: 20 },
-      { filter: "ascii", x: 58, y: 22, w: 34, h: 18 },
-      { filter: "halftone", x: 10, y: 58, w: 30, h: 20 },
-      { filter: "frost", x: 55, y: 66, w: 36, h: 18 },
-      { filter: "pixelate", x: 40, y: 42, w: 18, h: 12 },
+      { filter: "dither", x: 8, y: 14, w: 24, h: 18 },
+      { filter: "ascii", x: 62, y: 20, w: 30, h: 16 },
+      { filter: "halftone", x: 12, y: 56, w: 26, h: 18 },
+      { filter: "frost", x: 58, y: 62, w: 32, h: 16 },
+      { filter: "pixelate", x: 40, y: 40, w: 18, h: 12 },
     ],
     // < 640px
     mobile: [
-      { filter: "dither", x: 6, y: 12, w: 38, h: 16 },
-      { filter: "halftone", x: 54, y: 34, w: 40, h: 18 },
-      { filter: "frost", x: 8, y: 62, w: 46, h: 16 },
-      { filter: "ascii", x: 58, y: 80, w: 36, h: 12 },
+      { filter: "dither", x: 8, y: 14, w: 36, h: 15 },
+      { filter: "halftone", x: 54, y: 34, w: 38, h: 17 },
+      { filter: "frost", x: 10, y: 60, w: 44, h: 15 },
+      { filter: "ascii", x: 56, y: 78, w: 34, h: 12 },
     ],
   } satisfies Record<"desktop" | "tablet" | "mobile", FilterBox[]>,
 };

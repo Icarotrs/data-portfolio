@@ -1,38 +1,31 @@
-import { site, type FilterType, type IconTheme } from "@site";
-import { sceneStore } from "@/lib/scene-store";
-import {
-  ATLAS_COLUMNS,
-  CARET_TILE,
-  GLYPH_TILE_COUNT,
-  GLYPH_TILE_START,
-  ICON_TILE,
-  createIconAtlas,
-} from "@/lib/icons/atlas";
+import type { FilterType } from "@site";
 import {
   FILTER_IDS,
   FULLSCREEN_VERTEX,
-  ICON_FRAGMENT,
-  ICON_VERTEX,
+  IMAGE_FRAGMENT,
+  IMAGE_VERTEX,
   MAX_BOXES,
   POST_FRAGMENT,
+  SHAPE_FRAGMENT,
+  SHAPE_VERTEX,
   createGlyphStrip,
 } from "./post";
+import { Batch, Transform, cubeBars, particleSphere, torus, type Batches, type Colors, type RGB } from "./shapes";
 
 /**
  * Background renderer, plain WebGL2 (no 3D library):
- *   1. Icons — instanced quads from one atlas, drawn into an offscreen
- *      texture (one draw call).
- *   2. Post — one full-screen fragment shader composites the icons over a
- *      background field and applies each filter box's effect.
+ *   1. Scene → offscreen texture: visitor images (from the Image lab), then
+ *      three large wireframe shapes on a slow carousel around the centre.
+ *   2. Post: one full-screen shader draws the granite background, composites
+ *      the scene and applies each filter panel's effect inside its rectangle.
  *
- * Icons travel clockwise around rounded-rectangle "rings" inside the
- * viewport. Scrolling pushes them along; entering a new page section makes
- * every icon "type" its way into a random icon of that section's theme.
+ * Filter panels and image frames are DOM elements; their rectangles are the
+ * source of truth for where effects and images go.
  */
 
 export interface EngineOptions {
   canvas: HTMLCanvasElement;
-  /** Render a single settled frame at this time (asset rendering). */
+  /** Render a single frame at this time (asset rendering). */
   stillTime?: number;
   /** Called after the first frame is drawn. */
   onFirstFrame?: () => void;
@@ -45,78 +38,14 @@ export interface Engine {
 const MAX_DPR = 1.5;
 const MAX_PIXELS = 2_400_000; // cap on drawing-buffer size for big screens
 const IDLE_FPS = 30;
-const TYPE_SECONDS = 0.6; // per-icon "typing" transition
-const TYPE_STAGGER = 0.045; // delay between neighbouring icons
-const FLOATS_PER_ICON = 8;
+const CAMERA_Z = 7;
+const ORBIT_SECONDS = 80; // one full turn of the carousel
+const STATIC_TIME = 6; // frame shown with prefers-reduced-motion
 
-interface Ring {
-  /** Inset from the viewport edges, as a fraction of width / height. */
-  insetX: number;
-  insetY: number;
-  count: number;
-  size: number;
-  /** Loops per second when idle. */
-  speed: number;
-  alpha: number;
-}
-
-function ringsFor(width: number): Ring[] {
-  if (width < 640) {
-    return [{ insetX: 0.09, insetY: 0.1, count: 10, size: 26, speed: 1 / 110, alpha: 0.5 }];
-  }
-  return [
-    { insetX: 0.085, insetY: 0.12, count: 16, size: 32, speed: 1 / 130, alpha: 0.62 },
-    { insetX: 0.26, insetY: 0.3, count: 9, size: 26, speed: 1 / 95, alpha: 0.4 },
-  ];
-}
-
-interface Icon {
-  ring: number;
-  slot: number;
-  seed: number;
-  tile: number;
-  next: number;
-  /** Transition start time; NaN when idle. */
-  start: number;
-  accent: number;
-}
-
-const hash = (a: number, b: number) => {
-  const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
-  return s - Math.floor(s);
-};
-
-/** Point at fraction s of a clockwise rounded-rectangle loop. */
-function ringPoint(s: number, x0: number, y0: number, x1: number, y1: number, r: number): [number, number] {
-  const a = x1 - x0 - 2 * r;
-  const b = y1 - y0 - 2 * r;
-  const arc = (Math.PI / 2) * r;
-  const corner = (cx: number, cy: number, from: number, d: number): [number, number] => [
-    cx + Math.cos(from + d / r) * r,
-    cy + Math.sin(from + d / r) * r,
-  ];
-  const segments: [number, (d: number) => [number, number]][] = [
-    [a, (d) => [x0 + r + d, y0]],
-    [arc, (d) => corner(x1 - r, y0 + r, -Math.PI / 2, d)],
-    [b, (d) => [x1, y0 + r + d]],
-    [arc, (d) => corner(x1 - r, y1 - r, 0, d)],
-    [a, (d) => [x1 - r - d, y1]],
-    [arc, (d) => corner(x0 + r, y1 - r, Math.PI / 2, d)],
-    [b, (d) => [x0, y1 - r - d]],
-    [arc, (d) => corner(x0 + r, y0 + r, Math.PI, d)],
-  ];
-  let d = (((s % 1) + 1) % 1) * (2 * a + 2 * b + 4 * arc);
-  for (const [len, at] of segments) {
-    if (d <= len) return at(d);
-    d -= len;
-  }
-  return [x0 + r, y0];
-}
-
-function cssColor(name: string, fallback: string): [number, number, number] {
+function cssColor(name: string, fallback: string): RGB {
   const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const hex = /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
-  return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255) as [number, number, number];
+  return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255) as RGB;
 }
 
 function compile(gl: WebGL2RenderingContext, vertex: string, fragment: string) {
@@ -137,13 +66,12 @@ function compile(gl: WebGL2RenderingContext, vertex: string, fragment: string) {
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
     throw new Error(gl.getProgramInfoLog(program) ?? "program link failed");
   }
-  const uniforms = new Proxy({} as Record<string, WebGLUniformLocation | null>, {
-    get: (cache, name: string) => (name in cache ? cache[name] : (cache[name] = gl.getUniformLocation(program, name))),
-  });
-  return { program, uniforms };
+  const cache: Record<string, WebGLUniformLocation | null> = {};
+  const u = (name: string) => (name in cache ? cache[name] : (cache[name] = gl.getUniformLocation(program, name)));
+  return { program, u };
 }
 
-function texture(gl: WebGL2RenderingContext, source: TexImageSource, mipmaps: boolean) {
+function texture(gl: WebGL2RenderingContext, source: TexImageSource, mipmaps = false) {
   const tex = gl.createTexture()!;
   gl.bindTexture(gl.TEXTURE_2D, tex);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
@@ -153,6 +81,18 @@ function texture(gl: WebGL2RenderingContext, source: TexImageSource, mipmaps: bo
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   return tex;
+}
+
+/** Downscale big photos before upload (keeps GPU memory and upload time small). */
+function imageSource(img: HTMLImageElement): TexImageSource {
+  const max = 1024;
+  const s = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+  if (s === 1) return img;
+  const c = document.createElement("canvas");
+  c.width = Math.round(img.naturalWidth * s);
+  c.height = Math.round(img.naturalHeight * s);
+  c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
+  return c;
 }
 
 export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions): Engine {
@@ -171,112 +111,49 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
   let reduced = reducedQuery.matches;
 
   // ── GPU resources ──────────────────────────────────────────
-  const iconProgram = compile(gl, ICON_VERTEX, ICON_FRAGMENT);
+  const shapeProgram = compile(gl, SHAPE_VERTEX, SHAPE_FRAGMENT);
+  const imageProgram = compile(gl, IMAGE_VERTEX, IMAGE_FRAGMENT);
   const postProgram = compile(gl, FULLSCREEN_VERTEX, POST_FRAGMENT);
-
-  const atlasCanvas = createIconAtlas();
-  const atlas = texture(gl, atlasCanvas, true);
-  const atlasGrid = [ATLAS_COLUMNS, atlasCanvas.height / (atlasCanvas.width / ATLAS_COLUMNS)];
-  const glyphs = texture(gl, createGlyphStrip(), false);
-
+  const glyphs = texture(gl, createGlyphStrip());
   const sceneTex = gl.createTexture()!;
   const fbo = gl.createFramebuffer()!;
+  const emptyVao = gl.createVertexArray()!;
 
-  const iconVao = gl.createVertexArray()!;
-  gl.bindVertexArray(iconVao);
-  const cornerBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, cornerBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5]), gl.STATIC_DRAW);
-  const aCorner = gl.getAttribLocation(iconProgram.program, "aCorner");
-  gl.enableVertexAttribArray(aCorner);
-  gl.vertexAttribPointer(aCorner, 2, gl.FLOAT, false, 0, 0);
-  const instanceBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, instanceBuffer);
-  for (const [name, offset] of [
-    ["aA", 0],
-    ["aB", 16],
-  ] as const) {
-    const loc = gl.getAttribLocation(iconProgram.program, name);
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 4, gl.FLOAT, false, FLOATS_PER_ICON * 4, offset);
-    gl.vertexAttribDivisor(loc, 1);
-  }
-  const postVao = gl.createVertexArray()!;
+  const shapeVao = gl.createVertexArray()!;
+  const shapeBuffer = gl.createBuffer()!;
+  gl.bindVertexArray(shapeVao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, shapeBuffer);
+  const aPos = gl.getAttribLocation(shapeProgram.program, "aPos");
+  const aColor = gl.getAttribLocation(shapeProgram.program, "aColor");
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 28, 0);
+  gl.enableVertexAttribArray(aColor);
+  gl.vertexAttribPointer(aColor, 4, gl.FLOAT, false, 28, 12);
   gl.bindVertexArray(null);
 
-  // ── Icons ──────────────────────────────────────────────────
-  let rings: Ring[] = [];
-  let icons: Icon[] = [];
-  let instanceData = new Float32Array(0);
-  const ringProgress: number[] = [];
-  let theme: IconTheme = sceneStore.getState().theme;
+  const batches: Batches = { lines: new Batch(), points: new Batch(), tris: new Batch() };
+  const transform = new Transform();
+  let colors: Colors = { line: [0.85, 0.85, 0.85], accent: [1, 0.42, 0.12] };
 
-  function pickTiles(forTheme: IconTheme) {
-    const names = [...site.iconThemes[forTheme]];
-    for (let i = names.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [names[i], names[j]] = [names[j], names[i]];
-    }
-    return icons.map((_, i) => ICON_TILE[names[i % names.length]]);
-  }
-
-  function buildIcons(width: number) {
-    const nextRings = ringsFor(width);
-    if (nextRings.length === rings.length && nextRings[0].count === rings[0]?.count) return;
-    rings = nextRings;
-    icons = [];
-    rings.forEach((ring, r) => {
-      ringProgress[r] = ringProgress[r] ?? Math.random();
-      for (let slot = 0; slot < ring.count; slot++) {
-        const seed = hash(r, slot);
-        icons.push({ ring: r, slot, seed, tile: CARET_TILE, next: CARET_TILE, start: NaN, accent: seed < 0.15 ? 1 : 0 });
-      }
-    });
-    instanceData = new Float32Array(icons.length * FLOATS_PER_ICON);
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, instanceBuffer);
-    gl!.bufferData(gl!.ARRAY_BUFFER, instanceData.byteLength, gl!.DYNAMIC_DRAW);
-    switchTheme(theme, true);
-  }
-
-  /** Start the typing transition into a new random set of icons. */
-  function switchTheme(next: IconTheme, initial = false) {
-    theme = next;
-    const tiles = pickTiles(next);
-    const instant = reduced || still;
-    icons.forEach((icon, i) => {
-      icon.next = tiles[i];
-      if (instant) {
-        icon.tile = icon.next;
-        icon.start = NaN;
-      } else {
-        // Ripple along each ring, like text being typed.
-        icon.start = time + (initial ? 0.3 : 0) + icon.slot * TYPE_STAGGER + icon.ring * 0.12 + icon.seed * 0.05;
-      }
-    });
-    boost = instant ? 0 : 1;
-    wake(instant ? 0 : TYPE_SECONDS + 1.2);
-  }
-
-  // ── Theme colors (CSS custom properties) ───────────────────
+  // ── Theme colours (CSS custom properties) ──────────────────
   function applyColors() {
     const dark = document.documentElement.dataset.theme === "dark";
     const pick = (name: string, light: string, night: string) => cssColor(name, dark ? night : light);
+    const accent = pick("--accent-gl", "#e8591a", "#ff6a1f");
+    colors = { line: pick("--shape-line", "#2a2a2a", "#d6d6d6"), accent };
     gl!.useProgram(postProgram.program);
-    gl!.uniform3fv(postProgram.uniforms.uTop, pick("--bg-top", "#f2c7a6", "#1b0d08"));
-    gl!.uniform3fv(postProgram.uniforms.uBottom, pick("--bg-bottom", "#d0703f", "#722c15"));
-    gl!.uniform3fv(postProgram.uniforms.uGlow, pick("--bg-glow", "#f7d6bb", "#b9562c"));
-    gl!.uniform3fv(postProgram.uniforms.uShade, pick("--bg-shade", "#3b1a10", "#050303"));
-    const ink = pick("--ink", "#fff5ee", "#ffe8da");
-    gl!.uniform3fv(postProgram.uniforms.uInk, ink);
-    gl!.useProgram(iconProgram.program);
-    gl!.uniform3fv(iconProgram.uniforms.uFg, ink);
-    gl!.uniform3fv(iconProgram.uniforms.uAccent, pick("--ink-accent", "#3b1a10", "#ff9b66"));
+    gl!.uniform3fv(postProgram.u("uBase"), pick("--g-base", "#c4c4c1", "#0b0b0c"));
+    gl!.uniform3fv(postProgram.u("uBase2"), pick("--g-base2", "#dcdcd9", "#1c1c1e"));
+    gl!.uniform3fv(postProgram.u("uFleck"), pick("--g-fleck", "#a2a29f", "#4a4a4c"));
+    gl!.uniform3fv(postProgram.u("uInk"), pick("--ink", "#161616", "#e6e6e6"));
+    gl!.uniform3fv(postProgram.u("uAccent"), accent);
+    gl!.uniform1f(postProgram.u("uVignette"), dark ? 0.35 : 0.12);
     wake(0);
   }
   const themeObserver = new MutationObserver(applyColors);
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-  // ── Filter boxes (DOM is the source of truth) ──────────────
+  // ── Filter panels (DOM is the source of truth) ─────────────
   let boxElements: HTMLElement[] = [];
   const boxRects = new Float32Array(MAX_BOXES * 4);
   const boxTypes = new Float32Array(MAX_BOXES);
@@ -299,13 +176,61 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
       boxTypes[boxCount] = FILTER_IDS[el.dataset.filter as FilterType] ?? 0;
       boxCount++;
     }
-    wake(0);
+    wake(0.4);
+  }
+  const onLayout = () => syncBoxes();
+  addEventListener("bg:layout", onLayout);
+
+  // ── Visitor images ─────────────────────────────────────────
+  const imageTextures = new Map<string, WebGLTexture | null>(); // null while loading
+  function imageTexture(url: string) {
+    if (imageTextures.has(url)) return imageTextures.get(url) ?? null;
+    imageTextures.set(url, null);
+    const img = new Image();
+    img.onload = () => {
+      imageTextures.set(url, texture(gl!, imageSource(img)));
+      wake(0);
+    };
+    img.src = url;
+    return null;
   }
 
-  // ── Size ───────────────────────────────────────────────────
+  function drawImages() {
+    const frames = document.querySelectorAll<HTMLElement>("[data-user-image]");
+    const live = new Set<string>();
+    if (frames.length) {
+      gl!.useProgram(imageProgram.program);
+      gl!.uniform2f(imageProgram.u("uView"), width, height);
+      gl!.bindVertexArray(emptyVao);
+      for (const el of frames) {
+        const url = el.dataset.src;
+        if (!url) continue;
+        live.add(url);
+        const tex = imageTexture(url);
+        if (!tex) continue;
+        const r = el.getBoundingClientRect();
+        gl!.bindTexture(gl!.TEXTURE_2D, tex);
+        gl!.uniform4f(imageProgram.u("uRect"), r.left, r.top, r.width, r.height);
+        gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+      }
+    }
+    // Free textures of removed images.
+    for (const [url, tex] of imageTextures) {
+      if (!live.has(url) && tex) {
+        gl!.deleteTexture(tex);
+        imageTextures.delete(url);
+      }
+    }
+    return frames.length > 0;
+  }
+
+  // ── Size & camera ──────────────────────────────────────────
   let width = 0;
   let height = 0;
   let scale = 1;
+  let fov = 35;
+  const viewProj = new Float32Array(16);
+
   function resize() {
     width = canvas.clientWidth || innerWidth;
     height = canvas.clientHeight || innerHeight;
@@ -313,6 +238,16 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     canvas.width = Math.round(width * scale);
     canvas.height = Math.round(height * scale);
     scale = canvas.width / width;
+
+    const aspect = width / height;
+    fov = aspect < 0.8 ? 52 : 35;
+    const f = 1 / Math.tan((fov * Math.PI) / 360);
+    const near = 0.1;
+    const far = 50;
+    const a = (far + near) / (near - far);
+    const b = (2 * far * near) / (near - far);
+    // perspective × translate(0, 0, -CAMERA_Z), column-major
+    viewProj.set([f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, a, -1, 0, 0, -CAMERA_Z * a + b, CAMERA_Z]);
 
     gl!.bindTexture(gl!.TEXTURE_2D, sceneTex);
     gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA, canvas.width, canvas.height, 0, gl!.RGBA, gl!.UNSIGNED_BYTE, null);
@@ -324,27 +259,42 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     gl!.bindFramebuffer(gl!.FRAMEBUFFER, fbo);
     gl!.framebufferTexture2D(gl!.FRAMEBUFFER, gl!.COLOR_ATTACHMENT0, gl!.TEXTURE_2D, sceneTex, 0);
     gl!.bindFramebuffer(gl!.FRAMEBUFFER, null);
-
-    buildIcons(width);
     syncBoxes();
   }
 
-  // ── Scroll drives the loop ─────────────────────────────────
-  let lastScroll = scrollY;
-  let scrollPush = 0; // px of scroll not yet applied to the rings
-  let spin = 0;
-  function onScroll() {
-    const delta = Math.abs(scrollY - lastScroll);
-    lastScroll = scrollY;
-    scrollPush += delta;
-    spin = Math.min(spin + delta * 0.002, 1.5);
-    wake(0.5);
+  // ── Shapes: carousel around the centre ─────────────────────
+  function buildShapes(t: number) {
+    batches.lines.reset();
+    batches.points.reset();
+    batches.tris.reset();
+    const aspect = width / height;
+    const visibleW = 2 * CAMERA_Z * Math.tan((fov * Math.PI) / 360) * aspect;
+    const rx = visibleW * (aspect < 0.8 ? 0.3 : 0.27);
+    const rz = 2.0;
+    const size = aspect < 0.8 ? 0.5 : 0.68;
+    const builders = [cubeBars, torus, particleSphere];
+    builders.forEach((build, i) => {
+      const angle = (t / ORBIT_SECONDS) * Math.PI * 2 + (i * Math.PI * 2) / 3;
+      const x = Math.sin(angle) * rx;
+      const z = Math.cos(angle) * rz;
+      const y = Math.sin(t * 0.4 + i * 2) * 0.15;
+      const alpha = 0.55 + 0.45 * ((z / rz + 1) / 2); // dimmer at the back
+      const spin: [number, number, number] =
+        i === 0 ? [0.42, t * 0.16 + 0.6, 0] : i === 1 ? [-1.05, Math.sin(t * 0.2) * 0.15, t * 0.18] : [0.25, t * 0.12, 0];
+      transform.set(spin[0], spin[1], spin[2], size, x, y, z);
+      build(transform, t, batches, colors, alpha);
+    });
   }
-  addEventListener("scroll", onScroll, { passive: true });
+
+  function drawBatch(batch: Batch, mode: number, round: boolean) {
+    if (!batch.count) return;
+    gl!.bufferData(gl!.ARRAY_BUFFER, batch.data.subarray(0, batch.count * 7), gl!.STREAM_DRAW);
+    gl!.uniform1f(shapeProgram.u("uRound"), round ? 1 : 0);
+    gl!.drawArrays(mode, 0, batch.count);
+  }
 
   // ── Frame ──────────────────────────────────────────────────
-  let time = stillTime ?? 0;
-  let boost = 0;
+  let time = stillTime ?? (reduced ? STATIC_TIME : 0);
   let activeUntil = 0;
   let raf = 0;
   let lastFrame = performance.now();
@@ -352,97 +302,45 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
   let firstFrame = true;
   let dirty = true;
 
-  function updateIcons(dt: number) {
-    const moving = !reduced && !still;
-    rings.forEach((ring, r) => {
-      const [x0, y0, x1, y1] = [width * ring.insetX, height * ring.insetY, width * (1 - ring.insetX), height * (1 - ring.insetY)];
-      const perimeter = 2 * (x1 - x0 + y1 - y0);
-      if (moving) ringProgress[r] += dt * ring.speed * (1 + boost * 4) + (scrollPush * 0.35) / perimeter;
-    });
-    scrollPush = 0;
-
-    icons.forEach((icon, i) => {
-      const ring = rings[icon.ring];
-      const [x0, y0, x1, y1] = [width * ring.insetX, height * ring.insetY, width * (1 - ring.insetX), height * (1 - ring.insetY)];
-      const radius = Math.min(x1 - x0, y1 - y0) * 0.18;
-      let [x, y] = ringPoint(ringProgress[icon.ring] + icon.slot / ring.count, x0, y0, x1, y1, radius);
-
-      let size = ring.size;
-      let tile = icon.tile;
-      let alpha = ring.alpha;
-      let rot = moving ? Math.sin(time * 0.5 + icon.seed * 10) * 0.22 + spin * Math.sin(icon.seed * 20) : 0;
-      if (moving) y += Math.sin(time * 1.3 + icon.seed * 6) * 3;
-
-      if (!Number.isNaN(icon.start) && time >= icon.start) {
-        const p = (time - icon.start) / TYPE_SECONDS;
-        if (p >= 1) {
-          icon.tile = icon.next;
-          icon.start = NaN;
-          tile = icon.tile;
-        } else if (p < 0.14) {
-          // Blinking caret before "typing".
-          tile = CARET_TILE;
-          size *= 0.7;
-          rot = 0;
-          alpha *= Math.floor(time * 16) % 2 ? 1 : 0.25;
-        } else if (p < 0.82) {
-          // Random code characters, oscillating.
-          tile = GLYPH_TILE_START + Math.floor(hash(icon.seed * 50, Math.floor(time * 18)) * GLYPH_TILE_COUNT);
-          size *= 0.78 + 0.22 * Math.sin(p * Math.PI * 7);
-          x += Math.sin(time * 55 + i) * 2.5 * (1 - p);
-          rot = 0;
-          alpha *= 0.65 + 0.35 * hash(i, Math.floor(time * 24));
-        } else {
-          tile = icon.next;
-          size *= 1 + 0.25 * Math.sin(((p - 0.82) / 0.18) * Math.PI);
-        }
-      }
-
-      instanceData.set([x, y, size, rot, tile, alpha, 1, icon.accent], i * FLOATS_PER_ICON);
-    });
-  }
-
-  function render(dt: number) {
-    boost = Math.max(0, boost - dt * 0.8);
-    spin *= Math.exp(-dt * 2.5);
-    updateIcons(dt);
-
-    // Pass 1: icons → offscreen texture.
+  function render() {
+    // Pass 1: images + shapes → offscreen texture.
     gl!.bindFramebuffer(gl!.FRAMEBUFFER, fbo);
     gl!.viewport(0, 0, canvas.width, canvas.height);
     gl!.clearColor(0, 0, 0, 0);
     gl!.clear(gl!.COLOR_BUFFER_BIT);
+    gl!.activeTexture(gl!.TEXTURE0);
+    const hasImages = drawImages();
+
+    buildShapes(time);
     gl!.enable(gl!.BLEND);
     gl!.blendFunc(gl!.ONE, gl!.ONE_MINUS_SRC_ALPHA);
-    gl!.useProgram(iconProgram.program);
-    gl!.uniform2f(iconProgram.uniforms.uView, width, height);
-    gl!.uniform2fv(iconProgram.uniforms.uGrid, atlasGrid);
-    gl!.activeTexture(gl!.TEXTURE0);
-    gl!.bindTexture(gl!.TEXTURE_2D, atlas);
-    gl!.uniform1i(iconProgram.uniforms.uAtlas, 0);
-    gl!.bindVertexArray(iconVao);
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, instanceBuffer);
-    gl!.bufferSubData(gl!.ARRAY_BUFFER, 0, instanceData);
-    gl!.drawArraysInstanced(gl!.TRIANGLE_STRIP, 0, 4, icons.length);
+    gl!.useProgram(shapeProgram.program);
+    gl!.uniformMatrix4fv(shapeProgram.u("uViewProj"), false, viewProj);
+    gl!.uniform1f(shapeProgram.u("uPointScale"), 2.6 * scale * CAMERA_Z);
+    gl!.bindVertexArray(shapeVao);
+    gl!.bindBuffer(gl!.ARRAY_BUFFER, shapeBuffer);
+    drawBatch(batches.tris, gl!.TRIANGLES, false);
+    drawBatch(batches.lines, gl!.LINES, false);
+    drawBatch(batches.points, gl!.POINTS, true);
     gl!.disable(gl!.BLEND);
     gl!.bindTexture(gl!.TEXTURE_2D, sceneTex);
     gl!.generateMipmap(gl!.TEXTURE_2D);
 
-    // Pass 2: composite + filter boxes → screen.
+    // Pass 2: granite + composite + filter panels → screen.
     gl!.bindFramebuffer(gl!.FRAMEBUFFER, null);
     gl!.useProgram(postProgram.program);
-    const u = postProgram.uniforms;
-    gl!.uniform1i(u.tScene, 0);
+    const u = postProgram.u;
+    gl!.uniform1i(u("tScene"), 0);
     gl!.activeTexture(gl!.TEXTURE1);
     gl!.bindTexture(gl!.TEXTURE_2D, glyphs);
-    gl!.uniform1i(u.tGlyph, 1);
-    gl!.uniform2f(u.uRes, canvas.width, canvas.height);
-    gl!.uniform1f(u.uDpr, scale);
-    gl!.uniform1f(u.uTime, time);
-    gl!.uniform4fv(u.uBoxes, boxRects);
-    gl!.uniform1fv(u.uBoxType, boxTypes);
-    gl!.uniform1i(u.uBoxCount, boxCount);
-    gl!.bindVertexArray(postVao);
+    gl!.uniform1i(u("tGlyph"), 1);
+    gl!.uniform2f(u("uRes"), canvas.width, canvas.height);
+    gl!.uniform1f(u("uDpr"), scale);
+    gl!.uniform1f(u("uTime"), time);
+    gl!.uniform4fv(u("uBoxes"), boxRects);
+    gl!.uniform1fv(u("uBoxType"), boxTypes);
+    gl!.uniform1i(u("uBoxCount"), boxCount);
+    gl!.bindVertexArray(emptyVao);
     gl!.drawArrays(gl!.TRIANGLES, 0, 3);
     gl!.bindVertexArray(null);
     gl!.activeTexture(gl!.TEXTURE0);
@@ -452,22 +350,24 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
       firstFrame = false;
       onFirstFrame?.();
     }
+    return hasImages;
   }
 
   function tick(now: number) {
     raf = 0;
     const dt = Math.min((now - lastFrame) / 1000, 0.1);
     lastFrame = now;
-    const active = now < activeUntil;
 
     if (reduced || still) {
-      if (dirty) render(0);
-      return; // static: redraw only when something changes
+      if (dirty) render();
+      // Keep image frames in sync while they are dragged.
+      if (now < activeUntil) schedule();
+      return;
     }
     time += dt;
-    // Full frame rate while scrolling or animating, ~30fps when idle.
-    if (active || dirty || now - lastRender >= 1000 / IDLE_FPS - 2) {
-      render(Math.min((now - (lastRender || now - 16)) / 1000, 0.1));
+    // Full frame rate while something is being dragged, ~30fps otherwise.
+    if (now < activeUntil || dirty || now - lastRender >= 1000 / IDLE_FPS - 2) {
+      render();
       lastRender = now;
     }
     schedule();
@@ -497,21 +397,15 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
 
   function onReducedMotion(e: MediaQueryListEvent) {
     reduced = e.matches;
-    switchTheme(theme);
+    if (reduced) time = STATIC_TIME;
+    wake(0);
   }
   reducedQuery.addEventListener("change", onReducedMotion);
 
-  const unsubscribe = sceneStore.subscribe(() => {
-    const next = sceneStore.getState().theme;
-    if (next !== theme) switchTheme(next);
-  });
-
-  // Filter boxes may mount after the engine on client navigation.
+  // Panels and image frames may mount after the engine (client navigation).
   const domObserver = new MutationObserver(() => {
-    if (document.querySelectorAll("[data-filter-box]").length !== boxElements.length) {
-      collectBoxes();
-      syncBoxes();
-    }
+    if (document.querySelectorAll("[data-filter-box]").length !== boxElements.length) collectBoxes();
+    syncBoxes();
   });
   domObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -533,14 +427,13 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     dispose() {
       cancelAnimationFrame(raf);
       removeEventListener("resize", resize);
-      removeEventListener("scroll", onScroll);
+      removeEventListener("bg:layout", onLayout);
       document.removeEventListener("visibilitychange", onVisibility);
       reducedQuery.removeEventListener("change", onReducedMotion);
       canvas.removeEventListener("webglcontextlost", onContextLost);
       themeObserver.disconnect();
       boxObserver.disconnect();
       domObserver.disconnect();
-      unsubscribe();
       gl!.getExtension("WEBGL_lose_context")?.loseContext();
     },
   };

@@ -1,16 +1,16 @@
 import { site } from "@site";
-import { BrandGlyph } from "@/components/layout/SiteFrame";
+import { BrandMark } from "@/components/layout/SiteFrame";
 import { LinkButton } from "@/components/ui/LinkButton";
 
 const tools = ["Power BI", "Google Sheets", "Apps Script", "SQL", "Python"];
 
 export function Hero() {
   return (
-    <section id="top" data-icon-theme="intro" aria-labelledby="hero-title" className="scroll-mt-24">
+    <section id="top" data-section="intro" aria-labelledby="hero-title" className="scroll-mt-24">
       <div className="glass flex min-h-[min(70vh,560px)] flex-col justify-between gap-12 p-7 sm:p-9">
         <div>
-          <BrandGlyph className="h-8 w-8 text-fg" />
-          <p className="label mt-8 text-faint">
+          <BrandMark className="h-9 w-9 text-fg" />
+          <p className="label mt-8 text-accent">
             {site.name} · {site.role}
           </p>
           <h1 id="hero-title" className="mt-3 text-balance text-[26px] leading-[1.2] tracking-tight sm:text-[30px]">

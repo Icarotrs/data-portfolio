@@ -2,48 +2,35 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import type { IconTheme } from "@site";
-import { sceneStore } from "@/lib/scene-store";
+import { sectionStore } from "@/lib/section-store";
 
 /**
- * Watches every element with `data-icon-theme` and reports the one crossing
- * the middle of the viewport to the scene store.
+ * Watches every element with `data-section` and reports the one crossing
+ * the middle of the viewport (used to highlight the side menu).
  */
 export function SectionObserver() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-icon-theme]"));
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-section]"));
     if (sections.length === 0) return;
-    sceneStore.set({ sections: sections.length });
-
-    const activate = (el: HTMLElement) =>
-      sceneStore.set({
-        theme: el.dataset.iconTheme as IconTheme,
-        section: sections.indexOf(el) + 1,
-      });
+    const activate = (el: HTMLElement) => sectionStore.set(el.dataset.section ?? "intro");
     activate(sections[0]);
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) activate(entry.target as HTMLElement);
-        }
-      },
-      // A thin band across the middle of the screen.
+      (entries) => entries.forEach((e) => e.isIntersecting && activate(e.target as HTMLElement)),
       { rootMargin: "-45% 0px -45% 0px" },
     );
     sections.forEach((s) => observer.observe(s));
 
     // The last section may never reach the middle band on short pages.
     const onScroll = () => {
-      const bottom = window.scrollY + window.innerHeight;
-      if (bottom >= document.documentElement.scrollHeight - 4) activate(sections[sections.length - 1]);
+      if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) activate(sections[sections.length - 1]);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("scroll", onScroll, { passive: true });
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      removeEventListener("scroll", onScroll);
     };
   }, [pathname]);
 
