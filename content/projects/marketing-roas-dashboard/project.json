@@ -1,0 +1,40 @@
+{
+  "order": 5,
+  "number": "05",
+  "title": "Marketing ROAS Dashboard",
+  "kind": "dashboard",
+  "summary": "Ad spend, attributed revenue and cost per customer for every channel in one report that refreshes itself.",
+  "stack": [
+    "Power BI",
+    "BigQuery",
+    "SQL",
+    "Google Ads / Meta / Klaviyo APIs"
+  ],
+  "result": "Showed that 61% of the budget returned under 3× and where to move it.",
+  "metric": {
+    "value": "3.4×",
+    "label": "blended return on ad spend, tracked weekly per channel"
+  },
+  "note": "Demo built with fictitious marketing data.",
+  "links": {
+    "github": "",
+    "demo": ""
+  },
+  "media": {
+    "screenshots": [
+      {
+        "src": "/projects/marketing-roas-dashboard/overview.webp",
+        "alt": "Overview: spend, revenue, ROAS and CAC by channel with recommendations"
+      },
+      {
+        "src": "/projects/marketing-roas-dashboard/trend.webp",
+        "alt": "Weekly attributed revenue per channel with written insights"
+      }
+    ],
+    "video": {
+      "src": "",
+      "poster": ""
+    }
+  },
+  "upworkBlurb": "Marketing performance dashboard for an e-commerce brand: Google Ads, Meta, TikTok and email (Klaviyo) data pulled daily into BigQuery with SQL, joined to Shopify orders and shown in Power BI. One page answers what every channel and campaign costs and returns: spend, attributed revenue, ROAS, cost per new customer and weekly trends, with plain-English recommendations. Refreshes automatically. Demo uses fictitious data. Stack: Power BI, BigQuery, SQL, ad platform APIs."
+}

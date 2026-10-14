@@ -24,12 +24,12 @@
   "media": {
     "screenshots": [
       {
-        "src": "",
-        "alt": "Profit overview page: revenue, fees, shipping and net margin by month"
+        "src": "/projects/ecommerce-profit-dashboard/overview.webp",
+        "alt": "Profit overview: revenue, fees, freight and net margin by month and category"
       },
       {
-        "src": "",
-        "alt": "Product table ranked by net margin with negative-margin SKUs highlighted"
+        "src": "/projects/ecommerce-profit-dashboard/products.webp",
+        "alt": "Products ranked by net margin, loss-making SKUs flagged"
       }
     ],
     "video": {

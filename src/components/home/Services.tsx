@@ -37,6 +37,11 @@ export function Services() {
           </li>
         ))}
       </ul>
+      <p className="mt-6 border-t border-line pt-4 text-sm leading-relaxed text-muted">
+        <span className="label mr-2 text-accent">How I work</span>
+        Built with AI-assisted development (Claude Code) for fast turnaround. Every formula, query and number is checked
+        by hand before delivery, and you get the files and a short guide to maintain them.
+      </p>
     </div>
   );
 }

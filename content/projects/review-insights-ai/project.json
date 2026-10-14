@@ -1,0 +1,40 @@
+{
+  "order": 6,
+  "number": "06",
+  "title": "Customer Review Insights with AI",
+  "kind": "cleaning",
+  "summary": "Thousands of product reviews tagged by topic and sentiment with AI, then turned into a dashboard of what to fix first.",
+  "stack": [
+    "Python",
+    "LLM API",
+    "Google Sheets",
+    "Power BI"
+  ],
+  "result": "5,214 reviews tagged in minutes; delivery time surfaced as the top complaint.",
+  "metric": {
+    "value": "94%",
+    "label": "agreement with a 300-review hand check"
+  },
+  "note": "Demo built with fictitious reviews. Low-confidence AI tags are flagged for a human check.",
+  "links": {
+    "github": "",
+    "demo": ""
+  },
+  "media": {
+    "screenshots": [
+      {
+        "src": "/projects/review-insights-ai/topics.webp",
+        "alt": "Sentiment by topic with AI-written summaries of the top complaint"
+      },
+      {
+        "src": "/projects/review-insights-ai/tagged-sheet.webp",
+        "alt": "Reviews sheet with AI-tagged topic, sentiment, summary and confidence"
+      }
+    ],
+    "video": {
+      "src": "",
+      "poster": ""
+    }
+  },
+  "upworkBlurb": "AI review analysis for an online store: a Python script sends each Amazon and Shopify review to an LLM, which tags the topic (delivery, quality, packaging, size, price, service, returns), the sentiment and a one-line summary. Results land in Google Sheets with a confidence score; low-confidence rows are flagged for a quick human check. A dashboard shows sentiment by topic and what customers complain about most. Demo uses fictitious reviews. Stack: Python, LLM API, Google Sheets, Power BI."
+}

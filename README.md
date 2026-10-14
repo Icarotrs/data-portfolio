@@ -69,6 +69,17 @@ The boxes are real DOM elements (`src/components/background/FilterBoxLayer.tsx`)
 - No WebGL2 → a pre-rendered background image. Software-only WebGL (no GPU) → the lightweight CSS background. Add `?forcegl` to the URL to force WebGL anyway (testing).
 - Cards are opaque enough to keep text at WCAG AA contrast over any part of the background.
 
+## Project screenshots
+
+The screenshots on project pages are rendered from HTML mock-ups of the real deliverables (Power BI reports, Google Sheets, emails, PDF reports, terminal runs) with fictitious, deterministic data:
+
+```bash
+npm run shots                                   # all projects
+npm run shots -- --only=marketing-roas-dashboard
+```
+
+Definitions live in `scripts/shots/projects.mjs` (one function per project) and the building blocks (app frames and SVG charts) in `scripts/shots/kit.mjs`. Output: `public/projects/<slug>/<name>.webp`, referenced from each `project.json`. When a real client project is delivered, replace a mock-up with a real (anonymised) screenshot at the same path.
+
 ## Generated assets
 
 ```bash

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "assets": "node scripts/render-assets.mjs",
-    "upwork": "node scripts/render-assets.mjs --only=upwork"
+    "upwork": "node scripts/render-assets.mjs --only=upwork",
+    "shots": "node scripts/render-shots.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

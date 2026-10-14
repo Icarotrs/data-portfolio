@@ -23,12 +23,12 @@
   "media": {
     "screenshots": [
       {
-        "src": "",
-        "alt": "Before: raw CSV with merged headers, mixed date formats and currency symbols"
+        "src": "/projects/messy-data-importer/before-after.webp",
+        "alt": "Before and after: a messy supplier CSV turned into a clean, consistent sheet"
       },
       {
-        "src": "",
-        "alt": "After: normalized table and summary tab in Google Sheets"
+        "src": "/projects/messy-data-importer/run-log.webp",
+        "alt": "Import run: files detected, fixes applied and price changes vs. the last import"
       }
     ],
     "video": {

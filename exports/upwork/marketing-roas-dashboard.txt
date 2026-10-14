@@ -1,0 +1,14 @@
+TITLE
+Marketing ROAS Dashboard
+
+DESCRIPTION (471/600 characters)
+Marketing performance dashboard for an e-commerce brand: Google Ads, Meta, TikTok and email (Klaviyo) data pulled daily into BigQuery with SQL, joined to Shopify orders and shown in Power BI. One page answers what every channel and campaign costs and returns: spend, attributed revenue, ROAS, cost per new customer and weekly trends, with plain-English recommendations. Refreshes automatically. Demo uses fictitious data. Stack: Power BI, BigQuery, SQL, ad platform APIs.
+
+SKILLS
+Power BI, BigQuery, SQL, Google Ads / Meta / Klaviyo APIs
+
+RESULT
+Showed that 61% of the budget returned under 3× and where to move it.
+
+COVER
+exports/covers/marketing-roas-dashboard.png

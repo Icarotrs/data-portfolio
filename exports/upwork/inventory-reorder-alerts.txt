@@ -1,0 +1,14 @@
+TITLE
+Inventory Reorder Alerts
+
+DESCRIPTION (468/600 characters)
+Inventory reorder system in Google Sheets + Apps Script for a small online store. It imports daily sales, calculates days of stock left, reorder points from supplier lead times and a suggested order quantity per product, and colour-codes every SKU (OK / reorder soon / reorder now). Every morning a script emails purchasing the products that will run out before a new order can arrive. No paid apps. Demo uses fictitious data. Stack: Google Sheets, Apps Script, Gmail.
+
+SKILLS
+Google Sheets, Apps Script, Gmail, Shopify CSV export
+
+RESULT
+Stock-outs caught 1–3 weeks early, with a suggested order quantity for every product.
+
+COVER
+exports/covers/inventory-reorder-alerts.png

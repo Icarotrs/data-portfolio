@@ -1,0 +1,11 @@
+## Problem
+
+The brand spent about $16k a month across Google, Meta, TikTok and email, but each platform reported its own numbers and they never matched Shopify. Every Monday someone exported five CSVs and rebuilt the same spreadsheet, and the budget was split by habit, not by return.
+
+## What I built
+
+- A daily pipeline that pulls spend and campaign data from **Google Ads, Meta, TikTok and Klaviyo** into **BigQuery**, joined to Shopify orders with SQL.
+- One clear definition per metric — **ROAS**, **cost per new customer**, attributed revenue — written down on a *Definitions* page.
+- A Power BI **Overview** with spend, revenue, ROAS and CAC per channel, a status per channel (*scale*, *optimise*, *cut / test*) and the top campaigns.
+- A **Channels over time** page with weekly trends and short written insights, so the report explains itself.
+- Automatic refresh every morning: the Monday spreadsheet is gone.

@@ -1,0 +1,14 @@
+TITLE
+Customer Review Insights with AI
+
+DESCRIPTION (493/600 characters)
+AI review analysis for an online store: a Python script sends each Amazon and Shopify review to an LLM, which tags the topic (delivery, quality, packaging, size, price, service, returns), the sentiment and a one-line summary. Results land in Google Sheets with a confidence score; low-confidence rows are flagged for a quick human check. A dashboard shows sentiment by topic and what customers complain about most. Demo uses fictitious reviews. Stack: Python, LLM API, Google Sheets, Power BI.
+
+SKILLS
+Python, LLM API, Google Sheets, Power BI
+
+RESULT
+5,214 reviews tagged in minutes; delivery time surfaced as the top complaint.
+
+COVER
+exports/covers/review-insights-ai.png

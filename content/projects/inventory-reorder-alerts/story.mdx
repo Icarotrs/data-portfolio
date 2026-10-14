@@ -1,0 +1,11 @@
+## Problem
+
+A small home-goods store found out a product was out of stock when customers complained. Stock lived in a spreadsheet updated by hand, nobody tracked how fast each product sold, and suppliers needed 7 to 21 days to deliver. Best sellers ran out every month.
+
+## What I built
+
+- A daily import of the last 30 days of sales from the store's export into a **Stock** tab.
+- Per product: average daily sales, **days of cover** (how long current stock lasts), a **reorder point** from the supplier's lead time plus a safety week, and a **suggested order** that covers 45 days.
+- Colour-coded status for every SKU — *OK*, *Reorder soon*, *Reorder now* — with an icon and label, not colour alone.
+- An Apps Script trigger that runs every morning at 07:00 and **emails purchasing** the products to order today and this week.
+- A **Reorder log** tab that records every alert and order, and a **Settings** tab for thresholds and recipients.
