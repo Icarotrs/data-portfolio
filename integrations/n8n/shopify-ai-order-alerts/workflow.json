@@ -1,0 +1,373 @@
+{
+  "name": "Shopify → Sheets → AI → Alerts",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "shopify-order",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "c05e3832-3db2-5621-8ae8-ba7ecc01b421",
+      "name": "Shopify order",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "fac45a9c-4c36-5fa0-bf35-d50f8f6d84cb"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Shopify sends the whole order as the request body (orders/create webhook).\nconst o = $json.body ?? $json;\nconst shop = $json.headers?.['x-shopify-shop-domain'] ?? 'your-store.myshopify.com';\nconst place = (a) => (a ? [a.city, a.province_code, a.country_code].filter(Boolean).join(', ') : '');\nconst lines = o.line_items ?? [];\n\nconst order = {\n  order_id: o.id,\n  order: o.name,\n  created_at: o.created_at,\n  customer: [o.customer?.first_name, o.customer?.last_name].filter(Boolean).join(' '),\n  email: o.email ?? o.customer?.email ?? '',\n  past_orders: Math.max(0, (o.customer?.orders_count ?? 1) - 1),\n  lifetime_spent: Number(o.customer?.total_spent ?? 0),\n  total: Number(o.total_price ?? 0),\n  currency: o.currency ?? 'USD',\n  items: lines.map((li) => `${li.quantity}x ${li.title}`).join('; '),\n  item_count: lines.reduce((n, li) => n + (li.quantity ?? 0), 0),\n  shipping_method: o.shipping_lines?.[0]?.title ?? '',\n  ship_to: place(o.shipping_address),\n  bill_to: place(o.billing_address),\n  address_mismatch: Boolean(\n    o.shipping_address && o.billing_address &&\n      (o.shipping_address.province_code !== o.billing_address.province_code ||\n        o.shipping_address.country_code !== o.billing_address.country_code),\n  ),\n  discount_codes: (o.discount_codes ?? []).map((d) => d.code).join(', '),\n  note: o.note ?? '',\n  admin_url: `https://${shop}/admin/orders/${o.id}`,\n};\n\n// The request for the next node (Claude API, structured JSON output).\nconst ai_request = {\n  model: 'claude-opus-5-5',\n  max_tokens: 1024,\n  output_config: {\n    effort: 'low',\n    format: {\n      type: 'json_schema',\n      schema: {\n        type: 'object',\n        properties: {\n          risk: { type: 'string', enum: ['low', 'medium', 'high'] },\n          priority: { type: 'string', enum: ['normal', 'rush'] },\n          customer_type: { type: 'string', enum: ['new', 'returning', 'vip'] },\n          reason: { type: 'string' },\n        },\n        required: ['risk', 'priority', 'customer_type', 'reason'],\n        additionalProperties: false,\n      },\n    },\n  },\n  system: [\n    'You review new orders for a small online store and classify each one.',\n    'risk: \"high\" when there are two or more warning signs (billing and shipping in different states or countries, a first order of high value or many units, a freight-forwarder address, a note about failed payments or urgency from a new customer); \"medium\" for one warning sign; otherwise \"low\".',\n    'priority: \"rush\" when the shipping method is express, overnight or next day, or the note asks for delivery by a date; otherwise \"normal\".',\n    'customer_type: \"vip\" when past_orders >= 10 or lifetime_spent >= 2000; \"returning\" when past_orders >= 1; otherwise \"new\".',\n    'reason: one short sentence (max 15 words) a store owner understands, naming the main signal.',\n    'Use only the order data you are given.',\n  ].join('\\n'),\n  messages: [{ role: 'user', content: JSON.stringify(order) }],\n};\n\nreturn { json: { ...order, ai_request } };\n"
+      },
+      "id": "d3da285a-184f-5c4d-a093-9e6c4381a9ad",
+      "name": "Clean up order",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.ai_request) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "3241b945-1a5f-5ecf-88d7-6dab50b5b939",
+      "name": "Classify with Claude",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_ANTHROPIC",
+          "name": "Anthropic API key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// The Claude API answer is the first text block: JSON that follows the schema.\nconst order = $('Clean up order').item.json;\nconst text = ($json.content ?? []).find((b) => b.type === 'text')?.text;\n\nlet ai;\ntry {\n  ai = JSON.parse(text);\n} catch (e) {\n  // No usable answer (e.g. a refusal or a timeout): send it to a person.\n  ai = { risk: 'medium', priority: 'normal', customer_type: 'new', reason: 'AI answer missing; please check this order by hand.' };\n}\nconst needsPerson = ai.risk === 'high' || ai.priority === 'rush' || ai.customer_type === 'vip' || !text;\n\n// Field names match the header row of the \"Orders\" tab.\nreturn {\n  json: {\n    Order: order.order,\n    Created: order.created_at,\n    Customer: order.customer,\n    Email: order.email,\n    Total: order.total,\n    Currency: order.currency,\n    Items: order.items,\n    'Ship to': order.ship_to,\n    'Risk (AI)': ai.risk,\n    'Priority (AI)': ai.priority,\n    'Customer (AI)': ai.customer_type,\n    'Reason (AI)': ai.reason,\n    'Needs a person': needsPerson ? 'yes' : 'no',\n    'Admin link': order.admin_url,\n  },\n};\n"
+      },
+      "id": "672fec57-18b8-5999-ad9e-2e7f2488baf5",
+      "name": "Read AI answer",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Orders",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "690e4f08-2edd-5a13-b019-8746d581bc09",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        880,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GOOGLE_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "fbd6bd6b-ab87-5e9e-89b0-32153e5a162c",
+              "leftValue": "={{ $json['Needs a person'] }}",
+              "rightValue": "yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2f479cc4-ec91-5b06-a9b9-9c7f4668d04b",
+      "name": "Needs a person?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#orders-alerts",
+          "mode": "name"
+        },
+        "text": "={{ $json['Risk (AI)'] === 'high' ? ':red_circle: *Hold before shipping*' : $json['Priority (AI)'] === 'rush' ? ':large_orange_diamond: *Rush order*' : ':star: *VIP order*' }} {{ $json.Order }} · {{ $json.Total }} {{ $json.Currency }}\nCustomer: {{ $json.Customer }} · {{ $json['Ship to'] }}\nRisk: {{ $json['Risk (AI)'] }} · Priority: {{ $json['Priority (AI)'] }} · Customer: {{ $json['Customer (AI)'] }}\nWhy: {{ $json['Reason (AI)'] }}\n<{{ $json['Admin link'] }}|Open in Shopify>",
+        "otherOptions": {}
+      },
+      "id": "6d4c5b46-6832-54c5-80be-60b30144bb4d",
+      "name": "Alert in Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        200
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "REPLACE_SLACK",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "owner@example.com",
+        "subject": "=Order {{ $json.Order }} needs a look: {{ $json['Reason (AI)'] }}",
+        "emailType": "text",
+        "message": "=Order {{ $json.Order }} ({{ $json.Total }} {{ $json.Currency }}) needs a look.\n\nCustomer: {{ $json.Customer }}, {{ $json['Ship to'] }}\nItems: {{ $json.Items }}\n\nRisk: {{ $json['Risk (AI)'] }}\nPriority: {{ $json['Priority (AI)'] }}\nCustomer type: {{ $json['Customer (AI)'] }}\nWhy: {{ $json['Reason (AI)'] }}\n\nOpen in Shopify: {{ $json['Admin link'] }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "eae2bc2e-4dda-5d1e-8229-5a134006a31a",
+      "name": "Email the owner",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1340,
+        400
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_GMAIL",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Shopify order": {
+      "main": [
+        [
+          {
+            "node": "Clean up order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean up order": {
+      "main": [
+        [
+          {
+            "node": "Classify with Claude",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify with Claude": {
+      "main": [
+        [
+          {
+            "node": "Read AI answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read AI answer": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Needs a person?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs a person?": {
+      "main": [
+        [
+          {
+            "node": "Alert in Slack",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email the owner",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "pinData": {
+    "Shopify order": [
+      {
+        "json": {
+          "headers": {
+            "content-type": "application/json",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-shop-domain": "harbor-and-pine.myshopify.com"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 5810002,
+            "name": "#1087",
+            "email": "sp.orders2026@example.com",
+            "created_at": "2026-10-14T10:33:00-04:00",
+            "currency": "USD",
+            "total_price": "642.50",
+            "subtotal_price": "642.50",
+            "financial_status": "paid",
+            "note": "Ship ASAP. Payment failed twice with other cards.",
+            "discount_codes": [],
+            "customer": {
+              "id": 5811002,
+              "first_name": "Sophia",
+              "last_name": "Patel",
+              "email": "sp.orders2026@example.com",
+              "orders_count": 1,
+              "total_spent": "0.00"
+            },
+            "line_items": [
+              {
+                "id": 58100020,
+                "title": "Insulated tumbler 500ml",
+                "quantity": 4,
+                "price": "32.00",
+                "sku": "SKU-4401"
+              },
+              {
+                "id": 58100021,
+                "title": "Glass water bottle",
+                "quantity": 2,
+                "price": "89.00",
+                "sku": "SKU-3760"
+              },
+              {
+                "id": 58100022,
+                "title": "Gift card $250",
+                "quantity": 1,
+                "price": "336.50",
+                "sku": "GIFT-250"
+              }
+            ],
+            "shipping_lines": [
+              {
+                "title": "Standard",
+                "price": "0.00"
+              }
+            ],
+            "shipping_address": {
+              "first_name": "Sophia",
+              "last_name": "Patel",
+              "address1": "41 Market St, Unit 3",
+              "city": "Newark",
+              "province_code": "NJ",
+              "zip": "07102",
+              "country_code": "US"
+            },
+            "billing_address": {
+              "first_name": "Sophia",
+              "last_name": "Patel",
+              "address1": "9 Lakeview Dr",
+              "city": "Orlando",
+              "province_code": "FL",
+              "zip": "32801",
+              "country_code": "US"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

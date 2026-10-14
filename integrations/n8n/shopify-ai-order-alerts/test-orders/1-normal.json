@@ -1,0 +1,53 @@
+{
+  "id": 5810001,
+  "name": "#1088",
+  "email": "lucas.wright@example.com",
+  "created_at": "2026-10-14T10:49:00-05:00",
+  "currency": "USD",
+  "total_price": "71.00",
+  "subtotal_price": "71.00",
+  "financial_status": "paid",
+  "note": "",
+  "discount_codes": [],
+  "customer": {
+    "id": 5811001,
+    "first_name": "Lucas",
+    "last_name": "Wright",
+    "email": "lucas.wright@example.com",
+    "orders_count": 1,
+    "total_spent": "0.00"
+  },
+  "line_items": [
+    {
+      "id": 58100010,
+      "title": "Ceramic pour-over",
+      "quantity": 1,
+      "price": "71.00",
+      "sku": "SKU-1007"
+    }
+  ],
+  "shipping_lines": [
+    {
+      "title": "Standard",
+      "price": "0.00"
+    }
+  ],
+  "shipping_address": {
+    "first_name": "Lucas",
+    "last_name": "Wright",
+    "address1": "118 Palm Ave",
+    "city": "Phoenix",
+    "province_code": "AZ",
+    "zip": "85004",
+    "country_code": "US"
+  },
+  "billing_address": {
+    "first_name": "Lucas",
+    "last_name": "Wright",
+    "address1": "118 Palm Ave",
+    "city": "Phoenix",
+    "province_code": "AZ",
+    "zip": "85004",
+    "country_code": "US"
+  }
+}
