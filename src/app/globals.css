@@ -202,6 +202,7 @@ body {
   background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px);
   background-size: 6px 6px;
 }
-[data-webgl="on"] .filter-box {
+[data-webgl="on"] .filter-box,
+[data-webgl="off"] .filter-box {
   background-image: none;
 }

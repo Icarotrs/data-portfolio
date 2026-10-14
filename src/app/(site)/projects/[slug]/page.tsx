@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@site";
@@ -12,6 +13,23 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/projects/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) return {};
+  const url = `/projects/${slug}/`;
+  const image = { url: `/og/${slug}.png`, width: 1200, height: 630, alt: project.title };
+  return {
+    title: project.title,
+    description: project.summary,
+    alternates: { canonical: url },
+    openGraph: { type: "article", url, title: project.title, description: project.summary, images: [image] },
+    twitter: { card: "summary_large_image", title: project.title, description: project.summary, images: [image.url] },
+  };
 }
 
 export default async function ProjectPage({ params }: PageProps<"/projects/[slug]">) {

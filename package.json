@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "assets": "node scripts/render-assets.mjs",
+    "upwork": "node scripts/render-assets.mjs --only=upwork"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
