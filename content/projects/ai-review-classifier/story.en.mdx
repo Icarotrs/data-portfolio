@@ -1,0 +1,11 @@
+## Problem
+
+An online store had more than 5,000 reviews from Amazon and Shopify in a Google Sheet, and more arriving every week. Reading them by hand would take days, so nobody did, and the team couldn't say which problems came up most or what to fix first.
+
+## What I built
+
+- An **Apps Script** workflow inside the same Google Sheet: a custom menu (*AI tagging → Tag new reviews*) plus a nightly trigger for new rows.
+- Reviews are sent to the **Claude API** in batches of 25 with a fixed prompt. Each one comes back as strict JSON: **topic**, **sentiment**, a **one-line summary** and a **confidence** score.
+- Results are written **straight back into the sheet**, next to each review. Rows under 80% confidence are flagged for a person to check.
+- A **hand check** of 300 random reviews before trusting the numbers: 94% agreement.
+- The tagged sheet feeds a small dashboard of sentiment by topic, so the team can see delivery time is the top complaint.

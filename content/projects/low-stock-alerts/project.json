@@ -1,0 +1,95 @@
+{
+  "order": 3,
+  "number": "03",
+  "title": "Low-Stock Alerts",
+  "kind": "automation",
+  "summary": "A Google Sheet that knows when each product will run out and emails purchasing before it happens.",
+  "stack": [
+    "Google Sheets",
+    "Apps Script",
+    "Gmail",
+    "Shopify export"
+  ],
+  "result": "Stock-outs are caught 1 to 3 weeks early, with a suggested order quantity for every product.",
+  "metric": {
+    "value": "1–3 wk",
+    "label": "of warning before a product runs out",
+    "basis": "simulated"
+  },
+  "note": "Demo built with fictitious store data; the warning time comes from the simulated sales and supplier lead times.",
+  "links": {
+    "github": "",
+    "demo": ""
+  },
+  "media": {
+    "screenshots": [
+      {
+        "src": "/projects/low-stock-alerts/stock-sheet.webp",
+        "alt": "Stock sheet: days of cover, reorder point, suggested order and status per SKU"
+      },
+      {
+        "src": "/projects/low-stock-alerts/alert-email.webp",
+        "alt": "Daily alert email listing products to reorder now and this week"
+      }
+    ],
+    "video": {
+      "src": "/projects/low-stock-alerts/demo.mp4",
+      "poster": "/projects/low-stock-alerts/stock-sheet.webp"
+    }
+  },
+  "upworkBlurb": "Low-stock alerts in Google Sheets + Apps Script for a small online store. Daily sales are imported, and every product gets days of stock left, a reorder point based on supplier lead time and a suggested order quantity. Every morning a script emails purchasing the products that will run out before a new order can arrive, 1 to 3 weeks ahead (simulated data). No paid apps; works with a Shopify or any store export. Stack: Google Sheets, Apps Script, Gmail.",
+  "i18n": {
+    "pt": {
+      "title": "Alertas de Estoque Baixo",
+      "summary": "Uma planilha do Google que sabe quando cada produto vai acabar e avisa o setor de compras antes.",
+      "result": "A falta de estoque é detectada de 1 a 3 semanas antes, com sugestão de quantidade para cada produto.",
+      "metricLabel": "de aviso antes de um produto acabar",
+      "note": "Demonstração feita com dados fictícios de loja; o prazo de aviso vem das vendas e prazos de fornecedor simulados.",
+      "alts": [
+        "Aba de estoque: dias de cobertura, ponto de reposição, pedido sugerido e status por SKU",
+        "E-mail diário de alerta com os produtos para repor hoje e nesta semana"
+      ],
+      "flow": [
+        "Vendas do dia importadas",
+        "Dias de estoque por produto",
+        "Verificação diária às 7h",
+        "Compras recebe o que repor"
+      ]
+    },
+    "es": {
+      "title": "Alertas de Stock Bajo",
+      "summary": "Una hoja de Google que sabe cuándo se va a agotar cada producto y avisa a compras antes de que pase.",
+      "result": "Las roturas de stock se detectan de 1 a 3 semanas antes, con una cantidad sugerida para cada producto.",
+      "metricLabel": "de aviso antes de que un producto se agote",
+      "note": "Demo hecha con datos ficticios de tienda; el plazo de aviso sale de las ventas y plazos de proveedor simulados.",
+      "alts": [
+        "Hoja de stock: días de cobertura, punto de reposición, pedido sugerido y estado por SKU",
+        "Correo diario de alerta con los productos a reponer hoy y esta semana"
+      ],
+      "flow": [
+        "Ventas del día importadas",
+        "Días de stock por producto",
+        "Revisión diaria a las 7h",
+        "Compras recibe qué reponer"
+      ]
+    }
+  },
+  "flow": [
+    {
+      "tool": "Shopify export",
+      "label": "Daily sales imported"
+    },
+    {
+      "tool": "Google Sheets",
+      "label": "Days of stock left per product"
+    },
+    {
+      "tool": "Apps Script",
+      "label": "Daily check at 7am"
+    },
+    {
+      "tool": "Gmail",
+      "label": "Purchasing gets what to reorder"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+## Problem
+
+A Shopify store with about 40 orders a day had one person opening every order to check it by hand: does the address look wrong, is this a rush order, is it a repeat customer who deserves a note? It took about an hour a day, and risky orders still slipped through and shipped.
+
+## What I built
+
+- An **n8n** workflow that receives every new order from a **Shopify webhook** and cleans it into a simple record: customer, items, totals, shipping, past orders.
+- An **AI step (Claude API)** that classifies each order for **fraud risk**, **shipping priority** and **customer type** (new, returning, VIP), with a one-line reason. The answer comes back as strict JSON, so nothing downstream breaks.
+- Every order and its classification logged as a new row in **Google Sheets**, the team's single place to look.
+- An **alert** to **Slack** and **Gmail** only when an order needs a person: high risk, rush shipping or a VIP. Everything else is just logged.
+- An importable **n8n workflow file**, test orders and a short setup guide, so the store can run and change it without me.

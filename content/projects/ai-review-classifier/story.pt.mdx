@@ -1,0 +1,11 @@
+## Problema
+
+Uma loja online tinha mais de 5.000 avaliações da Amazon e da Shopify numa planilha do Google, e chegavam mais toda semana. Ler tudo à mão levaria dias, então ninguém lia, e a equipe não sabia quais problemas apareciam mais nem o que corrigir primeiro.
+
+## O que eu construí
+
+- Um fluxo em **Apps Script** dentro da própria planilha: um menu (*AI tagging → Classificar avaliações novas*) e um gatilho noturno para as linhas novas.
+- As avaliações são enviadas para a **API da Claude** em lotes de 25 com um prompt fixo. Cada uma volta em JSON estrito: **tema**, **sentimento**, um **resumo de uma linha** e um índice de **confiança**.
+- Os resultados são gravados **direto na planilha**, ao lado de cada avaliação. Linhas com menos de 80% de confiança são sinalizadas para uma pessoa conferir.
+- Uma **conferência manual** de 300 avaliações aleatórias antes de confiar nos números: 94% de concordância.
+- A planilha classificada alimenta um pequeno dashboard de sentimento por tema, mostrando que o prazo de entrega é a principal reclamação.

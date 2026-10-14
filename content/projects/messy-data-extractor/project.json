@@ -1,0 +1,95 @@
+{
+  "order": 5,
+  "number": "05",
+  "title": "Messy Data Extractor",
+  "kind": "extraction",
+  "summary": "Data extraction from messy CSV, Excel and PDF files: tables are pulled out, cleaned and merged into one consistent sheet.",
+  "stack": [
+    "Python (pandas, pdfplumber)",
+    "Google Sheets",
+    "Apps Script",
+    "SQL"
+  ],
+  "result": "Supplier files with mixed dates, prices and column layouts become one consistent table in seconds, with a log of every fix.",
+  "metric": {
+    "value": "~4 h",
+    "label": "of retyping supplier files saved per week",
+    "basis": "estimated"
+  },
+  "note": "Demo built with fictitious supplier files that reproduce common real-world problems. Time saved is an estimate.",
+  "links": {
+    "github": "",
+    "demo": ""
+  },
+  "media": {
+    "screenshots": [
+      {
+        "src": "/projects/messy-data-importer/before-after.webp",
+        "alt": "Before and after: a messy supplier CSV turned into a clean, consistent sheet"
+      },
+      {
+        "src": "/projects/messy-data-importer/run-log.webp",
+        "alt": "Import run: files detected, fixes applied and price changes vs. the last import"
+      }
+    ],
+    "video": {
+      "src": "/projects/messy-data-importer/demo.mp4",
+      "poster": "/projects/messy-data-importer/before-after.webp"
+    }
+  },
+  "upworkBlurb": "Data extraction and cleanup pipeline: tables are extracted from messy CSV, Excel and PDF files (merged headers, mixed date formats, currency text, duplicates, split columns), normalized and merged into one clean Google Sheet with a summary tab and a log of every fix. Runs as a Python script on a schedule or from a menu in Google Sheets. Saves about 4 hours a week of retyping (estimate). Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script.",
+  "i18n": {
+    "pt": {
+      "title": "Extrator de Dados Bagunçados",
+      "summary": "Extração de dados de arquivos CSV, Excel e PDF bagunçados: as tabelas são extraídas, limpas e unidas numa planilha consistente.",
+      "result": "Arquivos de fornecedores com datas, preços e colunas misturados viram uma tabela consistente em segundos, com registro de cada correção.",
+      "metricLabel": "de redigitação de arquivos de fornecedores economizadas por semana",
+      "note": "Demonstração feita com arquivos fictícios de fornecedores que reproduzem problemas comuns. O tempo economizado é uma estimativa.",
+      "alts": [
+        "Antes e depois: um CSV bagunçado de fornecedor virou uma planilha limpa e consistente",
+        "Execução da importação: arquivos detectados, correções aplicadas e mudanças de preço desde a última importação"
+      ],
+      "flow": [
+        "Arquivos dos fornecedores numa pasta",
+        "Tabelas extraídas de cada formato",
+        "Datas, preços e nomes padronizados",
+        "Tabela limpa, resumo e registro de correções"
+      ]
+    },
+    "es": {
+      "title": "Extractor de Datos Desordenados",
+      "summary": "Extracción de datos de archivos CSV, Excel y PDF desordenados: las tablas se extraen, limpian y unen en una hoja consistente.",
+      "result": "Archivos de proveedores con fechas, precios y columnas mezclados se convierten en una tabla consistente en segundos, con registro de cada corrección.",
+      "metricLabel": "de reescritura de archivos de proveedores ahorradas por semana",
+      "note": "Demo hecha con archivos ficticios de proveedores que reproducen problemas comunes. El tiempo ahorrado es una estimación.",
+      "alts": [
+        "Antes y después: un CSV desordenado de proveedor convertido en una hoja limpia y consistente",
+        "Ejecución de la importación: archivos detectados, correcciones aplicadas y cambios de precio desde la última importación"
+      ],
+      "flow": [
+        "Archivos de proveedores en una carpeta",
+        "Tablas extraídas de cada formato",
+        "Fechas, precios y nombres normalizados",
+        "Tabla limpia, resumen y registro de correcciones"
+      ]
+    }
+  },
+  "flow": [
+    {
+      "tool": "CSV · Excel · PDF",
+      "label": "Supplier files dropped in a folder"
+    },
+    {
+      "tool": "Python",
+      "label": "Tables extracted from each format"
+    },
+    {
+      "tool": "Python",
+      "label": "Dates, prices and names normalized"
+    },
+    {
+      "tool": "Google Sheets",
+      "label": "Clean table, summary and fix log"
+    }
+  ]
+}

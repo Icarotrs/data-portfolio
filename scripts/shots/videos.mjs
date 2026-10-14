@@ -44,32 +44,58 @@ const orderForm = page(
   `,
 );
 
+const node = (id) => `.node[data-id="${id}"]`;
+
 export const videos = {
   // ── 01 ─────────────────────────────────────────────────────
-  "ecommerce-profit-dashboard": {
+  "shopify-ai-order-alerts": {
     scenes: [
-      { html: html("ecommerce-profit-dashboard", "overview"), prep: [["growPrep", "svg path, svg rect"], ["countPrep", ".kpi .value"]] },
       {
-        html: html("ecommerce-profit-dashboard", "products"),
-        prep: [["hide", "tbody tr"], ["countPrep", ".kpi:nth-child(-n+2) .value"]],
+        html: html("shopify-ai-order-alerts", "n8n-workflow"),
+        prep: [["removeClass", ".node", { cls: "ok" }], ["hide", ".badge", { y: 4 }], ["hide", ".toast, .ex"]],
       },
+      {
+        html: html("shopify-ai-order-alerts", "orders-sheet"),
+        prep: [["clear", "tr.hl td:nth-of-type(n+6)"], ["hide", "tr.hl", { x: -30, y: 0 }], ["hide", ".toast"]],
+      },
+      { html: html("shopify-ai-order-alerts", "slack-alert"), prep: [["hide", ".msg"]] },
     ],
     async play(v) {
-      v.caption("Every order, fee and freight cost in one profit report");
+      const run = async (id, ms = 450) => {
+        await v.f("addClass", node(id), { cls: "ok" });
+        await v.f("reveal", `${node(id)} .badge`, { dur: 250 });
+        await v.wait(ms);
+      };
+      v.caption("1 · A new Shopify order reaches the n8n webhook");
       await v.scene(0);
-      await Promise.all([v.f("grow", "svg path, svg rect"), v.f("countUp", ".kpi .value")]);
-      await v.move(`svg rect[fill="${ORANGE}"]`, { fx: 0.4 });
-      v.tip("Office furniture · −6.3% net margin");
-      await v.wait(2200);
-      v.tip(null);
-      await v.move(".tabs span:nth-child(2)");
-      await v.click();
-      v.caption("312 products were selling at a loss — mostly because of freight");
+      await v.move(node("hook"));
+      await run("hook");
+      await run("clean");
+      v.caption("2 · Claude classifies risk, priority and customer type");
+      await v.move(node("ai"), { ms: 500 });
+      await run("ai", 1100);
+      await run("parse");
+      v.caption("3 · The order and the AI's answer are logged to Google Sheets");
+      await v.move(node("sheet"), { ms: 500 });
+      await run("sheet", 700);
+      v.caption("4 · Only orders that need a person send an alert");
+      await run("if", 500);
+      await Promise.all([run("slack"), run("mail")]);
+      await v.f("reveal", ".toast, .ex", { stagger: 200 });
+      await v.wait(1600);
+      v.caption("The orders sheet: every order with its AI review");
       await v.scene(1);
-      await Promise.all([v.f("reveal", "tbody tr", { stagger: 70 }), v.f("countUp", ".kpi:nth-child(-n+2) .value")]);
-      await v.move("tbody tr:first-child td:nth-child(7)");
-      v.tip("Sold at a loss after fees and freight");
-      await v.wait(2600);
+      await v.f("reveal", "tr.hl", { dur: 600 });
+      await v.move("tr.hl td:nth-of-type(6)");
+      await v.f("fillRows", "tr.hl", { from: 6, to: 9 });
+      v.tip("Billing and shipping don't match");
+      await v.wait(2000);
+      v.tip(null);
+      v.caption("The team sees risky, rush and VIP orders in Slack");
+      await v.scene(2);
+      await v.f("reveal", ".msg", { stagger: 900, dur: 500 });
+      await v.move(".msg:nth-child(2) .btn");
+      await v.wait(2400);
     },
   },
 
@@ -122,39 +148,13 @@ export const videos = {
   },
 
   // ── 03 ─────────────────────────────────────────────────────
-  "messy-data-importer": {
-    scenes: [
-      { html: html("messy-data-importer", "before-after"), prep: [["hide", ".clean tr:not(:first-child), .fixes"]] },
-      { html: html("messy-data-importer", "run-log"), prep: [["termPrep", "pre"]] },
-    ],
-    async play(v) {
-      v.caption("Four supplier files, four different formats");
-      await v.scene(0);
-      await v.move(".raw pre span.bad:nth-of-type(3)", { fx: 0.3 });
-      v.tip('Mixed dates · "R$" text prices · duplicates');
-      await v.wait(2400);
-      v.tip(null);
-      v.caption("A Python script reads, fixes and merges them");
-      await v.scene(1);
-      await v.f("term", "pre");
-      await v.wait(1200);
-      v.caption("One clean table in Google Sheets, with a log of every fix");
-      await v.scene(0);
-      await v.f("reveal", ".clean tr:not(:first-child)", { stagger: 90 });
-      await v.f("reveal", ".fixes");
-      await v.move(".fixes", { fx: 0.25 });
-      await v.wait(2600);
-    },
-  },
-
-  // ── 04 ─────────────────────────────────────────────────────
-  "inventory-reorder-alerts": {
+  "low-stock-alerts": {
     scenes: [
       {
-        html: html("inventory-reorder-alerts", "stock-sheet"),
+        html: html("low-stock-alerts", "stock-sheet"),
         prep: [["growPrep", 'td span[style*="height:12px"]'], ["hide", ".chip, .toast"]],
       },
-      { html: html("inventory-reorder-alerts", "alert-email"), prep: [["hide", ".msg tr, .btn"]] },
+      { html: html("low-stock-alerts", "alert-email"), prep: [["hide", ".msg tr, .btn"]] },
     ],
     async play(v) {
       v.caption("Every morning the sheet works out how many days of stock are left");
@@ -177,64 +177,107 @@ export const videos = {
     },
   },
 
-  // ── 05 ─────────────────────────────────────────────────────
-  "marketing-roas-dashboard": {
+  // ── 04 ─────────────────────────────────────────────────────
+  "ai-review-classifier": {
     scenes: [
       {
-        html: html("marketing-roas-dashboard", "overview"),
-        prep: [["growPrep", "svg rect"], ["countPrep", ".kpi .value"], ["hide", ".chip, .note"]],
+        html: html("ai-review-classifier", "tagged-sheet"),
+        prep: [["clear", "tbody tr:not(:first-child) td:nth-of-type(n+4):nth-of-type(-n+7)"], ["hide", ".toast"]],
       },
-      {
-        html: html("marketing-roas-dashboard", "trend"),
-        prep: [["growPrep", "svg path"], ["hide", ".canvas > div > div:last-child > .card"]],
-      },
+      { html: html("ai-review-classifier", "apps-script"), prep: [["hide", ".lr", { y: 4 }]] },
+      { html: html("ai-review-classifier", "topics"), prep: [["growPrep", "svg rect", { rightFill: ORANGE }], ["countPrep", ".kpi .value"]] },
     ],
     async play(v) {
-      v.caption("Spend and sales from every ad channel, side by side");
+      v.caption("1 · New reviews land in the sheet; one click starts the tagging");
       await v.scene(0);
-      await Promise.all([v.f("grow", "svg rect"), v.f("countUp", ".kpi .value")]);
-      await v.f("reveal", ".chip", { stagger: 120 });
-      await v.move(`svg rect[fill="${ORANGE}"]`, { fx: 0.6 });
-      v.tip("Return under 3× the spend");
-      await v.wait(1800);
-      v.tip(null);
-      v.caption("A clear recommendation, not just charts");
-      await v.f("reveal", ".note");
-      await v.move(".note", { fx: 0.3 });
-      await v.wait(2200);
-      await v.move(".tabs span:nth-child(2)");
+      await v.move(".menu .custom");
       await v.click();
-      v.caption("Weekly trend: where the money is growing");
+      v.caption("2 · Apps Script sends them to the Claude API in batches");
       await v.scene(1);
-      await v.f("grow", "svg path");
-      await v.f("reveal", ".canvas > div > div:last-child > .card", { stagger: 220 });
+      await v.f("reveal", ".lr", { stagger: 450 });
+      await v.wait(800);
+      v.caption("3 · Topic, sentiment and summary come straight back into the sheet");
+      await v.scene(0);
+      await v.move("tbody tr:nth-child(2) td:nth-of-type(4)");
+      await v.f("fillRows", "tbody tr:not(:first-child)", { from: 4, to: 7, stagger: 320 });
+      await v.f("reveal", ".toast");
+      v.caption("Low-confidence rows go to a person for a quick check");
+      await v.wait(2000);
+      v.caption("The tagged sheet also feeds a dashboard");
+      await v.scene(2);
+      await Promise.all([v.f("grow", "svg rect", { stagger: 50 }), v.f("countUp", ".kpi .value")]);
+      await v.move(`svg rect[fill="${ORANGE}"]`, { fx: 0.3 });
+      v.tip("Delivery time · 41% negative");
+      await v.wait(2200);
+    },
+  },
+
+  // ── 05 ─────────────────────────────────────────────────────
+  "messy-data-extractor": {
+    scenes: [
+      { html: html("messy-data-extractor", "before-after"), prep: [["hide", ".clean tr:not(:first-child), .fixes"]] },
+      { html: html("messy-data-extractor", "run-log"), prep: [["termPrep", "pre"]] },
+    ],
+    async play(v) {
+      v.caption("Four supplier files, four different formats");
+      await v.scene(0);
+      await v.move(".raw pre span.bad:nth-of-type(3)", { fx: 0.3 });
+      v.tip('Mixed dates · "R$" text prices · duplicates');
       await v.wait(2400);
+      v.tip(null);
+      v.caption("A Python script extracts, fixes and merges the tables");
+      await v.scene(1);
+      await v.f("term", "pre");
+      await v.wait(1200);
+      v.caption("One clean table in Google Sheets, with a log of every fix");
+      await v.scene(0);
+      await v.f("reveal", ".clean tr:not(:first-child)", { stagger: 90 });
+      await v.f("reveal", ".fixes");
+      await v.move(".fixes", { fx: 0.25 });
+      await v.wait(2600);
     },
   },
 
   // ── 06 ─────────────────────────────────────────────────────
-  "review-insights-ai": {
+  "ecommerce-profit-roas-dashboard": {
     scenes: [
+      { html: html("ecommerce-profit-roas-dashboard", "overview"), prep: [["growPrep", "svg path, svg rect"], ["countPrep", ".kpi .value"]] },
       {
-        html: html("review-insights-ai", "tagged-sheet"),
-        prep: [["clear", "tbody tr:not(:first-child) td:nth-of-type(n+4):nth-of-type(-n+7)"], ["hide", ".toast"]],
+        html: html("ecommerce-profit-roas-dashboard", "products"),
+        prep: [["hide", "tbody tr"], ["countPrep", ".kpi:nth-child(-n+2) .value"]],
       },
-      { html: html("review-insights-ai", "topics"), prep: [["growPrep", "svg rect", { rightFill: ORANGE }], ["countPrep", ".kpi .value"]] },
+      {
+        html: html("ecommerce-profit-roas-dashboard", "marketing"),
+        prep: [["growPrep", "svg rect"], ["countPrep", ".kpi .value"], ["hide", ".chip, .note"]],
+      },
     ],
     async play(v) {
-      v.caption("AI reads each review and tags topic, sentiment and a summary");
+      v.caption("Every order, fee and freight cost in one profit report");
       await v.scene(0);
-      await v.move("tbody tr:nth-child(2) td:nth-of-type(4)");
-      await v.f("fillRows", "tbody tr:not(:first-child)", { from: 4, to: 7 });
-      await v.f("reveal", ".toast");
-      v.caption("Low-confidence rows go to a person for a quick check");
-      await v.wait(2200);
-      v.caption("The result: what customers complain about most");
+      await Promise.all([v.f("grow", "svg path, svg rect"), v.f("countUp", ".kpi .value")]);
+      await v.move(`svg rect[fill="${ORANGE}"]`, { fx: 0.4 });
+      v.tip("Office furniture · −6.3% net margin");
+      await v.wait(1800);
+      v.tip(null);
+      await v.move(".tabs span:nth-child(2)");
+      await v.click();
+      v.caption("312 products were selling at a loss — mostly because of freight");
       await v.scene(1);
-      await Promise.all([v.f("grow", "svg rect", { stagger: 50 }), v.f("countUp", ".kpi .value")]);
-      await v.move(`svg rect[fill="${ORANGE}"]`, { fx: 0.3 });
-      v.tip("Delivery time · 41% negative");
-      await v.wait(2600);
+      await Promise.all([v.f("reveal", "tbody tr", { stagger: 60 }), v.f("countUp", ".kpi:nth-child(-n+2) .value")]);
+      await v.move("tbody tr:first-child td:nth-child(7)");
+      v.tip("Sold at a loss after fees and freight");
+      await v.wait(1800);
+      v.tip(null);
+      await v.move(".tabs span:nth-child(3)");
+      await v.click();
+      v.caption("Marketing tab: ad spend vs sales for every channel");
+      await v.scene(2);
+      await Promise.all([v.f("grow", "svg rect"), v.f("countUp", ".kpi .value")]);
+      await v.f("reveal", ".chip", { stagger: 120 });
+      await v.f("reveal", ".note");
+      await v.move(".note", { fx: 0.3 });
+      v.tip("Move budget from TikTok to Google Search");
+      await v.wait(2400);
     },
   },
 };

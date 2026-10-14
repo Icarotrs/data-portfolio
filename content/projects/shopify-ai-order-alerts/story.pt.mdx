@@ -1,0 +1,11 @@
+## Problema
+
+Uma loja na Shopify com cerca de 40 pedidos por dia tinha uma pessoa abrindo cada pedido para conferir à mão: o endereço parece errado, é um pedido urgente, é um cliente recorrente que merece atenção? Levava cerca de uma hora por dia, e pedidos de risco ainda passavam e eram enviados.
+
+## O que eu construí
+
+- Um fluxo no **n8n** que recebe cada pedido novo por um **webhook da Shopify** e o organiza num registro simples: cliente, itens, totais, envio, pedidos anteriores.
+- Uma **etapa de IA (API da Claude)** que classifica cada pedido por **risco de fraude**, **prioridade de envio** e **tipo de cliente** (novo, recorrente, VIP), com uma frase explicando o motivo. A resposta volta em JSON estrito, então nada quebra depois.
+- Cada pedido e sua classificação registrados como uma nova linha no **Google Sheets**, o lugar único onde a equipe olha.
+- Um **alerta** no **Slack** e no **Gmail** só quando o pedido precisa de uma pessoa: alto risco, envio urgente ou cliente VIP. O resto é apenas registrado.
+- Um **arquivo do fluxo do n8n** pronto para importar, pedidos de teste e um guia curto de configuração, para a loja rodar e alterar sem depender de mim.

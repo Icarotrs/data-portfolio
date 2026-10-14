@@ -22,20 +22,20 @@ export interface Dictionary {
   project: {
     allProjects: string;
     project: string;
-    result: string;
     hireForThis: string;
     code: string;
     demo: string;
+    sections: { demo: string; tools: string; result: string };
+    flow: string;
     type: string;
-    stack: string;
     data: string;
     clientData: string;
-    glance: string;
     hire: string;
     screenshots: string;
     comingSoon: string;
     nextProject: string;
     shotsNote: string;
+    basis: { estimated: string; simulated: string };
   };
   theme: { dark: string; light: string; group: string };
 }
@@ -84,20 +84,20 @@ const en: Dictionary = {
   project: {
     allProjects: "All projects",
     project: "Project",
-    result: "Result",
     hireForThis: "Hire me for this",
     code: "Code",
     demo: "Live demo",
+    sections: { demo: "03 · Demo", tools: "04 · Tools", result: "05 · Result" },
+    flow: "How it works",
     type: "Type",
-    stack: "Stack",
     data: "Data",
     clientData: "Client data",
-    glance: "At a glance",
     hire: "Hire me on Upwork",
-    screenshots: "Screenshots",
+    screenshots: "Screens",
     comingSoon: "coming soon",
     nextProject: "Next project",
-    shotsNote: "Screenshots are mock-ups of the deliverable with fictitious data.",
+    shotsNote: "Screens and videos are mock-ups of the deliverable with fictitious or simulated data.",
+    basis: { estimated: "Estimated", simulated: "Simulated" },
   },
   theme: { dark: "Dark theme", light: "Light theme", group: "Color theme" },
 };
@@ -146,20 +146,20 @@ const pt: Dictionary = {
   project: {
     allProjects: "Todos os projetos",
     project: "Projeto",
-    result: "Resultado",
     hireForThis: "Quero algo assim",
     code: "Código",
     demo: "Demo ao vivo",
+    sections: { demo: "03 · Demonstração", tools: "04 · Ferramentas", result: "05 · Resultado" },
+    flow: "Como funciona",
     type: "Tipo",
-    stack: "Ferramentas",
     data: "Dados",
     clientData: "Dados do cliente",
-    glance: "Resumo",
     hire: "Contratar no Upwork",
     screenshots: "Telas",
     comingSoon: "em breve",
     nextProject: "Próximo projeto",
-    shotsNote: "As telas são simulações da entrega com dados fictícios.",
+    shotsNote: "Telas e vídeos são simulações da entrega com dados fictícios ou simulados.",
+    basis: { estimated: "Estimado", simulated: "Simulado" },
   },
   theme: { dark: "Tema escuro", light: "Tema claro", group: "Tema de cores" },
 };
@@ -208,20 +208,20 @@ const es: Dictionary = {
   project: {
     allProjects: "Todos los proyectos",
     project: "Proyecto",
-    result: "Resultado",
     hireForThis: "Quiero algo así",
     code: "Código",
     demo: "Demo en vivo",
+    sections: { demo: "03 · Demo", tools: "04 · Herramientas", result: "05 · Resultado" },
+    flow: "Cómo funciona",
     type: "Tipo",
-    stack: "Herramientas",
     data: "Datos",
     clientData: "Datos del cliente",
-    glance: "Resumen",
     hire: "Contratar en Upwork",
     screenshots: "Pantallas",
     comingSoon: "próximamente",
     nextProject: "Siguiente proyecto",
-    shotsNote: "Las pantallas son simulaciones de la entrega con datos ficticios.",
+    shotsNote: "Las pantallas y videos son simulaciones de la entrega con datos ficticios o simulados.",
+    basis: { estimated: "Estimado", simulated: "Simulado" },
   },
   theme: { dark: "Tema oscuro", light: "Tema claro", group: "Tema de color" },
 };

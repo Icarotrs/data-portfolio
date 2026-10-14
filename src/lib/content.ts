@@ -8,8 +8,8 @@ import type { Locale } from "@/i18n/config";
  * Projects live in content/projects/<slug>/:
  *   project.json   — metadata in English, plus "i18n": { pt: {…}, es: {…} }
  *                    with translated title, summary, result, metricLabel,
- *                    note and screenshot alts (validated; the build fails on
- *                    bad data)
+ *                    note, screenshot alts and flow labels (validated; the
+ *                    build fails on bad data)
  *   story.<lang>.mdx — "Problem" and "What I built", one file per language
  *                    (story.en.mdx is required; others fall back to English)
  */
@@ -30,7 +30,10 @@ export interface Project {
   summary: string;
   stack: string[];
   result: string;
-  metric: { value: string; label: string };
+  /** The headline number. `basis` marks estimated or simulated numbers. */
+  metric: { value: string; label: string; basis?: MetricBasis };
+  /** Optional step-by-step flow, drawn as a diagram on the project page. */
+  flow?: FlowStep[];
   note?: string;
   links: { github?: string; demo?: string };
   media: {
@@ -42,6 +45,12 @@ export interface Project {
   i18n: Partial<Record<Locale, Translation>>;
 }
 
+export type MetricBasis = "estimated" | "simulated";
+export interface FlowStep {
+  tool: string;
+  label: string;
+}
+
 interface Translation {
   title?: string;
   summary?: string;
@@ -49,6 +58,7 @@ interface Translation {
   metricLabel?: string;
   note?: string;
   alts?: string[];
+  flow?: string[];
 }
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
@@ -84,6 +94,13 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
   }
 
   const metric = (raw.metric ?? {}) as Record<string, unknown>;
+  if (metric.basis !== undefined && metric.basis !== "estimated" && metric.basis !== "simulated") {
+    fail(slug, `"metric.basis" must be "estimated" or "simulated"`);
+  }
+  const flow = raw.flow as FlowStep[] | undefined;
+  if (flow !== undefined && (!Array.isArray(flow) || flow.some((f) => !f?.tool || !f?.label))) {
+    fail(slug, `"flow" must be a list of { "tool", "label" }`);
+  }
   const links = (raw.links ?? {}) as Record<string, string>;
   const media = (raw.media ?? {}) as Record<string, unknown>;
   const video = media.video as { src?: string; poster?: string } | undefined;
@@ -100,7 +117,9 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
     metric: {
       value: requireString(slug, metric.value, "metric.value"),
       label: requireString(slug, metric.label, "metric.label"),
+      basis: metric.basis as MetricBasis | undefined,
     },
+    flow,
     note: typeof raw.note === "string" && raw.note ? raw.note : undefined,
     links: {
       github: links.github || undefined,
@@ -155,6 +174,7 @@ export function localize(p: Project, locale: Locale): Project {
     result: t.result ?? p.result,
     metric: { ...p.metric, label: t.metricLabel ?? p.metric.label },
     note: t.note ?? p.note,
+    flow: p.flow?.map((f, i) => ({ ...f, label: t.flow?.[i] ?? f.label })),
     media: {
       ...p.media,
       screenshots: p.media.screenshots.map((s, i) => ({ ...s, alt: t.alts?.[i] ?? s.alt })),

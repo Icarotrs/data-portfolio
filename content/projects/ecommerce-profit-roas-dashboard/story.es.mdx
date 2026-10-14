@@ -1,0 +1,12 @@
+## Problema
+
+El dueño de la tienda veía crecer la facturación cada mes, pero no sabía qué productos dejaban dinero de verdad. Envío, comisión del marketplace y comisiones de pago estaban repartidos en exportaciones distintas, así que "más vendidos" y "más rentables" se trataban como la misma lista. No lo eran.
+
+## Lo que construí
+
+- Un modelo de datos limpio que une pedidos, ítems, productos, pagos, envíos y vendedores (8 tablas del dataset de Olist).
+- Una medida de **margen real** por línea de pedido: precio − envío − comisión del marketplace − comisión de pago − costo del producto.
+- Una tabla de costos por categoría con valores **simulados**, claramente marcados, para que el cliente los cambie por sus costos reales con un solo archivo.
+- Tres páginas de informe: estado de resultados mensual, ranking de productos por margen neto y detalle por pedido.
+- Formato condicional que marca cada SKU con margen negativo, para que la pregunta "¿qué deberíamos dejar de vender?" tenga respuesta.
+- Una cuarta página, **Marketing**, que cruza el gasto simulado en anuncios de Google, Meta, TikTok y correo con los pedidos: gasto, ventas atribuidas, **ROAS** y costo por cliente nuevo en cada canal, con una recomendación en lenguaje simple. Mostró que el 61% del presupuesto devolvía menos de 3×.

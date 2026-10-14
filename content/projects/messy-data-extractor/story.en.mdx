@@ -1,0 +1,11 @@
+## Problem
+
+Every supplier sent their price and stock list in a different shape: a CSV with semicolons and European decimals, a PDF table, an Excel file with headers merged across two rows. Dates came as `03/04/24`, `2024-04-03` and `April 3`. Someone spent about four hours a week retyping and fixing these files before they could be compared.
+
+## What I built
+
+- **Data extraction** for CSV, Excel and text-based PDF tables that detects delimiters, encodings and multi-row headers on its own.
+- A cleanup step: one date format, one currency format, trimmed and title-cased names, split and merged columns fixed, duplicates removed.
+- A column-mapping file, so a new supplier format is a few lines of configuration instead of new code.
+- Output to Google Sheets: a clean data tab, a **summary tab** (counts, totals, price changes since the last run) and a **log tab** listing every fix.
+- A weekly schedule, plus the same rules as a menu inside Google Sheets for people who don't use Python.

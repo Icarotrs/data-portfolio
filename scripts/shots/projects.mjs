@@ -5,12 +5,113 @@
  *
  * Each entry: { file, html } → public/projects/<slug>/<file>.webp
  */
-import { C, W, H, rng, fmt, esc, page, powerbi, sheets, gmail, pdf, terminal, bars, lines, hbars } from "./kit.mjs";
+import { C, W, H, rng, fmt, esc, page, powerbi, sheets, gmail, pdf, terminal, bars, lines, hbars, n8n, slack, appsScript } from "./kit.mjs";
 
 const R = (n) => (n < 0 ? "−" : "") + fmt.money(Math.abs(n), "R$ ");
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-// ── 01 E-commerce profit dashboard ────────────────────────────
+// ── 01 Shopify → Sheets → AI → Alerts ────────────────────────
+export const SHOP_ORDERS = [
+  ["#1081", "Oct 14, 09:12", "Emma Carter", 84.0, "2 items", "Austin, TX", ["Low", "good"], ["Normal", "neutral"], ["Returning", "info"], "Repeat buyer, address matches past orders"],
+  ["#1082", "Oct 14, 09:20", "Liam Brooks", 129.5, "3 items", "Denver, CO", ["Low", "good"], ["Normal", "neutral"], ["New", "neutral"], "First order, standard basket"],
+  ["#1083", "Oct 14, 09:41", "Olivia Reed", 412.0, "1 item", "Miami, FL", ["Medium", "warn"], ["Normal", "neutral"], ["New", "neutral"], "High value for a first order"],
+  ["#1084", "Oct 14, 09:58", "Noah Kim", 56.0, "1 item", "Seattle, WA", ["Low", "good"], ["Rush", "warn"], ["Returning", "info"], "Paid for overnight shipping"],
+  ["#1085", "Oct 14, 10:07", "Ava Martinez", 238.0, "4 items", "Chicago, IL", ["Low", "good"], ["Normal", "neutral"], ["VIP", "good"], "12 past orders, $2.9k lifetime"],
+  ["#1086", "Oct 14, 10:15", "Mason Lee", 97.0, "2 items", "Portland, OR", ["Low", "good"], ["Normal", "neutral"], ["Returning", "info"], "Second order this month"],
+  ["#1087", "Oct 14, 10:33", "Sophia Patel", 642.5, "6 items", "Newark, NJ", ["High", "bad"], ["Normal", "neutral"], ["New", "neutral"], "Billing and shipping in different states, 3 cards tried"],
+  ["#1088", "Oct 14, 10:49", "Lucas Wright", 71.0, "1 item", "Phoenix, AZ", ["Low", "good"], ["Normal", "neutral"], ["New", "neutral"], "Standard order"],
+  ["#1089", "Oct 14, 11:02", "Mia Johnson", 315.0, "2 items", "Boston, MA", ["Low", "good"], ["Rush", "warn"], ["VIP", "good"], "VIP, asked for delivery before Friday"],
+  ["#1090", "Oct 14, 11:18", "Ethan Davis", 44.0, "1 item", "Atlanta, GA", ["Low", "good"], ["Normal", "neutral"], ["Returning", "info"], "Small repeat order"],
+  ["#1091", "Oct 14, 11:26", "Isabella Cruz", 188.0, "3 items", "San Diego, CA", ["Medium", "warn"], ["Normal", "neutral"], ["New", "neutral"], "Freight-forwarder address"],
+  ["#1092", "Oct 14, 11:40", "James Wilson", 63.0, "1 item", "Dallas, TX", ["Low", "good"], ["Normal", "neutral"], ["Returning", "info"], "Address matches past orders"],
+].map(([order, date, customer, total, items, ship, risk, priority, type, reason]) => ({ order, date, customer, total, items, ship, risk, priority, type, reason }));
+
+function shopify() {
+  const nodes = [
+    { id: "hook", name: "Shopify order", sub: "Webhook · orders/create", icon: "⚡", color: "#7b61ff", x: 130, y: 360, ok: "1 item" },
+    { id: "clean", name: "Clean up order", sub: "Code", icon: "{ }", color: "#ff9922", x: 330, y: 360, ok: "1 item" },
+    { id: "ai", name: "Classify with Claude", sub: "HTTP Request · Claude API", icon: "AI", color: "#d97757", x: 530, y: 360, ok: "1 item" },
+    { id: "parse", name: "Read AI answer", sub: "Code", icon: "{ }", color: "#ff9922", x: 730, y: 360, ok: "1 item" },
+    { id: "sheet", name: "Log to Google Sheets", sub: "Append row · Orders", icon: "▦", color: "#0f9d58", x: 930, y: 360, ok: "1 item" },
+    { id: "if", name: "Needs a person?", sub: "If · risk, rush or VIP", icon: "⑂", color: "#5c6bc0", x: 1130, y: 360, ok: "true" },
+    { id: "slack", name: "Alert in Slack", sub: "#orders-alerts", icon: "#", color: "#4a154b", x: 1350, y: 250, ok: "1 item" },
+    { id: "mail", name: "Email the owner", sub: "Gmail · send", icon: "✉", color: "#ea4335", x: 1350, y: 480, ok: "1 item" },
+  ];
+  const edges = [["hook", "clean"], ["clean", "ai"], ["ai", "parse"], ["parse", "sheet"], ["sheet", "if"], ["if", "slack", "true"], ["if", "mail", "true"]];
+  const flow = n8n({
+    name: "Shopify → Sheets → AI → Alerts",
+    nodes,
+    edges,
+    toast: "✓ Workflow executed · order #1087 classified <b>High risk</b> · 1.4 s",
+    executions: [["4219", "10:33:12", "Success", "1.4s"], ["4218", "10:15:40", "Success", "1.1s"], ["4217", "10:07:03", "Success", "1.3s"], ["4216", "09:58:21", "Success", "1.2s"], ["4215", "09:41:56", "Success", "1.5s"]],
+  });
+
+  const sheet = sheets({
+    file: "Shopify orders — AI review",
+    tabs: ["Orders", "Alerts sent", "Settings"],
+    menu: [],
+    cell: "G8",
+    formula: "Filled by n8n: risk, priority, customer type and reason from the Claude API",
+    highlightRow: 6,
+    cols: [
+      { key: "order", title: "Order", w: 80, cls: "mono" },
+      { key: "date", title: "Created", w: 120 },
+      { key: "customer", title: "Customer", w: 140 },
+      { key: "total", title: "Total", w: 90, align: "right", render: (v) => `$${v.toFixed(2)}` },
+      { key: "ship", title: "Ship to", w: 120 },
+      { key: "risk", title: "Risk (AI)", w: 100, render: ([t, c]) => `<span class="chip ${c}">${t}</span>` },
+      { key: "priority", title: "Priority (AI)", w: 110, render: ([t, c]) => `<span class="chip ${c}">${t}</span>` },
+      { key: "type", title: "Customer (AI)", w: 120, render: ([t, c]) => `<span class="chip ${c}">${t}</span>` },
+      { key: "reason", title: "Reason (AI)", w: 380 },
+    ],
+    rows: SHOP_ORDERS,
+    extraCss: `td.h:nth-child(7), td.h:nth-child(8), td.h:nth-child(9), td.h:nth-child(10) { background: #1d4ed8; }`,
+    toast: "⚡ <b>n8n</b> — order #1092 logged and classified (1.2 s).<br>Alerts go out only for high risk, rush or VIP.",
+  });
+
+  const alerts = slack({
+    workspace: "Harbor & Pine",
+    channel: "orders-alerts",
+    channels: ["general", "orders-alerts", "shipping", "support"],
+    messages: [
+      {
+        app: "Order Bot",
+        time: "10:07 AM",
+        text: "VIP order, worth a thank-you note in the box.",
+        color: C.aqua,
+        title: "★ VIP order #1085 · $238.00",
+        fields: [["Customer", "Ava Martinez · Chicago, IL"], ["Customer type", "VIP (12 past orders)"], ["Risk", "Low"], ["Reason", "12 past orders, $2.9k lifetime"]],
+        button: "Open in Shopify",
+      },
+      {
+        app: "Order Bot",
+        time: "10:33 AM",
+        text: "<b>Hold before shipping:</b> this order looks risky.",
+        color: C.bad,
+        title: "● High-risk order #1087 · $642.50",
+        fields: [["Customer", "Sophia Patel · Newark, NJ"], ["Risk", "<b style='color:#c4312f'>High</b>"], ["Priority", "Normal"], ["Reason", "Billing and shipping in different states, 3 cards tried"]],
+        button: "Open in Shopify",
+      },
+      {
+        app: "Order Bot",
+        time: "11:02 AM",
+        text: "Rush order from a VIP: ship today.",
+        color: "#eda100",
+        title: "▲ Rush order #1089 · $315.00",
+        fields: [["Customer", "Mia Johnson · Boston, MA"], ["Priority", "Rush"], ["Customer type", "VIP"], ["Reason", "VIP, asked for delivery before Friday"]],
+        button: "Open in Shopify",
+      },
+    ],
+  });
+  return [
+    { file: "n8n-workflow", html: flow },
+    { file: "orders-sheet", html: sheet },
+    { file: "slack-alert", html: alerts },
+  ];
+}
+
+// ── 06 E-commerce profit & ROAS dashboard ─────────────────────
+const PROFIT_PAGES = ["Profit overview", "Products", "Marketing", "Marketing trend", "Data notes"];
 function ecommerce() {
   const r = rng(11);
   const labels = [];
@@ -39,7 +140,7 @@ function ecommerce() {
     file: "olist_profit.pbix",
     title: "Profit overview",
     slicers: [["Period", "Jan 2017 – Aug 2018"], ["Marketplace", "All"], ["Category", "All"]],
-    pages: ["Profit overview", "Products", "Orders drill-down", "Data notes"],
+    pages: PROFIT_PAGES,
     active: 0,
     body: `
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
@@ -106,7 +207,7 @@ function ecommerce() {
     file: "olist_profit.pbix",
     title: "Products ranked by net margin",
     slicers: [["Net margin", "< 5%"], ["Min. orders", "≥ 10"], ["Category", "All"]],
-    pages: ["Profit overview", "Products", "Orders drill-down", "Data notes"],
+    pages: PROFIT_PAGES,
     active: 1,
     body: `
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
@@ -141,6 +242,7 @@ function ecommerce() {
   return [
     { file: "overview", html: overview },
     { file: "products", html: products },
+    ...marketing(),
   ];
 }
 
@@ -223,7 +325,7 @@ function formToSheet() {
   ];
 }
 
-// ── 03 Messy data importer ───────────────────────────────────
+// ── 05 Messy data extractor ───────────────────────────────────
 function messyImporter() {
   const raw = [
     ["SKU;Description;Price;Stock;Updated", ""],
@@ -285,11 +387,11 @@ function messyImporter() {
     `,
   );
   const run = terminal({
-    title: "~/clients/homeware-co — python import_suppliers.py",
+    title: "~/clients/homeware-co — python extract_suppliers.py",
     lines: [
-      `<span class="d">$</span> <span class="w">python import_suppliers.py --inbox ./inbox --sheet "Supplier prices"</span>`,
+      `<span class="d">$</span> <span class="w">python extract_suppliers.py --inbox ./inbox --sheet "Supplier prices"</span>`,
       ``,
-      `<span class="b">▸ Reading 4 files from ./inbox</span>`,
+      `<span class="b">▸ Extracting tables from 4 files in ./inbox</span>`,
       `  supplier_A_2024-04.csv   <span class="d">delimiter ;  encoding latin-1   </span>  412 rows`,
       `  supplier_B_april.xlsx    <span class="d">2-row merged header detected    </span>  238 rows`,
       `  supplier_C_prices.pdf    <span class="d">table found on pages 1–6        </span>  517 rows`,
@@ -302,7 +404,7 @@ function messyImporter() {
       `  names      <span class="g">✓</span> 1,318 trimmed and title-cased`,
       `  duplicates <span class="y">!</span>    34 removed   <span class="d">(same SKU + supplier + date)</span>`,
       ``,
-      `<span class="b">▸ Comparing with last import (2024-03)</span>`,
+      `<span class="b">▸ Comparing with last run (2024-03)</span>`,
       `  price up   <span class="r">▲ 128 SKUs</span>   avg +6.4%     price down <span class="g">▼ 41 SKUs</span>   new SKUs 22`,
       ``,
       `<span class="g">✓ Wrote 1,284 rows to Google Sheet "Supplier prices"</span>  <span class="d">tabs: Clean data · Summary · Fix log</span>`,
@@ -316,7 +418,7 @@ function messyImporter() {
       `  D          143       6         4        2      19`,
       ``,
       `<span class="d">$</span> <span class="w">crontab -l</span>`,
-      `<span class="d">30 6 * * 1  cd ~/clients/homeware-co && python import_suppliers.py --inbox ./inbox   # every Monday 06:30</span>`,
+      `<span class="d">30 6 * * 1  cd ~/clients/homeware-co && python extract_suppliers.py --inbox ./inbox   # every Monday 06:30</span>`,
     ].join("\n"),
   });
   return [
@@ -325,7 +427,7 @@ function messyImporter() {
   ];
 }
 
-// ── 04 Inventory reorder alerts ──────────────────────────────
+// ── 03 Low-stock alerts ──────────────────────────────
 function inventory() {
   const items = [
     ["SKU-2041", "Cold brew bottle 1L", 18, 6.2, 12],
@@ -405,8 +507,10 @@ function inventory() {
   ];
 }
 
-// ── 05 Marketing ROAS dashboard ──────────────────────────────
-function roas() {
+// ── 06 (cont.) Marketing tab of the profit dashboard ─────────
+// Ad spend is simulated (Olist does not publish it), in R$ like the rest.
+function marketing() {
+  const money = (n) => fmt.money(n, "R$ ");
   const channels = [
     { name: "Email", spend: 2100, revenue: 23520, cust: 310, color: C.aqua },
     { name: "Google Search", spend: 16400, revenue: 75440, cust: 640, color: C.blue },
@@ -417,18 +521,18 @@ function roas() {
   const rev = channels.reduce((a, c) => a + c.revenue, 0);
   const cust = channels.reduce((a, c) => a + c.cust, 0);
   const overview = powerbi({
-    file: "marketing_performance.pbix",
-    title: "Marketing performance · Q3 2026",
-    slicers: [["Period", "Jul 1 – Sep 30, 2026"], ["Store", "All"], ["Attribution", "Last click, 7d"]],
-    pages: ["Overview", "Channels over time", "Campaigns", "Definitions"],
-    active: 0,
+    file: "olist_profit.pbix",
+    title: "Marketing · ad spend vs sales",
+    slicers: [["Period", "Jul – Sep 2018"], ["Ad spend", "Simulated"], ["Attribution", "Last click, 7d"]],
+    pages: PROFIT_PAGES,
+    active: 2,
     body: `
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
         ${[
-          ["Ad spend", fmt.money(spend), "+9% vs Q2", ""],
-          ["Attributed revenue", fmt.money(rev), "+21% vs Q2", "up"],
+          ["Ad spend", money(spend), "+9% vs Q2", ""],
+          ["Attributed revenue", money(rev), "+21% vs Q2", "up"],
           ["ROAS", `${(rev / spend).toFixed(2)}×`, "target 3.0×", "up"],
-          ["Cost per new customer", fmt.money(spend / cust), "−11% vs Q2", "up"],
+          ["Cost per new customer", money(spend / cust), "−11% vs Q2", "up"],
           ["New customers", fmt.int(cust), "+18% vs Q2", "up"],
         ]
           .map(([l, v, d, cls]) => `<div class="card kpi"><div class="label">${l}</div><div class="value">${v}</div><div class="delta ${cls}">${d}</div></div>`)
@@ -453,11 +557,11 @@ function roas() {
               .map((c) => {
                 const ro = c.revenue / c.spend;
                 const st = ro >= 3 ? '<span class="chip good">✓ Scale</span>' : ro >= 2 ? '<span class="chip warn">▲ Optimise</span>' : '<span class="chip bad">● Cut / test</span>';
-                return `<tr><td><b>${c.name}</b></td><td class="num">${fmt.money(c.spend)}</td><td class="num">${fmt.money(c.revenue)}</td><td class="num">${ro.toFixed(1)}×</td><td class="num">${c.cust}</td><td class="num">${fmt.money(c.spend / c.cust)}</td><td>${st}</td></tr>`;
+                return `<tr><td><b>${c.name}</b></td><td class="num">${money(c.spend)}</td><td class="num">${money(c.revenue)}</td><td class="num">${ro.toFixed(1)}×</td><td class="num">${c.cust}</td><td class="num">${money(c.spend / c.cust)}</td><td>${st}</td></tr>`;
               })
               .join("")}
-            <tr class="tot"><td>Total</td><td class="num">${fmt.money(spend)}</td><td class="num">${fmt.money(rev)}</td><td class="num">${(rev / spend).toFixed(2)}×</td><td class="num">${cust}</td><td class="num">${fmt.money(spend / cust)}</td><td></td></tr></table>
-          <div class="note"><b>Recommendation:</b> move ~$4k/month from TikTok to Google Search brand + shopping campaigns; keep Meta on retargeting only.</div></div>
+            <tr class="tot"><td>Total</td><td class="num">${money(spend)}</td><td class="num">${money(rev)}</td><td class="num">${(rev / spend).toFixed(2)}×</td><td class="num">${cust}</td><td class="num">${money(spend / cust)}</td><td></td></tr></table>
+          <div class="note"><b>Recommendation:</b> move ~R$ 4k/month from TikTok to Google Search brand + shopping campaigns; keep Meta on retargeting only.</div></div>
       </div>
       <div class="card" style="flex:1"><h3>Top campaigns by revenue</h3>
         <table class="ct"><tr><th>Campaign</th><th>Channel</th><th class="num">Spend</th><th class="num">Revenue</th><th class="num">ROAS</th><th class="num">Conv. rate</th></tr>
@@ -468,7 +572,7 @@ function roas() {
             ["Abandoned cart flow", "Email", 380, 7900, 4.9],
             ["UGC video — summer", "TikTok Ads", 4100, 5330, 0.9],
           ]
-            .map(([n, ch, s, r2, cr]) => `<tr><td><b>${n}</b></td><td>${ch}</td><td class="num">${fmt.money(s)}</td><td class="num">${fmt.money(r2)}</td><td class="num">${(r2 / s).toFixed(1)}×</td><td class="num">${cr.toFixed(1)}%</td></tr>`)
+            .map(([n, ch, s, r2, cr]) => `<tr><td><b>${n}</b></td><td>${ch}</td><td class="num">${money(s)}</td><td class="num">${money(r2)}</td><td class="num">${(r2 / s).toFixed(1)}×</td><td class="num">${cr.toFixed(1)}%</td></tr>`)
             .join("")}</table></div>`,
   }).replace(
     "</style>",
@@ -486,35 +590,35 @@ function roas() {
     { name: "Email", color: C.aqua, values: mk(1200, 110, 500) },
   ];
   const trend = powerbi({
-    file: "marketing_performance.pbix",
-    title: "Channels over time",
-    slicers: [["Period", "Q3 2026 · weekly"], ["Metric", "Attributed revenue"]],
-    pages: ["Overview", "Channels over time", "Campaigns", "Definitions"],
-    active: 1,
+    file: "olist_profit.pbix",
+    title: "Marketing trend",
+    slicers: [["Period", "Jul – Sep 2018 · weekly"], ["Metric", "Attributed revenue"]],
+    pages: PROFIT_PAGES,
+    active: 3,
     body: `
       <div style="display:grid;grid-template-columns:2.2fr 1fr;gap:14px;flex:1">
-        <div class="card"><h3>Attributed revenue per week</h3><div class="sub">USD · three largest channels · TikTok omitted (under $1k/week)</div>
+        <div class="card"><h3>Attributed revenue per week</h3><div class="sub">R$ · three largest channels · TikTok omitted (under R$ 1k/week)</div>
           <div style="display:flex;gap:18px;font-size:12px;margin:6px 0 4px">${series.map((s) => `<span><i style="display:inline-block;width:14px;height:3px;background:${s.color};vertical-align:middle;margin-right:6px;border-radius:2px"></i>${s.name}</span>`).join("")}</div>
-          ${lines({ w: 1000, h: 740, labels: weeks, series, format: (v) => fmt.k(v, "$") })}</div>
+          ${lines({ w: 1000, h: 740, labels: weeks, series, format: (v) => fmt.k(v, "R$ ") })}</div>
         <div style="display:flex;flex-direction:column;gap:14px">
           ${[
             ["Google Search keeps growing", "+62% weekly revenue from W27 to W39 with flat CPC after the shopping feed fix in W31.", C.blue],
-            ["Meta is flat while spend grew", "Revenue stayed around $4.2k/week while spend rose 18%. Creative fatigue on the two top ads.", C.orange],
-            ["Email is the most efficient channel", "11.2× ROAS. The abandoned-cart flow alone brought $7.9k this quarter.", C.aqua],
+            ["Meta is flat while spend grew", "Revenue stayed around R$ 4.2k/week while spend rose 18%. Creative fatigue on the two top ads.", C.orange],
+            ["Email is the most efficient channel", "11.2× ROAS. The abandoned-cart flow alone brought R$ 7.9k this quarter.", C.aqua],
           ]
             .map(([t, d, col]) => `<div class="card" style="border-left:4px solid ${col}"><h3>${t}</h3><div style="font-size:13px;line-height:1.55;color:${C.text2}">${d}</div></div>`)
             .join("")}
-          <div class="card"><h3>Refresh</h3><div style="font-size:13px;line-height:1.55;color:${C.text2}">Data pulled daily at 06:00 from Google Ads, Meta, Klaviyo and Shopify into BigQuery; the report refreshes automatically.</div></div>
+          <div class="card"><h3>Data note</h3><div style="font-size:13px;line-height:1.55;color:${C.text2}">Ad spend in this demo is simulated and joined to the Olist orders by week. With real accounts, spend is pulled daily from the ad platforms.</div></div>
         </div>
       </div>`,
   });
   return [
-    { file: "overview", html: overview },
-    { file: "trend", html: trend },
+    { file: "marketing", html: overview },
+    { file: "marketing-trend", html: trend },
   ];
 }
 
-// ── 06 Review insights with AI ───────────────────────────────
+// ── 04 AI review classifier ───────────────────────────────
 function reviews() {
   const topics = [
     ["Delivery time", 41, 12, 47],
@@ -607,19 +711,60 @@ function reviews() {
     extraCss: `td:nth-child(5), td:nth-child(7) { background: #f6faff; } td.h:nth-child(5), td.h:nth-child(6), td.h:nth-child(7), td.h:nth-child(8) { background: #1d4ed8; }`,
     toast: "🤖 <b>AI tagging</b> — 212 new reviews tagged (2m 41s).<br>Low-confidence rows (&lt; 80%) flagged for a quick human check.",
   });
+  const script = appsScript({
+    project: "Review tagger",
+    files: ["Code.gs", "Prompt.gs", "Sheet.gs", "appsscript.json"],
+    code: `<span class="k">const</span> MODEL = <span class="s">'claude-opus-5-5'</span>;
+<span class="k">const</span> BATCH = <span class="n">25</span>;
+
+<span class="c">/** Menu: AI tagging → Tag new reviews (also runs nightly). */</span>
+<span class="k">function</span> <span class="fn">tagNewReviews</span>() {
+  <span class="k">const</span> sheet = SpreadsheetApp.<span class="fn">getActive</span>().<span class="fn">getSheetByName</span>(<span class="s">'Reviews'</span>);
+  <span class="k">const</span> rows = <span class="fn">untaggedRows_</span>(sheet);           <span class="c">// reviews with no topic yet</span>
+  <span class="k">for</span> (<span class="k">const</span> batch <span class="k">of</span> <span class="fn">chunk_</span>(rows, BATCH)) {
+    <span class="k">const</span> res = UrlFetchApp.<span class="fn">fetch</span>(<span class="s">'https://api.anthropic.com/v1/messages'</span>, {
+      method: <span class="s">'post'</span>,
+      contentType: <span class="s">'application/json'</span>,
+      headers: {
+        <span class="s">'x-api-key'</span>: PropertiesService.<span class="fn">getScriptProperties</span>().<span class="fn">getProperty</span>(<span class="s">'ANTHROPIC_API_KEY'</span>),
+        <span class="s">'anthropic-version'</span>: <span class="s">'2023-06-01'</span>,
+      },
+      payload: JSON.<span class="fn">stringify</span>({
+        model: MODEL,
+        max_tokens: <span class="n">4000</span>,
+        system: PROMPT,                                  <span class="c">// topics, sentiment rules, examples</span>
+        output_config: { effort: <span class="s">'low'</span>, format: { type: <span class="s">'json_schema'</span>, schema: TAGS_SCHEMA } },
+        messages: [{ role: <span class="s">'user'</span>, content: JSON.<span class="fn">stringify</span>(batch.<span class="fn">map</span>(r => r.text)) }],
+      }),
+    });
+    <span class="k">const</span> reply = JSON.<span class="fn">parse</span>(res.<span class="fn">getContentText</span>());
+    <span class="k">const</span> tags = JSON.<span class="fn">parse</span>(reply.content.<span class="fn">find</span>(b => b.type === <span class="s">'text'</span>).text).reviews;
+    <span class="fn">writeTags_</span>(sheet, batch, tags);                  <span class="c">// topic, sentiment, summary, confidence</span>
+  }
+}`,
+    log: [
+      ["2:00:03 AM", "Notice", "Execution started"],
+      ["2:00:04 AM", "Info", "212 untagged reviews → 9 batches"],
+      ["2:00:21 AM", "Info", "Batch 1/9 · 25 tagged · 2 flagged for review (confidence &lt; 80%)"],
+      ["2:01:58 AM", "Info", "Batch 9/9 · 12 tagged · 1 flagged"],
+      ["2:02:44 AM", "Info", "212 reviews tagged · 14 flagged · written to Reviews!E:H"],
+      ["2:02:44 AM", "Notice", "Execution completed"],
+    ],
+  });
   return [
-    { file: "topics", html: dash },
     { file: "tagged-sheet", html: sheet },
+    { file: "apps-script", html: script },
+    { file: "topics", html: dash },
   ];
 }
 
 export const shots = {
-  "ecommerce-profit-dashboard": ecommerce(),
+  "shopify-ai-order-alerts": shopify(),
   "form-to-sheet-automation": formToSheet(),
-  "messy-data-importer": messyImporter(),
-  "inventory-reorder-alerts": inventory(),
-  "marketing-roas-dashboard": roas(),
-  "review-insights-ai": reviews(),
+  "low-stock-alerts": inventory(),
+  "ai-review-classifier": reviews(),
+  "messy-data-extractor": messyImporter(),
+  "ecommerce-profit-roas-dashboard": ecommerce(),
 };
 
 export { W, H };

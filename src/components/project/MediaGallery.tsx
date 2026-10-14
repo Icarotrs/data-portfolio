@@ -14,8 +14,8 @@ export function MediaGallery({
   const { screenshots, video } = project.media;
   if (!video && screenshots.length === 0) return null;
   return (
-    <section aria-labelledby="media-title" className="mt-6 flex flex-col gap-5">
-      <h2 id="media-title" className="label text-fg">
+    <section aria-labelledby="media-title" className="flex flex-col gap-5">
+      <h2 id="media-title" className="card label w-fit px-4 py-2 text-fg">
         {labels.title} · {String(screenshots.length).padStart(2, "0")}
       </h2>
       {video && (
@@ -38,7 +38,7 @@ export function MediaGallery({
                 alt={s.alt}
                 loading="lazy"
                 decoding="async"
-                className={`w-full object-cover ${wide ? "aspect-[16/9]" : "aspect-[4/3]"}`}
+                className="aspect-[16/10] w-full object-cover"
               />
             ) : (
               <div
@@ -60,7 +60,7 @@ export function MediaGallery({
           );
         })}
       </div>
-      <p className="label text-faint">{labels.note}</p>
+      <p className="card label w-fit px-4 py-2 text-faint">{labels.note}</p>
     </section>
   );
 }

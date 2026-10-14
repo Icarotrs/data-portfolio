@@ -265,7 +265,7 @@ export function bars({ w, h, data, color = C.blue, format = fmt.int, labelEvery 
 
 /** Line chart, 1–3 series, direct labels at the line ends. */
 export function lines({ w, h, labels, series, format = fmt.int, min = 0, labelEvery = 1, endLabels = true }) {
-  const pad = { l: 52, r: endLabels ? 120 : 12, t: 14, b: 26 };
+  const pad = { l: 52, r: endLabels ? 160 : 12, t: 14, b: 26 };
   const all = series.flatMap((s) => s.values);
   const lo = min;
   const max = lo + niceMax(Math.max(...all) - lo);
@@ -308,4 +308,148 @@ export function hbars({ w, rowH = 30, data, color = C.blue, format = fmt.int, la
       })
       .join("")}
   </svg>`;
+}
+
+// ── More app chrome: n8n, Slack, Apps Script ──────────────────
+
+/**
+ * n8n editor canvas. `nodes`: [{ id, name, sub, icon, color, x, y, ok }],
+ * `edges`: [[fromId, toId, label?]]. Nodes are 96px squares centred on x, y.
+ */
+export function n8n({ name, nodes, edges, toast = "", executions = [] }) {
+  const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
+  const S = 96;
+  const paths = edges
+    .map(([a, b, label]) => {
+      const p = byId[a];
+      const q = byId[b];
+      const x1 = p.x + S / 2 + 6;
+      const x2 = q.x - S / 2 - 8;
+      const mx = (x1 + x2) / 2;
+      return `<path d="M${x1},${p.y} C${mx},${p.y} ${mx},${q.y} ${x2},${q.y}" fill="none" stroke="#b6b6c2" stroke-width="2"/>
+        <path d="M${x2 - 7},${q.y - 5} L${x2 + 1},${q.y} L${x2 - 7},${q.y + 5}" fill="none" stroke="#b6b6c2" stroke-width="2"/>
+        <circle cx="${x1}" cy="${p.y}" r="5" fill="#fff" stroke="#9a9aa8" stroke-width="2"/>
+        ${label ? `<text x="${mx}" y="${(p.y + q.y) / 2 - 8}" text-anchor="middle" font-size="12" fill="#6b6b78">${esc(label)}</text>` : ""}`;
+    })
+    .join("");
+  return page(
+    `<div class="n8">
+      <header><span class="logo">n8n</span><span class="crumb">Personal /</span><b>${esc(name)}</b>
+        <span class="tabs"><span class="on">Editor</span><span>Executions</span></span>
+        <span class="right"><span class="active"><i></i> Active</span><span class="btn">Save</span></span></header>
+      <div class="canvas">
+        <svg class="edges" width="${W}" height="${H - 56}">${paths}</svg>
+        ${nodes
+          .map(
+            (n) => `<div class="node ${n.ok ? "ok" : ""}" data-id="${n.id}" style="left:${n.x - S / 2}px;top:${n.y - S / 2}px">
+              <span class="ic" style="background:${n.color}">${n.icon}</span>
+              ${n.ok ? `<span class="badge">✓ ${n.ok}</span>` : ""}
+              <div class="nm"><b>${esc(n.name)}</b><span>${esc(n.sub ?? "")}</span></div></div>`,
+          )
+          .join("")}
+        ${executions.length ? `<aside class="ex"><h4>Recent executions</h4>${executions.map(([id, when, st, t]) => `<div class="row"><span class="st ${st === "Success" ? "good" : "bad"}">${st}</span><span>#${id}</span><span class="muted">${when}</span><span class="muted">${t}</span></div>`).join("")}</aside>` : ""}
+        <div class="exec">▶ Execute workflow</div>
+        ${toast ? `<div class="toast">${toast}</div>` : ""}
+      </div>
+    </div>`,
+    `
+    .n8 { height: 100%; display: flex; flex-direction: column; font-family: Inter, "Segoe UI", Arial, sans-serif; }
+    .n8 header { height: 56px; background: #fff; border-bottom: 1px solid #e3e3ea; display: flex; align-items: center; gap: 12px; padding: 0 20px; font-size: 14px; }
+    .logo { font-weight: 800; color: #ea4b71; font-size: 18px; letter-spacing: -.02em; }
+    .crumb { color: #8a8a99; } .tabs { margin-left: 40px; display: flex; gap: 4px; background: #f2f2f6; border-radius: 6px; padding: 3px; }
+    .tabs span { padding: 5px 14px; border-radius: 4px; font-size: 13px; color: #555; } .tabs .on { background: #fff; color: #111; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+    .right { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+    .active { display: flex; align-items: center; gap: 6px; color: #2f8a4e; font-weight: 600; font-size: 13px; } .active i { width: 30px; height: 16px; border-radius: 8px; background: #3fb36a; position: relative; } .active i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; }
+    .btn { background: #ff6d5a; color: #fff; padding: 7px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; }
+    .canvas { position: relative; flex: 1; background: #f6f6f9; background-image: radial-gradient(#d6d6de 1.2px, transparent 1.2px); background-size: 22px 22px; overflow: hidden; }
+    .edges { position: absolute; inset: 0; }
+    .node { position: absolute; width: 96px; height: 96px; background: #fff; border: 2px solid #c9c9d4; border-radius: 12px; display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+    .node.ok { border-color: #3fb36a; }
+    .node .ic { width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 18px; }
+    .node .badge { position: absolute; top: -12px; right: -14px; background: #3fb36a; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+    .node .nm { position: absolute; top: 104px; left: 50%; transform: translateX(-50%); width: 170px; text-align: center; font-size: 13px; line-height: 1.35; }
+    .node .nm b { display: block; font-weight: 600; } .node .nm span { color: #7a7a88; font-size: 12px; }
+    .ex { position: absolute; right: 20px; bottom: 28px; width: 300px; background: #fff; border: 1px solid #e3e3ea; border-radius: 10px; padding: 14px 16px; font-size: 12.5px; }
+    .ex h4 { font-size: 13px; margin-bottom: 8px; } .ex .row { display: grid; grid-template-columns: 70px 54px 1fr 40px; gap: 6px; padding: 6px 0; border-top: 1px solid #f0f0f4; }
+    .ex .st { font-weight: 600; } .ex .st.good { color: #2f8a4e; } .ex .st.bad { color: #c4312f; }
+    .exec { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); background: #ff6d5a; color: #fff; font-weight: 600; padding: 12px 22px; border-radius: 8px; font-size: 14px; box-shadow: 0 4px 14px rgba(255,109,90,.35); }
+    .toast { position: absolute; left: 20px; top: 20px; background: #fff; border-left: 4px solid #3fb36a; padding: 12px 16px; border-radius: 8px; font-size: 13px; box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+    `,
+  );
+}
+
+/** Slack channel view. `messages`: [{ app, time, text, color, title, fields: [[k, v]], button }]. */
+export function slack({ workspace, channel, channels, messages }) {
+  return page(
+    `<div class="sl">
+      <aside><div class="ws">${esc(workspace)}</div>${channels
+        .map((c) => `<div class="ch ${c === channel ? "on" : ""}"># ${esc(c)}</div>`)
+        .join("")}</aside>
+      <main><header><b># ${esc(channel)}</b><span class="muted">Orders that need a person · posted by Order Bot</span></header>
+        <div class="msgs">${messages
+          .map(
+            (m) => `<div class="msg"><span class="av">OB</span><div class="body">
+              <div class="who"><b>${esc(m.app)}</b><span class="app">APP</span><span class="muted">${esc(m.time)}</span></div>
+              <div class="text">${m.text}</div>
+              <div class="att" style="border-color:${m.color}"><b>${m.title}</b>
+                <div class="fields">${m.fields.map(([k, v]) => `<div><span class="muted">${esc(k)}</span><div>${v}</div></div>`).join("")}</div>
+                ${m.button ? `<span class="btn">${esc(m.button)}</span>` : ""}</div></div></div>`,
+          )
+          .join("")}</div>
+        <div class="composer">Message #${esc(channel)}</div></main>
+    </div>`,
+    `
+    .sl { height: 100%; display: flex; font-family: Lato, "Segoe UI", Arial, sans-serif; }
+    aside { width: 260px; background: #3f0e40; color: #cfc3cf; padding: 14px 0; font-size: 15px; }
+    .ws { color: #fff; font-weight: 800; font-size: 18px; padding: 4px 18px 16px; border-bottom: 1px solid #5d2c5d; margin-bottom: 10px; }
+    .ch { padding: 6px 18px; } .ch.on { background: #1164a3; color: #fff; font-weight: 700; }
+    main { flex: 1; display: flex; flex-direction: column; background: #fff; }
+    main header { height: 60px; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; gap: 14px; padding: 0 22px; font-size: 17px; }
+    main header .muted { font-size: 13px; }
+    .msgs { flex: 1; padding: 18px 22px; display: flex; flex-direction: column; gap: 22px; overflow: hidden; }
+    .msg { display: flex; gap: 12px; } .av { width: 40px; height: 40px; border-radius: 6px; background: #ff6d5a; color: #fff; font-weight: 800; display: grid; place-items: center; font-size: 14px; flex: none; }
+    .who { display: flex; gap: 8px; align-items: center; font-size: 15px; } .app { font-size: 10px; background: #e8e8e8; color: #555; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+    .text { font-size: 15px; margin-top: 4px; line-height: 1.5; }
+    .att { margin-top: 8px; border-left: 4px solid; padding: 6px 0 6px 14px; font-size: 14.5px; max-width: 760px; }
+    .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 26px; margin-top: 10px; }
+    .fields .muted { font-size: 13px; font-weight: 700; color: #616061; }
+    .att .btn { display: inline-block; margin-top: 12px; border: 1px solid #ccc; border-radius: 6px; padding: 6px 14px; font-weight: 700; font-size: 14px; }
+    .composer { margin: 0 22px 20px; border: 1px solid #ccc; border-radius: 8px; padding: 14px; color: #888; }
+    `,
+  );
+}
+
+/** Apps Script editor with a code file and the execution log. `code` is pre-highlighted HTML. */
+export function appsScript({ project, files, active = 0, code, log }) {
+  const lines = code.split("\n");
+  return page(
+    `<div class="as">
+      <header><span class="logo"></span><b>Apps Script</b><span class="proj">${esc(project)}</span><span class="right"><span class="run">▶ Run</span><span class="muted">tagNewReviews ▾</span><span class="dep">Deploy</span></span></header>
+      <div class="body">
+        <aside><div class="h">Files</div>${files.map((f, i) => `<div class="f ${i === active ? "on" : ""}">${esc(f)}</div>`).join("")}
+          <div class="h" style="margin-top:22px">Triggers</div><div class="f">⏰ tagNewReviews · daily 2am</div></aside>
+        <section class="ed"><div class="code mono">${lines.map((l, i) => `<div class="ln"><i>${i + 1}</i><span>${l || " "}</span></div>`).join("")}</div>
+          <div class="log"><div class="lh"><b>Execution log</b><span class="muted">tagNewReviews</span></div>
+            <div class="mono">${log.map(([t, lvl, msg]) => `<div class="lr"><span class="muted">${t}</span><span class="lv ${lvl.toLowerCase()}">${lvl}</span><span>${msg}</span></div>`).join("")}</div></div></section>
+      </div>
+    </div>`,
+    `
+    .as { height: 100%; display: flex; flex-direction: column; font-family: "Google Sans", Roboto, Arial, sans-serif; background: #fff; }
+    .as header { height: 56px; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 12px; padding: 0 18px; font-size: 15px; }
+    .as .logo { width: 26px; height: 26px; border-radius: 6px; background: conic-gradient(#4285f4 0 25%, #34a853 0 50%, #fbbc04 0 75%, #ea4335 0); }
+    .proj { margin-left: 18px; color: #3c4043; } .right { margin-left: auto; display: flex; gap: 16px; align-items: center; font-size: 13px; }
+    .run { color: #1a73e8; font-weight: 600; } .dep { background: #1a73e8; color: #fff; padding: 8px 16px; border-radius: 4px; font-weight: 500; }
+    .body { flex: 1; display: flex; min-height: 0; }
+    .as aside { width: 250px; border-right: 1px solid #e0e0e0; padding: 16px 12px; font-size: 13.5px; }
+    .as aside .h { font-size: 12px; color: #5f6368; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; padding: 0 8px; }
+    .as aside .f { padding: 7px 10px; border-radius: 4px; color: #3c4043; } .as aside .f.on { background: #e8f0fe; color: #1967d2; font-weight: 600; }
+    .ed { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .code { flex: 1; padding: 12px 0; font-size: 13.5px; line-height: 1.62; color: #202124; overflow: hidden; }
+    .ln { display: flex; white-space: pre; } .ln i { width: 54px; text-align: right; padding-right: 16px; color: #9aa0a6; font-style: normal; flex: none; }
+    .k { color: #a626a4; } .s { color: #188038; } .c { color: #80868b; font-style: italic; } .fn { color: #1a73e8; } .n { color: #b55c00; }
+    .log { height: 250px; border-top: 1px solid #e0e0e0; background: #fafafa; font-size: 13px; }
+    .lh { display: flex; gap: 12px; padding: 10px 18px; border-bottom: 1px solid #eee; } .lr { display: grid; grid-template-columns: 110px 70px 1fr; padding: 4px 18px; }
+    .lv.notice { color: #5f6368; } .lv.info { color: #1a73e8; } .lv.warning { color: #b26a00; }
+    `,
+  );
 }

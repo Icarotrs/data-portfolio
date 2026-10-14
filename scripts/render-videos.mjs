@@ -108,6 +108,8 @@ const HOST = `<!doctype html><html><head><meta charset="utf-8"><style>
       await sleep((els.length - 1) * stagger + dur);
     },
     setText(sel, { text }) { for (const e of $$(sel)) e.textContent = text; },
+    addClass(sel, { cls }) { for (const e of $$(sel)) e.classList.add(cls); },
+    removeClass(sel, { cls }) { for (const e of $$(sel)) e.classList.remove(cls); },
     async type(sel, { text, cps = 16 }) {
       const e = $$(sel)[0]; e.textContent = "";
       for (const ch of text) { e.textContent += ch; await sleep(1000 / cps); }

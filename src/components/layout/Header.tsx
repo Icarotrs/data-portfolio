@@ -3,7 +3,6 @@ import { site } from "@site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
-import { BrandMark } from "./BrandMark";
 import { LanguageSwitch } from "./LanguageSwitch";
 
 /** Sticky, frosted top bar with a thin scroll-progress line. */
@@ -17,8 +16,11 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     <header className="glass sticky top-0 z-40 border-b border-line">
       <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6">
         <Link href={`/${lang}/`} className="inline-flex items-center gap-2.5" aria-label={`${site.name} — home`}>
-          <BrandMark className="h-6 w-6" />
-          <span className="text-[15px] font-medium tracking-tight">{site.name}</span>
+          {/* Full name; just the initials on very small screens. */}
+          <span className="text-[15px] font-medium tracking-tight">
+            <span className="hidden min-[400px]:inline">{site.name}</span>
+            <span className="min-[400px]:hidden">IT</span>
+          </span>
           <span className="label hidden text-faint lg:inline">/ {dict.role}</span>
         </Link>
         <div className="flex items-center gap-4 sm:gap-5">

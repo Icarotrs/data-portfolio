@@ -1,0 +1,11 @@
+## Problema
+
+Cada proveedor enviaba su lista de precios y stock en un formato distinto: un CSV con punto y coma y decimales con coma, una tabla en PDF, un Excel con encabezados combinados en dos filas. Las fechas venían como `03/04/24`, `2024-04-03` y `April 3`. Alguien pasaba unas cuatro horas a la semana reescribiendo y corrigiendo estos archivos antes de poder compararlos.
+
+## Lo que construí
+
+- **Extracción de datos** de tablas en CSV, Excel y PDF con texto, que detecta sola delimitadores, codificaciones y encabezados de varias filas.
+- Un paso de limpieza: un solo formato de fecha y de moneda, nombres recortados y normalizados, columnas divididas y combinadas corregidas, duplicados eliminados.
+- Un archivo de mapeo de columnas, para que un proveedor nuevo sean unas líneas de configuración y no código nuevo.
+- Salida en Google Sheets: una pestaña de datos limpios, una **pestaña de resumen** (conteos, totales, cambios de precio desde la última ejecución) y una **pestaña de registro** con cada corrección.
+- Ejecución semanal programada, y las mismas reglas en un menú dentro de Google Sheets para quien no usa Python.

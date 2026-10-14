@@ -402,3 +402,61 @@ body {
     display: none;
   }
 }
+
+/* ── Flow diagram connectors ──────────────────────────────────
+   A short line between steps with a dot travelling along it. */
+.flow-link {
+  position: relative;
+  flex: none;
+  align-self: center;
+  width: 1px;
+  height: 26px;
+  background: var(--line-strong);
+}
+.flow-link::after {
+  content: "";
+  position: absolute;
+  left: -2.5px;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: flow-down 1.6s linear infinite;
+  animation-delay: inherit;
+}
+@media (min-width: 1024px) {
+  .flow-link {
+    width: 26px;
+    height: 1px;
+  }
+  .flow-link::after {
+    left: 0;
+    top: -2.5px;
+    animation-name: flow-right;
+  }
+}
+@keyframes flow-down {
+  to {
+    transform: translateY(20px);
+  }
+}
+@keyframes flow-right {
+  to {
+    transform: translateX(20px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-link::after {
+    display: none;
+  }
+}
+
+/* Story headings are numbered: 01 Problem, 02 What I built. */
+.prose-story {
+  counter-reset: step;
+}
+.prose-story h2::before {
+  counter-increment: step;
+  content: "0" counter(step) " · ";
+}

@@ -1,0 +1,108 @@
+{
+  "order": 6,
+  "number": "06",
+  "title": "E-commerce Profit & ROAS Dashboard",
+  "kind": "dashboard",
+  "summary": "Real margin per product and per order after shipping and fees, plus a marketing tab with ad spend, sales and ROAS for every channel.",
+  "stack": [
+    "Power BI",
+    "DAX",
+    "Power Query",
+    "SQL",
+    "Python (pandas)"
+  ],
+  "result": "Real net margin for ~99k orders, loss-making products flagged, and a marketing tab showing 61% of ad spend returned under 3×.",
+  "metric": {
+    "value": "312",
+    "label": "products found selling at a loss",
+    "basis": "simulated"
+  },
+  "note": "Built on the public Olist e-commerce dataset. Product cost and ad spend are simulated (Olist does not publish them) and labeled as such in the report.",
+  "links": {
+    "github": "",
+    "demo": ""
+  },
+  "media": {
+    "screenshots": [
+      {
+        "src": "/projects/ecommerce-profit-roas-dashboard/overview.webp",
+        "alt": "Profit overview: revenue, fees, freight and net margin by month and category"
+      },
+      {
+        "src": "/projects/ecommerce-profit-roas-dashboard/products.webp",
+        "alt": "Products ranked by net margin, loss-making SKUs flagged"
+      },
+      {
+        "src": "/projects/ecommerce-profit-roas-dashboard/marketing.webp",
+        "alt": "Marketing tab: ad spend, attributed sales, ROAS and cost per customer by channel, with a recommendation"
+      },
+      {
+        "src": "/projects/ecommerce-profit-roas-dashboard/marketing-trend.webp",
+        "alt": "Attributed sales per week for each ad channel"
+      }
+    ],
+    "video": {
+      "src": "/projects/ecommerce-profit-roas-dashboard/demo.mp4",
+      "poster": "/projects/ecommerce-profit-roas-dashboard/overview.webp"
+    }
+  },
+  "upworkBlurb": "Power BI dashboard for an online store that shows real profit, not just revenue: net margin per product and per order after shipping, marketplace and payment fees, with loss-making products flagged. A marketing tab compares ad spend and sales per channel (ROAS, cost per new customer) and shows where to move the budget. Built on the public Olist dataset (~99k orders); product cost and ad spend are simulated and labeled. Stack: Power BI, DAX, Power Query, SQL, Python.",
+  "i18n": {
+    "pt": {
+      "title": "Dashboard de Lucro e ROAS para E-commerce",
+      "summary": "Margem real por produto e por pedido depois de frete e taxas, mais uma aba de marketing com gasto em anúncios, vendas e ROAS de cada canal.",
+      "result": "Margem líquida real de ~99 mil pedidos, produtos com prejuízo destacados e uma aba de marketing mostrando que 61% do gasto em anúncios retornou menos de 3×.",
+      "metricLabel": "produtos encontrados vendendo com prejuízo",
+      "note": "Feito com o dataset público de e-commerce da Olist. O custo dos produtos e o gasto em anúncios são simulados (a Olist não os publica) e estão identificados no relatório.",
+      "alts": [
+        "Visão de lucro: faturamento, taxas, frete e margem líquida por mês e categoria",
+        "Produtos ordenados por margem líquida, com os SKUs que dão prejuízo destacados",
+        "Aba de marketing: gasto em anúncios, vendas atribuídas, ROAS e custo por cliente por canal, com recomendação",
+        "Vendas atribuídas por semana em cada canal de anúncios"
+      ],
+      "flow": [
+        "Pedidos, taxas, frete e anúncios",
+        "Um modelo de dados limpo",
+        "Medidas de margem líquida e ROAS",
+        "Páginas de lucro, produtos e marketing"
+      ]
+    },
+    "es": {
+      "title": "Dashboard de Beneficio y ROAS para E-commerce",
+      "summary": "Margen real por producto y por pedido después de envío y comisiones, más una pestaña de marketing con gasto en anuncios, ventas y ROAS por canal.",
+      "result": "Margen neto real de ~99 mil pedidos, productos con pérdidas destacados y una pestaña de marketing que muestra que el 61% del gasto en anuncios devolvió menos de 3×.",
+      "metricLabel": "productos encontrados vendiéndose con pérdidas",
+      "note": "Hecho con el dataset público de e-commerce de Olist. El costo de los productos y el gasto en anuncios son simulados (Olist no los publica) y están identificados en el informe.",
+      "alts": [
+        "Vista de rentabilidad: facturación, comisiones, envío y margen neto por mes y categoría",
+        "Productos ordenados por margen neto, con los SKUs que pierden dinero destacados",
+        "Pestaña de marketing: gasto en anuncios, ventas atribuidas, ROAS y costo por cliente por canal, con recomendación",
+        "Ventas atribuidas por semana en cada canal de anuncios"
+      ],
+      "flow": [
+        "Pedidos, comisiones, envío y anuncios",
+        "Un modelo de datos limpio",
+        "Medidas de margen neto y ROAS",
+        "Páginas de beneficio, productos y marketing"
+      ]
+    }
+  },
+  "flow": [
+    {
+      "tool": "Orders · ads",
+      "label": "Orders, fees, freight and ad spend"
+    },
+    {
+      "tool": "Power Query · SQL",
+      "label": "One clean data model"
+    },
+    {
+      "tool": "DAX",
+      "label": "Net margin and ROAS measures"
+    },
+    {
+      "tool": "Power BI",
+      "label": "Profit, products and marketing pages"
+    }
+  ]
+}

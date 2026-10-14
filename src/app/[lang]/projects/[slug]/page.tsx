@@ -6,7 +6,9 @@ import { LOCALES, LOCALE_LABELS, isLocale, languageAlternates } from "@/i18n/con
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProject, getProjects, localize, storyLocale } from "@/lib/content";
 import { ContactCard } from "@/components/layout/ContactCard";
+import { FlowDiagram } from "@/components/project/FlowDiagram";
 import { MediaGallery } from "@/components/project/MediaGallery";
+import { Glyph } from "@/components/ui/Glyph";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/icons";
 
@@ -42,11 +44,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/projects/[
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
- * Case-study layout, built for scanning first and reading second:
- *   1. Header — what it is (title + one-line summary) beside the outcome
- *   2. Fact strip — type, tools, data at a glance
- *   3. Story — Problem / What I built, with a sticky summary panel
- *   4. Screenshots, then the next project and the call to action
+ * Case-study layout, in the order a client reads it:
+ *   header (what it is) → 01 problem → 02 what I built → 03 demo
+ *   (flow diagram, video, screens) → 04 tools → 05 result with a number
+ *   (marked when estimated or simulated) → next project, call to action.
  */
 export default async function ProjectPage({ params }: PageProps<"/[lang]/projects/[slug]">) {
   const { lang, slug } = await params;
@@ -62,11 +63,11 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
   const all = getProjects().map((p) => localize(p, lang));
   const index = all.findIndex((p) => p.slug === slug);
   const next = all[(index + 1) % all.length];
-  const dataNote = project.note?.split(". ")[0].replace(/\.$/, "");
+  const basis = project.metric.basis;
 
   return (
     <article className="mx-auto flex max-w-[1040px] flex-col gap-5">
-      <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4 pb-2">
+      <nav aria-label="Breadcrumb" className="card flex items-center justify-between gap-4 px-5 py-3">
         <Link href={`/${lang}/#projects`} className="label inline-flex items-center gap-2 text-fg hover:text-accent">
           <ArrowLeft className="h-3.5 w-3.5" />
           {t.allProjects}
@@ -76,15 +77,15 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
         </span>
       </nav>
 
-      {/* 1. Header: what it is + the outcome */}
-      <header className="card grid gap-8 p-7 sm:p-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-12">
-        <div className="flex flex-col">
+      {/* Header: what it is */}
+      <header className="card grid gap-8 p-7 sm:p-10 md:grid-cols-[minmax(0,1fr)_160px]">
+        <div>
           <p className="label text-accent">
             {project.number} · {dict.kinds[project.kind]}
           </p>
           <h1 className="mt-4 text-balance text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{project.title}</h1>
-          <p className="mt-5 max-w-[52ch] text-pretty text-[17px] leading-relaxed text-muted">{project.summary}</p>
-          <div className="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
+          <p className="mt-5 max-w-[60ch] text-pretty text-[17px] leading-relaxed text-muted">{project.summary}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
             <LinkButton href={site.links.upwork} external>
               {t.hireForThis}
             </LinkButton>
@@ -102,51 +103,58 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
             )}
           </div>
         </div>
-        <div className="flex flex-col justify-between rounded-[8px] border border-line p-6">
-          <p className="label text-faint">{t.result}</p>
-          <p className="mt-6 font-mono text-[52px] font-light leading-none tracking-tight text-accent">
-            {project.metric.value}
-          </p>
-          <p className="mt-3 text-sm text-muted">{project.metric.label}</p>
-          <p className="mt-6 border-t border-line pt-4 text-pretty text-[15px] leading-relaxed">{project.result}</p>
-        </div>
+        <Glyph shape={site.kindShapes[project.kind]} className="hidden aspect-square w-full self-center md:block" />
       </header>
 
-      {/* 2. Facts at a glance */}
-      <dl className="card grid grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        <Fact label={t.type} value={dict.kinds[project.kind]} />
-        <Fact label={t.stack} value={project.stack.join(" · ")} />
-        <Fact label={t.data} value={dataNote ?? t.clientData} />
-      </dl>
-
-      {/* 3. Story + sticky summary */}
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
-        <div className="card prose-story p-7 sm:p-10">
-          <Story />
-        </div>
-        <aside aria-label={t.glance} className="lg:sticky lg:top-6 lg:self-start">
-          <div className="card p-7">
-            <p className="label text-faint">{t.glance}</p>
-            <ul className="mt-4 flex flex-col gap-2.5">
-              {project.stack.map((s) => (
-                <li key={s} className="flex items-center gap-3 text-[15px]">
-                  <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-accent" />
-                  {s}
-                </li>
-              ))}
-            </ul>
-            {project.note && <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-muted">{project.note}</p>}
-            <div className="mt-5 border-t border-line pt-5">
-              <LinkButton href={site.links.upwork} external className="w-full">
-                {t.hire}
-              </LinkButton>
-            </div>
-          </div>
-        </aside>
+      {/* 01 Problem · 02 What I built */}
+      <div className="card prose-story p-7 sm:p-10">
+        <Story />
       </div>
 
-      {/* 4. Screenshots */}
-      <MediaGallery project={project} labels={{ title: t.screenshots, comingSoon: t.comingSoon, note: t.shotsNote }} />
+      {/* 03 Demo */}
+      <section aria-label={t.sections.demo} className="flex flex-col gap-5">
+        <h2 className="card label w-fit px-4 py-2 text-accent">{t.sections.demo}</h2>
+        {project.flow && <FlowDiagram steps={project.flow} title={t.flow} />}
+        <MediaGallery project={project} labels={{ title: t.screenshots, comingSoon: t.comingSoon, note: t.shotsNote }} />
+      </section>
+
+      {/* 04 Tools · 05 Result */}
+      <div className="grid gap-5 md:grid-cols-2">
+        <section className="card p-7 sm:p-9">
+          <h2 className="label text-accent">{t.sections.tools}</h2>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {project.stack.map((s) => (
+              <li key={s} className="rounded-[3px] border border-line-strong px-3 py-1.5 text-[14px]">
+                {s}
+              </li>
+            ))}
+          </ul>
+          <dl className="mt-6 grid gap-3 border-t border-line pt-5 text-[14px]">
+            <div className="flex gap-3">
+              <dt className="label w-16 shrink-0 pt-0.5 text-faint">{t.type}</dt>
+              <dd>{dict.kinds[project.kind]}</dd>
+            </div>
+            <div className="flex gap-3">
+              <dt className="label w-16 shrink-0 pt-0.5 text-faint">{t.data}</dt>
+              <dd className="text-muted">{project.note ?? t.clientData}</dd>
+            </div>
+          </dl>
+        </section>
+        <section className="card flex flex-col p-7 sm:p-9">
+          <h2 className="label text-accent">{t.sections.result}</h2>
+          <p className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <span className="font-mono text-[52px] font-light leading-none tracking-tight text-accent">{project.metric.value}</span>
+            {basis && <span className="label rounded-[3px] border border-line-strong px-2 py-0.5 text-faint">{t.basis[basis]}</span>}
+          </p>
+          <p className="mt-3 text-[15px] text-muted">{project.metric.label}</p>
+          <p className="mt-6 border-t border-line pt-5 text-pretty text-[16px] leading-relaxed">{project.result}</p>
+          <div className="mt-6 md:mt-auto md:pt-6">
+            <LinkButton href={site.links.upwork} external>
+              {t.hire}
+            </LinkButton>
+          </div>
+        </section>
+      </div>
 
       {next.slug !== project.slug && (
         <Link
@@ -160,7 +168,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
             </span>
             <span className="mt-2 block text-[15px] text-muted">{next.summary}</span>
           </span>
-          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
+          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] border border-line-strong transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
             <ArrowRight className="h-4 w-4" />
           </span>
         </Link>
@@ -170,14 +178,5 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
         <ContactCard dict={dict} />
       </div>
     </article>
-  );
-}
-
-function Fact({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="px-7 py-5">
-      <dt className="label text-faint">{label}</dt>
-      <dd className="mt-1.5 text-[15px] leading-snug">{value}</dd>
-    </div>
   );
 }
