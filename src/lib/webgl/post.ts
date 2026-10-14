@@ -1,4 +1,3 @@
-import * as THREE from "three";
 import type { FilterType } from "@site";
 
 export const MAX_BOXES = 8;
@@ -16,7 +15,7 @@ export const FILTER_IDS: Record<FilterType, number> = {
 const GLYPHS = " .:-=+*#%@";
 
 /** Monospace glyph strip used by the ASCII filter, ordered dark → bright. */
-function createGlyphAtlas() {
+export function createGlyphStrip() {
   const cellW = 32;
   const cellH = 48;
   const canvas = document.createElement("canvas");
@@ -30,25 +29,70 @@ function createGlyphAtlas() {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   [...GLYPHS].forEach((g, i) => ctx.fillText(g, i * cellW + cellW / 2, cellH / 2 + 2));
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.minFilter = THREE.LinearFilter;
-  texture.magFilter = THREE.LinearFilter;
-  texture.generateMipmaps = false;
-  return texture;
+  return canvas;
 }
 
-const fragmentShader = /* glsl */ `
+/** Full-screen triangle; no vertex buffer needed. */
+export const FULLSCREEN_VERTEX = /* glsl */ `#version 300 es
+  void main() {
+    vec2 p = vec2(gl_VertexID == 1 ? 3.0 : -1.0, gl_VertexID == 2 ? 3.0 : -1.0);
+    gl_Position = vec4(p, 0.0, 1.0);
+  }
+`;
+
+/**
+ * Icons pass: instanced quads sampling the icon atlas. Output is
+ * premultiplied alpha over a transparent target.
+ */
+export const ICON_VERTEX = /* glsl */ `#version 300 es
+  in vec2 aCorner;            // -0.5..0.5
+  in vec4 aA;                 // x, y (CSS px), size (CSS px), rotation
+  in vec4 aB;                 // tile, alpha, scale x, accent
+  uniform vec2 uView;         // viewport in CSS px
+  uniform vec2 uGrid;         // atlas columns, rows
+  out vec2 vUv;
+  out float vAlpha;
+  out float vAccent;
+  void main() {
+    vec2 c = aCorner * vec2(aB.z, 1.0) * aA.z;
+    float s = sin(aA.w), k = cos(aA.w);
+    vec2 p = aA.xy + mat2(k, s, -s, k) * c;
+    vec2 clip = p / uView * 2.0 - 1.0;
+    gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);
+    vec2 cell = vec2(mod(aB.x, uGrid.x), floor(aB.x / uGrid.x));
+    vUv = (cell + aCorner + 0.5) / uGrid;
+    vAlpha = aB.y;
+    vAccent = aB.w;
+  }
+`;
+
+export const ICON_FRAGMENT = /* glsl */ `#version 300 es
+  precision mediump float;
+  uniform sampler2D uAtlas;
+  uniform vec3 uFg;
+  uniform vec3 uAccent;
+  in vec2 vUv;
+  in float vAlpha;
+  in float vAccent;
+  out vec4 outColor;
+  void main() {
+    float m = texture(uAtlas, vUv).a * vAlpha;
+    outColor = vec4(mix(uFg, uAccent, vAccent) * m, m);
+  }
+`;
+
+export const POST_FRAGMENT = /* glsl */ `#version 300 es
   precision highp float;
+  out vec4 outColor;
 
   uniform sampler2D tScene;
   uniform sampler2D tGlyph;
   uniform vec2 uRes;          // drawing buffer size in device px
-  uniform float uDpr;
+  uniform float uDpr;         // device px per CSS px
   uniform float uTime;
   uniform vec3 uBg;
   uniform vec3 uFg;
   uniform vec3 uFrost;
-  uniform float uDark;
   uniform vec4 uBoxes[${MAX_BOXES}];   // x0, y0, x1, y1 in device px (origin bottom-left)
   uniform float uBoxType[${MAX_BOXES}];
   uniform int uBoxCount;
@@ -130,8 +174,7 @@ const fragmentShader = /* glsl */ `
   vec3 fFrost(vec2 px, vec2 o) {
     float lod = 3.5;
     float j = 6.0 * uDpr;
-    vec3 c = (sceneAt(px + vec2(j, j), lod) + sceneAt(px + vec2(-j, j), lod)
-      + sceneAt(px + vec2(j, -j), lod) + sceneAt(px + vec2(-j, -j), lod)) * 0.25;
+    vec3 c = (sceneAt(px + vec2(j, j), lod) + sceneAt(px - vec2(j, j), lod)) * 0.5;
     c = mix(c, uFrost, 0.38);
     return c + (hash(px) - 0.5) * 0.03;
   }
@@ -166,48 +209,6 @@ const fragmentShader = /* glsl */ `
       else col = fHalftone(px, o);
       break;
     }
-    gl_FragColor = vec4(col, 1.0);
+    outColor = vec4(col, 1.0);
   }
 `;
-
-export function createPostPass() {
-  const glyphs = createGlyphAtlas();
-  const boxes = Array.from({ length: MAX_BOXES }, () => new THREE.Vector4());
-  const material = new THREE.ShaderMaterial({
-    depthTest: false,
-    depthWrite: false,
-    uniforms: {
-      tScene: { value: null },
-      tGlyph: { value: glyphs },
-      uRes: { value: new THREE.Vector2(1, 1) },
-      uDpr: { value: 1 },
-      uTime: { value: 0 },
-      uBg: { value: new THREE.Color() },
-      uFg: { value: new THREE.Color() },
-      uFrost: { value: new THREE.Color() },
-      uDark: { value: 0 },
-      uBoxes: { value: boxes },
-      uBoxType: { value: new Array(MAX_BOXES).fill(0) },
-      uBoxCount: { value: 0 },
-    },
-    vertexShader: /* glsl */ `
-      void main() { gl_Position = vec4(position.xy, 0.0, 1.0); }
-    `,
-    fragmentShader,
-  });
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-  mesh.frustumCulled = false;
-  const scene = new THREE.Scene();
-  scene.add(mesh);
-
-  return {
-    scene,
-    camera: new THREE.Camera(),
-    uniforms: material.uniforms,
-    dispose() {
-      glyphs.dispose();
-      material.dispose();
-      mesh.geometry.dispose();
-    },
-  };
-}

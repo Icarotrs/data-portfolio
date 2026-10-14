@@ -43,8 +43,9 @@ export function BackgroundCanvas({ stillTime }: { stillTime?: number }) {
       if (disposed || engine) return;
       cleanups.splice(0).forEach((c) => c());
       const support = detectWebGL();
-      // Asset rendering (stillTime) is allowed to use software WebGL.
-      if (support === "none" || (support === "software" && stillTime === undefined)) {
+      // Asset rendering (stillTime) and ?forcegl (testing) may use software WebGL.
+      const allowSoftware = stillTime !== undefined || location.search.includes("forcegl");
+      if (support === "none" || (support === "software" && !allowSoftware)) {
         root.dataset.webgl = support === "none" ? "off" : "soft";
         return;
       }

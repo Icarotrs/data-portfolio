@@ -6,14 +6,14 @@ const tools = ["Power BI", "Google Sheets", "Apps Script", "SQL", "Python"];
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="pt-10 sm:pt-20">
+    <section data-icon-theme="intro" aria-labelledby="hero-title" className="pt-10 sm:pt-20">
       <div className="glass max-w-3xl rounded-3xl p-6 sm:p-10">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
           {site.role} · Available on Upwork
         </p>
         <h1
           id="hero-title"
-          className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl"
+          className="text-silver mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl"
         >
           {site.title}
         </h1>

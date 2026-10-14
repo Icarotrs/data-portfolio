@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@site";
 import { getProject, getProjects } from "@/lib/content";
-import { ShapeScope } from "@/components/background/ShapeScope";
 import { MediaGallery } from "@/components/project/MediaGallery";
 import { ResultMetric } from "@/components/project/ResultMetric";
 import { LinkButton } from "@/components/ui/LinkButton";
@@ -45,8 +44,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
 
   return (
     <article className="flex flex-col gap-6 pt-8 sm:pt-14">
-      <ShapeScope shape={site.shapes[project.kind]} />
-
       <Link
         href="/#projects"
         className="glass inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-fg"
@@ -55,18 +52,18 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         All projects
       </Link>
 
-      <header className="glass rounded-3xl p-6 sm:p-10">
+      <header data-icon-theme={project.kind} className="glass rounded-3xl p-6 sm:p-10">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
           Project {project.number} · {site.kindLabels[project.kind]}
         </p>
-        <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
+        <h1 className="text-silver mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
           {project.title}
         </h1>
         <p className="mt-4 max-w-2xl text-pretty text-lg text-muted">{project.summary}</p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
-        <div className="glass prose-story rounded-2xl p-6 sm:p-8">
+      <div data-icon-theme="code" className="grid gap-6 lg:grid-cols-[1fr_20rem]">
+        <div className="glass reveal prose-story rounded-2xl p-6 sm:p-8">
           <Story />
         </div>
         <aside className="flex flex-col gap-6">
@@ -109,9 +106,11 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         </aside>
       </div>
 
-      <MediaGallery project={project} />
+      <div data-icon-theme="projects">
+        <MediaGallery project={project} />
+      </div>
 
-      <div className="glass flex flex-col gap-4 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="glass reveal flex flex-col gap-4 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-pretty text-muted">Need something like this for your business?</p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <LinkButton href={site.links.upwork} external>

@@ -32,19 +32,19 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" aria-labelledby="services-title" className="scroll-mt-24">
+    <section id="services" data-icon-theme="services" aria-labelledby="services-title" className="scroll-mt-24">
       <SectionHeading id="services-title" eyebrow="Services · 04" title="What I can build for you" />
       <ul className="mt-6 grid gap-4 sm:grid-cols-2">
         {services.map((s) => (
-          <li key={s.code} className="glass flex flex-col rounded-2xl p-6">
+          <li key={s.code} className="glass reveal flex flex-col p-6">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">{s.code}</p>
-            <h3 className="mt-2 text-lg font-semibold tracking-tight">{s.title}</h3>
+            <h3 className="text-silver mt-2 text-lg font-semibold tracking-tight">{s.title}</h3>
             <p className="mt-1 font-mono text-[11px] text-faint">{s.tools}</p>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted">{s.body}</p>
           </li>
         ))}
       </ul>
-      <div className="glass mt-4 flex flex-col items-start justify-between gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
+      <div className="glass reveal mt-4 flex flex-col items-start justify-between gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
         <p className="text-pretty text-muted">
           Have a spreadsheet or report that eats your week? Send the details on Upwork.
         </p>

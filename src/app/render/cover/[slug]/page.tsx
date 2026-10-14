@@ -1,7 +1,7 @@
 import { site } from "@site";
 import { getProject, getProjects } from "@/lib/content";
 import { Background } from "@/components/background/Background";
-import { ShapeScope } from "@/components/background/ShapeScope";
+import { ThemeScope } from "@/components/background/ThemeScope";
 import { RENDER_STILL_TIME } from "../../still";
 
 export const dynamicParams = false;
@@ -17,7 +17,7 @@ export default async function RenderCover({ params }: PageProps<"/render/cover/[
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
-      <ShapeScope shape={site.shapes[project.kind]} />
+      <ThemeScope theme={project.kind} />
       <Background stillTime={RENDER_STILL_TIME} />
       <div className="relative z-10 flex h-full flex-col justify-end gap-6 p-20">
         <div className="glass-strong w-[1040px] rounded-[2rem] p-14">

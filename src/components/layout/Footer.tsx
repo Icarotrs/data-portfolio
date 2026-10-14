@@ -10,7 +10,7 @@ const links = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative z-20 px-3 pb-6 sm:px-6">
+    <footer data-icon-theme="contact" className="relative z-20 px-3 pb-6 sm:px-6">
       <div className="glass mx-auto flex max-w-5xl flex-col gap-5 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-semibold">{site.name}</p>

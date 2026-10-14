@@ -1,5 +1,5 @@
-import { getProjects } from "@/lib/content";
 import { Background } from "@/components/background/Background";
+import { SectionObserver } from "@/components/background/SectionObserver";
 import { Chrome } from "@/components/chrome/Chrome";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -14,7 +14,8 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
         Skip to content
       </a>
       <Background />
-      <Chrome projectCount={getProjects().length} />
+      <Chrome />
+      <SectionObserver />
       <Header />
       <main id="main" className="relative z-20 mx-auto w-full max-w-5xl px-3 pb-16 sm:px-6">
         {children}

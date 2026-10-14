@@ -24,7 +24,7 @@ export function MediaGallery({ project }: { project: Project }) {
       <div className="grid gap-4 sm:grid-cols-2">
         {screenshots.map((s, i) =>
           s.src ? (
-            <figure key={i} className="glass overflow-hidden rounded-2xl">
+            <figure key={i} className="glass reveal overflow-hidden rounded-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element -- static export, images are pre-sized */}
               <img src={s.src} alt={s.alt} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
               <figcaption className="p-4 text-sm text-muted">{s.alt}</figcaption>
@@ -32,7 +32,7 @@ export function MediaGallery({ project }: { project: Project }) {
           ) : (
             <figure
               key={i}
-              className="glass flex aspect-[4/3] flex-col justify-between rounded-2xl p-5"
+              className="glass reveal flex aspect-[4/3] flex-col justify-between rounded-2xl p-5"
             >
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
                 Screenshot {String(i + 1).padStart(2, "0")} · coming soon

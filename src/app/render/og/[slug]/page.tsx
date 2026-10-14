@@ -1,7 +1,7 @@
 import { site } from "@site";
 import { getProject, getProjects } from "@/lib/content";
 import { Background } from "@/components/background/Background";
-import { ShapeScope } from "@/components/background/ShapeScope";
+import { ThemeScope } from "@/components/background/ThemeScope";
 import { RENDER_STILL_TIME } from "../../still";
 
 export const dynamicParams = false;
@@ -14,11 +14,10 @@ export function generateStaticParams() {
 export default async function RenderOg({ params }: PageProps<"/render/og/[slug]">) {
   const { slug } = await params;
   const project = getProject(slug);
-  const shape = project ? site.shapes[project.kind] : "home";
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
-      <ShapeScope shape={shape} />
+      <ThemeScope theme={project ? project.kind : "intro"} />
       <Background stillTime={RENDER_STILL_TIME} />
       <div className="relative z-10 flex h-full items-end p-14">
         <div className="glass-strong w-[760px] rounded-3xl p-10">

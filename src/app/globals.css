@@ -19,11 +19,12 @@
   --line-strong: rgb(13 16 21 / 0.28);
   --accent: #1d4fd8;
   --accent-fg: #ffffff;
-  --glass: rgb(246 247 249 / 0.8);
-  --glass-strong: rgb(250 251 252 / 0.9);
-  --glass-border: rgb(13 16 21 / 0.1);
-  --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset,
-    0 10px 30px -12px rgb(13 16 21 / 0.18);
+  --glass: linear-gradient(135deg, rgb(255 255 255 / 0.66), rgb(255 255 255 / 0.36));
+  --glass-strong: linear-gradient(135deg, rgb(255 255 255 / 0.82), rgb(255 255 255 / 0.6));
+  --glass-border: rgb(255 255 255 / 0.85);
+  --glass-shadow: 0 0 0 1px rgb(13 16 21 / 0.06), inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 24px 48px -28px rgb(13 16 21 / 0.35);
+  --silver: linear-gradient(180deg, #0d1015 30%, #3b4350 100%);
   --cta: #0d1015;
   --cta-fg: #f5f6f8;
 }
@@ -39,11 +40,13 @@
   --line-strong: rgb(236 238 242 / 0.26);
   --accent: #8fb0ff;
   --accent-fg: #050506;
-  --glass: rgb(12 13 16 / 0.84);
-  --glass-strong: rgb(14 15 19 / 0.9);
-  --glass-border: rgb(236 238 242 / 0.1);
-  --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset,
-    0 10px 30px -12px rgb(0 0 0 / 0.6);
+  /* Frosted dark glass: translucent white over black, bright hairline edge. */
+  --glass: linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.03) 60%, rgb(255 255 255 / 0.05));
+  --glass-strong: linear-gradient(135deg, rgb(30 31 35 / 0.82), rgb(14 15 18 / 0.78));
+  --glass-border: rgb(255 255 255 / 0.15);
+  --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), inset 0 -1px 0 rgb(255 255 255 / 0.03),
+    0 30px 60px -30px rgb(0 0 0 / 0.9);
+  --silver: linear-gradient(180deg, #ffffff 25%, #b9bec7 100%);
   --cta: #eceef2;
   --cta-fg: #050506;
 }
@@ -99,21 +102,52 @@ body {
   outline-offset: 3px;
 }
 
-/* ── Glass cards ──────────────────────────────────────────── */
+/* ── Glass cards (frosted glassmorphism) ──────────────────── */
+/* Unlayered on purpose: the 14px radius wins over rounded-* utilities. */
 .glass {
   background: var(--glass);
   border: 1px solid var(--glass-border);
+  border-radius: 14px;
   box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  backdrop-filter: blur(22px) saturate(1.4);
 }
 
 .glass-strong {
   background: var(--glass-strong);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  backdrop-filter: blur(22px) saturate(1.4);
+}
+
+/* Silver headline text, like engraved glass. */
+.text-silver {
+  background: var(--silver);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Scroll-driven reveal (CSS only, no JS) ──────────────── */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
 }
 
 /* ── CSS-only background (shown before / without WebGL) ───── */

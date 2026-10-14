@@ -1,10 +1,19 @@
 /**
  * site.config.ts — the ONE file to edit for personal info, links,
- * background shapes and filter boxes.
+ * background icons and filter boxes.
  */
 
+import type { IconName } from "./src/lib/icons/names";
+
 export type ProjectKind = "dashboard" | "automation" | "cleaning";
-export type ShapeId = "cube-bars" | "torus" | "particle-sphere" | "home";
+/** A section "theme": picks which icons orbit the page while it is in view. */
+export type IconTheme =
+  | "intro"
+  | "projects"
+  | "services"
+  | "contact"
+  | "code"
+  | ProjectKind;
 export type FilterType =
   | "dither"
   | "ascii"
@@ -43,13 +52,20 @@ export const site = {
     github: "https://github.com/Icarotrs",
   },
 
-  // ── Background: project kind → 3D shape ─────────────────────
-  shapes: {
-    home: "home",
-    dashboard: "cube-bars",
-    automation: "torus",
-    cleaning: "particle-sphere",
-  } satisfies Record<ProjectKind | "home", ShapeId>,
+  // ── Background: icons orbiting the page ─────────────────────
+  // Small line icons travel in a loop around the viewport. Each page
+  // section has a theme; when you scroll into it, the icons "type" into a
+  // random pick from that theme's list. Icon names: src/lib/icons/names.ts
+  iconThemes: {
+    intro: ["coffee", "key-a", "clock", "frog", "star", "braces", "tag", "rocket", "bulb", "heart", "key-cmd", "planet", "cactus"],
+    projects: ["bar-chart", "pie-chart", "trend", "sheet", "database", "sigma", "percent", "dollar", "magnifier", "coffee", "star", "monitor"],
+    services: ["gear", "envelope", "bolt", "loop", "clock", "arrow-fn", "fn", "check", "cloud", "terminal", "frog", "key-enter"],
+    contact: ["chat", "check", "star", "heart", "coffee", "frog", "smiley", "planet", "key-esc", "rocket"],
+    code: ["braces", "tag", "arrow-fn", "fn", "semicolon", "hash", "and", "brackets", "lambda", "binary", "terminal", "key-cmd", "mouse"],
+    dashboard: ["bar-chart", "pie-chart", "trend", "sigma", "percent", "dollar", "database", "sheet", "monitor", "coffee"],
+    automation: ["gear", "loop", "clock", "bolt", "envelope", "check", "arrow-fn", "terminal", "key-enter", "frog"],
+    cleaning: ["magnifier", "sheet", "database", "check", "sigma", "hash", "brackets", "binary", "cactus", "star"],
+  } satisfies Record<IconTheme, IconName[]>,
 
   /** Human labels for project kinds. */
   kindLabels: {
