@@ -11,8 +11,8 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const title = dict.hero.title;
   return (
     <section aria-labelledby="hero-title" className="mx-auto grid max-w-[1120px] items-center gap-12 lg:min-h-[calc(100dvh-12rem)] lg:grid-cols-[1.05fr_1fr]">
-      <div>
-        <p className="label rise text-accent" style={{ "--i": 0 } as CSSProperties}>
+      <div className="card rise p-7 sm:p-10" style={{ "--i": 0 } as CSSProperties}>
+        <p className="label text-accent" style={{ "--i": 0 } as CSSProperties}>
           {dict.hero.eyebrow} · {dict.role}
         </p>
         <h1 id="hero-title" className="mt-5 font-mono text-[34px] leading-[1.1] tracking-normal sm:text-[52px]">

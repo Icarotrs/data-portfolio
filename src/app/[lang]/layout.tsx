@@ -56,7 +56,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
       <body className="page-bg min-h-dvh">
         <a
           href="#main"
-          className="label sr-only z-50 rounded-[4px] bg-cta px-3 py-2 text-cta-fg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="label sr-only z-50 rounded-[3px] bg-cta px-3 py-2 text-cta-fg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           {dict.nav.skip}
         </a>

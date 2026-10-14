@@ -4,44 +4,47 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Theme tokens ─────────────────────────────────────────────
-   Simple and opaque: near-black / dark greys with orange highlights, or
-   light stone greys. Solid cards, no blur, no canvas. */
+   A blurred orange band behind everything (public/bg/*.webp, a static
+   image) and frosted glass cards on top. Dark: near-black and ember
+   orange; light: warm cream and peach. */
 :root {
   color-scheme: light;
-  --bg: #e7e7e4;
-  --bg-2: #dededa;
-  --fg: #151515;
-  --muted: #3c3c3c;
-  --faint: #575757;
-  --line: rgb(21 21 21 / 0.12);
-  --line-strong: rgb(21 21 21 / 0.26);
-  --card: #f7f7f5;
-  --card-2: #efefec;
-  --card-border: rgb(21 21 21 / 0.08);
-  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 18px 40px -28px rgb(0 0 0 / 0.35);
-  --accent: #b83c0b;
+  --bg: #f4ece5;
+  --bg-image: url("/bg/light.webp");
+  --fg: #1a120d;
+  --muted: #45382f;
+  --faint: #5e5046;
+  --line: rgb(60 30 10 / 0.12);
+  --line-strong: rgb(60 30 10 / 0.28);
+  --card: rgb(255 251 247 / 0.62);
+  --card-strong: rgb(255 251 247 / 0.84);
+  --card-2: rgb(255 248 242 / 0.5);
+  --card-border: rgb(255 255 255 / 0.7);
+  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 20px 50px -30px rgb(90 40 10 / 0.45);
+  --accent: #b23a0a;
   --accent-fg: #ffffff;
-  --cta: #b83c0b;
+  --cta: #b23a0a;
   --cta-fg: #ffffff;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0b0b0c;
-  --bg-2: #141415;
-  --fg: #ededed;
-  --muted: #bdbdbd;
-  --faint: #9a9a9a;
-  --line: rgb(255 255 255 / 0.09);
-  --line-strong: rgb(255 255 255 / 0.22);
-  --card: #161617;
-  --card-2: #1d1d1f;
-  --card-border: rgb(255 255 255 / 0.07);
-  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 24px 50px -30px rgb(0 0 0 / 0.9);
-  --accent: #ff7a33;
-  --accent-fg: #111111;
-  --cta: #ff6a1f;
-  --cta-fg: #111111;
+  --bg: #120604;
+  --bg-image: url("/bg/dark.webp");
+  --fg: #f3ede9;
+  --muted: #cbbfb7;
+  --faint: #ab9f97;
+  --line: rgb(255 255 255 / 0.1);
+  --line-strong: rgb(255 255 255 / 0.24);
+  --card: rgb(18 10 8 / 0.66);
+  --card-strong: rgb(18 10 8 / 0.86);
+  --card-2: rgb(255 255 255 / 0.04);
+  --card-border: rgb(255 255 255 / 0.1);
+  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --accent: #ff8a45;
+  --accent-fg: #160803;
+  --cta: #ff7a33;
+  --cta-fg: #160803;
 }
 
 @theme inline {
@@ -69,8 +72,8 @@ html {
   scroll-behavior: smooth;
 }
 
+/* No body background: the fixed .page-bg layer sits under the content. */
 body {
-  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
 }
@@ -97,13 +100,34 @@ body {
   outline-offset: 3px;
 }
 
-/* ── Cards: solid, small radius ───────────────────────────── */
-/* Unlayered on purpose: the 10px radius wins over rounded-* utilities. */
+/* ── Cards: frosted glass, square corners, accent corner ticks ─
+   Unlayered on purpose: the 3px radius wins over rounded-* utilities.
+   The ticks are background layers, so .card never needs position. */
 .card {
-  background: var(--card);
+  --tick: var(--accent);
+  background:
+    linear-gradient(var(--tick), var(--tick)) left top / 14px 1.5px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) left top / 1.5px 14px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) right bottom / 14px 1.5px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) right bottom / 1.5px 14px no-repeat,
+    var(--card);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 3px;
   box-shadow: var(--card-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+}
+/* Cards that stack on top of each other need more opacity to stay legible. */
+.card-strong {
+  --card: var(--card-strong);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 12px 24px -18px rgb(0 0 0 / 0.6);
+}
+
+/* Bars and buttons share the square look. */
+.glass {
+  background: var(--card);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
 }
 
 /* Small mono labels used across the layout. */
@@ -115,11 +139,14 @@ body {
   text-transform: uppercase;
 }
 
-/* Quiet page background: a soft glow at the top, nothing animated. */
-.page-bg {
-  background:
-    radial-gradient(70% 45% at 50% -10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
-    var(--bg);
+/* Page background: the blurred band, fixed behind the content. */
+.page-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-image) center / cover no-repeat, var(--bg);
+  pointer-events: none;
 }
 
 /* ── Load animation: hero lines rise in ───────────────────── */

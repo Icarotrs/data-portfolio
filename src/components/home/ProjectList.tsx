@@ -35,7 +35,7 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
   return (
     <Link
       href={`/${lang}/projects/${p.slug}/`}
-      className="card stack-in group grid overflow-hidden transition-colors hover:border-accent focus-visible:border-accent lg:min-h-[480px] lg:grid-cols-[1fr_1.2fr]"
+      className="card card-strong stack-in group grid overflow-hidden transition-colors hover:border-accent focus-visible:border-accent lg:min-h-[480px] lg:grid-cols-[1fr_1.2fr]"
     >
       <div className="flex flex-col p-7 sm:p-9">
         <div className="flex items-baseline gap-4">
@@ -51,12 +51,12 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
           <span className="text-sm text-muted">{p.metric.label}</span>
         </div>
         <p className="label mt-5 text-faint">{p.stack.join(" · ")}</p>
-        <span className="label mt-8 inline-flex h-10 w-fit items-center gap-2 rounded-[4px] border border-line-strong px-4 text-fg transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg lg:mt-auto">
+        <span className="label mt-8 inline-flex h-10 w-fit items-center gap-2 rounded-[3px] border border-line-strong px-4 text-fg transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg lg:mt-auto">
           {dict.projects.viewCase}
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
-      <div className="relative min-h-[220px] overflow-hidden border-t border-line bg-card-2 lg:border-l lg:border-t-0">
+      <div className="relative min-h-[220px] overflow-hidden border-t border-line lg:border-l lg:border-t-0">
         {shot && (
           // eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP
           <img

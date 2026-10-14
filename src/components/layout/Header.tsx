@@ -6,7 +6,7 @@ import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import { BrandMark } from "./BrandMark";
 import { LanguageSwitch } from "./LanguageSwitch";
 
-/** Sticky, opaque top bar with a thin scroll-progress line. */
+/** Sticky, frosted top bar with a thin scroll-progress line. */
 export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const nav = [
     { label: dict.nav.projects, href: `/${lang}/#projects` },
@@ -14,7 +14,7 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     { label: dict.nav.contact, href: `/${lang}/#contact` },
   ];
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg">
+    <header className="glass sticky top-0 z-40 border-b border-line">
       <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6">
         <Link href={`/${lang}/`} className="inline-flex items-center gap-2.5" aria-label={`${site.name} — home`}>
           <BrandMark className="h-6 w-6" />
@@ -35,7 +35,7 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             href={site.links.upwork}
             target="_blank"
             rel="noopener noreferrer"
-            className="label hidden h-9 items-center rounded-[4px] bg-cta px-3.5 text-cta-fg transition hover:opacity-90 sm:inline-flex"
+            className="label hidden h-9 items-center rounded-[3px] bg-cta px-3.5 text-cta-fg transition hover:opacity-90 sm:inline-flex"
           >
             {dict.nav.hire}
           </a>

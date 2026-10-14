@@ -43,7 +43,7 @@ export function MediaGallery({
             ) : (
               <div
                 aria-hidden="true"
-                className={`m-5 mb-0 flex items-center justify-center rounded-[4px] border border-dashed border-line-strong ${
+                className={`m-5 mb-0 flex items-center justify-center rounded-[3px] border border-dashed border-line-strong ${
                   wide ? "aspect-[16/8]" : "aspect-[4/3]"
                 }`}
                 style={{

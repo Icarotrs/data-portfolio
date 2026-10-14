@@ -37,7 +37,7 @@ export default async function RenderCover({ params }: PageProps<"/render/cover/[
           <p className="mt-6 text-pretty text-2xl leading-snug text-muted">{project.summary}</p>
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {project.stack.map((s) => (
-              <li key={s} className="rounded-[4px] border border-line-strong px-3 py-1 font-mono text-base text-muted">
+              <li key={s} className="rounded-[3px] border border-line-strong px-3 py-1 font-mono text-base text-muted">
                 {s}
               </li>
             ))}

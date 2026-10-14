@@ -16,7 +16,7 @@ const variants = {
 
 /** Small, square-ish mono button. */
 export function LinkButton({ href, children, variant = "primary", external, className = "" }: LinkButtonProps) {
-  const classes = `label inline-flex h-9 items-center justify-center gap-2 rounded-[4px] px-3.5 transition ${variants[variant]} ${className}`;
+  const classes = `label inline-flex h-9 items-center justify-center gap-2 rounded-[3px] px-3.5 transition ${variants[variant]} ${className}`;
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
