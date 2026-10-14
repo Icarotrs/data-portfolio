@@ -4,7 +4,7 @@ Personal portfolio for a freelance data & automation specialist (Power BI, Googl
 
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
-- **WebGL2** background (no 3D library): three large wireframe shapes on a slow carousel, rendered through movable "filter panels" (dither, ASCII, pixelate, noise, frost, halftone) by a single post-processing shader
+- **WebGL2** background (no 3D library): three simple wireframe solids on a slow carousel, rendered through movable "filter panels" (dither, ASCII, pixelate, noise, frost, halftone) by a single post-processing shader
 - Granite theme (blacks and dark greys with orange highlights; light stone variant), opaque frosted cards, mono corner details (menu, clock, theme switch, links)
 - **Image lab**: visitors drop their own images into the background and drag them (and the panels) under the effects — images never leave the browser
 - Case-study pages in an editorial layout: outcome first, fact strip, story with a sticky summary, large screenshots
@@ -51,7 +51,7 @@ The site intentionally has no email, phone or contact form — all contact goes 
 
 ## Change the background
 
-**Shapes.** A wireframe cube with animated bars (dashboards), a line-ring torus with flowing points (automation) and a particle cloud that keeps organising itself into a sphere (data cleaning) orbit the centre of the screen on a slow 3D carousel. They are plain vertex lists in `src/lib/webgl/shapes.ts`; orbit radius, size and speed are in `buildShapes()` in `src/lib/webgl/engine.ts`.
+**Shapes.** Three simple wireframe solids (a cube, a square pyramid and an icosahedron) with orange vertices orbit the centre of the screen on a slow 3D carousel. They are plain vertex lists in `src/lib/webgl/shapes.ts`; orbit radius, size and speed are in `buildShapes()` in `src/lib/webgl/engine.ts`.
 
 **Filter boxes.** `site.config.ts → filterBoxes` has one list per breakpoint (`desktop` ≥ 1024px, `tablet` 640–1023px, `mobile` < 640px). Each box is `{ filter, x, y, w, h }` in % of the viewport, with `filter` one of `dither`, `ascii`, `pixelate`, `noise`, `frost`, `halftone`. Up to 8 boxes per breakpoint. On the home page visitors can drag the panels (mouse anywhere on a panel, touch on its label tab, or Tab + arrow keys); their positions are saved in `localStorage` and the Image lab has a *Reset panels* button.
 
@@ -62,7 +62,7 @@ The boxes are real DOM elements (`src/components/background/FilterBoxLayer.tsx`)
 ## Performance and accessibility
 
 - The WebGL engine (plain WebGL2, ~20 KB) loads only after the page has loaded and the browser is idle (or on first interaction).
-- Shapes are three draw calls (triangles, lines, points); the drawing buffer is capped (1.5× pixel ratio, 2.4 MP); the loop runs at 30 fps, 60 while something is dragged.
+- Shapes are two draw calls (lines, points); the drawing buffer is capped (1.5× pixel ratio, 2.4 MP); the loop runs at 30 fps, 60 while something is dragged.
 - Pixel ratio capped at 1.5; rendering pauses when the tab is hidden.
 - `prefers-reduced-motion`: a static frame, redrawn only when something changes.
 - No WebGL2 → a pre-rendered background image. Software-only WebGL (no GPU) → the lightweight CSS background. Add `?forcegl` to the URL to force WebGL anyway (testing).

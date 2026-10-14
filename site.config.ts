@@ -5,7 +5,7 @@
 
 
 export type ProjectKind = "dashboard" | "automation" | "cleaning";
-export type ShapeId = "cube-bars" | "torus" | "particle-sphere";
+export type ShapeId = "cube" | "pyramid" | "icosahedron";
 export type FilterType =
   | "dither"
   | "ascii"
@@ -46,12 +46,12 @@ export const site = {
     github: "https://github.com/Icarotrs",
   },
 
-  // ── Background: three large shapes on a slow carousel ──────
+  // ── Background: three simple wireframe solids on a slow carousel ──
   // One shape per project kind, orbiting the center of the screen.
   shapes: {
-    dashboard: "cube-bars",
-    automation: "torus",
-    cleaning: "particle-sphere",
+    dashboard: "cube",
+    automation: "pyramid",
+    cleaning: "icosahedron",
   } satisfies Record<ProjectKind, ShapeId>,
 
   /** Human labels for project kinds. */

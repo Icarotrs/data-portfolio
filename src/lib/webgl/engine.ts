@@ -10,12 +10,12 @@ import {
   SHAPE_VERTEX,
   createGlyphStrip,
 } from "./post";
-import { Batch, Transform, cubeBars, particleSphere, torus, type Batches, type Colors, type RGB } from "./shapes";
+import { Batch, Transform, cube, icosahedron, pyramid, type Batches, type Colors, type RGB } from "./shapes";
 
 /**
  * Background renderer, plain WebGL2 (no 3D library):
  *   1. Scene → offscreen texture: visitor images (from the Image lab), then
- *      three large wireframe shapes on a slow carousel around the centre.
+ *      three simple wireframe solids on a slow carousel around the centre.
  *   2. Post: one full-screen shader draws the granite background, composites
  *      the scene and applies each filter panel's effect inside its rectangle.
  *
@@ -271,16 +271,15 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     const visibleW = 2 * CAMERA_Z * Math.tan((fov * Math.PI) / 360) * aspect;
     const rx = visibleW * (aspect < 0.8 ? 0.3 : 0.27);
     const rz = 2.0;
-    const size = aspect < 0.8 ? 0.5 : 0.68;
-    const builders = [cubeBars, torus, particleSphere];
+    const size = aspect < 0.8 ? 0.6 : 0.85;
+    const builders = [cube, pyramid, icosahedron];
     builders.forEach((build, i) => {
       const angle = (t / ORBIT_SECONDS) * Math.PI * 2 + (i * Math.PI * 2) / 3;
       const x = Math.sin(angle) * rx;
       const z = Math.cos(angle) * rz;
       const y = Math.sin(t * 0.4 + i * 2) * 0.15;
       const alpha = 0.55 + 0.45 * ((z / rz + 1) / 2); // dimmer at the back
-      const spin: [number, number, number] =
-        i === 0 ? [0.42, t * 0.16 + 0.6, 0] : i === 1 ? [-1.05, Math.sin(t * 0.2) * 0.15, t * 0.18] : [0.25, t * 0.12, 0];
+      const spin: [number, number, number] = [0.35 + Math.sin(t * 0.2 + i) * 0.15, t * (0.14 + i * 0.03) + i, 0];
       transform.set(spin[0], spin[1], spin[2], size, x, y, z);
       build(transform, t, batches, colors, alpha);
     });
@@ -316,7 +315,7 @@ export function createEngine({ canvas, stillTime, onFirstFrame }: EngineOptions)
     gl!.blendFunc(gl!.ONE, gl!.ONE_MINUS_SRC_ALPHA);
     gl!.useProgram(shapeProgram.program);
     gl!.uniformMatrix4fv(shapeProgram.u("uViewProj"), false, viewProj);
-    gl!.uniform1f(shapeProgram.u("uPointScale"), 2.6 * scale * CAMERA_Z);
+    gl!.uniform1f(shapeProgram.u("uPointScale"), 5 * scale * CAMERA_Z);
     gl!.bindVertexArray(shapeVao);
     gl!.bindBuffer(gl!.ARRAY_BUFFER, shapeBuffer);
     drawBatch(batches.tris, gl!.TRIANGLES, false);
