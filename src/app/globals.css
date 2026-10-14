@@ -4,31 +4,21 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Theme tokens ─────────────────────────────────────────────
-   Blacks and dark greys with orange highlights (dark), or light stone
-   greys (light). Cards are opaque enough to keep text at
-   WCAG AA over any part of the background. */
+   Simple and opaque: near-black / dark greys with orange highlights, or
+   light stone greys. Solid cards, no blur, no canvas. */
 :root {
   color-scheme: light;
-  /* Background "image" (drawn by the WebGL shader, or by CSS as fallback) */
-  --g-base: #c4c4c1;
-  --g-base2: #dcdcd9;
-  --bg: #cfcfcc; /* solid fallback / theme-color */
-  --shape-line: #2a2a2a;
-  --ink: #161616;
-  --accent-gl: #e8591a;
-
+  --bg: #e7e7e4;
+  --bg-2: #dededa;
   --fg: #151515;
   --muted: #3c3c3c;
   --faint: #575757;
   --line: rgb(21 21 21 / 0.12);
   --line-strong: rgb(21 21 21 / 0.26);
-  --on-bg: #151515;
-  --on-bg-muted: #333333;
-  --card: rgb(246 246 244 / 0.86);
-  /* Fine grain shown on cards only (dark specks on light cards). */
-  --card-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --card-border: rgb(255 255 255 / 0.7);
-  --card-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.35);
+  --card: #f7f7f5;
+  --card-2: #efefec;
+  --card-border: rgb(21 21 21 / 0.08);
+  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 18px 40px -28px rgb(0 0 0 / 0.35);
   --accent: #b83c0b;
   --accent-fg: #ffffff;
   --cta: #b83c0b;
@@ -37,24 +27,17 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --g-base: #0b0b0c;
-  --g-base2: #1c1c1e;
-  --bg: #121213;
-  --shape-line: #d6d6d6;
-  --ink: #e6e6e6;
-  --accent-gl: #ff6a1f;
-
+  --bg: #0b0b0c;
+  --bg-2: #141415;
   --fg: #ededed;
   --muted: #bdbdbd;
   --faint: #9a9a9a;
   --line: rgb(255 255 255 / 0.09);
   --line-strong: rgb(255 255 255 / 0.22);
-  --on-bg: #ededed;
-  --on-bg-muted: #a8a8a8;
-  --card: rgb(17 17 18 / 0.8);
-  --card-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .14 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --card-border: rgb(255 255 255 / 0.08);
-  --card-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --card: #161617;
+  --card-2: #1d1d1f;
+  --card-border: rgb(255 255 255 / 0.07);
+  --card-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 24px 50px -30px rgb(0 0 0 / 0.9);
   --accent: #ff7a33;
   --accent-fg: #111111;
   --cta: #ff6a1f;
@@ -63,13 +46,14 @@
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --color-on-bg: var(--on-bg);
-  --color-on-bg-muted: var(--on-bg-muted);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
   --color-cta: var(--cta);
@@ -104,8 +88,8 @@ body {
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-fg);
 }
 
 :focus-visible {
@@ -113,16 +97,13 @@ body {
   outline-offset: 3px;
 }
 
-/* ── Cards: opaque frosted glass, small radius ────────────── */
+/* ── Cards: solid, small radius ───────────────────────────── */
 /* Unlayered on purpose: the 10px radius wins over rounded-* utilities. */
-.glass {
-  background-color: var(--card);
-  background-image: var(--card-noise);
+.card {
+  background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: 10px;
   box-shadow: var(--card-shadow);
-  -webkit-backdrop-filter: blur(28px) saturate(1.3);
-  backdrop-filter: blur(28px) saturate(1.3);
 }
 
 /* Small mono labels used across the layout. */
@@ -134,31 +115,131 @@ body {
   text-transform: uppercase;
 }
 
-/* ── CSS background (shown before / without WebGL) ────────── */
-.bg-css {
-  background-color: var(--g-base);
-  background-image:
-    radial-gradient(60% 40% at 50% 105%, color-mix(in srgb, var(--accent-gl) 10%, transparent), transparent 70%),
-    radial-gradient(120% 90% at 50% 50%, var(--g-base2), var(--g-base) 75%);
+/* Quiet page background: a soft glow at the top, nothing animated. */
+.page-bg {
+  background:
+    radial-gradient(70% 45% at 50% -10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    var(--bg);
 }
 
-/* Visitor images are drawn by WebGL when it runs; the <img> is the fallback. */
-[data-webgl="on"] .user-image-img {
-  visibility: hidden;
+/* ── Load animation: hero lines rise in ───────────────────── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
 }
 
-.bg-fallback {
-  display: none;
+/* ── Hero title: typed like a command prompt ──────────────────
+   Monospace, so 1ch = one character; --n is the character count. */
+.type {
+  display: inline-block;
+  vertical-align: bottom;
+  white-space: nowrap;
+  overflow: hidden;
 }
-[data-webgl="off"] .bg-fallback {
-  display: block;
+.caret {
+  display: inline-block;
+  width: 0.12em;
+  height: 0.85em;
+  margin-left: 0.1em;
+  vertical-align: -0.05em;
+  background: var(--accent);
+  animation: blink 1s steps(1) infinite;
 }
-.bg-fallback-dark,
-[data-theme="dark"] .bg-fallback-light {
-  display: none;
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: calc(var(--n) * 1ch);
+  }
 }
-[data-theme="dark"] .bg-fallback-dark {
-  display: block;
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .type {
+    animation: typing calc(var(--n) * 85ms) steps(var(--n), end) 350ms both;
+  }
+}
+
+/* ── Scroll-driven animations (CSS only; no JavaScript) ───────
+   Browsers without animation-timeline simply show everything. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes zoom-in {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes stack-in {
+  from {
+    transform: translateY(80px) scale(0.94);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.scroll-progress {
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+    .zoom-in {
+      animation: zoom-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+    .stack-in {
+      animation: stack-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+    .scroll-progress {
+      animation: progress linear both;
+      animation-timeline: scroll(root);
+    }
+  }
 }
 
 /* ── Prose for MDX stories ────────────────────────────────── */
@@ -167,15 +248,20 @@ body {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--accent);
   margin: 2rem 0 0.75rem;
 }
 .prose-story h2:first-child {
   margin-top: 0;
 }
-.prose-story p {
+.prose-story p,
+.prose-story li {
   color: var(--muted);
-  line-height: 1.7;
+  font-size: 16.5px;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+.prose-story p {
   margin: 0 0 1rem;
 }
 .prose-story ul {
@@ -186,18 +272,16 @@ body {
 .prose-story li {
   position: relative;
   padding-left: 1.25rem;
-  color: var(--muted);
-  line-height: 1.65;
   margin-bottom: 0.6rem;
 }
 .prose-story li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.75em;
+  top: 0.85em;
   width: 0.5rem;
   height: 1px;
-  background: var(--fg);
+  background: var(--accent);
 }
 .prose-story strong {
   color: var(--fg);
@@ -209,31 +293,4 @@ body {
   padding: 0.1em 0.35em;
   border: 1px solid var(--line);
   border-radius: 3px;
-}
-
-/* Larger reading size for case studies. */
-.prose-story-lg p,
-.prose-story-lg li {
-  font-size: 16.5px;
-  line-height: 1.75;
-  max-width: 68ch;
-}
-.prose-story-lg h2 {
-  color: var(--accent);
-}
-
-/* Home panels: a short slide when switching. Motion only: fading the
-   panel would switch off the cards' backdrop blur mid-animation. */
-@keyframes panel-in {
-  from {
-    transform: translateY(14px) scale(0.99);
-  }
-  to {
-    transform: none;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .deck-panel:not([hidden]) {
-    animation: panel-in 260ms ease-out;
-  }
 }

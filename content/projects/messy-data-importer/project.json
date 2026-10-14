@@ -36,5 +36,29 @@
       "poster": ""
     }
   },
-  "upworkBlurb": "Data cleaning and import pipeline: messy CSV or PDF exports (merged headers, mixed date formats, currency symbols, duplicated rows, split columns) are parsed, cleaned and normalized into one consistent spreadsheet, with a summary tab and a log of every fix applied. Runs as a Python script or directly in Google Sheets with Apps Script. Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script."
+  "upworkBlurb": "Data cleaning and import pipeline: messy CSV or PDF exports (merged headers, mixed date formats, currency symbols, duplicated rows, split columns) are parsed, cleaned and normalized into one consistent spreadsheet, with a summary tab and a log of every fix applied. Runs as a Python script or directly in Google Sheets with Apps Script. Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script.",
+  "i18n": {
+    "pt": {
+      "title": "Importador de Dados Bagunçados",
+      "summary": "Entra um CSV ou PDF bagunçado; sai uma planilha limpa e padronizada com aba de resumo.",
+      "result": "Arquivos de fornecedores com datas, moedas e colunas misturadas viram uma tabela consistente em segundos.",
+      "metricLabel": "do arquivo bruto do fornecedor até uma planilha limpa com resumo",
+      "note": "Demonstração feita com arquivos fictícios de fornecedores que reproduzem problemas comuns do dia a dia.",
+      "alts": [
+        "Antes e depois: um CSV bagunçado de fornecedor virou uma planilha limpa e consistente",
+        "Execução da importação: arquivos detectados, correções aplicadas e mudanças de preço desde a última importação"
+      ]
+    },
+    "es": {
+      "title": "Importador de Datos Desordenados",
+      "summary": "Entra un CSV o PDF desordenado; sale una hoja limpia y normalizada con pestaña de resumen.",
+      "result": "Archivos de proveedores con fechas, monedas y columnas mezcladas se convierten en una tabla consistente en segundos.",
+      "metricLabel": "del archivo bruto del proveedor a una hoja limpia con resumen",
+      "note": "Demo hecha con archivos ficticios de proveedores que reproducen problemas comunes.",
+      "alts": [
+        "Antes y después: un CSV desordenado de proveedor convertido en una hoja limpia y consistente",
+        "Ejecución de la importación: archivos detectados, correcciones aplicadas y cambios de precio desde la última importación"
+      ]
+    }
+  }
 }

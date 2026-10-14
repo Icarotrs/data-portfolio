@@ -1,0 +1,11 @@
+## Problema
+
+Una pequeña empresa recibía pedidos por un Google Form. El "vincular a hoja" por defecto dejaba las respuestas en una pestaña bruta, así que alguien copiaba las filas a mano a la hoja real cada día — y cada pegado arriesgaba borrar fórmulas, desplegables y formato. El resumen semanal se armaba a mano cada viernes por la tarde.
+
+## Lo que construí
+
+- Un disparador `onFormSubmit` en Apps Script que lee cada respuesta, la limpia (texto sin espacios de más, teléfonos y fechas normalizados) y la escribe en la tabla **con formato** — fórmulas, validación y formato condicional quedan intactos.
+- Un bloqueo para que dos respuestas simultáneas nunca escriban en la misma fila.
+- Una pestaña de resumen basada en fórmulas (totales por semana, por producto, por estado).
+- Un disparador por tiempo que exporta la pestaña de resumen como **PDF** cada lunes a las 8 y lo envía por correo al dueño.
+- Una pestaña "Configuración" para que el dueño cambie destinatarios y horario sin tocar el código.

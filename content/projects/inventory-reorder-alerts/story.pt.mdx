@@ -1,0 +1,11 @@
+## Problema
+
+Uma pequena loja de artigos para casa descobria que um produto tinha acabado quando os clientes reclamavam. O estoque ficava numa planilha atualizada à mão, ninguém acompanhava a velocidade de venda de cada produto e os fornecedores levavam de 7 a 21 dias para entregar. Os mais vendidos acabavam todo mês.
+
+## O que eu construí
+
+- Uma importação diária das vendas dos últimos 30 dias, a partir da exportação da loja, para uma aba de **Estoque**.
+- Para cada produto: venda média por dia, **dias de cobertura** (quanto tempo o estoque atual dura), um **ponto de reposição** baseado no prazo do fornecedor mais uma semana de segurança e um **pedido sugerido** que cobre 45 dias.
+- Status com cor para cada SKU — *OK*, *Repor em breve*, *Repor agora* — com ícone e rótulo, não só cor.
+- Um gatilho do Apps Script que roda toda manhã às 7h e **envia um e-mail para compras** com os produtos a pedir hoje e nesta semana.
+- Uma aba de **Histórico de reposição** que registra cada alerta e pedido, e uma aba de **Configurações** para limites e destinatários.

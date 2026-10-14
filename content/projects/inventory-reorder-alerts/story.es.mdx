@@ -1,0 +1,11 @@
+## Problema
+
+Una pequeña tienda de artículos para el hogar se enteraba de que un producto se había agotado cuando los clientes se quejaban. El stock vivía en una hoja actualizada a mano, nadie seguía qué tan rápido se vendía cada producto y los proveedores tardaban de 7 a 21 días en entregar. Los más vendidos se agotaban cada mes.
+
+## Lo que construí
+
+- Una importación diaria de las ventas de los últimos 30 días, desde la exportación de la tienda, a una pestaña de **Stock**.
+- Por producto: venta media diaria, **días de cobertura** (cuánto dura el stock actual), un **punto de reposición** según el plazo del proveedor más una semana de seguridad y un **pedido sugerido** que cubre 45 días.
+- Estado con color para cada SKU — *OK*, *Reponer pronto*, *Reponer ya* — con ícono y etiqueta, no solo color.
+- Un disparador de Apps Script que corre cada mañana a las 7 y **envía un correo a compras** con los productos a pedir hoy y esta semana.
+- Una pestaña de **Historial de reposición** que registra cada alerta y pedido, y una pestaña de **Configuración** para umbrales y destinatarios.

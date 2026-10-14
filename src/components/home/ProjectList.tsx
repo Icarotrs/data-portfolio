@@ -1,60 +1,74 @@
 import Link from "next/link";
-import { site } from "@site";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 import type { Project } from "@/lib/content";
-import { ArrowUpRight } from "@/components/ui/icons";
+import { ArrowRight } from "@/components/ui/icons";
+import { SectionHeading } from "./SectionHeading";
 
-/** All projects in one card: a grid of thumbnails, each an obvious link. */
-export function ProjectList({ projects }: { projects: Project[] }) {
+/**
+ * Projects as large cards that stack while you scroll (each card sticks a
+ * little lower than the previous one, so the next slides over it).
+ * Stacking is for large screens; small screens get a plain list.
+ */
+export function ProjectList({ projects, lang, dict }: { projects: Project[]; lang: Locale; dict: Dictionary }) {
   return (
-    <div className="glass flex h-full flex-col overflow-y-auto p-5 sm:p-6">
-      <div className="flex items-baseline justify-between px-1 pb-4 pt-1">
-        <h2 className="label text-accent">Selected projects</h2>
-        <span className="label text-faint">{String(projects.length).padStart(2, "0")}</span>
-      </div>
-      <ul className="grid gap-3 sm:grid-cols-2">
-        {projects.map((p) => (
-          <li key={p.slug}>
-            <ProjectTile project={p} />
+    <section id="projects" aria-labelledby="projects-title" className="mx-auto max-w-[1120px] scroll-mt-24">
+      <SectionHeading
+        id="projects-title"
+        eyebrow={`${dict.projects.eyebrow} · ${String(projects.length).padStart(2, "0")}`}
+        title={dict.projects.title}
+        intro={dict.projects.intro}
+      />
+      <ol className="mt-12 flex flex-col gap-8">
+        {projects.map((p, i) => (
+          <li key={p.slug} className="lg:sticky" style={{ top: `calc(6rem + ${i * 16}px)` }}>
+            <ProjectCard project={p} lang={lang} dict={dict} />
           </li>
         ))}
-      </ul>
-    </div>
+      </ol>
+    </section>
   );
 }
 
-function ProjectTile({ project: p }: { project: Project }) {
-  const thumb = p.media.screenshots.find((s) => s.src);
+function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Locale; dict: Dictionary }) {
+  const shot = p.media.screenshots.find((s) => s.src);
   return (
     <Link
-      href={`/projects/${p.slug}/`}
-      className="group flex h-full flex-col overflow-hidden rounded-[8px] border border-line transition-colors hover:border-accent focus-visible:border-accent"
+      href={`/${lang}/projects/${p.slug}/`}
+      className="card stack-in group grid overflow-hidden transition-colors hover:border-accent focus-visible:border-accent lg:min-h-[480px] lg:grid-cols-[1fr_1.2fr]"
     >
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-[color-mix(in_srgb,var(--fg)_6%,transparent)]">
-        {thumb && (
-          // eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP
-          <img
-            src={thumb.src}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover object-left-top transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        )}
-        <span className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-cta text-cta-fg opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-          <ArrowUpRight className="h-3.5 w-3.5" />
+      <div className="flex flex-col p-7 sm:p-9">
+        <div className="flex items-baseline gap-4">
+          <span className="font-mono text-[44px] font-light leading-none text-accent">{p.number}</span>
+          <span className="label text-faint">{dict.kinds[p.kind]}</span>
+        </div>
+        <h3 className="mt-6 text-[26px] leading-tight tracking-tight transition-colors group-hover:text-accent sm:text-[30px]">
+          {p.title}
+        </h3>
+        <p className="mt-3 text-pretty text-[16px] leading-relaxed text-muted">{p.summary}</p>
+        <div className="mt-6 flex items-baseline gap-3 border-t border-line pt-5">
+          <span className="font-mono text-[28px] font-light leading-none text-accent">{p.metric.value}</span>
+          <span className="text-sm text-muted">{p.metric.label}</span>
+        </div>
+        <p className="label mt-5 text-faint">{p.stack.join(" · ")}</p>
+        <span className="label mt-8 inline-flex h-10 w-fit items-center gap-2 rounded-[4px] border border-line-strong px-4 text-fg transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg lg:mt-auto">
+          {dict.projects.viewCase}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
-      <div className="flex flex-1 flex-col gap-1.5 p-3.5">
-        <p className="label text-[10px] text-faint">
-          <span className="text-accent">{p.number}</span> · {site.kindLabels[p.kind]}
-        </p>
-        <h3 className="text-[15px] leading-snug tracking-tight transition-colors group-hover:text-accent">{p.title}</h3>
-        <p className="mt-auto flex items-baseline justify-between gap-2 pt-1.5">
-          <span className="label text-[10px] text-muted">
-            <span className="text-accent">{p.metric.value}</span>
-          </span>
-          <span className="label text-[10px] text-fg transition-colors group-hover:text-accent">Case study →</span>
-        </p>
+      <div className="relative min-h-[220px] overflow-hidden border-t border-line bg-card-2 lg:border-l lg:border-t-0">
+        {shot && (
+          // eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            width={1600}
+            height={1000}
+            loading="lazy"
+            decoding="async"
+            className="zoom-in absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        )}
       </div>
     </Link>
   );

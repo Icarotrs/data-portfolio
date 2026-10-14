@@ -1,0 +1,11 @@
+## Problema
+
+La marca invertía unos US$ 16 mil al mes entre Google, Meta, TikTok y email, pero cada plataforma mostraba sus propios números y nunca coincidían con Shopify. Cada lunes alguien exportaba cinco CSV y rehacía la misma hoja, y el presupuesto se repartía por costumbre, no por retorno.
+
+## Lo que construí
+
+- Un pipeline diario que trae inversión y datos de campañas de **Google Ads, Meta, TikTok y Klaviyo** a **BigQuery**, cruzados con los pedidos de Shopify en SQL.
+- Una definición clara por métrica — **ROAS**, **costo por cliente nuevo**, ingresos atribuidos — documentada en una página de *Definiciones*.
+- Una **Vista general** en Power BI con inversión, ingresos, ROAS y CAC por canal, un estado por canal (*escalar*, *optimizar*, *cortar / probar*) y las campañas principales.
+- Una página de **Canales en el tiempo** con tendencias semanales e insights cortos escritos, para que el informe se explique solo.
+- Actualización automática cada mañana: la hoja de los lunes dejó de existir.

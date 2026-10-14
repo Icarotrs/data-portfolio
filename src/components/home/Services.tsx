@@ -1,47 +1,26 @@
-const services = [
-  {
-    title: "Profit dashboards",
-    tools: "Power BI · Sheets · Looker Studio",
-    body: "Real margin per product and per order after fees, shipping and ads, from your Shopify, Amazon or WooCommerce exports.",
-  },
-  {
-    title: "Sheets & Apps Script automation",
-    tools: "Apps Script · Sheets · Forms · Gmail",
-    body: "Forms into formatted sheets, scheduled imports, email and PDF reports. The repetitive work runs itself.",
-  },
-  {
-    title: "Data cleaning & import",
-    tools: "Python · SQL · Power Query",
-    body: "Messy CSV, Excel or PDF exports turned into one consistent table, with a log of every fix.",
-  },
-  {
-    title: "Automated reports",
-    tools: "SQL · Python · Apps Script",
-    body: "Weekly or monthly KPI reports that build and send themselves, so nobody rebuilds them every Friday.",
-  },
-];
+import type { Dictionary } from "@/i18n/dictionaries";
+import { SectionHeading } from "./SectionHeading";
 
-export function Services() {
+export function Services({ dict }: { dict: Dictionary }) {
+  const t = dict.services;
   return (
-    <div className="glass flex h-full flex-col overflow-y-auto p-7 sm:p-9">
-      <h2 className="label text-accent">Services</h2>
-      <p className="mt-3 text-[22px] leading-tight tracking-tight">What I can build for you</p>
-      <ul className="mt-6 grid content-start gap-x-6 gap-y-6 sm:grid-cols-2">
-        {services.map((s, i) => (
-          <li key={s.title} className="border-t border-line pt-4">
+    <section id="services" aria-labelledby="services-title" className="mx-auto max-w-[1120px] scroll-mt-24">
+      <SectionHeading id="services-title" eyebrow={t.eyebrow} title={t.title} />
+      <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+        {t.items.map((s, i) => (
+          <li key={s.title} className="card reveal p-7 sm:p-8">
             <p className="label text-faint">
               <span className="text-accent">S{i + 1}</span> · {s.tools}
             </p>
-            <h3 className="mt-2 text-[17px] leading-snug tracking-tight">{s.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted">{s.body}</p>
+            <h3 className="mt-4 text-[21px] leading-snug tracking-tight">{s.title}</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted">{s.body}</p>
           </li>
         ))}
       </ul>
-      <p className="mt-6 border-t border-line pt-4 text-sm leading-relaxed text-muted">
-        <span className="label mr-2 text-accent">How I work</span>
-        Built with AI-assisted development (Claude Code) for fast turnaround. Every formula, query and number is checked
-        by hand before delivery, and you get the files and a short guide to maintain them.
-      </p>
-    </div>
+      <div className="card reveal mt-4 p-7 sm:p-8">
+        <p className="label text-accent">{t.howTitle}</p>
+        <p className="mt-3 max-w-[80ch] text-[15px] leading-relaxed text-muted">{t.how}</p>
+      </div>
+    </section>
   );
 }

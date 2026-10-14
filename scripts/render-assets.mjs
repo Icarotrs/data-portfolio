@@ -8,11 +8,10 @@
  *   exports/covers/<slug>.png      1600×1200 Upwork portfolio covers
  *   exports/upwork/<slug>.txt      title, description (≤600 chars), stack, result
  *   public/og/<slug|home>.png      1200×630 Open Graph images
- *   public/fallback/bg-<theme>.webp  background shown when WebGL2 is unavailable
  *
  * Options
  *   --theme=dark|light   theme for covers and OG images (default: dark)
- *   --only=covers,og,fallback,upwork
+ *   --only=covers,og,upwork
  *
  * Needs a Chromium binary: set CHROME_PATH, or have Playwright browsers
  * installed (PLAYWRIGHT_BROWSERS_PATH), or a local Chrome.
@@ -34,7 +33,7 @@ const args = Object.fromEntries(
   }),
 );
 const theme = args.theme === "light" ? "light" : "dark";
-const only = new Set((args.only ?? "covers,og,fallback,upwork").split(","));
+const only = new Set((args.only ?? "covers,og,upwork").split(","));
 
 // ── Content ────────────────────────────────────────────────────
 const projects = fs
@@ -77,7 +76,7 @@ if (only.has("upwork")) {
   }
 }
 
-const needsBrowser = ["covers", "og", "fallback"].some((k) => only.has(k));
+const needsBrowser = ["covers", "og"].some((k) => only.has(k));
 if (!needsBrowser) process.exit(0);
 
 if (!fs.existsSync(path.join(OUT, "index.html"))) {
@@ -137,11 +136,7 @@ if (!executablePath) {
   process.exit(1);
 }
 
-const browser = await chromium.launch({
-  executablePath,
-  // Software WebGL so rendering works on machines without a GPU.
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
-});
+const browser = await chromium.launch({ executablePath });
 
 async function render(route, { width, height, theme: t = theme }) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
@@ -149,45 +144,14 @@ async function render(route, { width, height, theme: t = theme }) {
   page.on("pageerror", (e) => console.error("  page error:", e.message));
   await page.goto(base + route, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForFunction(
-    () => document.documentElement.dataset.bgReady === "1" || document.documentElement.dataset.webgl === "off",
-    null,
-    { timeout: 60_000 },
-  );
-  if ((await page.evaluate(() => document.documentElement.dataset.webgl)) === "off") {
-    throw new Error("WebGL2 is not available in this browser; cannot render assets.");
-  }
+  // Wait for the screenshot images on the page to finish loading.
+  await page.evaluate(() => Promise.all([...document.images].map((img) => img.decode().catch(() => {}))));
   const png = await page.screenshot({ type: "png" });
   return { page, png };
 }
 
-async function toWebp(page, png, quality = 0.82) {
-  const dataUrl = await page.evaluate(
-    async ({ b64, quality }) => {
-      const img = new Image();
-      img.src = `data:image/png;base64,${b64}`;
-      await img.decode();
-      const c = document.createElement("canvas");
-      c.width = img.width;
-      c.height = img.height;
-      c.getContext("2d").drawImage(img, 0, 0);
-      return c.toDataURL("image/webp", quality);
-    },
-    { b64: png.toString("base64"), quality },
-  );
-  return Buffer.from(dataUrl.split(",")[1], "base64");
-}
 
 try {
-  if (only.has("fallback")) {
-    console.log("Fallback backgrounds");
-    for (const t of ["light", "dark"]) {
-      const { page, png } = await render("/render/background/", { width: 1600, height: 1000, theme: t });
-      writeFile(path.join(ROOT, "public", "fallback", `bg-${t}.webp`), await toWebp(page, png));
-      await page.close();
-    }
-  }
-
   if (only.has("og")) {
     console.log(`Open Graph images (${theme})`);
     for (const slug of ["home", ...projects.map((p) => p.slug)]) {

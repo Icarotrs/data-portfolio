@@ -1,0 +1,11 @@
+## Problema
+
+Uma pequena empresa recebia pedidos por um Google Form. O "vincular à planilha" padrão jogava as respostas numa aba bruta, então alguém copiava as linhas à mão para a planilha de verdade todos os dias — e cada colagem arriscava apagar fórmulas, listas suspensas e formatação. O resumo semanal era montado manualmente toda sexta à tarde.
+
+## O que eu construí
+
+- Um gatilho `onFormSubmit` no Apps Script que lê cada resposta, limpa os dados (texto sem espaços extras, telefones e datas padronizados) e grava na tabela **formatada** — fórmulas, validação e formatação condicional continuam intactas.
+- Uma trava para que duas respostas simultâneas nunca escrevam na mesma linha.
+- Uma aba de resumo movida por fórmulas (totais por semana, por produto, por status).
+- Um gatilho por horário que exporta a aba de resumo como **PDF** toda segunda às 8h e envia por e-mail ao dono.
+- Uma aba "Configurações" para o dono mudar destinatários e horário sem mexer no código.

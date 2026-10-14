@@ -9,15 +9,13 @@ function subscribe(onChange: () => void) {
   return () => observer.disconnect();
 }
 
-const options: { theme: Theme; label: string; icon: ReactNode }[] = [
+const options: { theme: Theme; icon: ReactNode }[] = [
   {
     theme: "dark",
-    label: "Dark theme",
     icon: <path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" />,
   },
   {
     theme: "light",
-    label: "Light theme",
     icon: (
       <>
         <circle cx="12" cy="12" r="3.5" fill="currentColor" />
@@ -28,7 +26,7 @@ const options: { theme: Theme; label: string; icon: ReactNode }[] = [
 ];
 
 /** Two small round buttons (dark / light), like the reference. */
-export function ThemeSwitch() {
+export function ThemeSwitch({ labels }: { labels: { dark: string; light: string; group: string } }) {
   const current = useSyncExternalStore<Theme | null>(subscribe, getTheme, () => null);
 
   // Follow the system preference until the visitor picks a theme.
@@ -46,17 +44,17 @@ export function ThemeSwitch() {
   }, []);
 
   return (
-    <div className="flex gap-2" role="group" aria-label="Color theme">
-      {options.map(({ theme, label, icon }) => (
+    <div className="flex gap-2" role="group" aria-label={labels.group}>
+      {options.map(({ theme, icon }) => (
         <button
           key={theme}
           type="button"
-          aria-label={label}
+          aria-label={labels[theme]}
           aria-pressed={current === theme}
           onClick={() => setTheme(theme)}
           className={`inline-flex h-6 w-6 items-center justify-center rounded-full border transition-opacity ${
-            current === theme ? "border-on-bg opacity-100" : "border-on-bg opacity-55 hover:opacity-100"
-          } text-on-bg`}
+            current === theme ? "border-fg opacity-100" : "border-fg opacity-55 hover:opacity-100"
+          } text-fg`}
         >
           <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
             {icon}

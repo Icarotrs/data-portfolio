@@ -4,23 +4,29 @@ import type { Project } from "@/lib/content";
  * Screenshots and video: the first item large, the rest in two columns.
  * Entries with an empty `src` render as labelled placeholders.
  */
-export function MediaGallery({ project }: { project: Project }) {
+export function MediaGallery({
+  project,
+  labels,
+}: {
+  project: Project;
+  labels: { title: string; comingSoon: string; note: string };
+}) {
   const { screenshots, video } = project.media;
   if (!video && screenshots.length === 0) return null;
   return (
     <section aria-labelledby="media-title" className="mt-6 flex flex-col gap-5">
-      <h2 id="media-title" className="label text-on-bg">
-        Screenshots · {String(screenshots.length).padStart(2, "0")}
+      <h2 id="media-title" className="label text-fg">
+        {labels.title} · {String(screenshots.length).padStart(2, "0")}
       </h2>
       {video && (
-        <video className="glass w-full" src={video.src} poster={video.poster} controls preload="none" playsInline />
+        <video className="card w-full" src={video.src} poster={video.poster} controls preload="none" playsInline />
       )}
       <div className="grid gap-5 sm:grid-cols-2">
         {screenshots.map((s, i) => {
           // First item full width; an odd one out at the end also spans both columns.
           const wide = i === 0 || (i === screenshots.length - 1 && (screenshots.length - 1) % 2 === 1);
           return (
-          <figure key={i} className={`glass overflow-hidden ${wide ? "sm:col-span-2" : ""}`}>
+          <figure key={i} className={`card overflow-hidden ${wide ? "sm:col-span-2" : ""}`}>
             {s.src ? (
               // eslint-disable-next-line @next/next/no-img-element -- static export, images are pre-sized
               <img
@@ -42,7 +48,7 @@ export function MediaGallery({ project }: { project: Project }) {
                   backgroundSize: "24px 24px",
                 }}
               >
-                <span className="label text-faint">Screenshot {String(i + 1).padStart(2, "0")} · coming soon</span>
+                <span className="label text-faint">{labels.title} {String(i + 1).padStart(2, "0")} · {labels.comingSoon}</span>
               </div>
             )}
             <figcaption className="p-5 text-sm text-muted">{s.alt}</figcaption>
@@ -50,6 +56,7 @@ export function MediaGallery({ project }: { project: Project }) {
           );
         })}
       </div>
+      <p className="label text-faint">{labels.note}</p>
     </section>
   );
 }

@@ -1,0 +1,11 @@
+## Problema
+
+Cada proveedor enviaba su lista de precios y stock en un formato distinto: uno como CSV con punto y coma y decimales con coma, otro como tabla en PDF, otro con encabezados combinados en dos filas. Las fechas llegaban como `03/04/24`, `2024-04-03` y `April 3`. Alguien pasaba horas cada semana reescribiendo y corrigiendo estos archivos antes de poder compararlos.
+
+## Lo que construí
+
+- Un lector de tablas en CSV, XLSX y PDF con texto que detecta delimitadores, codificaciones y encabezados de varias filas.
+- Un paso de normalización: un solo formato de fecha y de moneda, texto sin espacios de más y con mayúsculas iniciales, columnas divididas o combinadas corregidas, duplicados eliminados.
+- Un archivo de mapeo de columnas, para que un proveedor nuevo sea unas líneas de configuración en lugar de código nuevo.
+- Salida en Google Sheets: una pestaña de datos limpios, una **pestaña de resumen** (conteos, totales, cambios de precio desde la última importación) y una **pestaña de registro** con cada corrección aplicada.
+- Las mismas reglas disponibles como un menú de Apps Script dentro de Google Sheets, para usuarios no técnicos.

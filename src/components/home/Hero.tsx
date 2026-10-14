@@ -1,35 +1,60 @@
+import type { CSSProperties } from "react";
 import { site } from "@site";
-import { BrandMark } from "@/components/layout/SiteFrame";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { LinkButton } from "@/components/ui/LinkButton";
-import { DeckLink } from "./DeckLink";
 
 const tools = ["Power BI", "Google Sheets", "Apps Script", "SQL", "Python"];
 
-export function Hero() {
+/** Intro: the title types itself like a command prompt; two project screenshots on the right. */
+export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+  const title = dict.hero.title;
   return (
-    <div className="glass flex h-full flex-col justify-between gap-10 overflow-y-auto p-7 sm:p-9">
+    <section aria-labelledby="hero-title" className="mx-auto grid max-w-[1120px] items-center gap-12 lg:min-h-[calc(100dvh-12rem)] lg:grid-cols-[1.05fr_1fr]">
       <div>
-        <BrandMark className="h-9 w-9 text-fg" />
-        <p className="label mt-8 text-accent">
-          {site.name} · {site.role}
+        <p className="label rise text-accent" style={{ "--i": 0 } as CSSProperties}>
+          {dict.hero.eyebrow} · {dict.role}
         </p>
-        <h1 className="mt-3 text-balance text-[26px] leading-[1.2] tracking-tight sm:text-[30px]">{site.headline}</h1>
-      </div>
-      <div>
-        <p className="max-w-[44ch] text-pretty text-[15px] leading-relaxed text-muted">{site.valueProp}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <h1 id="hero-title" className="mt-5 font-mono text-[34px] leading-[1.1] tracking-normal sm:text-[52px]">
+          <span aria-hidden="true" className="text-accent">&gt;&nbsp;</span>
+          <span className="type" style={{ "--n": title.length } as CSSProperties}>
+            {title}
+          </span>
+          <span aria-hidden="true" className="caret" />
+        </h1>
+        <p className="rise mt-6 max-w-[54ch] text-pretty text-[17px] leading-relaxed text-muted" style={{ "--i": 14 } as CSSProperties}>
+          {dict.hero.intro}
+        </p>
+        <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--i": 15 } as CSSProperties}>
           <LinkButton href={site.links.upwork} external>
-            Hire me on Upwork
+            {dict.hero.cta}
           </LinkButton>
-          <DeckLink
-            to="projects"
-            className="label inline-flex h-9 items-center justify-center gap-2 rounded-[4px] border border-line-strong px-3.5 text-fg transition hover:bg-fg hover:text-bg"
-          >
-            See projects
-          </DeckLink>
+          <LinkButton href={`/${lang}/#projects`} variant="ghost">
+            {dict.hero.seeProjects}
+          </LinkButton>
         </div>
-        <p className="label mt-8 text-faint">{tools.join(" · ")}</p>
+        <p className="label rise mt-10 text-faint" style={{ "--i": 16 } as CSSProperties}>
+          {tools.join(" · ")}
+        </p>
       </div>
-    </div>
+
+      <div aria-hidden="true" className="relative hidden h-[480px] sm:block">
+        <div className="card rise absolute right-0 top-0 w-[86%] rotate-[2.5deg] overflow-hidden p-0" style={{ "--i": 3 } as CSSProperties}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
+          <img src="/projects/form-to-sheet-automation/sheet.webp" alt="" width={1600} height={1000} className="block h-auto w-full" />
+        </div>
+        <div className="card rise absolute bottom-0 left-0 w-[88%] -rotate-[2deg] overflow-hidden p-0" style={{ "--i": 5 } as CSSProperties}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
+          <img
+            src="/projects/ecommerce-profit-dashboard/overview.webp"
+            alt=""
+            width={1600}
+            height={1000}
+            fetchPriority="high"
+            className="block h-auto w-full"
+          />
+        </div>
+      </div>
+    </section>
   );
 }

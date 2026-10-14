@@ -1,0 +1,11 @@
+## Problema
+
+Uma loja online tinha mais de 5.000 avaliações entre Amazon e Shopify. A equipe lia algumas, mas ninguém sabia dizer quais problemas apareciam mais, se estavam melhorando ou o que corrigir primeiro.
+
+## O que eu construí
+
+- Um script em Python que envia cada avaliação para um **LLM** com um prompt fixo e recebe de volta um **tema**, um **sentimento** e um **resumo de uma linha** num formato rígido.
+- Resultados gravados no **Google Sheets** com uma **nota de confiança**; tudo abaixo de 80% é sinalizado para uma conferência humana rápida.
+- Uma **conferência manual** de 300 avaliações aleatórias para medir a precisão (94% de concordância) antes de confiar nos números.
+- Um dashboard com **sentimento por tema**, as principais reclamações com citações reais e a tendência depois de cada mudança (a nova embalagem reduziu as avaliações negativas em 4 pontos).
+- Avaliações novas são classificadas de forma agendada, então o dashboard fica sempre atualizado.

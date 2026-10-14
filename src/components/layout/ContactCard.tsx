@@ -1,21 +1,23 @@
 import { site } from "@site";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { LinkButton } from "@/components/ui/LinkButton";
 
 /** Last section on every page: the only call to action is Upwork. */
-export function ContactCard({ fill = false }: { fill?: boolean }) {
+export function ContactCard({ dict }: { dict: Dictionary }) {
+  const t = dict.contact;
   return (
-    <section aria-labelledby="contact-title" className={fill ? "h-full" : undefined}>
-      <div className={`glass p-7 sm:p-9 ${fill ? "flex h-full flex-col justify-center" : ""}`}>
-        <p className="label text-accent">Contact</p>
-        <h2 id="contact-title" className="mt-4 text-[26px] leading-tight tracking-tight">
-          Have a report that eats your week?
+    <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24">
+      <div className="card reveal p-7 sm:p-10">
+        <p className="label text-accent">{t.eyebrow}</p>
+        <h2 id="contact-title" className="mt-4 text-[30px] leading-tight tracking-tight sm:text-[36px]">
+          {t.title}
         </h2>
         <p className="mt-3 text-pretty text-[15px] leading-relaxed text-muted">
-          Send me the details on Upwork. All projects and payments go through the platform.
+          {t.body}
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
           <LinkButton href={site.links.upwork} external>
-            Hire me on Upwork
+            {t.cta}
           </LinkButton>
           <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-accent">
             LinkedIn
@@ -25,9 +27,6 @@ export function ContactCard({ fill = false }: { fill?: boolean }) {
           </a>
         </div>
       </div>
-      <p className="label mt-6 text-center text-on-bg-muted lg:hidden">
-        © {new Date().getFullYear()} {site.name}
-      </p>
     </section>
   );
 }

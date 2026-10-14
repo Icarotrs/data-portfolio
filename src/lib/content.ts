@@ -2,11 +2,16 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import { site, type ProjectKind } from "@site";
+import type { Locale } from "@/i18n/config";
 
 /**
  * Projects live in content/projects/<slug>/:
- *   project.json — metadata (validated below; the build fails on bad data)
- *   story.mdx    — "Problem" and "What I built" sections
+ *   project.json   — metadata in English, plus "i18n": { pt: {…}, es: {…} }
+ *                    with translated title, summary, result, metricLabel,
+ *                    note and screenshot alts (validated; the build fails on
+ *                    bad data)
+ *   story.<lang>.mdx — "Problem" and "What I built", one file per language
+ *                    (story.en.mdx is required; others fall back to English)
  */
 
 export const UPWORK_BLURB_MAX = 600;
@@ -33,10 +38,21 @@ export interface Project {
     video?: { src: string; poster?: string };
   };
   upworkBlurb: string;
+  /** Translations by locale (English is the base). */
+  i18n: Partial<Record<Locale, Translation>>;
+}
+
+interface Translation {
+  title?: string;
+  summary?: string;
+  result?: string;
+  metricLabel?: string;
+  note?: string;
+  alts?: string[];
 }
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
-const KINDS = Object.keys(site.kindLabels) as ProjectKind[];
+const KINDS = site.projectKinds;
 
 function fail(slug: string, message: string): never {
   throw new Error(`content/projects/${slug}/project.json: ${message}`);
@@ -98,6 +114,7 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
       video: video?.src ? { src: video.src, poster: video.poster || undefined } : undefined,
     },
     upworkBlurb: blurb,
+    i18n: (raw.i18n as Project["i18n"]) ?? {},
   };
 }
 
@@ -114,8 +131,8 @@ export function getProjects(): Project[] {
     .map((slug) => {
       const file = path.join(PROJECTS_DIR, slug, "project.json");
       if (!fs.existsSync(file)) fail(slug, "file is missing");
-      if (!fs.existsSync(path.join(PROJECTS_DIR, slug, "story.mdx"))) {
-        throw new Error(`content/projects/${slug}/story.mdx is missing`);
+      if (!fs.existsSync(path.join(PROJECTS_DIR, slug, "story.en.mdx"))) {
+        throw new Error(`content/projects/${slug}/story.en.mdx is missing`);
       }
       return validate(slug, JSON.parse(fs.readFileSync(file, "utf8")));
     })
@@ -125,4 +142,29 @@ export function getProjects(): Project[] {
 
 export function getProject(slug: string): Project | undefined {
   return getProjects().find((p) => p.slug === slug);
+}
+
+/** A project with its texts in the given language (English fallback). */
+export function localize(p: Project, locale: Locale): Project {
+  const t = p.i18n[locale];
+  if (!t) return p;
+  return {
+    ...p,
+    title: t.title ?? p.title,
+    summary: t.summary ?? p.summary,
+    result: t.result ?? p.result,
+    metric: { ...p.metric, label: t.metricLabel ?? p.metric.label },
+    note: t.note ?? p.note,
+    media: {
+      ...p.media,
+      screenshots: p.media.screenshots.map((s, i) => ({ ...s, alt: t.alts?.[i] ?? s.alt })),
+    },
+  };
+}
+
+export const getLocalizedProjects = (locale: Locale) => getProjects().map((p) => localize(p, locale));
+
+/** Which story file to import for a project in a language. */
+export function storyLocale(slug: string, locale: Locale): Locale {
+  return fs.existsSync(path.join(PROJECTS_DIR, slug, `story.${locale}.mdx`)) ? locale : "en";
 }

@@ -36,5 +36,29 @@
       "poster": ""
     }
   },
-  "upworkBlurb": "Marketing performance dashboard for an e-commerce brand: Google Ads, Meta, TikTok and email (Klaviyo) data pulled daily into BigQuery with SQL, joined to Shopify orders and shown in Power BI. One page answers what every channel and campaign costs and returns: spend, attributed revenue, ROAS, cost per new customer and weekly trends, with plain-English recommendations. Refreshes automatically. Demo uses fictitious data. Stack: Power BI, BigQuery, SQL, ad platform APIs."
+  "upworkBlurb": "Marketing performance dashboard for an e-commerce brand: Google Ads, Meta, TikTok and email (Klaviyo) data pulled daily into BigQuery with SQL, joined to Shopify orders and shown in Power BI. One page answers what every channel and campaign costs and returns: spend, attributed revenue, ROAS, cost per new customer and weekly trends, with plain-English recommendations. Refreshes automatically. Demo uses fictitious data. Stack: Power BI, BigQuery, SQL, ad platform APIs.",
+  "i18n": {
+    "pt": {
+      "title": "Dashboard de ROAS de Marketing",
+      "summary": "Investimento em anúncios, receita atribuída e custo por cliente de cada canal num só relatório que se atualiza sozinho.",
+      "result": "Mostrou que 61% da verba retornava menos de 3× e para onde realocá-la.",
+      "metricLabel": "de retorno médio sobre o investimento em anúncios, acompanhado por canal a cada semana",
+      "note": "Demonstração feita com dados fictícios de marketing.",
+      "alts": [
+        "Visão geral: investimento, receita, ROAS e CAC por canal, com recomendações",
+        "Receita atribuída por semana em cada canal, com insights escritos"
+      ]
+    },
+    "es": {
+      "title": "Dashboard de ROAS de Marketing",
+      "summary": "Inversión publicitaria, ingresos atribuidos y costo por cliente de cada canal en un solo informe que se actualiza solo.",
+      "result": "Mostró que el 61% del presupuesto retornaba menos de 3× y adónde moverlo.",
+      "metricLabel": "de retorno medio sobre la inversión publicitaria, seguido por canal cada semana",
+      "note": "Demo hecha con datos ficticios de marketing.",
+      "alts": [
+        "Vista general: inversión, ingresos, ROAS y CAC por canal, con recomendaciones",
+        "Ingresos atribuidos por semana en cada canal, con insights escritos"
+      ]
+    }
+  }
 }

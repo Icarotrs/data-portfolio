@@ -37,5 +37,29 @@
       "poster": ""
     }
   },
-  "upworkBlurb": "Power BI profit dashboard for an e-commerce store, built on the public Olist dataset (~99k orders). It calculates real net margin per product and per order after shipping and marketplace fees, and flags SKUs that sell at a loss. Includes a monthly P&L view, product ranking and drill-down to order level. Product cost is simulated and clearly labeled. Stack: Power BI, DAX, Power Query, SQL, Python. I can build the same for your Shopify, Amazon or WooCommerce data."
+  "upworkBlurb": "Power BI profit dashboard for an e-commerce store, built on the public Olist dataset (~99k orders). It calculates real net margin per product and per order after shipping and marketplace fees, and flags SKUs that sell at a loss. Includes a monthly P&L view, product ranking and drill-down to order level. Product cost is simulated and clearly labeled. Stack: Power BI, DAX, Power Query, SQL, Python. I can build the same for your Shopify, Amazon or WooCommerce data.",
+  "i18n": {
+    "pt": {
+      "title": "Dashboard de Lucro para E-commerce",
+      "summary": "Margem real por produto e por pedido depois de frete e taxas do marketplace — não só faturamento.",
+      "result": "Margem líquida real de ~99 mil pedidos e 32 mil produtos, com os SKUs que dão prejuízo destacados numa só tela.",
+      "metricLabel": "pedidos analisados com margem líquida real (dataset público da Olist)",
+      "note": "Feito com o dataset público de e-commerce brasileiro da Olist. O custo dos produtos é simulado (a Olist não o publica) e está identificado como simulado no relatório.",
+      "alts": [
+        "Visão de lucro: faturamento, taxas, frete e margem líquida por mês e categoria",
+        "Produtos ordenados por margem líquida, com os SKUs que dão prejuízo destacados"
+      ]
+    },
+    "es": {
+      "title": "Dashboard de Rentabilidad para E-commerce",
+      "summary": "Margen real por producto y por pedido después de envío y comisiones del marketplace — no solo facturación.",
+      "result": "Margen neto real de ~99 mil pedidos y 32 mil productos, con los SKUs que pierden dinero destacados en una sola vista.",
+      "metricLabel": "pedidos analizados con margen neto real (dataset público de Olist)",
+      "note": "Hecho con el dataset público de e-commerce brasileño de Olist. El costo de los productos es simulado (Olist no lo publica) y está marcado como simulado en el informe.",
+      "alts": [
+        "Vista de rentabilidad: facturación, comisiones, envío y margen neto por mes y categoría",
+        "Productos ordenados por margen neto, con los SKUs que pierden dinero destacados"
+      ]
+    }
+  }
 }
