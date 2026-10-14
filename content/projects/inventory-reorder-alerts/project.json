@@ -32,8 +32,8 @@
       }
     ],
     "video": {
-      "src": "",
-      "poster": ""
+      "src": "/projects/inventory-reorder-alerts/demo.mp4",
+      "poster": "/projects/inventory-reorder-alerts/stock-sheet.webp"
     }
   },
   "upworkBlurb": "Inventory reorder system in Google Sheets + Apps Script for a small online store. It imports daily sales, calculates days of stock left, reorder points from supplier lead times and a suggested order quantity per product, and colour-codes every SKU (OK / reorder soon / reorder now). Every morning a script emails purchasing the products that will run out before a new order can arrive. No paid apps. Demo uses fictitious data. Stack: Google Sheets, Apps Script, Gmail.",

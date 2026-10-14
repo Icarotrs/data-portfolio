@@ -8,7 +8,7 @@ export const site = {
   // ── Identity ────────────────────────────────────────────────
   // Interface texts (headline, intro, services…) are per language in
   // src/i18n/dictionaries.ts.
-  name: "Icaro",
+  name: "Icaro Torres",
   /** Production URL, used for Open Graph and sitemap. No trailing slash. */
   url: "https://icaro-data-portfolio.vercel.app",
 

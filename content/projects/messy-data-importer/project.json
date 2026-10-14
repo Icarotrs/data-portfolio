@@ -32,8 +32,8 @@
       }
     ],
     "video": {
-      "src": "",
-      "poster": ""
+      "src": "/projects/messy-data-importer/demo.mp4",
+      "poster": "/projects/messy-data-importer/before-after.webp"
     }
   },
   "upworkBlurb": "Data cleaning and import pipeline: messy CSV or PDF exports (merged headers, mixed date formats, currency symbols, duplicated rows, split columns) are parsed, cleaned and normalized into one consistent spreadsheet, with a summary tab and a log of every fix applied. Runs as a Python script or directly in Google Sheets with Apps Script. Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script.",

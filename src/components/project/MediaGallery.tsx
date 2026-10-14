@@ -19,7 +19,11 @@ export function MediaGallery({
         {labels.title} · {String(screenshots.length).padStart(2, "0")}
       </h2>
       {video && (
-        <video className="card w-full" src={video.src} poster={video.poster} controls preload="none" playsInline />
+        <video className="card w-full" poster={video.poster} controls muted preload="metadata" playsInline>
+          {/* scripts/render-videos.mjs writes a WebM next to every MP4. */}
+          {video.src.endsWith(".mp4") && <source src={video.src.replace(/\.mp4$/, ".webm")} type="video/webm" />}
+          <source src={video.src} type="video/mp4" />
+        </video>
       )}
       <div className="grid gap-5 sm:grid-cols-2">
         {screenshots.map((s, i) => {

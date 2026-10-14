@@ -16,8 +16,6 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     items: { title: string; tools: string; body: string }[];
-    howTitle: string;
-    how: string;
   };
   contact: { eyebrow: string; title: string; body: string; cta: string };
   footer: { note: string };
@@ -44,15 +42,15 @@ export interface Dictionary {
 
 const en: Dictionary = {
   meta: {
-    title: "Icaro — Data & Automation Portfolio",
+    title: "Icaro Torres — Data & Automation Portfolio",
     description:
-      "Portfolio of Icaro, freelance data & automation specialist: Power BI and Google Sheets dashboards, Apps Script automation, data cleaning and automated reports.",
+      "Portfolio of Icaro Torres, freelance data & automation specialist: Power BI and Google Sheets dashboards, Apps Script automation, data cleaning and automated reports.",
   },
   nav: { projects: "Projects", services: "Services", contact: "Contact", hire: "Hire me", skip: "Skip to content", language: "Language" },
   role: "Data & Automation Freelancer",
   kinds: { dashboard: "Dashboard / BI", automation: "Automation / Apps Script", cleaning: "Data cleaning / AI" },
   hero: {
-    eyebrow: "Icaro",
+    eyebrow: "Icaro Torres",
     title: "My portfolio",
     intro:
       "I turn messy spreadsheets into clear dashboards and automations that give people their hours back. Here's some of my work.",
@@ -74,8 +72,6 @@ const en: Dictionary = {
       { title: "Data cleaning & import", tools: "Python · SQL · Power Query", body: "Messy exports turned into one table you can trust." },
       { title: "AI-assisted analysis", tools: "Python · LLM APIs · Sheets", body: "Thousands of reviews or answers sorted by topic, checked by a human." },
     ],
-    howTitle: "How I work",
-    how: "I build with Claude Code to move fast, and check every number by hand before it reaches you.",
   },
   contact: {
     eyebrow: "Contact",
@@ -107,15 +103,15 @@ const en: Dictionary = {
 
 const pt: Dictionary = {
   meta: {
-    title: "Icaro — Portfólio de Dados e Automação",
+    title: "Icaro Torres — Portfólio de Dados e Automação",
     description:
-      "Portfólio do Icaro, freelancer de dados e automação: dashboards em Power BI e Google Sheets, automações com Apps Script, limpeza de dados e relatórios automáticos.",
+      "Portfólio de Icaro Torres, freelancer de dados e automação: dashboards em Power BI e Google Sheets, automações com Apps Script, limpeza de dados e relatórios automáticos.",
   },
   nav: { projects: "Projetos", services: "Serviços", contact: "Contato", hire: "Contratar", skip: "Pular para o conteúdo", language: "Idioma" },
   role: "Freelancer de Dados e Automação",
   kinds: { dashboard: "Dashboard / BI", automation: "Automação / Apps Script", cleaning: "Limpeza de dados / IA" },
   hero: {
-    eyebrow: "Icaro",
+    eyebrow: "Icaro Torres",
     title: "Meu portfólio",
     intro:
       "Transformo planilhas bagunçadas em dashboards claros e automações que devolvem horas da semana. Aqui estão alguns trabalhos.",
@@ -137,8 +133,6 @@ const pt: Dictionary = {
       { title: "Limpeza e importação de dados", tools: "Python · SQL · Power Query", body: "Exportações bagunçadas viram uma tabela confiável." },
       { title: "Análise com apoio de IA", tools: "Python · APIs de LLM · Sheets", body: "Milhares de avaliações ou respostas organizadas por tema, com conferência humana." },
     ],
-    howTitle: "Como eu trabalho",
-    how: "Uso o Claude Code para entregar rápido e confiro cada número à mão antes de chegar até você.",
   },
   contact: {
     eyebrow: "Contato",
@@ -170,15 +164,15 @@ const pt: Dictionary = {
 
 const es: Dictionary = {
   meta: {
-    title: "Icaro — Portafolio de Datos y Automatización",
+    title: "Icaro Torres — Portafolio de Datos y Automatización",
     description:
-      "Portafolio de Icaro, freelancer de datos y automatización: dashboards en Power BI y Google Sheets, automatizaciones con Apps Script, limpieza de datos e informes automáticos.",
+      "Portafolio de Icaro Torres, freelancer de datos y automatización: dashboards en Power BI y Google Sheets, automatizaciones con Apps Script, limpieza de datos e informes automáticos.",
   },
   nav: { projects: "Proyectos", services: "Servicios", contact: "Contacto", hire: "Contratar", skip: "Saltar al contenido", language: "Idioma" },
   role: "Freelancer de Datos y Automatización",
   kinds: { dashboard: "Dashboard / BI", automation: "Automatización / Apps Script", cleaning: "Limpieza de datos / IA" },
   hero: {
-    eyebrow: "Icaro",
+    eyebrow: "Icaro Torres",
     title: "Mi portafolio",
     intro:
       "Convierto hojas de cálculo desordenadas en dashboards claros y automatizaciones que devuelven horas a la semana. Aquí hay algunos trabajos.",
@@ -200,8 +194,6 @@ const es: Dictionary = {
       { title: "Limpieza e importación de datos", tools: "Python · SQL · Power Query", body: "Exportaciones desordenadas convertidas en una tabla confiable." },
       { title: "Análisis con apoyo de IA", tools: "Python · APIs de LLM · Sheets", body: "Miles de reseñas o respuestas ordenadas por tema, con revisión humana." },
     ],
-    howTitle: "Cómo trabajo",
-    how: "Uso Claude Code para entregar rápido y reviso cada número a mano antes de que te llegue.",
   },
   contact: {
     eyebrow: "Contacto",

@@ -17,10 +17,6 @@ export function Services({ dict }: { dict: Dictionary }) {
           </li>
         ))}
       </ul>
-      <div className="card reveal mt-4 p-7 sm:p-8">
-        <p className="label text-accent">{t.howTitle}</p>
-        <p className="mt-3 max-w-[80ch] text-[15px] leading-relaxed text-muted">{t.how}</p>
-      </div>
     </section>
   );
 }

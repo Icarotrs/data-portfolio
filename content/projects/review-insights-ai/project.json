@@ -32,8 +32,8 @@
       }
     ],
     "video": {
-      "src": "",
-      "poster": ""
+      "src": "/projects/review-insights-ai/demo.mp4",
+      "poster": "/projects/review-insights-ai/topics.webp"
     }
   },
   "upworkBlurb": "AI review analysis for an online store: a Python script sends each Amazon and Shopify review to an LLM, which tags the topic (delivery, quality, packaging, size, price, service, returns), the sentiment and a one-line summary. Results land in Google Sheets with a confidence score; low-confidence rows are flagged for a quick human check. A dashboard shows sentiment by topic and what customers complain about most. Demo uses fictitious reviews. Stack: Python, LLM API, Google Sheets, Power BI.",

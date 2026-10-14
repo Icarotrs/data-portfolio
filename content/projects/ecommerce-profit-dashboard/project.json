@@ -33,8 +33,8 @@
       }
     ],
     "video": {
-      "src": "",
-      "poster": ""
+      "src": "/projects/ecommerce-profit-dashboard/demo.mp4",
+      "poster": "/projects/ecommerce-profit-dashboard/overview.webp"
     }
   },
   "upworkBlurb": "Power BI profit dashboard for an e-commerce store, built on the public Olist dataset (~99k orders). It calculates real net margin per product and per order after shipping and marketplace fees, and flags SKUs that sell at a loss. Includes a monthly P&L view, product ranking and drill-down to order level. Product cost is simulated and clearly labeled. Stack: Power BI, DAX, Power Query, SQL, Python. I can build the same for your Shopify, Amazon or WooCommerce data.",

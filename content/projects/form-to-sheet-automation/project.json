@@ -32,8 +32,8 @@
       }
     ],
     "video": {
-      "src": "",
-      "poster": ""
+      "src": "/projects/form-to-sheet-automation/demo.mp4",
+      "poster": "/projects/form-to-sheet-automation/sheet.webp"
     }
   },
   "upworkBlurb": "Google Apps Script automation that writes Google Form responses into a formatted Google Sheet without breaking existing formulas, validation or formatting (the default form link overwrites them). Each response is cleaned, written to the right table row, and a weekly summary is generated as a PDF and emailed automatically on a time trigger. No add-ons, no paid tools. Demo uses fictitious data. Stack: Apps Script, Google Sheets, Forms, Gmail.",

@@ -43,6 +43,17 @@ npm run shots -- --only=marketing-roas-dashboard
 
 Definitions live in `scripts/shots/projects.mjs` (one function per project) and the building blocks (app frames and SVG charts) in `scripts/shots/kit.mjs`. Output: `public/projects/<slug>/<name>.webp`, referenced from each `project.json`. When a real client project is delivered, replace a mock-up with a real (anonymised) screenshot at the same path.
 
+## Demo videos
+
+Each project has a short walkthrough video (cursor, typing, rows arriving, charts growing, captions) built from the same mock-ups:
+
+```bash
+npm run videos                                  # all projects (needs ffmpeg on PATH)
+npm run videos -- --only=form-to-sheet-automation
+```
+
+Scripts live in `scripts/shots/videos.mjs`; output is `public/projects/<slug>/demo.mp4` (1280×800, H.264) plus `demo.webm` (VP9), referenced from `media.video` in each `project.json`.
+
 ## Generated assets
 
 ```bash
