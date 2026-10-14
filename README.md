@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Data & Automation Portfolio
 
-## Getting Started
+Personal portfolio for a freelance data & automation specialist (Power BI, Google Sheets, Apps Script, SQL, Python). It is built to be linked from an Upwork profile: every call to action goes to Upwork, and the repo also produces the cover images and description texts for the Upwork portfolio section.
 
-First, run the development server:
+- **Next.js 16** (App Router), fully static export (`out/`)
+- **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
+- **three.js** background: 3D shapes rendered through "filter boxes" (dither, ASCII, pixelate, noise, frost, halftone) by a single post-processing shader
+- Content in **JSON + MDX**, validated at build time
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # static site in out/
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Edit your details
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything personal lives in **`site.config.ts`**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Field | What it does |
+| --- | --- |
+| `name`, `role`, `title`, `valueProp`, `description` | Hero text, page titles, SEO |
+| `url` | Production URL (Open Graph, sitemap). No trailing slash |
+| `links.upwork`, `links.linkedin`, `links.github` | The only contact links on the site |
+| `shapes` | Which 3D shape each project kind shows |
+| `kindLabels` | Labels for project kinds |
+| `filterBoxes` | Filter box positions per breakpoint |
 
-## Learn More
+The site intentionally has no email, phone or contact form — all contact goes through Upwork.
 
-To learn more about Next.js, take a look at the following resources:
+## Add a project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create `content/projects/<slug>/` (the slug becomes the URL: `/projects/<slug>/`).
+2. Add `project.json` (copy an existing one). Fields:
+   - `order` (sort order), `number` (`"04"`), `title`, `summary`
+   - `kind`: `dashboard`, `automation` or `cleaning` — picks the background shape
+   - `stack` (array), `result` (one sentence), `metric` (`value` + `label`)
+   - `note` (optional, e.g. "Demo uses fictitious data")
+   - `links.github`, `links.demo` (optional; empty strings are hidden)
+   - `media.screenshots` (`src` + `alt`; an empty `src` shows a placeholder), `media.video` (optional)
+   - `upworkBlurb`: the Upwork project description, **max 600 characters** — the build fails if it is longer
+3. Add `story.mdx` with `## Problem` and `## What I built` sections.
+4. Put screenshots in `public/projects/<slug>/` and reference them as `/projects/<slug>/file.png`.
+5. Run `npm run build && npm run assets` to create the cover, OG image and Upwork text.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Change the background
 
-## Deploy on Vercel
+**Shapes.** `site.config.ts → shapes` maps each project kind to a shape: `cube-bars`, `torus`, `particle-sphere` (and `home` for the home page). Hovering or focusing a project card switches the shape with an 800 ms crossfade. Shape code lives in `src/lib/webgl/shapes/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Filter boxes.** `site.config.ts → filterBoxes` has one list per breakpoint (`desktop` ≥ 1024px, `tablet` 640–1023px, `mobile` < 640px). Each box is `{ filter, x, y, w, h }` in % of the viewport, with `filter` one of `dither`, `ascii`, `pixelate`, `noise`, `frost`, `halftone`. Up to 8 boxes per breakpoint.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The boxes are real DOM elements (`src/components/background/FilterBoxLayer.tsx`); the WebGL engine reads their on-screen rectangles and passes them to the shader (`src/lib/webgl/post.ts`), so what you see outlined is exactly where the filter applies.
+
+## Performance and accessibility
+
+- The three.js engine loads only after the page has loaded and the browser is idle (or on first interaction), in its own chunk.
+- Pixel ratio capped at 1.5; rendering pauses when the tab is hidden.
+- `prefers-reduced-motion`: a static frame, redrawn only when something changes.
+- No WebGL2 → a pre-rendered background image. Software-only WebGL (no GPU) → the lightweight CSS background.
+- Glass cards are opaque enough to keep text at WCAG AA contrast over any background pixel.
+
+## Generated assets
+
+```bash
+npm run build
+npm run assets            # everything below
+npm run upwork            # only the Upwork texts (no browser needed)
+```
+
+| Output | Use |
+| --- | --- |
+| `exports/covers/<slug>.png` | 1600×1200 cover for the Upwork portfolio |
+| `exports/upwork/<slug>.txt` | Title, description (≤ 600 chars), skills, result |
+| `public/og/*.png` | 1200×630 social preview images |
+| `public/fallback/bg-*.webp` | Background for browsers without WebGL2 |
+
+Options: `--theme=light` (default `dark`), `--only=covers,og,fallback,upwork`. The script uses `playwright-core` with a local Chromium; set `CHROME_PATH` if it cannot find one. It screenshots internal pages under `/render/` (not linked, `noindex`, disallowed in `robots.txt`).
+
+Commit the regenerated `public/og` and `public/fallback` files so they deploy.
+
+## Project structure
+
+```
+site.config.ts                 personal info, links, shapes, filter boxes
+content/projects/<slug>/       project.json + story.mdx
+scripts/render-assets.mjs      covers, OG images, fallback, Upwork texts
+src/app/(site)/                home and project pages
+src/app/render/                internal pages for asset screenshots
+src/components/background/     background, canvas loader, filter boxes
+src/components/chrome/         decorative viewport details
+src/lib/content.ts             loads and validates projects
+src/lib/shape-store.ts         active shape (React + engine)
+src/lib/webgl/                 engine, director, shapes, post shader
+```
+
+## Deploy
+
+See [DEPLOY.md](./DEPLOY.md).

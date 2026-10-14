@@ -2,13 +2,25 @@
 
 import { useEffect, useRef } from "react";
 
-function supportsWebGL2() {
+/**
+ * "none": no WebGL2 → pre-rendered image.
+ * "software": WebGL2 runs on the CPU (SwiftShader, llvmpipe…). The animated
+ * scene would hog the main thread, so these visitors keep the CSS background.
+ */
+function detectWebGL(): "gpu" | "software" | "none" {
   try {
     const gl = document.createElement("canvas").getContext("webgl2");
-    gl?.getExtension("WEBGL_lose_context")?.loseContext();
-    return !!gl;
+    if (!gl) return "none";
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = String(
+      gl.getParameter(info ? info.UNMASKED_RENDERER_WEBGL : gl.RENDERER) ?? "",
+    );
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(renderer)
+      ? "software"
+      : "gpu";
   } catch {
-    return false;
+    return "none";
   }
 }
 
@@ -30,8 +42,10 @@ export function BackgroundCanvas({ stillTime }: { stillTime?: number }) {
     async function start() {
       if (disposed || engine) return;
       cleanups.splice(0).forEach((c) => c());
-      if (!supportsWebGL2()) {
-        root.dataset.webgl = "off";
+      const support = detectWebGL();
+      // Asset rendering (stillTime) is allowed to use software WebGL.
+      if (support === "none" || (support === "software" && stillTime === undefined)) {
+        root.dataset.webgl = support === "none" ? "off" : "soft";
         return;
       }
       const { createEngine } = await import("@/lib/webgl/engine");
