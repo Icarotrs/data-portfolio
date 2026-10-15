@@ -1,0 +1,164 @@
+// ═══════════════════════════════════════════════════════════════════════
+// E-commerce Profit & ROAS — DAX measures
+// Paste each block into Modeling → New measure (or New column / New table
+// where marked). Model and Power Query steps: REPORT-GUIDE.md, steps 2–4.
+//
+// Values are in BRL (Olist is a Brazilian marketplace). Product cost, fees,
+// channel attribution and ad spend are SIMULATED (is_simulated = TRUE in
+// their tables) — every page shows a "Simulated inputs" note.
+// ═══════════════════════════════════════════════════════════════════════
+
+
+// ── Tables ─────────────────────────────────────────────────────────────
+
+// New table: Date (one row per day of the dataset)
+Date =
+ADDCOLUMNS (
+    CALENDAR ( DATE ( 2016, 9, 1 ), DATE ( 2018, 10, 31 ) ),
+    "Year", YEAR ( [Date] ),
+    "Month", DATE ( YEAR ( [Date] ), MONTH ( [Date] ), 1 ),
+    "Month name", FORMAT ( [Date], "mmm yyyy" )
+)
+
+// New table: Channel (dimension shared by orders and ad spend)
+Channel =
+DATATABLE ( "Channel", STRING, { { "Google" }, { "Meta" }, { "TikTok" }, { "Email" } } )
+
+
+// ── Calculated columns on order_items (one row = one item sold) ───────
+
+// Cost as a share of price for the item's category (simulated table)
+Cost % =
+RELATED ( product_cost_by_category[cost_pct_of_price] )
+
+// Payment fee % for the order's main payment type (simulated table)
+Payment fee % =
+VAR _type = RELATED ( orders[payment_type] )
+RETURN
+    COALESCE (
+        LOOKUPVALUE ( fee_assumptions[pct_of_price],
+            fee_assumptions[fee], "payment_fee",
+            fee_assumptions[applies_to], _type ),
+        0
+    )
+
+
+// ── Base measures ─────────────────────────────────────────────────────
+
+// Gross product revenue: sum of item prices (freight excluded)
+Revenue =
+SUM ( order_items[price] )
+
+// Freight charged per item (Olist's freight_value). Treated as a cost the
+// store absorbs, which is the conservative reading for a margin report.
+Freight =
+SUM ( order_items[freight_value] )
+
+// Marketplace commission (simulated %, one rate for all items)
+Commission % =
+CALCULATE ( MAX ( fee_assumptions[pct_of_price] ), fee_assumptions[fee] = "marketplace_commission" )
+
+Commission =
+SUMX ( order_items, order_items[price] ) * [Commission %]
+
+// Payment fees, item by item, at the order's payment-type rate (simulated)
+Payment fees =
+SUMX ( order_items, order_items[price] * order_items[Payment fee %] )
+
+// Product cost (simulated % of price per category)
+Product cost =
+SUMX ( order_items, order_items[price] * order_items[Cost %] )
+
+
+// ── Margin ────────────────────────────────────────────────────────────
+
+// Real margin per order line: price − freight − marketplace fee − payment fee − product cost
+Net margin =
+[Revenue] - [Freight] - [Commission] - [Payment fees] - [Product cost]
+
+Net margin % =
+DIVIDE ( [Net margin], [Revenue] )
+
+Orders =
+DISTINCTCOUNT ( order_items[order_id] )
+
+Average order value =
+DIVIDE ( [Revenue], [Orders] )
+
+Net margin per order =
+DIVIDE ( [Net margin], [Orders] )
+
+// Products whose net margin in the current filter context is below zero
+Loss-making products =
+COUNTROWS (
+    FILTER ( VALUES ( order_items[product_id] ), [Net margin] < 0 )
+)
+
+// Share of revenue that comes from loss-making products
+Revenue from loss-making products % =
+DIVIDE (
+    SUMX ( FILTER ( VALUES ( order_items[product_id] ), [Net margin] < 0 ), [Revenue] ),
+    [Revenue]
+)
+
+// For the product table's conditional formatting (step 6.2): 1 = loss
+Is loss-making =
+IF ( [Net margin] < 0, 1, 0 )
+
+
+// ── Marketing (all inputs simulated) ──────────────────────────────────
+
+Ad spend =
+SUM ( ad_spend_by_channel[spend_brl] )
+
+// Revenue of the orders attributed to the channel(s) in context
+// (orders[channel] comes from order_channel_attribution, merged in Power Query)
+Attributed revenue =
+[Revenue]
+
+ROAS =
+DIVIDE ( [Attributed revenue], [Ad spend] )
+
+// Target used on the Marketing page; change it here
+ROAS target =
+3
+
+Below ROAS target =
+IF ( NOT ISBLANK ( [ROAS] ) && [ROAS] < [ROAS target], 1, 0 )
+
+// Customers whose first-ever order (by customer_unique_id) is in context
+New customers =
+CALCULATE ( DISTINCTCOUNT ( customers[customer_unique_id] ), orders[is_first_order] = TRUE () )
+
+Cost per new customer =
+DIVIDE ( [Ad spend], [New customers] )
+
+// Net margin after ad spend: what is left once marketing is paid
+Net margin after ads =
+[Net margin] - [Ad spend]
+
+// Plain-language line for the Marketing page card
+Marketing note =
+VAR _below =
+    CONCATENATEX (
+        FILTER ( VALUES ( Channel[Channel] ), [Below ROAS target] = 1 ),
+        Channel[Channel], ", "
+    )
+RETURN
+    IF (
+        _below = "",
+        "Every channel is at or above " & [ROAS target] & "× ROAS (simulated ad spend).",
+        "Below " & [ROAS target] & "× ROAS: " & _below & " (simulated ad spend)."
+    )
+
+
+// ── Delivery (real Olist data) ────────────────────────────────────────
+
+Late delivery % =
+DIVIDE (
+    CALCULATE ( DISTINCTCOUNT ( orders[order_id] ), orders[is_late] = TRUE () ),
+    CALCULATE ( DISTINCTCOUNT ( orders[order_id] ), NOT ISBLANK ( orders[order_delivered_customer_date] ) )
+)
+
+Average review score =
+AVERAGE ( order_reviews[review_score] )
