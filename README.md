@@ -43,9 +43,20 @@ A project page reads: the scenario → what I built / how I'd build it → demo 
 
 Rule for numbers: a number only goes on the site if it was measured, or calculated from an assumption written next to it. Never invent one.
 
-## n8n workflow
+## Project code
 
-`integrations/n8n/shopify-ai-order-alerts/` holds the importable workflow of project 01 (`workflow.json`), sample Shopify orders, a script that sends them to the webhook and a README with the setup steps.
+Each project's deliverable lives in `integrations/`, with its own README (setup steps) and tests. Fictitious or public data only.
+
+| # | Project | Folder | Status | Tests |
+| --- | --- | --- | --- | --- |
+| 01 | Shopify → Sheets → AI → Alerts | `integrations/n8n/shopify-ai-order-alerts/` | built | imported and run end to end in n8n (Claude call mocked) |
+| 02 | Form-to-Sheet Automation | `integrations/apps-script/form-to-sheet-automation/` | code ready, in progress until run in a Google account | `node --test tests/*.test.mjs` |
+| 03 | Low-Stock Alerts | `integrations/apps-script/low-stock-alerts/` | code ready, in progress until run in a Google account | `node --test tests/*.test.mjs` |
+| 04 | AI Review Classifier | `integrations/apps-script/ai-review-classifier/` | code ready, in progress until run with an API key and hand-checked | `node --test tests/*.test.mjs` |
+| 05 | Messy Data Extractor | `integrations/python/messy-data-extractor/` | code ready, in progress until confirmed | `python -m pytest -q` |
+| 06 | E-commerce Profit & ROAS | `integrations/powerbi/ecommerce-profit-roas/` | kit ready; the report is built in Power BI Desktop | `python -m pytest -q` |
+
+When a project is confirmed to run, set `"status": "built"` in its `project.json` and change "How I'd build it" to "What I built" (past tense, only what was implemented) in its three story files. The build fails if the heading and the status don't match.
 
 ## Project screenshots
 

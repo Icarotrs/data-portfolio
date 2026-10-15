@@ -20,7 +20,7 @@
   },
   "note": "Build in progress. Public dataset from a Brazilian marketplace (Olist, values in BRL). Product cost and ad spend will be simulated (Olist does not publish them) and labeled as such. Screens and video are mock-ups.",
   "links": {
-    "github": "",
+    "github": "https://github.com/Icarotrs/data-portfolio/tree/main/integrations/powerbi/ecommerce-profit-roas",
     "demo": ""
   },
   "media": {
