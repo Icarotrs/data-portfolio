@@ -1,63 +1,42 @@
-# Changes: new positioning (October 2026)
+# Mudanças — Fase 1: correções de honestidade (outubro de 2026)
 
-Review list before deploying. Branch `main-1tqb61`.
+Regra aplicada em todo o site, capas, imagens OG e textos do Upwork: só entra número medido ou calculado com a premissa escrita ao lado.
 
-## 1. Visual
-- Blurred orange background, as in the reference image: a static image (`public/bg/dark.webp`, `light.webp`, about 15 KB each) fixed behind the page, with nothing animated in the background.
-- Frosted glass cards with 3px corners and orange corner marks. The header and footer are frosted too.
-- Hero text and section titles sit on cards, so they stay readable over the bright part of the band.
-- The IT logo was removed. The header shows "Icaro Torres" ("IT" only on very small screens). The browser-tab icon is plain "IT" letters.
+## Status dos projetos
+- Novo campo `status` em `project.json`: `built` ou `in-progress`. O build falha se faltar.
+- Só o 01 (n8n) é `built`. De 02 a 06 é `in-progress`, com o selo "In progress" / "Em andamento" / "En curso" no card da home, na página do projeto, na capa do Upwork e na imagem OG.
+- O build também falha se o título da segunda seção não bater com o status: "What I built" só para `built`, "How I'd build it" para `in-progress`, nas três línguas.
 
-## 2. Positioning (all texts in EN, with PT and ES translations)
-- Title: "Business Automation & AI Integration | Google Sheets, n8n, Apps Script".
-- Hero: typed `> My portfolio` + "I connect the tools your business already uses, automate the manual work and add AI where it actually saves time. Plus clear dashboards to see the results."
-- Services, in order:
-  1. Process automation
-  2. AI integration (Claude & OpenAI APIs)
-  3. Data extraction & cleanup
-  4. Dashboards & reporting
-- Metadata, Open Graph and the README use the new positioning.
-- Contact is still Upwork only: no email, phone or form.
+## Cenário em vez de cliente
+- "Problem" virou "The scenario" / "O cenário" / "El escenario", no presente, como situação típica e não como cliente atendido.
+- Projetos 02 a 06: "What I built" virou "How I'd build it" / "Como eu construiria" / "Cómo lo construiría", com verbos no futuro.
+- Projeto 01: acrescentado o que foi de fato testado ("importado no n8n e rodado de ponta a ponta com os três pedidos de teste, com a chamada à API da Claude simulada").
 
-## 3. Animated shapes
-- Home page only: connected nodes with pulses, a spinning torus and a wireframe cube, joined by lines ("Connect · Automate · See results"). Light SVG/CSS, no WebGL.
-- The per-type shapes on the project cards and pages were removed at your request; the cards show number, type, title, summary, result and tools.
+## Números
+| # | Antes | Agora | Selo |
+|---|---|---|---|
+| 01 | ~5h economizadas por semana | ~5h por semana, estimadas para 40 pedidos/dia × ~1 min × 7 dias (≈ 4,7 h) | Estimado |
+| 02 | ~3h economizadas por semana | ~3h por semana, estimadas para 20 respostas/dia × ~2 min × 5 dias (≈ 3,3 h) | Estimado |
+| 03 | 1–3 semanas de aviso | +7 dias além do prazo do fornecedor: o alerta dispara quando o estoque não cobre mais os dois | Regra do projeto |
+| 04 | 3 min para 5.214 avaliações; 94% de concordância | 80%: limite de confiança abaixo do qual a linha vai para uma pessoa | Regra do projeto |
+| 05 | ~4h economizadas por semana; "em segundos" | ~4h por semana, estimadas para 5 arquivos/semana × ~45 min (≈ 3,8 h); "em segundos" removido | Estimado |
+| 06 | 312 produtos com prejuízo; 61% do gasto abaixo de 3× | ~99 mil pedidos no dataset público da Olist (marketplace brasileiro, valores em R$) | Dado público |
 
-## 4. Projects (new order)
+- Novos selos: "Regra do projeto" (configuração da solução) e "Dado público" (fato sobre um dataset público), além de Estimado e Simulado.
+- Os selos agora aparecem também nos cards da home.
+- 01: removido "classificado em cerca de um minuto", que nunca foi medido.
 
-| # | Project | Type | Result shown |
-| --- | --- | --- | --- |
-| 01 | Shopify → Sheets → AI → Alerts *(new)* | integration | ~5h/week of order checks saved (estimated) |
-| 02 | Form → Sheet Automation | automation | ~3h/week of copy-paste saved (estimated) |
-| 03 | Low-Stock Alerts *(renamed)* | automation | 1–3 weeks of warning before a stock-out (simulated) |
-| 04 | AI Review Classifier *(reframed)* | ai | 5,214 reviews in 3 min, about 2 days by hand (estimated) |
-| 05 | Messy Data Extractor *(renamed)* | extraction | ~4h/week of retyping saved (estimated) |
-| 06 | E-commerce Profit & ROAS Dashboard *(merged)* | dashboard | 312 products selling at a loss (simulated cost) |
+## Promessas
+- 01: "risky orders reach the team before they ship" → "Orders flagged as high risk, rush or VIP are sent to the team for review before fulfillment. A second check, not a replacement for Shopify's own fraud analysis."
+- 01: "so the store can run and change it without me" → "so the team can run it day to day."
+- Textos do Upwork: "Saves about X hours" → "Designed to save about X hours a week (estimate based on …)". Os projetos 02 a 06 começam com "Demo project, build in progress."
+- 05: "detects … on its own" → "handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format." Removidos "in seconds", o agendamento semanal e o menu do Apps Script, que não fazem parte do plano do projeto 05.
+- Serviço de IA: "A person still checks what matters" → "Low-confidence results go to a person to check."
 
-- The separate ROAS project was removed. Its screens became the "Marketing" and "Marketing trend" tabs of the profit dashboard, in R$, with ad spend marked as simulated.
-- The project page now follows this order: problem → what I built → demo (flow diagram, video, screens) → tools → result with a number. An "Estimated" or "Simulated" label appears when the number is not measured.
-- New screens: the n8n canvas, the orders sheet with the AI columns, a Slack alert, and the Apps Script editor that calls the Claude API.
-- All six videos were re-rendered (MP4 + WebM, 15–24 s each).
-- Project URLs changed:
-  - `shopify-ai-order-alerts` (new)
-  - `low-stock-alerts`
-  - `ai-review-classifier`
-  - `messy-data-extractor`
-  - `ecommerce-profit-roas-dashboard`
-
-## 5. n8n workflow (project 01)
-`integrations/n8n/shopify-ai-order-alerts/` contains:
-- `workflow.json`, ready to import: webhook → clean-up → Claude API (JSON with a schema) → read the answer → Google Sheets → "needs a person?" → Slack + Gmail;
-- three test orders and `send-test-orders.mjs`;
-- a README with the setup steps and the flow diagram.
-
-Tested here: the import into n8n 2.43.5, and an end-to-end run with the three test orders (with the Claude API mocked; Sheets, Slack and Gmail need your credentials).
-
-## 6. Upwork
-- Covers (1600×1200): `exports/covers/<slug>.png`.
-- Texts (title, description up to 600 characters, skills, result): `exports/upwork/<slug>.txt`.
-
-## Still to do on your side
-- The Upwork and LinkedIn URLs in `site.config.ts` are still placeholders.
-- Final site URL (`site.url`), once the Vercel deploy is done.
-- Credentials for the n8n workflow (Anthropic, Google Sheets, Slack, Gmail) when it runs for real.
+## Outros
+- Home: novo subtítulo da seção de projetos, nas três línguas.
+- OpenAI removida da descrição de metadados, das ferramentas do topo e do serviço de IA.
+- 06: "public dataset from a Brazilian marketplace (values in BRL)" no texto e na nota de dados.
+- Telas e vídeos simulados: removidos "300 random reviews were checked by hand: 94% agreement", "spot-checked by hand", "Meta and TikTok spend 61% of the budget…" e a legenda "312 products were selling at a loss". As telas e os vídeos dos projetos 04 e 06 foram gerados de novo.
+- Capas 1600×1200, imagens OG e textos do Upwork gerados de novo.
+- Scripts de geração (`scripts/*.mjs`) corrigidos para rodar no Windows.

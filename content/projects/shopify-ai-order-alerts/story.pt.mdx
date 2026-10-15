@@ -1,11 +1,12 @@
-## Problema
+## O cenário
 
-Uma loja na Shopify com cerca de 40 pedidos por dia tinha uma pessoa abrindo cada pedido para conferir à mão: o endereço parece errado, é um pedido urgente, é um cliente recorrente que merece atenção? Levava cerca de uma hora por dia, e pedidos de risco ainda passavam e eram enviados.
+Uma loja típica na Shopify com cerca de 40 pedidos por dia: uma pessoa abre cada pedido para conferir à mão. O endereço parece errado, é um pedido urgente, é um cliente recorrente que merece atenção? A cerca de um minuto por pedido, são uns 40 minutos por dia, todos os dias, e pedidos de risco ainda podem passar.
 
 ## O que eu construí
 
 - Um fluxo no **n8n** que recebe cada pedido novo por um **webhook da Shopify** e o organiza num registro simples: cliente, itens, totais, envio, pedidos anteriores.
-- Uma **etapa de IA (API da Claude)** que classifica cada pedido por **risco de fraude**, **prioridade de envio** e **tipo de cliente** (novo, recorrente, VIP), com uma frase explicando o motivo. A resposta volta em JSON estrito, então nada quebra depois.
+- Uma **etapa de IA (API da Claude)** que classifica cada pedido por **risco de fraude**, **prioridade de envio** e **tipo de cliente** (novo, recorrente, VIP), com uma frase explicando o motivo. A resposta volta em JSON estrito com um esquema fixo, então nada quebra depois.
 - Cada pedido e sua classificação registrados como uma nova linha no **Google Sheets**, o lugar único onde a equipe olha.
-- Um **alerta** no **Slack** e no **Gmail** só quando o pedido precisa de uma pessoa: alto risco, envio urgente ou cliente VIP. O resto é apenas registrado.
-- Um **arquivo do fluxo do n8n** pronto para importar, pedidos de teste e um guia curto de configuração, para a loja rodar e alterar sem depender de mim.
+- Um **alerta** no **Slack** e no **Gmail** só quando o pedido é marcado como alto risco, urgente ou VIP, para a equipe revisar antes do envio. O resto é apenas registrado. É uma segunda conferência, não substitui a análise de fraude da própria Shopify.
+- Um **arquivo do fluxo do n8n** pronto para importar, três pedidos de teste e um guia de configuração, para a equipe operar no dia a dia.
+- Testado importando o fluxo no n8n e rodando os três pedidos de teste de ponta a ponta, com a chamada à API da Claude simulada.

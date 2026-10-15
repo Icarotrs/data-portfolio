@@ -10,10 +10,11 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 import { shots, W, H } from "./shots/projects.mjs";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
 
 function findChrome() {

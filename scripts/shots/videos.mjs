@@ -261,7 +261,7 @@ export const videos = {
       v.tip(null);
       await v.move(".tabs span:nth-child(2)");
       await v.click();
-      v.caption("312 products were selling at a loss — mostly because of freight");
+      v.caption("Products with a negative margin are flagged in red");
       await v.scene(1);
       await Promise.all([v.f("reveal", "tbody tr", { stagger: 60 }), v.f("countUp", ".kpi:nth-child(-n+2) .value")]);
       await v.move("tbody tr:first-child td:nth-child(7)");

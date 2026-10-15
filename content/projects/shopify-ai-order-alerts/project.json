@@ -3,6 +3,7 @@
   "number": "01",
   "title": "Shopify → Sheets → AI → Alerts",
   "kind": "integration",
+  "status": "built",
   "summary": "Every new Shopify order is logged to Google Sheets, classified by AI for risk, priority and customer type, and flagged in Slack or by email when it needs a person.",
   "stack": [
     "n8n",
@@ -12,13 +13,13 @@
     "Slack",
     "Gmail"
   ],
-  "result": "Each order is logged and classified within about a minute; risky, rush and VIP orders reach the team before they ship.",
+  "result": "Orders flagged as high risk, rush or VIP are sent to the team for review before fulfillment. A second check, not a replacement for Shopify's own fraud analysis.",
   "metric": {
     "value": "~5h",
-    "label": "of manual order review saved per week",
+    "label": "of manual order review per week, estimated for 40 orders a day at about 1 minute each, 7 days a week (40 × 1 min × 7 ≈ 4.7 h)",
     "basis": "estimated"
   },
-  "note": "Demo built with simulated Shopify test orders sent to an n8n webhook. Time saved is estimated for a store with about 40 orders a day.",
+  "note": "Demo built with simulated Shopify test orders sent to an n8n webhook. Tested in n8n end to end with the Claude API call mocked; Sheets, Slack and Gmail need your own credentials.",
   "flow": [
     {
       "tool": "Shopify",
@@ -61,14 +62,14 @@
       "poster": "/projects/shopify-ai-order-alerts/n8n-workflow.webp"
     }
   },
-  "upworkBlurb": "n8n automation for a Shopify store: every new order hits a webhook, gets logged to Google Sheets and is classified by AI (Claude API) for fraud risk, shipping priority and customer type, with a one-line reason. Risky, rush and VIP orders trigger a Slack message and an email so the team acts before shipping. Saves about 5 hours a week of manual order checks (estimate). Demo uses simulated test orders; the importable n8n workflow JSON is included. Stack: n8n, Shopify, Google Sheets, Claude API, Slack, Gmail.",
+  "upworkBlurb": "n8n automation for a Shopify store: every new order hits a webhook, is logged to Google Sheets and classified by AI (Claude API) for fraud risk, shipping priority and customer type, with a one-line reason. Orders flagged as high risk, rush or VIP go to the team on Slack and email for review before fulfillment, as a second check next to Shopify's own fraud analysis. Designed to save about 5 hours a week (estimate based on 40 orders a day at about 1 minute each). Importable n8n workflow, test orders and setup guide included.",
   "i18n": {
     "pt": {
       "title": "Shopify → Planilha → IA → Alertas",
       "summary": "Cada pedido novo da Shopify é registrado no Google Sheets, classificado pela IA por risco, prioridade e tipo de cliente, e sinalizado no Slack ou por e-mail quando precisa de uma pessoa.",
-      "result": "Cada pedido é registrado e classificado em cerca de um minuto; pedidos de risco, urgentes e de clientes VIP chegam à equipe antes do envio.",
-      "metricLabel": "de conferência manual de pedidos economizadas por semana",
-      "note": "Demonstração feita com pedidos de teste simulados da Shopify enviados a um webhook do n8n. O tempo economizado é uma estimativa para uma loja com cerca de 40 pedidos por dia.",
+      "result": "Pedidos marcados como alto risco, urgentes ou VIP são enviados à equipe para revisão antes do envio. Uma segunda conferência, que não substitui a análise de fraude da própria Shopify.",
+      "metricLabel": "de conferência manual de pedidos por semana, estimadas para 40 pedidos por dia a cerca de 1 minuto cada, 7 dias por semana (40 × 1 min × 7 ≈ 4,7 h)",
+      "note": "Demonstração feita com pedidos de teste simulados da Shopify enviados a um webhook do n8n. Testado no n8n de ponta a ponta com a chamada à API da Claude simulada; Sheets, Slack e Gmail precisam das suas próprias credenciais.",
       "flow": [
         "Pedido novo enviado a um webhook",
         "Dados do pedido organizados",
@@ -85,9 +86,9 @@
     "es": {
       "title": "Shopify → Hoja → IA → Alertas",
       "summary": "Cada pedido nuevo de Shopify se registra en Google Sheets, la IA lo clasifica por riesgo, prioridad y tipo de cliente, y se avisa por Slack o correo cuando necesita a una persona.",
-      "result": "Cada pedido se registra y clasifica en cerca de un minuto; los pedidos de riesgo, urgentes y VIP llegan al equipo antes del envío.",
-      "metricLabel": "de revisión manual de pedidos ahorradas por semana",
-      "note": "Demo hecha con pedidos de prueba simulados de Shopify enviados a un webhook de n8n. El tiempo ahorrado es una estimación para una tienda con unos 40 pedidos al día.",
+      "result": "Los pedidos marcados como riesgo alto, urgentes o VIP se envían al equipo para revisión antes del envío. Una segunda revisión, que no reemplaza el análisis de fraude de Shopify.",
+      "metricLabel": "de revisión manual de pedidos por semana, estimadas para 40 pedidos al día a cerca de 1 minuto cada uno, 7 días a la semana (40 × 1 min × 7 ≈ 4,7 h)",
+      "note": "Demo hecha con pedidos de prueba simulados de Shopify enviados a un webhook de n8n. Probado en n8n de punta a punta con la llamada a la API de Claude simulada; Sheets, Slack y Gmail necesitan tus propias credenciales.",
       "flow": [
         "Pedido nuevo enviado a un webhook",
         "Datos del pedido limpiados",

@@ -1,11 +1,12 @@
-## Problema
+## O cenário
 
-Uma loja online tinha mais de 5.000 avaliações da Amazon e da Shopify numa planilha do Google, e chegavam mais toda semana. Ler tudo à mão levaria dias, então ninguém lia, e a equipe não sabia quais problemas apareciam mais nem o que corrigir primeiro.
+Uma loja online típica com milhares de avaliações da Amazon e da Shopify numa planilha do Google, e mais chegando toda semana. Ler tudo à mão leva dias, então ninguém lê, e a equipe não sabe quais problemas aparecem mais nem o que corrigir primeiro.
 
-## O que eu construí
+## Como eu construiria
 
 - Um fluxo em **Apps Script** dentro da própria planilha: um menu (*AI tagging → Classificar avaliações novas*) e um gatilho noturno para as linhas novas.
-- As avaliações são enviadas para a **API da Claude** em lotes de 25 com um prompt fixo. Cada uma volta em JSON estrito: **tema**, **sentimento**, um **resumo de uma linha** e um índice de **confiança**.
-- Os resultados são gravados **direto na planilha**, ao lado de cada avaliação. Linhas com menos de 80% de confiança são sinalizadas para uma pessoa conferir.
-- Uma **conferência manual** de 300 avaliações aleatórias antes de confiar nos números: 94% de concordância.
-- A planilha classificada alimenta um pequeno dashboard de sentimento por tema, mostrando que o prazo de entrega é a principal reclamação.
+- As avaliações vão ser enviadas para a **API da Claude** em lotes de 25 com um prompt fixo. Cada uma vai voltar em JSON estrito (**tema**, **sentimento**, um **resumo de uma linha** e um índice de **confiança**) e ser validada antes de ser gravada.
+- Os resultados vão ser gravados **direto na planilha**, ao lado de cada avaliação. Linhas com menos de 80% de confiança vão ser sinalizadas para uma pessoa conferir.
+- O Apps Script limita o tempo de cada execução, então planilhas grandes vão ser processadas em partes: o progresso é salvo e um gatilho retoma o trabalho até terminar todas as linhas.
+- Uma aba de **conferência manual** com 300 avaliações aleatórias, para medir a concordância com uma pessoa antes de confiar nos resultados.
+- A planilha classificada vai alimentar um pequeno dashboard de sentimento por tema.

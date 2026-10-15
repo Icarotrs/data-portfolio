@@ -14,12 +14,13 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { chromium } from "playwright-core";
 import { videos } from "./shots/videos.mjs";
 import { W, H } from "./shots/kit.mjs";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
 const OUT_W = 1280;
 const OUT_H = 800;

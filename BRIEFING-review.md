@@ -1,3 +1,5 @@
+> **Desatualizado.** Este briefing descreve o texto antigo, antes das correções da fase 1 (ver CHANGES.md). Mantido só como histórico da revisão.
+
 # Briefing para revisão do portfólio (Icaro Torres)
 
 **Para quem lê (Claude):** este é o texto completo do meu portfólio de freelancer, linkado no meu perfil do Upwork. Público: pequenas empresas e lojas de e-commerce dos EUA. Posicionamento: automação de processos e integração de IA (Google Sheets, Apps Script, n8n, Make, APIs de IA), com dashboards como apoio. Todo contato vai pelo botão "Hire me on Upwork" (sem e-mail, telefone ou formulário).

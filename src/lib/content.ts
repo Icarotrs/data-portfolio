@@ -10,7 +10,8 @@ import type { Locale } from "@/i18n/config";
  *                    with translated title, summary, result, metricLabel,
  *                    note, screenshot alts and flow labels (validated; the
  *                    build fails on bad data)
- *   story.<lang>.mdx — "Problem" and "What I built", one file per language
+ *   story.<lang>.mdx — "The scenario" and "What I built" (status "built") or
+ *                    "How I'd build it" (status "in-progress"), one file per language
  *                    (story.en.mdx is required; others fall back to English)
  */
 
@@ -27,10 +28,17 @@ export interface Project {
   number: string;
   title: string;
   kind: ProjectKind;
+  /** "built": the deliverable exists in this repo. "in-progress": planned build, described in the future tense. */
+  status: ProjectStatus;
   summary: string;
   stack: string[];
   result: string;
-  /** The headline number. `basis` marks estimated or simulated numbers. */
+  /**
+   * The headline number. `basis` says where it comes from: "estimated"
+   * (the label must state the assumption), "simulated" (computed on
+   * simulated data), "setting" (a design rule of the build) or "public"
+   * (a fact about a public dataset). Measured numbers have no basis.
+   */
   metric: { value: string; label: string; basis?: MetricBasis };
   /** Optional step-by-step flow, drawn as a diagram on the project page. */
   flow?: FlowStep[];
@@ -45,7 +53,10 @@ export interface Project {
   i18n: Partial<Record<Locale, Translation>>;
 }
 
-export type MetricBasis = "estimated" | "simulated";
+export type MetricBasis = "estimated" | "simulated" | "setting" | "public";
+export type ProjectStatus = "built" | "in-progress";
+export const METRIC_BASES: MetricBasis[] = ["estimated", "simulated", "setting", "public"];
+export const PROJECT_STATUSES: ProjectStatus[] = ["built", "in-progress"];
 export interface FlowStep {
   tool: string;
   label: string;
@@ -55,6 +66,7 @@ interface Translation {
   title?: string;
   summary?: string;
   result?: string;
+  metricValue?: string;
   metricLabel?: string;
   note?: string;
   alts?: string[];
@@ -94,8 +106,11 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
   }
 
   const metric = (raw.metric ?? {}) as Record<string, unknown>;
-  if (metric.basis !== undefined && metric.basis !== "estimated" && metric.basis !== "simulated") {
-    fail(slug, `"metric.basis" must be "estimated" or "simulated"`);
+  if (metric.basis !== undefined && !METRIC_BASES.includes(metric.basis as MetricBasis)) {
+    fail(slug, `"metric.basis" must be one of ${METRIC_BASES.join(", ")}`);
+  }
+  if (!PROJECT_STATUSES.includes(raw.status as ProjectStatus)) {
+    fail(slug, `"status" must be one of ${PROJECT_STATUSES.join(", ")} (got "${raw.status}")`);
   }
   const flow = raw.flow as FlowStep[] | undefined;
   if (flow !== undefined && (!Array.isArray(flow) || flow.some((f) => !f?.tool || !f?.label))) {
@@ -111,6 +126,7 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
     number: requireString(slug, raw.number, "number"),
     title: requireString(slug, raw.title, "title"),
     kind,
+    status: raw.status as ProjectStatus,
     summary: requireString(slug, raw.summary, "summary"),
     stack: raw.stack as string[],
     result: requireString(slug, raw.result, "result"),
@@ -147,6 +163,26 @@ function checkMedia(p: Project) {
   }
 }
 
+/**
+ * A project only says "What I built" when it is built; an in-progress one
+ * says "How I'd build it". Checked in every story file, or the build fails.
+ */
+const BUILT_HEADINGS = ["## What I built", "## O que eu construí", "## Lo que construí"];
+const PLANNED_HEADINGS = ["## How I'd build it", "## Como eu construiria", "## Cómo lo construiría"];
+
+function checkStoryMatchesStatus(p: Project) {
+  const dir = path.join(PROJECTS_DIR, p.slug);
+  const [must, mustNot] = p.status === "built" ? [BUILT_HEADINGS, PLANNED_HEADINGS] : [PLANNED_HEADINGS, BUILT_HEADINGS];
+  for (const file of fs.readdirSync(dir).filter((f) => /^story\.\w+\.mdx$/.test(f))) {
+    const text = fs.readFileSync(path.join(dir, file), "utf8");
+    if (mustNot.some((h) => text.includes(h)) || !must.some((h) => text.includes(h))) {
+      throw new Error(
+        `content/projects/${p.slug}/${file}: status is "${p.status}", so the second section must be "${must.join('" / "')}".`,
+      );
+    }
+  }
+}
+
 let cache: Project[] | null = null;
 
 export function getProjects(): Project[] {
@@ -165,6 +201,7 @@ export function getProjects(): Project[] {
       }
       const project = validate(slug, JSON.parse(fs.readFileSync(file, "utf8")));
       checkMedia(project);
+      checkStoryMatchesStatus(project);
       return project;
     })
     .sort((a, b) => a.order - b.order);
@@ -184,7 +221,7 @@ export function localize(p: Project, locale: Locale): Project {
     title: t.title ?? p.title,
     summary: t.summary ?? p.summary,
     result: t.result ?? p.result,
-    metric: { ...p.metric, label: t.metricLabel ?? p.metric.label },
+    metric: { ...p.metric, value: t.metricValue ?? p.metric.value, label: t.metricLabel ?? p.metric.label },
     note: t.note ?? p.note,
     flow: p.flow?.map((f, i) => ({ ...f, label: t.flow?.[i] ?? f.label })),
     media: {

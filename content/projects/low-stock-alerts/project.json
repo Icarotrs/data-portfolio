@@ -3,20 +3,21 @@
   "number": "03",
   "title": "Low-Stock Alerts",
   "kind": "automation",
-  "summary": "A Google Sheet that knows when each product will run out and emails purchasing before it happens.",
+  "status": "in-progress",
+  "summary": "A Google Sheet that will work out when each product runs out and email purchasing before it happens.",
   "stack": [
     "Google Sheets",
     "Apps Script",
     "Gmail",
     "Shopify export"
   ],
-  "result": "Stock-outs are caught 1 to 3 weeks early, with a suggested order quantity for every product.",
+  "result": "Alerts fire when stock no longer covers supplier lead time plus a one-week buffer, with a suggested order quantity for 45 days.",
   "metric": {
-    "value": "1–3 wk",
-    "label": "of warning before a product runs out",
-    "basis": "simulated"
+    "value": "+7 days",
+    "label": "on top of supplier lead time: the alert fires when stock no longer covers both",
+    "basis": "setting"
   },
-  "note": "Demo built with fictitious store data; the warning time comes from the simulated sales and supplier lead times.",
+  "note": "Build in progress. Screens and video are mock-ups with fictitious store data.",
   "links": {
     "github": "",
     "demo": ""
@@ -37,14 +38,15 @@
       "poster": "/projects/low-stock-alerts/stock-sheet.webp"
     }
   },
-  "upworkBlurb": "Low-stock alerts in Google Sheets + Apps Script for a small online store. Daily sales are imported, and every product gets days of stock left, a reorder point based on supplier lead time and a suggested order quantity. Every morning a script emails purchasing the products that will run out before a new order can arrive, 1 to 3 weeks ahead (simulated data). No paid apps; works with a Shopify or any store export. Stack: Google Sheets, Apps Script, Gmail.",
+  "upworkBlurb": "Demo project, build in progress. Low-stock alerts in Google Sheets + Apps Script for a small online store: 30 days of sales imported from a store CSV export, then per product the average daily sales, days of stock left, a reorder point (supplier lead time plus a one-week buffer) and a suggested order for 45 days. A script will check every morning at 7am and email purchasing what to reorder, with a reorder log and a Settings tab. Fictitious store data. Stack: Google Sheets, Apps Script, Gmail.",
   "i18n": {
     "pt": {
       "title": "Alertas de Estoque Baixo",
-      "summary": "Uma planilha do Google que sabe quando cada produto vai acabar e avisa o setor de compras antes.",
-      "result": "A falta de estoque é detectada de 1 a 3 semanas antes, com sugestão de quantidade para cada produto.",
-      "metricLabel": "de aviso antes de um produto acabar",
-      "note": "Demonstração feita com dados fictícios de loja; o prazo de aviso vem das vendas e prazos de fornecedor simulados.",
+      "summary": "Uma planilha do Google que vai calcular quando cada produto acaba e avisar o setor de compras antes.",
+      "result": "Os alertas disparam quando o estoque não cobre mais o prazo do fornecedor mais uma semana de folga, com quantidade sugerida para 45 dias.",
+      "metricValue": "+7 dias",
+      "metricLabel": "além do prazo do fornecedor: o alerta dispara quando o estoque não cobre mais os dois",
+      "note": "Construção em andamento. Telas e vídeo são simulações com dados fictícios de loja.",
       "alts": [
         "Aba de estoque: dias de cobertura, ponto de reposição, pedido sugerido e status por SKU",
         "E-mail diário de alerta com os produtos para repor hoje e nesta semana"
@@ -58,10 +60,11 @@
     },
     "es": {
       "title": "Alertas de Stock Bajo",
-      "summary": "Una hoja de Google que sabe cuándo se va a agotar cada producto y avisa a compras antes de que pase.",
-      "result": "Las roturas de stock se detectan de 1 a 3 semanas antes, con una cantidad sugerida para cada producto.",
-      "metricLabel": "de aviso antes de que un producto se agote",
-      "note": "Demo hecha con datos ficticios de tienda; el plazo de aviso sale de las ventas y plazos de proveedor simulados.",
+      "summary": "Una hoja de Google que calculará cuándo se agota cada producto y avisará a compras antes de que pase.",
+      "result": "Las alertas saltan cuando el stock ya no cubre el plazo del proveedor más una semana de margen, con una cantidad sugerida para 45 días.",
+      "metricValue": "+7 días",
+      "metricLabel": "además del plazo del proveedor: la alerta salta cuando el stock ya no cubre ambos",
+      "note": "Construcción en curso. Las pantallas y el video son simulaciones con datos ficticios de tienda.",
       "alts": [
         "Hoja de stock: días de cobertura, punto de reposición, pedido sugerido y estado por SKU",
         "Correo diario de alerta con los productos a reponer hoy y esta semana"

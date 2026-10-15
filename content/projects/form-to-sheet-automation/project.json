@@ -3,20 +3,21 @@
   "number": "02",
   "title": "Form-to-Sheet Automation",
   "kind": "automation",
-  "summary": "Google Form responses land in a formatted sheet without breaking formulas, plus an automatic summary report.",
+  "status": "in-progress",
+  "summary": "Google Form responses will land in a formatted sheet without breaking formulas, plus an automatic weekly summary report.",
   "stack": [
     "Google Forms",
     "Google Sheets",
     "Apps Script",
     "Gmail"
   ],
-  "result": "Zero manual copy-paste: every response lands in the right row and a PDF summary goes out every Monday.",
+  "result": "Designed so every response lands in the right row with formulas intact, and a PDF summary goes out every Monday.",
   "metric": {
     "value": "~3h",
-    "label": "of copy-paste saved per week",
+    "label": "of copy-paste per week, estimated for 20 responses a day at about 2 minutes each, 5 days a week (20 × 2 min × 5 ≈ 3.3 h)",
     "basis": "estimated"
   },
-  "note": "Demo built with fictitious order-request data. Time saved is estimated for about 20 form responses a day.",
+  "note": "Build in progress. Screens and video are mock-ups with fictitious order-request data.",
   "links": {
     "github": "",
     "demo": ""
@@ -37,14 +38,14 @@
       "poster": "/projects/form-to-sheet-automation/sheet.webp"
     }
   },
-  "upworkBlurb": "Google Forms to Google Sheets automation with Apps Script: every response is cleaned and written into a formatted sheet without breaking formulas, dropdowns or formatting, the thing the default form link always breaks. A weekly summary is exported as a PDF and emailed every Monday. No add-ons or paid tools. Saves about 3 hours a week of copy-paste (estimate). Demo uses fictitious data. Stack: Google Forms, Google Sheets, Apps Script, Gmail.",
+  "upworkBlurb": "Demo project, build in progress. Google Forms to Google Sheets automation with Apps Script: each response will be cleaned and written into a formatted sheet without breaking formulas, dropdowns or formatting, with a lock against simultaneous submissions. A weekly summary will be exported as a PDF and emailed every Monday, with a Settings tab for recipients. Designed to save about 3 hours a week (estimate based on 20 responses a day at about 2 minutes each). Fictitious data. Stack: Google Forms, Sheets, Apps Script, Gmail.",
   "i18n": {
     "pt": {
       "title": "Automação de Formulário para Planilha",
-      "summary": "Respostas do Google Forms entram numa planilha formatada sem quebrar fórmulas, com um relatório-resumo automático.",
-      "result": "Zero copiar e colar: cada resposta cai na linha certa e um resumo em PDF sai toda segunda-feira.",
-      "metricLabel": "de copiar e colar economizadas por semana",
-      "note": "Demonstração feita com pedidos fictícios. O tempo economizado é uma estimativa para cerca de 20 respostas por dia.",
+      "summary": "Respostas do Google Forms vão entrar numa planilha formatada sem quebrar fórmulas, com um relatório-resumo semanal automático.",
+      "result": "Feito para que cada resposta caia na linha certa com as fórmulas intactas, e um resumo em PDF saia toda segunda-feira.",
+      "metricLabel": "de copiar e colar por semana, estimadas para 20 respostas por dia a cerca de 2 minutos cada, 5 dias por semana (20 × 2 min × 5 ≈ 3,3 h)",
+      "note": "Construção em andamento. Telas e vídeo são simulações com pedidos fictícios.",
       "alts": [
         "Planilha de pedidos: uma nova resposta gravada na tabela formatada, com fórmulas e listas suspensas intactas",
         "Resumo semanal em PDF gerado e enviado toda segunda-feira pelo Apps Script"
@@ -58,10 +59,10 @@
     },
     "es": {
       "title": "Automatización de Formulario a Hoja",
-      "summary": "Las respuestas de Google Forms llegan a una hoja con formato sin romper fórmulas, con un informe resumen automático.",
-      "result": "Cero copiar y pegar: cada respuesta cae en la fila correcta y un resumen en PDF sale cada lunes.",
-      "metricLabel": "de copiar y pegar ahorradas por semana",
-      "note": "Demo hecha con pedidos ficticios. El tiempo ahorrado es una estimación para unas 20 respuestas al día.",
+      "summary": "Las respuestas de Google Forms llegarán a una hoja con formato sin romper fórmulas, con un informe resumen semanal automático.",
+      "result": "Pensado para que cada respuesta caiga en la fila correcta con las fórmulas intactas, y un resumen en PDF salga cada lunes.",
+      "metricLabel": "de copiar y pegar por semana, estimadas para 20 respuestas al día a cerca de 2 minutos cada una, 5 días a la semana (20 × 2 min × 5 ≈ 3,3 h)",
+      "note": "Construcción en curso. Las pantallas y el video son simulaciones con pedidos ficticios.",
       "alts": [
         "Hoja de pedidos: una nueva respuesta escrita en la tabla con formato, con fórmulas y desplegables intactos",
         "Resumen semanal en PDF generado y enviado cada lunes por Apps Script"

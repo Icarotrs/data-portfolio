@@ -550,7 +550,7 @@ function marketing() {
               .sort((a, b) => b.value - a.value)
               .map((d) => ({ ...d, color: d.value < 3 ? C.orange : C.blue })),
           })}
-          <div class="muted" style="margin-top:14px;font-size:12px">Meta and TikTok spend 61% of the budget but return under 3×.</div></div>
+          <div class="muted" style="margin-top:14px;font-size:12px">Channels under the 3× target are shown in orange (simulated ad spend).</div></div>
         <div class="card"><h3>Channel table</h3>
           <table class="ct"><tr><th>Channel</th><th class="num">Spend</th><th class="num">Revenue</th><th class="num">ROAS</th><th class="num">New cust.</th><th class="num">CAC</th><th>Status</th></tr>
             ${channels
@@ -655,7 +655,7 @@ function reviews() {
     body: `
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
         ${[
-          ["Reviews analysed", "5,214", "tagged by an LLM, spot-checked by hand", ""],
+          ["Reviews analysed", "5,214", "tagged by an LLM · fictitious reviews", ""],
           ["Negative share", "18.4%", "−4.1 pts after packaging change", "up"],
           ["Top complaint", "Delivery time", "41% of delivery mentions negative", "down"],
           ["Avg. rating", "4.1 ★", "Amazon 3.9 · Shopify 4.4", ""],
@@ -674,7 +674,7 @@ function reviews() {
           ]
             .map(([q, s, cls]) => `<div style="padding:12px 0;border-bottom:1px solid #f0efec"><div style="font-size:13.5px;line-height:1.5">${q}</div><div style="margin-top:6px"><span class="chip ${cls}">${s}</span></div></div>`)
             .join("")}
-          <div class="muted" style="margin-top:14px;font-size:12px;line-height:1.5">Each review is classified into topic + sentiment with a one-line summary. 300 random reviews were checked by hand: 94% agreement.</div></div>
+          <div class="muted" style="margin-top:14px;font-size:12px;line-height:1.5">Each review is classified into topic + sentiment with a one-line summary.</div></div>
       </div>`,
   });
 

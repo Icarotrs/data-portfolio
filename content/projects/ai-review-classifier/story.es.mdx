@@ -1,11 +1,12 @@
-## Problema
+## El escenario
 
-Una tienda online tenía más de 5.000 reseñas de Amazon y Shopify en una hoja de Google, y llegaban más cada semana. Leerlas a mano llevaría días, así que nadie lo hacía, y el equipo no sabía qué problemas aparecían más ni qué arreglar primero.
+Una tienda online típica con miles de reseñas de Amazon y Shopify en una hoja de Google, y más llegando cada semana. Leerlas todas a mano lleva días, así que nadie lo hace, y el equipo no sabe qué problemas aparecen más ni qué arreglar primero.
 
-## Lo que construí
+## Cómo lo construiría
 
 - Un flujo en **Apps Script** dentro de la misma hoja: un menú (*AI tagging → Clasificar reseñas nuevas*) y un activador nocturno para las filas nuevas.
-- Las reseñas se envían a la **API de Claude** en lotes de 25 con un prompt fijo. Cada una vuelve como JSON estricto: **tema**, **sentimiento**, un **resumen de una línea** y un índice de **confianza**.
-- Los resultados se escriben **directamente en la hoja**, junto a cada reseña. Las filas con menos de 80% de confianza se marcan para que una persona las revise.
-- Una **revisión manual** de 300 reseñas al azar antes de confiar en los números: 94% de coincidencia.
-- La hoja clasificada alimenta un pequeño dashboard de sentimiento por tema, que muestra que el tiempo de entrega es la queja principal.
+- Las reseñas se enviarán a la **API de Claude** en lotes de 25 con un prompt fijo. Cada una volverá como JSON estricto (**tema**, **sentimiento**, un **resumen de una línea** y un índice de **confianza**) y se validará antes de escribirse.
+- Los resultados se escribirán **directamente en la hoja**, junto a cada reseña. Las filas con menos de 80% de confianza se marcarán para que una persona las revise.
+- Apps Script limita el tiempo de cada ejecución, así que las hojas grandes se procesarán por partes: el progreso se guarda y un activador retoma el trabajo hasta terminar todas las filas.
+- Una pestaña de **revisión manual** con 300 reseñas al azar, para medir la coincidencia con una persona antes de confiar en los resultados.
+- La hoja clasificada alimentará un pequeño dashboard de sentimiento por tema.

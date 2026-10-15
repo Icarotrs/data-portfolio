@@ -1,14 +1,14 @@
 TITLE
 Messy Data Extractor
 
-DESCRIPTION (490/600 characters)
-Data extraction and cleanup pipeline: tables are extracted from messy CSV, Excel and PDF files (merged headers, mixed date formats, currency text, duplicates, split columns), normalized and merged into one clean Google Sheet with a summary tab and a log of every fix. Runs as a Python script on a schedule or from a menu in Google Sheets. Saves about 4 hours a week of retyping (estimate). Demo uses fictitious supplier files. Stack: Python (pandas, pdfplumber), Google Sheets, Apps Script.
+DESCRIPTION (543/600 characters)
+Demo project, build in progress. Data extraction and cleanup pipeline in Python (pandas, pdfplumber): tables from messy CSV, Excel and text-based PDF files (semicolons, European decimals, two-row headers, mixed date formats) will be normalized and merged into one Google Sheet with a summary tab and a log of every fix. It handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format. Designed to save about 4 hours a week (estimate based on 5 supplier files a week at about 45 minutes each).
 
 SKILLS
-Python (pandas, pdfplumber), Google Sheets, Apps Script, SQL
+Python (pandas, pdfplumber), Google Sheets
 
 RESULT
-Supplier files with mixed dates, prices and column layouts become one consistent table in seconds, with a log of every fix.
+Supplier files with mixed dates, prices and column layouts will become one consistent table, with a log of every fix.
 
 COVER
 exports/covers/messy-data-extractor.png

@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Project } from "@/lib/content";
 import { ArrowRight } from "@/components/ui/icons";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { SectionHeading } from "./SectionHeading";
 
 /**
@@ -41,6 +42,7 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
         <div className="flex items-baseline gap-4">
           <span className="font-mono text-[44px] font-light leading-none text-accent">{p.number}</span>
           <span className="label text-faint">{dict.kinds[p.kind]}</span>
+          {p.status === "in-progress" && <StatusBadge label={dict.project.status.inProgress} />}
         </div>
         <h3 className="mt-6 text-[26px] leading-tight tracking-tight transition-colors group-hover:text-accent sm:text-[30px]">
           {p.title}
@@ -48,7 +50,14 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
         <p className="mt-3 text-pretty text-[16px] leading-relaxed text-muted">{p.summary}</p>
         <div className="mt-6 flex items-baseline gap-3 border-t border-line pt-5">
           <span className="font-mono text-[28px] font-light leading-none text-accent">{p.metric.value}</span>
-          <span className="text-sm text-muted">{p.metric.label}</span>
+          <span className="text-sm text-muted">
+            {p.metric.label}
+            {p.metric.basis && (
+              <span className="label ml-2 inline-block rounded-[3px] border border-line-strong px-1.5 py-px align-middle text-faint">
+                {dict.project.basis[p.metric.basis]}
+              </span>
+            )}
+          </span>
         </div>
         <p className="label mt-5 text-faint">{p.stack.join(" · ")}</p>
         <span className="label mt-8 inline-flex h-10 w-fit items-center gap-2 rounded-[3px] border border-line-strong px-4 text-fg transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg lg:mt-auto">

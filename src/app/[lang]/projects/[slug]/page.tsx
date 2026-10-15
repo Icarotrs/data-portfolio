@@ -9,6 +9,7 @@ import { ContactCard } from "@/components/layout/ContactCard";
 import { FlowDiagram } from "@/components/project/FlowDiagram";
 import { MediaGallery } from "@/components/project/MediaGallery";
 import { LinkButton } from "@/components/ui/LinkButton";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/icons";
 
 export const dynamicParams = false;
@@ -44,7 +45,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
  * Case-study layout, in the order a client reads it:
- *   header (what it is) → 01 problem → 02 what I built → 03 demo
+ *   header (what it is) → 01 the scenario → 02 what I built (or, while
+ *   in progress, how I'd build it) → 03 demo
  *   (flow diagram, video, screens) → 04 tools → 05 result with a number
  *   (marked when estimated or simulated) → next project, call to action.
  */
@@ -79,8 +81,11 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
       {/* Header: what it is */}
       <header className="card p-7 sm:p-10">
         <div>
-          <p className="label text-accent">
-            {project.number} · {dict.kinds[project.kind]}
+          <p className="flex flex-wrap items-center gap-3">
+            <span className="label text-accent">
+              {project.number} · {dict.kinds[project.kind]}
+            </span>
+            {project.status === "in-progress" && <StatusBadge label={t.status.inProgress} />}
           </p>
           <h1 className="mt-4 text-balance text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{project.title}</h1>
           <p className="mt-5 max-w-[60ch] text-pretty text-[17px] leading-relaxed text-muted">{project.summary}</p>
@@ -104,7 +109,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
         </div>
       </header>
 
-      {/* 01 Problem · 02 What I built */}
+      {/* 01 The scenario · 02 What I built / How I'd build it */}
       <div className="card prose-story p-7 sm:p-10">
         <Story />
       </div>

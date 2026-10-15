@@ -423,7 +423,7 @@ body {
   }
 }
 
-/* Story headings are numbered: 01 Problem, 02 What I built. */
+/* Story headings are numbered: 01 The scenario, 02 What I built / How I'd build it. */
 .prose-story {
   counter-reset: step;
 }

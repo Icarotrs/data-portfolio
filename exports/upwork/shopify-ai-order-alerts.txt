@@ -1,14 +1,14 @@
 TITLE
 Shopify → Sheets → AI → Alerts
 
-DESCRIPTION (511/600 characters)
-n8n automation for a Shopify store: every new order hits a webhook, gets logged to Google Sheets and is classified by AI (Claude API) for fraud risk, shipping priority and customer type, with a one-line reason. Risky, rush and VIP orders trigger a Slack message and an email so the team acts before shipping. Saves about 5 hours a week of manual order checks (estimate). Demo uses simulated test orders; the importable n8n workflow JSON is included. Stack: n8n, Shopify, Google Sheets, Claude API, Slack, Gmail.
+DESCRIPTION (528/600 characters)
+n8n automation for a Shopify store: every new order hits a webhook, is logged to Google Sheets and classified by AI (Claude API) for fraud risk, shipping priority and customer type, with a one-line reason. Orders flagged as high risk, rush or VIP go to the team on Slack and email for review before fulfillment, as a second check next to Shopify's own fraud analysis. Designed to save about 5 hours a week (estimate based on 40 orders a day at about 1 minute each). Importable n8n workflow, test orders and setup guide included.
 
 SKILLS
 n8n, Shopify webhooks, Google Sheets, Claude API, Slack, Gmail
 
 RESULT
-Each order is logged and classified within about a minute; risky, rush and VIP orders reach the team before they ship.
+Orders flagged as high risk, rush or VIP are sent to the team for review before fulfillment. A second check, not a replacement for Shopify's own fraud analysis.
 
 COVER
 exports/covers/shopify-ai-order-alerts.png

@@ -28,7 +28,7 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
         <div className="card w-[760px] p-10">
           <p className="font-mono text-sm uppercase tracking-[0.2em] text-faint">
             {project
-              ? `Project ${project.number} · ${en.kinds[project.kind]}`
+              ? `Project ${project.number} · ${en.kinds[project.kind]}${project.status === "in-progress" ? ` · ${en.project.status.inProgress}` : ""}`
               : `${site.name} · ${en.role}`}
           </p>
           <h1 className="mt-4 text-balance text-5xl font-normal leading-[1.05] tracking-tight">
@@ -39,7 +39,7 @@ export default async function RenderOg({ params }: PageProps<"/render/og/[slug]"
               <>
                 <span className="font-mono font-normal text-fg">{project.metric.value}</span>{" "}
                 {project.metric.label}
-                {project.metric.basis && ` (${project.metric.basis})`}
+                {project.metric.basis && ` (${en.project.basis[project.metric.basis].toLowerCase()})`}
               </>
             ) : (
               "Connect your tools, automate the manual work, add AI where it saves time."

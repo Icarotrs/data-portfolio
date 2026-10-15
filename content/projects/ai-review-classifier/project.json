@@ -3,20 +3,21 @@
   "number": "04",
   "title": "AI Review Classifier",
   "kind": "ai",
-  "summary": "A Google Sheets workflow that sends new reviews to the Claude API and writes the topic, sentiment and a short summary straight back into the sheet.",
+  "status": "in-progress",
+  "summary": "A Google Sheets workflow that will send new reviews to the Claude API and write the topic, sentiment and a short summary straight back into the sheet.",
   "stack": [
     "Google Sheets",
     "Apps Script",
     "Claude API",
     "Power BI"
   ],
-  "result": "Runs from a menu in Google Sheets or on a schedule; 94% agreement with a 300-review hand check, and low-confidence rows go to a person.",
+  "result": "Will run from a menu in Google Sheets or on a schedule; low-confidence rows go to a person to check. Accuracy will be measured against a 300-review hand check before any number is published.",
   "metric": {
-    "value": "3 min",
-    "label": "to tag 5,214 reviews, about 2 days of reading by hand",
-    "basis": "estimated"
+    "value": "80%",
+    "label": "confidence threshold: rows below it will be flagged for a person to check",
+    "basis": "setting"
   },
-  "note": "Demo built with fictitious reviews. The manual reading time is an estimate (about 30 seconds per review).",
+  "note": "Build in progress. Screens and video are mock-ups with fictitious reviews.",
   "flow": [
     {
       "tool": "Google Sheets",
@@ -55,14 +56,14 @@
       "poster": "/projects/ai-review-classifier/tagged-sheet.webp"
     }
   },
-  "upworkBlurb": "AI integration inside Google Sheets: an Apps Script workflow sends new customer reviews to the Claude API in batches and writes the topic, sentiment and a one-line summary straight back into the sheet. It runs from a custom menu or on a schedule, and rows with low confidence are flagged for a person to check (94% agreement with a hand check). 5,214 reviews tagged in about 3 minutes instead of roughly 2 days of reading (estimate). Demo uses fictitious reviews. Stack: Google Sheets, Apps Script, Claude API, Power BI.",
+  "upworkBlurb": "Demo project, build in progress. AI integration inside Google Sheets: an Apps Script workflow will send new customer reviews to the Claude API in batches of 25 and write the topic, sentiment and a one-line summary back into the sheet as validated JSON. It will run from a custom menu or a nightly trigger, resume large sheets in parts, and flag rows under 80% confidence for a person to check. A 300-review hand check will measure accuracy before any number is published. Fictitious reviews. Stack: Google Sheets, Apps Script, Claude API.",
   "i18n": {
     "pt": {
       "title": "Classificador de Avaliações com IA",
-      "summary": "Um fluxo no Google Sheets que envia as avaliações novas para a API da Claude e grava tema, sentimento e um resumo curto direto na planilha.",
-      "result": "Roda por um menu no Google Sheets ou em horário programado; 94% de concordância com uma conferência manual de 300 avaliações, e as linhas de baixa confiança vão para uma pessoa.",
-      "metricLabel": "para classificar 5.214 avaliações, cerca de 2 dias de leitura à mão",
-      "note": "Demonstração feita com avaliações fictícias. O tempo de leitura manual é uma estimativa (cerca de 30 segundos por avaliação).",
+      "summary": "Um fluxo no Google Sheets que vai enviar as avaliações novas para a API da Claude e gravar tema, sentimento e um resumo curto direto na planilha.",
+      "result": "Vai rodar por um menu no Google Sheets ou em horário programado; as linhas de baixa confiança vão para uma pessoa conferir. A precisão vai ser medida com uma conferência manual de 300 avaliações antes de qualquer número ser publicado.",
+      "metricLabel": "de limite de confiança: linhas abaixo dele vão ser sinalizadas para uma pessoa conferir",
+      "note": "Construção em andamento. Telas e vídeo são simulações com avaliações fictícias.",
       "flow": [
         "Avaliações novas chegam à planilha",
         "Enviadas em lotes de 25",
@@ -77,10 +78,10 @@
     },
     "es": {
       "title": "Clasificador de Reseñas con IA",
-      "summary": "Un flujo en Google Sheets que envía las reseñas nuevas a la API de Claude y escribe el tema, el sentimiento y un resumen corto directamente en la hoja.",
-      "result": "Se ejecuta desde un menú en Google Sheets o de forma programada; 94% de coincidencia con una revisión manual de 300 reseñas, y las filas de baja confianza pasan a una persona.",
-      "metricLabel": "para clasificar 5.214 reseñas, unos 2 días de lectura a mano",
-      "note": "Demo hecha con reseñas ficticias. El tiempo de lectura manual es una estimación (unos 30 segundos por reseña).",
+      "summary": "Un flujo en Google Sheets que enviará las reseñas nuevas a la API de Claude y escribirá el tema, el sentimiento y un resumen corto directamente en la hoja.",
+      "result": "Se ejecutará desde un menú en Google Sheets o de forma programada; las filas de baja confianza pasan a una persona. La precisión se medirá con una revisión manual de 300 reseñas antes de publicar cualquier número.",
+      "metricLabel": "de umbral de confianza: las filas por debajo se marcarán para que una persona las revise",
+      "note": "Construcción en curso. Las pantallas y el video son simulaciones con reseñas ficticias.",
       "flow": [
         "Llegan reseñas nuevas a la hoja",
         "Enviadas en lotes de 25",

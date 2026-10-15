@@ -31,14 +31,17 @@ Each project is a folder in `content/projects/<slug>/`:
 
 - `project.json` — metadata in English (validated at build time):
    - `order`, `number`, `title`, `kind` (`integration`, `automation`, `ai`, `extraction`, `dashboard`), `summary`
-   - `stack` (array), `result` (one sentence), `metric` (`value` + `label`, and `basis`: `estimated` or `simulated` when the number is not measured; the page shows the label)
+   - `status`: `built` (the deliverable exists in this repo) or `in-progress` (shown with an "In progress" seal on the card, the page and the cover)
+   - `stack` (array), `result` (one sentence), `metric` (`value` + `label`, and `basis` when the number is not measured: `estimated` — the label must state the assumption and the math —, `simulated`, `setting` for a design rule, or `public` for a fact about a public dataset; the card, page and cover show the seal)
    - optional `flow` (`[{ tool, label }]`), drawn as a step diagram on the project page
    - `media.screenshots` (`src` + `alt`), `media.video`, optional `note`, `links`
    - `upworkBlurb` (≤ 600 characters, English, for Upwork)
-   - `i18n.pt` / `i18n.es` — translated `title`, `summary`, `result`, `metricLabel`, `note`, `alts`, `flow`
-- `story.en.mdx` (required), `story.pt.mdx`, `story.es.mdx` — "Problem" and "What I built"; missing languages fall back to English.
+   - `i18n.pt` / `i18n.es` — translated `title`, `summary`, `result`, `metricValue`, `metricLabel`, `note`, `alts`, `flow`
+- `story.en.mdx` (required), `story.pt.mdx`, `story.es.mdx` — "The scenario" (a typical situation, in the present tense, never a client) and then "What I built" for `built` projects or "How I'd build it" (future tense) for `in-progress` ones. The build fails if the heading doesn't match the status. Missing languages fall back to English.
 
-A project page reads: problem → what I built → demo (flow diagram, video, screens) → tools → result with a number.
+A project page reads: the scenario → what I built / how I'd build it → demo (flow diagram, video, screens) → tools → result with a number.
+
+Rule for numbers: a number only goes on the site if it was measured, or calculated from an assumption written next to it. Never invent one.
 
 ## n8n workflow
 

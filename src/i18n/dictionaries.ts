@@ -35,7 +35,8 @@ export interface Dictionary {
     comingSoon: string;
     nextProject: string;
     shotsNote: string;
-    basis: { estimated: string; simulated: string };
+    basis: { estimated: string; simulated: string; setting: string; public: string };
+    status: { inProgress: string };
   };
   theme: { dark: string; light: string; group: string };
 }
@@ -44,7 +45,7 @@ const en: Dictionary = {
   meta: {
     title: "Business Automation & AI Integration | Google Sheets, n8n, Apps Script",
     description:
-      "Icaro Torres connects the tools small businesses and online stores already use, automates the manual work and adds AI where it saves time. Google Sheets, Apps Script, n8n, Make, Claude and OpenAI APIs, plus clear dashboards.",
+      "Icaro Torres connects the tools small businesses and online stores already use, automates the manual work and adds AI where it saves time. Google Sheets, Apps Script, n8n, Make and the Claude API, plus clear dashboards.",
   },
   nav: { projects: "Projects", services: "Services", contact: "Contact", hire: "Hire me", skip: "Skip to content", language: "Language" },
   role: "Business Automation & AI Integration",
@@ -61,7 +62,7 @@ const en: Dictionary = {
   projects: {
     eyebrow: "Work",
     title: "Projects",
-    intro: "Workflows built for small businesses and online stores. Open one to see the problem, the build and the result.",
+    intro: "Demo projects built around common small-business problems, using simulated or public data. Each one shows the problem, the build and the expected result.",
     viewCase: "View case study",
   },
   services: {
@@ -69,7 +70,7 @@ const en: Dictionary = {
     title: "How I can help",
     items: [
       { title: "Process automation", tools: "Google Sheets · Apps Script · n8n · Make", body: "Connect the tools you already use and stop copy-pasting. Orders, forms, stock and emails that update themselves." },
-      { title: "AI integration", tools: "Claude & OpenAI APIs · n8n · Apps Script", body: "AI inside the workflows you already have: classify requests, summarize text, draft replies. A person still checks what matters." },
+      { title: "AI integration", tools: "Claude API · n8n · Apps Script", body: "AI inside the workflows you already have: classify requests, summarize text, draft replies. Low-confidence results go to a person to check." },
       { title: "Data extraction & cleanup", tools: "Python · SQL · Power Query", body: "CSV, Excel, PDF and web data turned into clean, usable tables." },
       { title: "Dashboards & reporting", tools: "Power BI · Google Sheets · Looker Studio", body: "Clear reports that show what the automation saves and where the money goes." },
     ],
@@ -97,7 +98,8 @@ const en: Dictionary = {
     comingSoon: "coming soon",
     nextProject: "Next project",
     shotsNote: "Screens and videos are mock-ups of the deliverable with fictitious or simulated data.",
-    basis: { estimated: "Estimated", simulated: "Simulated" },
+    basis: { estimated: "Estimated", simulated: "Simulated", setting: "Design rule", public: "Public data" },
+    status: { inProgress: "In progress" },
   },
   theme: { dark: "Dark theme", light: "Light theme", group: "Color theme" },
 };
@@ -106,7 +108,7 @@ const pt: Dictionary = {
   meta: {
     title: "Automação de Processos e Integração de IA | Google Sheets, n8n, Apps Script",
     description:
-      "Icaro Torres conecta as ferramentas que pequenas empresas e lojas online já usam, automatiza o trabalho manual e adiciona IA onde ela realmente economiza tempo. Google Sheets, Apps Script, n8n, Make, APIs da Claude e da OpenAI, além de dashboards claros.",
+      "Icaro Torres conecta as ferramentas que pequenas empresas e lojas online já usam, automatiza o trabalho manual e adiciona IA onde ela realmente economiza tempo. Google Sheets, Apps Script, n8n, Make e a API da Claude, além de dashboards claros.",
   },
   nav: { projects: "Projetos", services: "Serviços", contact: "Contato", hire: "Contratar", skip: "Pular para o conteúdo", language: "Idioma" },
   role: "Automação de Processos e Integração de IA",
@@ -123,7 +125,7 @@ const pt: Dictionary = {
   projects: {
     eyebrow: "Trabalhos",
     title: "Projetos",
-    intro: "Fluxos feitos para pequenas empresas e lojas online. Abra um para ver o problema, a solução e o resultado.",
+    intro: "Projetos de demonstração montados em torno de problemas comuns de pequenas empresas, com dados simulados ou públicos. Cada um mostra o problema, a solução e o resultado esperado.",
     viewCase: "Ver estudo de caso",
   },
   services: {
@@ -131,7 +133,7 @@ const pt: Dictionary = {
     title: "Como posso ajudar",
     items: [
       { title: "Automação de processos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecte as ferramentas que você já usa e pare de copiar e colar. Pedidos, formulários, estoque e e-mails que se atualizam sozinhos." },
-      { title: "Integração de IA", tools: "APIs da Claude e da OpenAI · n8n · Apps Script", body: "IA dentro dos fluxos que você já tem: classificar pedidos, resumir textos, rascunhar respostas. Uma pessoa continua conferindo o que importa." },
+      { title: "Integração de IA", tools: "API da Claude · n8n · Apps Script", body: "IA dentro dos fluxos que você já tem: classificar pedidos, resumir textos, rascunhar respostas. Resultados de baixa confiança vão para uma pessoa conferir." },
       { title: "Extração e limpeza de dados", tools: "Python · SQL · Power Query", body: "Dados de CSV, Excel, PDF e da web viram tabelas limpas e prontas para usar." },
       { title: "Dashboards e relatórios", tools: "Power BI · Google Sheets · Looker Studio", body: "Relatórios claros que mostram o que a automação economiza e para onde vai o dinheiro." },
     ],
@@ -159,7 +161,8 @@ const pt: Dictionary = {
     comingSoon: "em breve",
     nextProject: "Próximo projeto",
     shotsNote: "Telas e vídeos são simulações da entrega com dados fictícios ou simulados.",
-    basis: { estimated: "Estimado", simulated: "Simulado" },
+    basis: { estimated: "Estimado", simulated: "Simulado", setting: "Regra do projeto", public: "Dado público" },
+    status: { inProgress: "Em andamento" },
   },
   theme: { dark: "Tema escuro", light: "Tema claro", group: "Tema de cores" },
 };
@@ -168,7 +171,7 @@ const es: Dictionary = {
   meta: {
     title: "Automatización de Procesos e Integración de IA | Google Sheets, n8n, Apps Script",
     description:
-      "Icaro Torres conecta las herramientas que ya usan las pequeñas empresas y tiendas online, automatiza el trabajo manual y añade IA donde de verdad ahorra tiempo. Google Sheets, Apps Script, n8n, Make, APIs de Claude y OpenAI, además de dashboards claros.",
+      "Icaro Torres conecta las herramientas que ya usan las pequeñas empresas y tiendas online, automatiza el trabajo manual y añade IA donde de verdad ahorra tiempo. Google Sheets, Apps Script, n8n, Make y la API de Claude, además de dashboards claros.",
   },
   nav: { projects: "Proyectos", services: "Servicios", contact: "Contacto", hire: "Contratar", skip: "Saltar al contenido", language: "Idioma" },
   role: "Automatización de Procesos e Integración de IA",
@@ -185,7 +188,7 @@ const es: Dictionary = {
   projects: {
     eyebrow: "Trabajos",
     title: "Proyectos",
-    intro: "Flujos hechos para pequeñas empresas y tiendas online. Abre uno para ver el problema, la solución y el resultado.",
+    intro: "Proyectos de demostración construidos sobre problemas comunes de pequeñas empresas, con datos simulados o públicos. Cada uno muestra el problema, la solución y el resultado esperado.",
     viewCase: "Ver caso de estudio",
   },
   services: {
@@ -193,7 +196,7 @@ const es: Dictionary = {
     title: "Cómo puedo ayudar",
     items: [
       { title: "Automatización de procesos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecta las herramientas que ya usas y deja de copiar y pegar. Pedidos, formularios, stock y correos que se actualizan solos." },
-      { title: "Integración de IA", tools: "APIs de Claude y OpenAI · n8n · Apps Script", body: "IA dentro de los flujos que ya tienes: clasificar solicitudes, resumir textos, redactar respuestas. Una persona sigue revisando lo importante." },
+      { title: "Integración de IA", tools: "API de Claude · n8n · Apps Script", body: "IA dentro de los flujos que ya tienes: clasificar solicitudes, resumir textos, redactar respuestas. Los resultados de baja confianza pasan a una persona para revisarlos." },
       { title: "Extracción y limpieza de datos", tools: "Python · SQL · Power Query", body: "Datos de CSV, Excel, PDF y la web convertidos en tablas limpias y listas para usar." },
       { title: "Dashboards e informes", tools: "Power BI · Google Sheets · Looker Studio", body: "Informes claros que muestran lo que ahorra la automatización y adónde va el dinero." },
     ],
@@ -221,7 +224,8 @@ const es: Dictionary = {
     comingSoon: "próximamente",
     nextProject: "Siguiente proyecto",
     shotsNote: "Las pantallas y videos son simulaciones de la entrega con datos ficticios o simulados.",
-    basis: { estimated: "Estimado", simulated: "Simulado" },
+    basis: { estimated: "Estimado", simulated: "Simulado", setting: "Regla de diseño", public: "Dato público" },
+    status: { inProgress: "En curso" },
   },
   theme: { dark: "Tema oscuro", light: "Tema claro", group: "Tema de color" },
 };

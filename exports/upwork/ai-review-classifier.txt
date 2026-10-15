@@ -1,14 +1,14 @@
 TITLE
 AI Review Classifier
 
-DESCRIPTION (520/600 characters)
-AI integration inside Google Sheets: an Apps Script workflow sends new customer reviews to the Claude API in batches and writes the topic, sentiment and a one-line summary straight back into the sheet. It runs from a custom menu or on a schedule, and rows with low confidence are flagged for a person to check (94% agreement with a hand check). 5,214 reviews tagged in about 3 minutes instead of roughly 2 days of reading (estimate). Demo uses fictitious reviews. Stack: Google Sheets, Apps Script, Claude API, Power BI.
+DESCRIPTION (538/600 characters)
+Demo project, build in progress. AI integration inside Google Sheets: an Apps Script workflow will send new customer reviews to the Claude API in batches of 25 and write the topic, sentiment and a one-line summary back into the sheet as validated JSON. It will run from a custom menu or a nightly trigger, resume large sheets in parts, and flag rows under 80% confidence for a person to check. A 300-review hand check will measure accuracy before any number is published. Fictitious reviews. Stack: Google Sheets, Apps Script, Claude API.
 
 SKILLS
 Google Sheets, Apps Script, Claude API, Power BI
 
 RESULT
-Runs from a menu in Google Sheets or on a schedule; 94% agreement with a 300-review hand check, and low-confidence rows go to a person.
+Will run from a menu in Google Sheets or on a schedule; low-confidence rows go to a person to check. Accuracy will be measured against a 300-review hand check before any number is published.
 
 COVER
 exports/covers/ai-review-classifier.png

@@ -1,11 +1,11 @@
-## Problema
+## O cenário
 
-Uma pequena empresa recebia pedidos por um Google Form. O "vincular à planilha" padrão jogava as respostas numa aba bruta, então alguém copiava as linhas à mão para a planilha de verdade todos os dias — e cada colagem arriscava apagar fórmulas, listas suspensas e formatação. O resumo semanal era montado manualmente toda sexta à tarde.
+Uma situação comum: os pedidos chegam por um Google Form, e alguém copia as linhas à mão para a planilha de verdade todos os dias, arriscando fórmulas e formatação. O resumo semanal é montado à mão toda sexta-feira.
 
-## O que eu construí
+## Como eu construiria
 
-- Um gatilho `onFormSubmit` no Apps Script que lê cada resposta, limpa os dados (texto sem espaços extras, telefones e datas padronizados) e grava na tabela **formatada** — fórmulas, validação e formatação condicional continuam intactas.
-- Uma trava para que duas respostas simultâneas nunca escrevam na mesma linha.
-- Uma aba de resumo movida por fórmulas (totais por semana, por produto, por status).
-- Um gatilho por horário que exporta a aba de resumo como **PDF** toda segunda às 8h e envia por e-mail ao dono.
-- Uma aba "Configurações" para o dono mudar destinatários e horário sem mexer no código.
+- Um gatilho `onFormSubmit` no Apps Script vai ler cada resposta, limpar os dados (texto sem espaços extras, telefones e datas padronizados) e gravar na tabela **formatada**, mantendo fórmulas, validação e formatação condicional intactas.
+- Uma trava (`LockService`) vai garantir que duas respostas simultâneas nunca escrevam na mesma linha.
+- Uma aba de resumo vai ser movida por fórmulas (totais por semana, por produto, por status).
+- Um gatilho por horário vai exportar a aba de resumo como **PDF** toda segunda às 8h e enviar por e-mail ao dono.
+- Uma aba de **Configurações** vai permitir mudar destinatários e horário sem mexer no código.

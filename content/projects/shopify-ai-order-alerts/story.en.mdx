@@ -1,11 +1,12 @@
-## Problem
+## The scenario
 
-A Shopify store with about 40 orders a day had one person opening every order to check it by hand: does the address look wrong, is this a rush order, is it a repeat customer who deserves a note? It took about an hour a day, and risky orders still slipped through and shipped.
+A typical Shopify store with about 40 orders a day: one person opens every order to check it by hand. Does the address look wrong, is it a rush order, is it a repeat customer who deserves a note? At about a minute per order, that is around 40 minutes a day, every day, and risky orders can still slip through.
 
 ## What I built
 
 - An **n8n** workflow that receives every new order from a **Shopify webhook** and cleans it into a simple record: customer, items, totals, shipping, past orders.
-- An **AI step (Claude API)** that classifies each order for **fraud risk**, **shipping priority** and **customer type** (new, returning, VIP), with a one-line reason. The answer comes back as strict JSON, so nothing downstream breaks.
+- An **AI step (Claude API)** that classifies each order for **fraud risk**, **shipping priority** and **customer type** (new, returning, VIP), with a one-line reason. The answer comes back as strict JSON with a fixed schema, so nothing downstream breaks.
 - Every order and its classification logged as a new row in **Google Sheets**, the team's single place to look.
-- An **alert** to **Slack** and **Gmail** only when an order needs a person: high risk, rush shipping or a VIP. Everything else is just logged.
-- An importable **n8n workflow file**, test orders and a short setup guide, so the store can run and change it without me.
+- An **alert** to **Slack** and **Gmail** only when an order is flagged as high risk, rush or VIP, so the team reviews it before fulfillment. Everything else is just logged. It is a second check, not a replacement for Shopify's own fraud analysis.
+- An importable **n8n workflow file**, three test orders and a setup guide, so the team can run it day to day.
+- Tested by importing the workflow into n8n and running the three test orders end to end, with the Claude API call mocked.

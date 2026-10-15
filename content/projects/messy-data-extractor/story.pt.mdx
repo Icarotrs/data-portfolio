@@ -1,11 +1,10 @@
-## Problema
+## O cenário
 
-Cada fornecedor mandava sua lista de preços e estoque num formato diferente: um CSV com ponto e vírgula e decimais com vírgula, uma tabela em PDF, um Excel com cabeçalho mesclado em duas linhas. As datas vinham como `03/04/24`, `2024-04-03` e `April 3`. Alguém passava cerca de quatro horas por semana redigitando e corrigindo esses arquivos antes de poder compará-los.
+Uma situação comum: cada fornecedor manda sua lista de preços e estoque num formato diferente. Um CSV com ponto e vírgula e decimais com vírgula, uma tabela em PDF, um Excel com cabeçalho mesclado em duas linhas. As datas vêm como `03/04/24`, `2024-04-03` e `April 3`. Alguém redigita e corrige esses arquivos toda semana antes de poder compará-los.
 
-## O que eu construí
+## Como eu construiria
 
-- **Extração de dados** de tabelas em CSV, Excel e PDF com texto, detectando sozinha delimitadores, codificações e cabeçalhos em várias linhas.
+- **Extração de dados** de tabelas em CSV, Excel e PDF com texto, lidando com delimitadores, codificações e cabeçalhos em várias linhas diferentes, com um arquivo de mapeamento para cada formato novo de fornecedor.
 - Uma etapa de limpeza: um só formato de data e de moeda, nomes aparados e padronizados, colunas divididas e mescladas corrigidas, duplicatas removidas.
-- Um arquivo de mapeamento de colunas, para que um fornecedor novo seja algumas linhas de configuração, e não código novo.
 - Saída no Google Sheets: uma aba de dados limpos, uma **aba de resumo** (contagens, totais, mudanças de preço desde a última execução) e uma **aba de registro** com cada correção.
-- Execução semanal agendada, e as mesmas regras num menu dentro do Google Sheets para quem não usa Python.
+- Testes para cada tipo de problema, rodando sobre arquivos fictícios de fornecedores que reproduzem esses problemas.
