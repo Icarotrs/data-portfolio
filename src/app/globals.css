@@ -103,8 +103,8 @@ body {
 }
 
 /* ── Cards: frosted glass, square corners, accent corner ticks ─
-   The frost is faked on purpose: a translucent fill plus a static grain
-   tile over an already-blurred background. A live backdrop-filter blur is
+   The frost is faked on purpose: a translucent fill over the blurred,
+   grainy background (the grain is on the background only). A live backdrop-filter blur is
    recomputed on every scroll frame and made scrolling stutter.
    Unlayered on purpose: the 3px radius wins over rounded-* utilities.
    The ticks are background layers, so .card never needs position. */
@@ -115,7 +115,6 @@ body {
     linear-gradient(var(--tick), var(--tick)) left top / 1.5px 14px no-repeat,
     linear-gradient(var(--tick), var(--tick)) right bottom / 14px 1.5px no-repeat,
     linear-gradient(var(--tick), var(--tick)) right bottom / 1.5px 14px no-repeat,
-    url("/bg/grain-soft.png") repeat,
     var(--card);
   border: 1px solid var(--card-border);
   border-radius: 3px;
@@ -127,9 +126,9 @@ body {
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 12px 24px -18px rgb(0 0 0 / 0.6);
 }
 
-/* Header and footer: the same frosted look without the corner ticks. */
+/* Header and footer: the same translucent fill without the corner ticks. */
 .glass {
-  background: url("/bg/grain-soft.png") repeat, var(--card-strong);
+  background: var(--card-strong);
 }
 
 /* Small mono labels used across the layout. */
