@@ -1,0 +1,1524 @@
+Name,Email,Financial Status,Created at,Lineitem quantity,Lineitem name,Lineitem price,Lineitem sku
+#1001,customer1001@example.com,paid,2026-09-09 12:11:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1001,,,,1,Reusable straw set,28.00,SKU-1180
+#1001,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1002,customer1002@example.com,paid,2026-09-09 15:49:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1002,,,,1,Reusable straw set,28.00,SKU-1180
+#1002,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1003,customer1003@example.com,paid,2026-09-09 20:57:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1003,,,,1,Glass water bottle,34.00,SKU-3760
+#1004,customer1004@example.com,refunded,2026-09-09 15:49:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1004,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1004,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1005,customer1005@example.com,paid,2026-09-09 18:58:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1005,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1006,customer1006@example.com,paid,2026-09-09 18:33:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1006,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1007,customer1007@example.com,paid,2026-09-09 21:50:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1008,customer1008@example.com,paid,2026-09-09 16:43:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1008,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1009,customer1009@example.com,paid,2026-09-09 19:37:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1009,,,,1,Glass water bottle,34.00,SKU-3760
+#1010,customer1010@example.com,paid,2026-09-09 15:09:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1010,,,,1,Cotton produce bags,35.00,SKU-2880
+#1011,customer1011@example.com,paid,2026-09-09 18:39:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1011,,,,1,Glass water bottle,34.00,SKU-3760
+#1012,customer1012@example.com,paid,2026-09-09 11:35:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1012,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1013,customer1013@example.com,paid,2026-09-09 14:31:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1013,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1014,customer1014@example.com,paid,2026-09-09 10:00:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1014,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1015,customer1015@example.com,paid,2026-09-09 21:03:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1015,,,,1,Travel cutlery case,31.00,SKU-0420
+#1016,customer1016@example.com,paid,2026-09-09 13:47:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1016,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1017,customer1017@example.com,paid,2026-09-09 13:33:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1017,,,,1,Glass water bottle,34.00,SKU-3760
+#1017,,,,1,Reusable straw set,28.00,SKU-1180
+#1018,customer1018@example.com,paid,2026-09-09 19:49:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1019,customer1019@example.com,paid,2026-09-10 20:16:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1020,customer1020@example.com,paid,2026-09-10 18:03:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1020,,,,2,Cold brew bottle 1L,27.00,SKU-2041
+#1021,customer1021@example.com,paid,2026-09-10 19:41:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1021,,,,1,Reusable straw set,28.00,SKU-1180
+#1022,customer1022@example.com,paid,2026-09-10 14:32:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1022,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1023,customer1023@example.com,paid,2026-09-10 19:02:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1023,,,,1,Cotton produce bags,35.00,SKU-2880
+#1023,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1024,customer1024@example.com,paid,2026-09-10 17:19:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1024,,,,1,Spice jar set (6),33.00,SKU-2604
+#1024,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1025,customer1025@example.com,paid,2026-09-10 15:04:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1026,customer1026@example.com,paid,2026-09-10 10:44:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1026,,,,1,Reusable straw set,28.00,SKU-1180
+#1026,,,,1,Cotton produce bags,35.00,SKU-2880
+#1027,customer1027@example.com,paid,2026-09-10 08:56:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1028,customer1028@example.com,paid,2026-09-10 17:10:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1028,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1029,customer1029@example.com,paid,2026-09-10 19:04:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1029,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1029,,,,1,Travel cutlery case,31.00,SKU-0420
+#1030,customer1030@example.com,paid,2026-09-10 10:17:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1031,customer1031@example.com,paid,2026-09-10 20:46:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1031,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1032,customer1032@example.com,paid,2026-09-10 12:24:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1032,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1032,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1033,customer1033@example.com,paid,2026-09-10 17:25:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1033,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1034,customer1034@example.com,paid,2026-09-10 14:23:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1034,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1035,customer1035@example.com,paid,2026-09-10 17:37:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1035,,,,1,Glass water bottle,34.00,SKU-3760
+#1036,customer1036@example.com,paid,2026-09-10 15:41:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1036,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1036,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1037,customer1037@example.com,paid,2026-09-10 11:29:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1037,,,,1,Travel cutlery case,31.00,SKU-0420
+#1038,customer1038@example.com,paid,2026-09-10 21:09:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1038,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1039,customer1039@example.com,refunded,2026-09-10 18:12:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1039,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1039,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1040,customer1040@example.com,paid,2026-09-10 21:17:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1040,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1041,customer1041@example.com,paid,2026-09-10 16:07:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1042,customer1042@example.com,paid,2026-09-10 19:44:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1042,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1042,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1043,customer1043@example.com,paid,2026-09-10 16:35:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1044,customer1044@example.com,paid,2026-09-10 20:40:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1044,,,,1,Travel cutlery case,31.00,SKU-0420
+#1045,customer1045@example.com,paid,2026-09-10 20:02:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1046,customer1046@example.com,paid,2026-09-10 11:10:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1046,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1047,customer1047@example.com,paid,2026-09-10 12:56:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1048,customer1048@example.com,paid,2026-09-10 18:00:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1049,customer1049@example.com,paid,2026-09-10 15:58:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1049,,,,1,Cotton produce bags,35.00,SKU-2880
+#1050,customer1050@example.com,paid,2026-09-10 17:45:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1050,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1051,customer1051@example.com,paid,2026-09-10 11:03:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1051,,,,1,Cotton produce bags,35.00,SKU-2880
+#1052,customer1052@example.com,paid,2026-09-11 10:40:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1053,customer1053@example.com,paid,2026-09-11 15:55:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1053,,,,2,Travel cutlery case,31.00,SKU-0420
+#1054,customer1054@example.com,paid,2026-09-11 20:47:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1054,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1055,customer1055@example.com,paid,2026-09-11 21:43:00 -0400,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1056,customer1056@example.com,paid,2026-09-11 18:37:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1056,,,,1,Cotton produce bags,35.00,SKU-2880
+#1057,customer1057@example.com,paid,2026-09-11 10:24:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1057,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1057,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1058,customer1058@example.com,paid,2026-09-11 21:09:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1058,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1059,customer1059@example.com,paid,2026-09-11 13:40:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1059,,,,1,Reusable straw set,28.00,SKU-1180
+#1060,customer1060@example.com,paid,2026-09-11 20:04:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1061,customer1061@example.com,paid,2026-09-11 12:48:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1061,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1062,customer1062@example.com,paid,2026-09-11 09:58:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1063,customer1063@example.com,paid,2026-09-11 19:55:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1064,customer1064@example.com,paid,2026-09-11 16:13:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1065,customer1065@example.com,paid,2026-09-11 09:28:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1066,customer1066@example.com,paid,2026-09-11 17:28:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1066,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1067,customer1067@example.com,paid,2026-09-11 16:53:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1067,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1068,customer1068@example.com,paid,2026-09-11 17:56:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1068,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1069,customer1069@example.com,paid,2026-09-11 20:50:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1069,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1070,customer1070@example.com,paid,2026-09-11 10:22:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1070,,,,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1071,customer1071@example.com,paid,2026-09-11 17:39:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1071,,,,1,Cotton produce bags,35.00,SKU-2880
+#1071,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1072,customer1072@example.com,paid,2026-09-12 10:50:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1073,customer1073@example.com,paid,2026-09-12 20:26:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1073,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1074,customer1074@example.com,paid,2026-09-12 08:27:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1075,customer1075@example.com,paid,2026-09-12 15:42:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1075,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1076,customer1076@example.com,paid,2026-09-12 10:08:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1076,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1076,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1077,customer1077@example.com,paid,2026-09-12 16:47:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1077,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1078,customer1078@example.com,paid,2026-09-12 18:23:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1078,,,,1,Reusable straw set,28.00,SKU-1180
+#1079,customer1079@example.com,paid,2026-09-12 10:13:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1080,customer1080@example.com,paid,2026-09-12 12:33:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1080,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1081,customer1081@example.com,paid,2026-09-12 11:16:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1081,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1081,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1082,customer1082@example.com,paid,2026-09-12 10:55:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1082,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1083,customer1083@example.com,paid,2026-09-12 20:52:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1083,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1084,customer1084@example.com,paid,2026-09-12 21:47:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1084,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1085,customer1085@example.com,paid,2026-09-12 20:49:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1085,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1085,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1086,customer1086@example.com,paid,2026-09-12 13:56:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1086,,,,1,Travel cutlery case,31.00,SKU-0420
+#1087,customer1087@example.com,paid,2026-09-12 15:05:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1087,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1088,customer1088@example.com,paid,2026-09-12 18:11:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1088,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1089,customer1089@example.com,paid,2026-09-12 13:35:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1089,,,,1,Cotton produce bags,35.00,SKU-2880
+#1090,customer1090@example.com,paid,2026-09-12 10:21:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1091,customer1091@example.com,paid,2026-09-12 17:20:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1092,customer1092@example.com,paid,2026-09-12 15:08:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1093,customer1093@example.com,paid,2026-09-12 13:59:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1093,,,,1,Cotton produce bags,35.00,SKU-2880
+#1094,customer1094@example.com,paid,2026-09-12 15:53:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1094,,,,1,Travel cutlery case,31.00,SKU-0420
+#1095,customer1095@example.com,paid,2026-09-13 09:10:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1095,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1096,customer1096@example.com,paid,2026-09-13 18:05:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1096,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1097,customer1097@example.com,paid,2026-09-13 15:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1097,,,,1,Cotton produce bags,35.00,SKU-2880
+#1097,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1098,customer1098@example.com,paid,2026-09-13 16:15:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1098,,,,1,Glass water bottle,34.00,SKU-3760
+#1098,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1099,customer1099@example.com,paid,2026-09-13 09:23:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1099,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1099,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1100,customer1100@example.com,paid,2026-09-13 11:10:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1100,,,,1,Cotton produce bags,35.00,SKU-2880
+#1100,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1101,customer1101@example.com,paid,2026-09-13 19:41:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1101,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1102,customer1102@example.com,paid,2026-09-13 20:18:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1102,,,,1,Reusable straw set,28.00,SKU-1180
+#1103,customer1103@example.com,paid,2026-09-13 12:34:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1103,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1103,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1104,customer1104@example.com,paid,2026-09-13 12:41:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1105,customer1105@example.com,paid,2026-09-13 18:48:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1106,customer1106@example.com,paid,2026-09-13 15:42:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1106,,,,1,Glass water bottle,34.00,SKU-3760
+#1107,customer1107@example.com,paid,2026-09-13 16:56:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1107,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1108,customer1108@example.com,paid,2026-09-13 08:55:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1109,customer1109@example.com,paid,2026-09-13 10:57:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1109,,,,2,Reusable straw set,28.00,SKU-1180
+#1110,customer1110@example.com,paid,2026-09-13 18:31:00 -0400,2,Insulated tumbler 500ml,31.00,SKU-4401
+#1111,customer1111@example.com,paid,2026-09-13 18:44:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1111,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1112,customer1112@example.com,paid,2026-09-13 21:30:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1113,customer1113@example.com,paid,2026-09-13 11:22:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1113,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1113,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1114,customer1114@example.com,paid,2026-09-13 13:58:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1114,,,,1,Cotton produce bags,35.00,SKU-2880
+#1115,customer1115@example.com,paid,2026-09-13 15:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1116,customer1116@example.com,paid,2026-09-13 17:10:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1117,customer1117@example.com,paid,2026-09-13 13:12:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1117,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1117,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1118,customer1118@example.com,paid,2026-09-13 09:46:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1119,customer1119@example.com,paid,2026-09-13 20:43:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1119,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1119,,,,1,Reusable straw set,28.00,SKU-1180
+#1120,customer1120@example.com,paid,2026-09-13 11:12:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1120,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1121,customer1121@example.com,paid,2026-09-13 10:36:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1121,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1121,,,,1,Glass water bottle,34.00,SKU-3760
+#1122,customer1122@example.com,paid,2026-09-13 14:26:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1123,customer1123@example.com,paid,2026-09-14 19:19:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1124,customer1124@example.com,paid,2026-09-14 13:51:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1124,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1125,customer1125@example.com,paid,2026-09-14 13:47:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1125,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1126,customer1126@example.com,paid,2026-09-14 17:36:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1127,customer1127@example.com,paid,2026-09-14 11:28:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1128,customer1128@example.com,paid,2026-09-14 11:03:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1128,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1129,customer1129@example.com,paid,2026-09-14 18:54:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1129,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1129,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1130,customer1130@example.com,paid,2026-09-14 14:26:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1130,,,,2,Bamboo utensil kit,29.00,SKU-2210
+#1131,customer1131@example.com,paid,2026-09-14 18:25:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1132,customer1132@example.com,paid,2026-09-14 08:15:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1133,customer1133@example.com,paid,2026-09-14 17:09:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1133,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1134,customer1134@example.com,paid,2026-09-14 15:56:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1135,customer1135@example.com,paid,2026-09-14 12:43:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1135,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1136,customer1136@example.com,paid,2026-09-14 14:21:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1137,customer1137@example.com,paid,2026-09-14 08:56:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1138,customer1138@example.com,paid,2026-09-14 18:08:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1138,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1138,,,,1,Glass water bottle,34.00,SKU-3760
+#1139,customer1139@example.com,paid,2026-09-14 08:25:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1139,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1139,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1140,customer1140@example.com,paid,2026-09-14 21:00:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1140,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1141,customer1141@example.com,paid,2026-09-14 19:28:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1142,customer1142@example.com,paid,2026-09-14 13:14:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1143,customer1143@example.com,paid,2026-09-14 20:54:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1144,customer1144@example.com,paid,2026-09-14 16:19:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1145,customer1145@example.com,paid,2026-09-14 16:52:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1146,customer1146@example.com,paid,2026-09-14 09:34:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1147,customer1147@example.com,paid,2026-09-14 21:29:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1147,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1147,,,,1,Cotton produce bags,35.00,SKU-2880
+#1148,customer1148@example.com,paid,2026-09-14 12:53:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1148,,,,1,Cotton produce bags,35.00,SKU-2880
+#1148,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1149,customer1149@example.com,paid,2026-09-14 17:46:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1150,customer1150@example.com,paid,2026-09-14 08:02:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1151,customer1151@example.com,paid,2026-09-15 21:26:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1152,customer1152@example.com,paid,2026-09-15 10:19:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1152,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1153,customer1153@example.com,paid,2026-09-15 09:29:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1154,customer1154@example.com,paid,2026-09-15 09:09:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1155,customer1155@example.com,paid,2026-09-15 21:15:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1155,,,,1,Reusable straw set,28.00,SKU-1180
+#1156,customer1156@example.com,paid,2026-09-15 16:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1157,customer1157@example.com,paid,2026-09-15 20:38:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1157,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1158,customer1158@example.com,paid,2026-09-15 10:01:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1158,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1158,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1159,customer1159@example.com,paid,2026-09-15 16:02:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1160,customer1160@example.com,paid,2026-09-15 12:32:00 -0400,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1160,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1161,customer1161@example.com,paid,2026-09-15 13:25:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1162,customer1162@example.com,paid,2026-09-15 08:32:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1162,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1163,customer1163@example.com,paid,2026-09-15 18:14:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1163,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1164,customer1164@example.com,paid,2026-09-15 20:08:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1164,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1165,customer1165@example.com,paid,2026-09-15 12:50:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1165,,,,1,Spice jar set (6),33.00,SKU-2604
+#1166,customer1166@example.com,paid,2026-09-15 12:36:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1167,customer1167@example.com,paid,2026-09-15 10:38:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1167,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1168,customer1168@example.com,paid,2026-09-15 13:44:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1168,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1169,customer1169@example.com,paid,2026-09-15 13:14:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1169,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1169,,,,1,Cotton produce bags,35.00,SKU-2880
+#1170,customer1170@example.com,paid,2026-09-15 15:21:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1170,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1171,customer1171@example.com,paid,2026-09-15 17:38:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1171,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1171,,,,1,Glass water bottle,34.00,SKU-3760
+#1172,customer1172@example.com,paid,2026-09-15 13:45:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1173,customer1173@example.com,paid,2026-09-15 12:06:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1173,,,,1,Reusable straw set,28.00,SKU-1180
+#1173,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1174,customer1174@example.com,paid,2026-09-15 12:20:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1174,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1175,customer1175@example.com,paid,2026-09-15 14:29:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1176,customer1176@example.com,paid,2026-09-15 19:42:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1177,customer1177@example.com,paid,2026-09-16 08:50:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1177,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1177,,,,1,Cotton produce bags,35.00,SKU-2880
+#1178,customer1178@example.com,paid,2026-09-16 08:39:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1178,,,,1,Glass water bottle,34.00,SKU-3760
+#1179,customer1179@example.com,paid,2026-09-16 17:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1180,customer1180@example.com,paid,2026-09-16 17:06:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1181,customer1181@example.com,paid,2026-09-16 08:36:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1181,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1181,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1182,customer1182@example.com,paid,2026-09-16 11:23:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1182,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1183,customer1183@example.com,paid,2026-09-16 11:03:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1183,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1183,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1184,customer1184@example.com,paid,2026-09-16 08:33:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1185,customer1185@example.com,paid,2026-09-16 18:53:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1185,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1186,customer1186@example.com,paid,2026-09-16 08:37:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1187,customer1187@example.com,paid,2026-09-16 19:54:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1188,customer1188@example.com,paid,2026-09-16 12:32:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1189,customer1189@example.com,paid,2026-09-16 13:10:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1189,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1190,customer1190@example.com,paid,2026-09-16 12:00:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1191,customer1191@example.com,paid,2026-09-16 13:33:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1192,customer1192@example.com,paid,2026-09-16 16:11:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1192,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1193,customer1193@example.com,paid,2026-09-16 13:37:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1193,,,,1,Reusable straw set,28.00,SKU-1180
+#1193,,,,1,Travel cutlery case,31.00,SKU-0420
+#1194,customer1194@example.com,paid,2026-09-16 09:48:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1194,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1195,customer1195@example.com,paid,2026-09-16 10:59:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1195,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1195,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1196,customer1196@example.com,paid,2026-09-16 14:46:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1196,,,,1,Cotton produce bags,35.00,SKU-2880
+#1196,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1197,customer1197@example.com,paid,2026-09-16 15:00:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1197,,,,2,Cotton produce bags,35.00,SKU-2880
+#1198,customer1198@example.com,paid,2026-09-16 20:27:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1199,customer1199@example.com,paid,2026-09-16 15:35:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1200,customer1200@example.com,paid,2026-09-17 20:54:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1201,customer1201@example.com,paid,2026-09-17 12:25:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1201,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1202,customer1202@example.com,paid,2026-09-17 19:57:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1203,customer1203@example.com,paid,2026-09-17 11:31:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1204,customer1204@example.com,paid,2026-09-17 09:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1205,customer1205@example.com,paid,2026-09-17 13:27:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1206,customer1206@example.com,paid,2026-09-17 18:15:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1206,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1206,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1207,customer1207@example.com,paid,2026-09-17 13:44:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1208,customer1208@example.com,paid,2026-09-17 13:44:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1209,customer1209@example.com,paid,2026-09-17 09:16:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1209,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1209,,,,1,Cotton produce bags,35.00,SKU-2880
+#1210,customer1210@example.com,paid,2026-09-17 09:57:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1210,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1210,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1211,customer1211@example.com,paid,2026-09-17 15:26:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1212,customer1212@example.com,paid,2026-09-17 18:06:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1212,,,,1,Cotton produce bags,35.00,SKU-2880
+#1213,customer1213@example.com,paid,2026-09-17 09:25:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1213,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1214,customer1214@example.com,paid,2026-09-17 13:25:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1215,customer1215@example.com,paid,2026-09-17 16:54:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1215,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1215,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1216,customer1216@example.com,paid,2026-09-17 09:03:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1216,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1217,customer1217@example.com,paid,2026-09-17 08:32:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1217,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1217,,,,1,Reusable straw set,28.00,SKU-1180
+#1218,customer1218@example.com,paid,2026-09-17 18:34:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1219,customer1219@example.com,paid,2026-09-17 13:18:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1220,customer1220@example.com,paid,2026-09-17 13:12:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1221,customer1221@example.com,paid,2026-09-18 21:28:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1221,,,,1,Cotton produce bags,35.00,SKU-2880
+#1222,customer1222@example.com,refunded,2026-09-18 10:36:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1223,customer1223@example.com,paid,2026-09-18 20:42:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1223,,,,1,Cotton produce bags,35.00,SKU-2880
+#1224,customer1224@example.com,paid,2026-09-18 10:56:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1224,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1224,,,,1,Cotton produce bags,35.00,SKU-2880
+#1225,customer1225@example.com,paid,2026-09-18 14:53:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1226,customer1226@example.com,paid,2026-09-18 10:44:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1227,customer1227@example.com,paid,2026-09-18 08:15:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1227,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1228,customer1228@example.com,paid,2026-09-18 10:37:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1228,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1229,customer1229@example.com,paid,2026-09-18 14:14:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1229,,,,1,Travel cutlery case,31.00,SKU-0420
+#1230,customer1230@example.com,refunded,2026-09-18 10:41:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1230,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1231,customer1231@example.com,paid,2026-09-18 16:31:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1231,,,,1,Travel cutlery case,31.00,SKU-0420
+#1231,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1232,customer1232@example.com,paid,2026-09-18 18:58:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1232,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1233,customer1233@example.com,paid,2026-09-18 12:48:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1234,customer1234@example.com,paid,2026-09-18 19:00:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1234,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1234,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1235,customer1235@example.com,paid,2026-09-18 14:39:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1236,customer1236@example.com,paid,2026-09-18 12:58:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1237,customer1237@example.com,paid,2026-09-18 16:39:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1237,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1237,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1238,customer1238@example.com,paid,2026-09-18 19:05:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1238,,,,1,Cotton produce bags,35.00,SKU-2880
+#1239,customer1239@example.com,paid,2026-09-18 18:28:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1239,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1239,,,,1,Reusable straw set,28.00,SKU-1180
+#1240,customer1240@example.com,paid,2026-09-18 13:13:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1240,,,,1,Glass water bottle,34.00,SKU-3760
+#1241,customer1241@example.com,paid,2026-09-18 15:50:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1242,customer1242@example.com,paid,2026-09-18 11:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1243,customer1243@example.com,paid,2026-09-18 12:49:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1244,customer1244@example.com,paid,2026-09-18 12:52:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1245,customer1245@example.com,paid,2026-09-19 21:47:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1245,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1245,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1246,customer1246@example.com,paid,2026-09-19 19:00:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1246,,,,1,Spice jar set (6),33.00,SKU-2604
+#1247,customer1247@example.com,paid,2026-09-19 18:45:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1247,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1247,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1248,customer1248@example.com,paid,2026-09-19 14:23:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1249,customer1249@example.com,paid,2026-09-19 09:15:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1249,,,,1,Glass water bottle,34.00,SKU-3760
+#1250,customer1250@example.com,paid,2026-09-19 16:57:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1251,customer1251@example.com,paid,2026-09-19 08:07:00 -0400,2,Glass meal-prep box (3),30.00,SKU-3302
+#1251,,,,1,Cotton produce bags,35.00,SKU-2880
+#1252,customer1252@example.com,paid,2026-09-19 19:21:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1253,customer1253@example.com,paid,2026-09-19 19:21:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1253,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1254,customer1254@example.com,paid,2026-09-19 21:31:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1254,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1254,,,,1,Reusable straw set,28.00,SKU-1180
+#1255,customer1255@example.com,paid,2026-09-19 12:41:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1255,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1255,,,,1,Glass water bottle,34.00,SKU-3760
+#1256,customer1256@example.com,paid,2026-09-19 14:41:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1256,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1257,customer1257@example.com,paid,2026-09-19 14:57:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1258,customer1258@example.com,paid,2026-09-19 12:19:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1258,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1259,customer1259@example.com,paid,2026-09-19 12:16:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1260,customer1260@example.com,paid,2026-09-19 09:08:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1261,customer1261@example.com,paid,2026-09-19 15:05:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1261,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1262,customer1262@example.com,paid,2026-09-19 12:03:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1262,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1263,customer1263@example.com,paid,2026-09-19 19:30:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1263,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1264,customer1264@example.com,paid,2026-09-19 13:22:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1264,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1265,customer1265@example.com,paid,2026-09-19 12:08:00 -0400,2,Glass meal-prep box (3),30.00,SKU-3302
+#1266,customer1266@example.com,paid,2026-09-19 09:20:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1266,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1266,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1267,customer1267@example.com,paid,2026-09-19 12:00:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1267,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1268,customer1268@example.com,paid,2026-09-19 21:30:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1268,,,,1,Cotton produce bags,35.00,SKU-2880
+#1268,,,,1,Glass water bottle,34.00,SKU-3760
+#1269,customer1269@example.com,paid,2026-09-19 13:20:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1270,customer1270@example.com,refunded,2026-09-20 16:27:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1271,customer1271@example.com,paid,2026-09-20 13:45:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1271,,,,1,Glass water bottle,34.00,SKU-3760
+#1271,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1272,customer1272@example.com,paid,2026-09-20 09:43:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1272,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1272,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1273,customer1273@example.com,paid,2026-09-20 11:03:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1273,,,,1,Cotton produce bags,35.00,SKU-2880
+#1273,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1274,customer1274@example.com,paid,2026-09-20 21:43:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1274,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1275,customer1275@example.com,paid,2026-09-20 18:56:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1276,customer1276@example.com,paid,2026-09-20 08:51:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1277,customer1277@example.com,paid,2026-09-20 17:32:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1277,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1278,customer1278@example.com,paid,2026-09-20 16:04:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1278,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1279,customer1279@example.com,paid,2026-09-20 17:37:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1279,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1280,customer1280@example.com,paid,2026-09-20 14:55:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1280,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1281,customer1281@example.com,paid,2026-09-20 18:07:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1281,,,,1,Cotton produce bags,35.00,SKU-2880
+#1281,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1282,customer1282@example.com,paid,2026-09-20 13:51:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1282,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1283,customer1283@example.com,paid,2026-09-20 21:02:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1283,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1284,customer1284@example.com,paid,2026-09-20 17:05:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1284,,,,1,Travel cutlery case,31.00,SKU-0420
+#1285,customer1285@example.com,paid,2026-09-21 15:38:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1285,,,,1,Travel cutlery case,31.00,SKU-0420
+#1286,customer1286@example.com,paid,2026-09-21 13:38:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1286,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1286,,,,1,Cotton produce bags,35.00,SKU-2880
+#1287,customer1287@example.com,paid,2026-09-21 19:37:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1287,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1288,customer1288@example.com,paid,2026-09-21 17:01:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1288,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1289,customer1289@example.com,paid,2026-09-21 11:41:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1289,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1290,customer1290@example.com,refunded,2026-09-21 11:00:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1290,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1291,customer1291@example.com,paid,2026-09-21 15:12:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1291,,,,1,Cotton produce bags,35.00,SKU-2880
+#1292,customer1292@example.com,paid,2026-09-21 12:48:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1292,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1293,customer1293@example.com,paid,2026-09-21 20:52:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1294,customer1294@example.com,paid,2026-09-21 14:17:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1294,,,,1,Cotton produce bags,35.00,SKU-2880
+#1295,customer1295@example.com,paid,2026-09-21 21:26:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1295,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1295,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1296,customer1296@example.com,paid,2026-09-21 14:43:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1296,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1296,,,,1,Glass water bottle,34.00,SKU-3760
+#1297,customer1297@example.com,paid,2026-09-21 19:55:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1298,customer1298@example.com,paid,2026-09-21 18:37:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1298,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1298,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1299,customer1299@example.com,paid,2026-09-21 10:29:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1300,customer1300@example.com,paid,2026-09-21 09:13:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1301,customer1301@example.com,paid,2026-09-21 13:09:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1301,,,,1,Reusable straw set,28.00,SKU-1180
+#1301,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1302,customer1302@example.com,paid,2026-09-21 16:10:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1302,,,,1,Reusable straw set,28.00,SKU-1180
+#1302,,,,1,Cotton produce bags,35.00,SKU-2880
+#1303,customer1303@example.com,paid,2026-09-21 20:35:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1303,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1304,customer1304@example.com,paid,2026-09-21 18:50:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1304,,,,1,Glass water bottle,34.00,SKU-3760
+#1305,customer1305@example.com,paid,2026-09-21 16:54:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1306,customer1306@example.com,paid,2026-09-21 11:24:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1306,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1307,customer1307@example.com,paid,2026-09-21 18:48:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1307,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1308,customer1308@example.com,refunded,2026-09-21 20:34:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1309,customer1309@example.com,paid,2026-09-21 12:49:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1310,customer1310@example.com,paid,2026-09-22 17:41:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1310,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1311,customer1311@example.com,paid,2026-09-22 13:31:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1311,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1312,customer1312@example.com,paid,2026-09-22 17:38:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1313,customer1313@example.com,paid,2026-09-22 13:21:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1314,customer1314@example.com,paid,2026-09-22 08:34:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1315,customer1315@example.com,paid,2026-09-22 19:35:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1315,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1315,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1316,customer1316@example.com,paid,2026-09-22 18:45:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1316,,,,1,Cotton produce bags,35.00,SKU-2880
+#1316,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1317,customer1317@example.com,paid,2026-09-22 17:12:00 -0400,2,Insulated tumbler 500ml,31.00,SKU-4401
+#1317,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1318,customer1318@example.com,paid,2026-09-22 17:26:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1318,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1318,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1319,customer1319@example.com,paid,2026-09-22 10:25:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1320,customer1320@example.com,paid,2026-09-22 10:11:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1321,customer1321@example.com,paid,2026-09-22 14:27:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1321,,,,2,Bamboo utensil kit,29.00,SKU-2210
+#1322,customer1322@example.com,paid,2026-09-22 11:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1323,customer1323@example.com,paid,2026-09-22 12:28:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1324,customer1324@example.com,refunded,2026-09-22 13:14:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1325,customer1325@example.com,paid,2026-09-22 13:42:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1326,customer1326@example.com,paid,2026-09-22 17:52:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1326,,,,1,Cotton produce bags,35.00,SKU-2880
+#1327,customer1327@example.com,paid,2026-09-22 08:38:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1328,customer1328@example.com,paid,2026-09-22 09:34:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1329,customer1329@example.com,paid,2026-09-22 09:03:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1329,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1329,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1330,customer1330@example.com,paid,2026-09-22 16:21:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1331,customer1331@example.com,paid,2026-09-22 12:26:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1331,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1331,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1332,customer1332@example.com,paid,2026-09-22 15:33:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1333,customer1333@example.com,paid,2026-09-22 08:28:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1334,customer1334@example.com,paid,2026-09-22 15:34:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1334,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1335,customer1335@example.com,paid,2026-09-22 13:58:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1336,customer1336@example.com,paid,2026-09-22 09:35:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1337,customer1337@example.com,paid,2026-09-22 11:21:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1337,,,,1,Reusable straw set,28.00,SKU-1180
+#1338,customer1338@example.com,paid,2026-09-22 16:25:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1339,customer1339@example.com,paid,2026-09-22 17:39:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1339,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1340,customer1340@example.com,paid,2026-09-22 15:04:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1340,,,,1,Reusable straw set,28.00,SKU-1180
+#1340,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1341,customer1341@example.com,paid,2026-09-22 16:02:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1342,customer1342@example.com,paid,2026-09-23 13:03:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1343,customer1343@example.com,paid,2026-09-23 11:31:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1344,customer1344@example.com,paid,2026-09-23 17:40:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1345,customer1345@example.com,paid,2026-09-23 08:59:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1345,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1346,customer1346@example.com,paid,2026-09-23 21:09:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1347,customer1347@example.com,paid,2026-09-23 18:21:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1347,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1348,customer1348@example.com,paid,2026-09-23 18:30:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1348,,,,1,Cotton produce bags,35.00,SKU-2880
+#1348,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1349,customer1349@example.com,paid,2026-09-23 19:49:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1350,customer1350@example.com,paid,2026-09-23 21:53:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1351,customer1351@example.com,paid,2026-09-23 20:02:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1351,,,,2,Cotton produce bags,35.00,SKU-2880
+#1352,customer1352@example.com,paid,2026-09-23 18:05:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1352,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1353,customer1353@example.com,paid,2026-09-23 21:39:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1354,customer1354@example.com,paid,2026-09-23 14:33:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1354,,,,1,Glass water bottle,34.00,SKU-3760
+#1355,customer1355@example.com,paid,2026-09-23 19:54:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1356,customer1356@example.com,paid,2026-09-23 08:32:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1357,customer1357@example.com,paid,2026-09-23 19:25:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1357,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1358,customer1358@example.com,paid,2026-09-23 08:29:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1358,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1358,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1359,customer1359@example.com,paid,2026-09-23 21:10:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1360,customer1360@example.com,paid,2026-09-23 09:34:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1360,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1360,,,,1,Cotton produce bags,35.00,SKU-2880
+#1361,customer1361@example.com,paid,2026-09-23 17:31:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1361,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1362,customer1362@example.com,paid,2026-09-23 16:54:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1363,customer1363@example.com,paid,2026-09-23 09:37:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1364,customer1364@example.com,paid,2026-09-23 20:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1365,customer1365@example.com,paid,2026-09-23 15:08:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1365,,,,1,Cotton produce bags,35.00,SKU-2880
+#1365,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1366,customer1366@example.com,paid,2026-09-23 13:39:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1366,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1367,customer1367@example.com,paid,2026-09-24 15:55:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1367,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1368,customer1368@example.com,paid,2026-09-24 10:10:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1368,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1368,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1369,customer1369@example.com,paid,2026-09-24 15:21:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1369,,,,1,Reusable straw set,28.00,SKU-1180
+#1370,customer1370@example.com,paid,2026-09-24 10:51:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1370,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1370,,,,1,Reusable straw set,28.00,SKU-1180
+#1371,customer1371@example.com,paid,2026-09-24 15:30:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1372,customer1372@example.com,paid,2026-09-24 09:10:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1372,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1372,,,,1,Cotton produce bags,35.00,SKU-2880
+#1373,customer1373@example.com,paid,2026-09-24 13:15:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1373,,,,1,Glass water bottle,34.00,SKU-3760
+#1374,customer1374@example.com,paid,2026-09-24 08:04:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1374,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1375,customer1375@example.com,paid,2026-09-24 10:40:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1376,customer1376@example.com,paid,2026-09-24 08:46:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1376,,,,1,Cotton produce bags,35.00,SKU-2880
+#1377,customer1377@example.com,paid,2026-09-24 17:11:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1378,customer1378@example.com,paid,2026-09-24 16:48:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1378,,,,2,Bamboo utensil kit,29.00,SKU-2210
+#1379,customer1379@example.com,paid,2026-09-24 11:22:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1379,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1380,customer1380@example.com,refunded,2026-09-24 11:51:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1380,,,,1,Glass water bottle,34.00,SKU-3760
+#1380,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1381,customer1381@example.com,paid,2026-09-24 10:49:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1381,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1382,customer1382@example.com,paid,2026-09-24 08:14:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1382,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1383,customer1383@example.com,paid,2026-09-24 21:03:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1384,customer1384@example.com,paid,2026-09-24 10:33:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1384,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1385,customer1385@example.com,paid,2026-09-24 17:18:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1385,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1385,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1386,customer1386@example.com,paid,2026-09-24 15:25:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1387,customer1387@example.com,paid,2026-09-24 16:07:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1388,customer1388@example.com,paid,2026-09-24 19:04:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1388,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1388,,,,1,Glass water bottle,34.00,SKU-3760
+#1389,customer1389@example.com,paid,2026-09-24 14:39:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1390,customer1390@example.com,refunded,2026-09-24 11:52:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1391,customer1391@example.com,paid,2026-09-24 09:59:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1392,customer1392@example.com,paid,2026-09-25 09:53:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1392,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1392,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1393,customer1393@example.com,paid,2026-09-25 15:12:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1393,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1394,customer1394@example.com,paid,2026-09-25 18:09:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1395,customer1395@example.com,paid,2026-09-25 10:29:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1395,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1396,customer1396@example.com,paid,2026-09-25 12:29:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1396,,,,1,Cotton produce bags,35.00,SKU-2880
+#1397,customer1397@example.com,paid,2026-09-25 10:59:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1397,,,,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1398,customer1398@example.com,paid,2026-09-25 13:32:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1399,customer1399@example.com,paid,2026-09-25 19:16:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1399,,,,1,Glass water bottle,34.00,SKU-3760
+#1400,customer1400@example.com,paid,2026-09-25 09:20:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1400,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1400,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1401,customer1401@example.com,paid,2026-09-25 14:23:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1401,,,,1,Cotton produce bags,35.00,SKU-2880
+#1402,customer1402@example.com,paid,2026-09-25 16:32:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1403,customer1403@example.com,paid,2026-09-25 19:27:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1403,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1404,customer1404@example.com,paid,2026-09-25 14:46:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1404,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1404,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1405,customer1405@example.com,paid,2026-09-25 21:17:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1405,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1405,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1406,customer1406@example.com,refunded,2026-09-25 14:34:00 -0400,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1406,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1407,customer1407@example.com,paid,2026-09-25 08:28:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1407,,,,2,Cold brew bottle 1L,27.00,SKU-2041
+#1408,customer1408@example.com,paid,2026-09-25 17:50:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1409,customer1409@example.com,paid,2026-09-25 13:26:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1410,customer1410@example.com,paid,2026-09-25 15:13:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1410,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1411,customer1411@example.com,paid,2026-09-25 11:51:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1411,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1412,customer1412@example.com,paid,2026-09-25 20:42:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1412,,,,1,Reusable straw set,28.00,SKU-1180
+#1413,customer1413@example.com,paid,2026-09-25 21:22:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1413,,,,1,Travel cutlery case,31.00,SKU-0420
+#1413,,,,1,Cotton produce bags,35.00,SKU-2880
+#1414,customer1414@example.com,paid,2026-09-25 11:42:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1415,customer1415@example.com,paid,2026-09-25 16:24:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1415,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1415,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1416,customer1416@example.com,paid,2026-09-25 19:27:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1417,customer1417@example.com,paid,2026-09-25 16:02:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1418,customer1418@example.com,paid,2026-09-26 18:50:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1419,customer1419@example.com,paid,2026-09-26 13:58:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1419,,,,1,Reusable straw set,28.00,SKU-1180
+#1419,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1420,customer1420@example.com,paid,2026-09-26 17:48:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1420,,,,1,Reusable straw set,28.00,SKU-1180
+#1421,customer1421@example.com,paid,2026-09-26 12:21:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1421,,,,1,Cotton produce bags,35.00,SKU-2880
+#1422,customer1422@example.com,paid,2026-09-26 11:19:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1422,,,,1,Reusable straw set,28.00,SKU-1180
+#1423,customer1423@example.com,paid,2026-09-26 09:35:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1423,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1423,,,,1,Cotton produce bags,35.00,SKU-2880
+#1424,customer1424@example.com,paid,2026-09-26 13:34:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1424,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1425,customer1425@example.com,paid,2026-09-26 21:41:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1425,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1425,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1426,customer1426@example.com,paid,2026-09-26 21:55:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1427,customer1427@example.com,paid,2026-09-26 12:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1427,,,,1,Glass water bottle,34.00,SKU-3760
+#1428,customer1428@example.com,paid,2026-09-26 14:08:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1428,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1429,customer1429@example.com,paid,2026-09-26 14:52:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1430,customer1430@example.com,paid,2026-09-26 20:09:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1431,customer1431@example.com,paid,2026-09-26 09:46:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1431,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1432,customer1432@example.com,paid,2026-09-26 08:18:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1432,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1433,customer1433@example.com,paid,2026-09-26 19:07:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1433,,,,1,Cotton produce bags,35.00,SKU-2880
+#1434,customer1434@example.com,paid,2026-09-26 18:05:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1434,,,,1,Travel cutlery case,31.00,SKU-0420
+#1435,customer1435@example.com,paid,2026-09-26 10:07:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1435,,,,1,Cotton produce bags,35.00,SKU-2880
+#1435,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1436,customer1436@example.com,paid,2026-09-26 16:08:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1436,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1437,customer1437@example.com,paid,2026-09-27 09:11:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1438,customer1438@example.com,paid,2026-09-27 15:35:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1438,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1438,,,,1,Reusable straw set,28.00,SKU-1180
+#1439,customer1439@example.com,paid,2026-09-27 16:27:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1439,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1439,,,,1,Cotton produce bags,35.00,SKU-2880
+#1440,customer1440@example.com,paid,2026-09-27 20:39:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1441,customer1441@example.com,paid,2026-09-27 10:12:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1442,customer1442@example.com,paid,2026-09-27 21:53:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1442,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1443,customer1443@example.com,paid,2026-09-27 19:57:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1443,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1444,customer1444@example.com,paid,2026-09-27 14:25:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1445,customer1445@example.com,paid,2026-09-27 19:11:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1446,customer1446@example.com,paid,2026-09-27 19:19:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1446,,,,1,Glass water bottle,34.00,SKU-3760
+#1446,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1447,customer1447@example.com,paid,2026-09-27 21:07:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1447,,,,1,Cotton produce bags,35.00,SKU-2880
+#1448,customer1448@example.com,paid,2026-09-27 15:02:00 -0400,2,Ceramic pour-over,27.00,SKU-1007
+#1449,customer1449@example.com,paid,2026-09-27 11:19:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1449,,,,1,Reusable straw set,28.00,SKU-1180
+#1450,customer1450@example.com,paid,2026-09-27 12:37:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1451,customer1451@example.com,paid,2026-09-27 16:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1452,customer1452@example.com,refunded,2026-09-27 12:59:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1453,customer1453@example.com,paid,2026-09-27 21:36:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1453,,,,1,Travel cutlery case,31.00,SKU-0420
+#1454,customer1454@example.com,paid,2026-09-27 17:31:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1454,,,,1,Glass water bottle,34.00,SKU-3760
+#1455,customer1455@example.com,paid,2026-09-27 15:20:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1455,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1455,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1456,customer1456@example.com,paid,2026-09-27 17:19:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1457,customer1457@example.com,paid,2026-09-27 18:27:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1458,customer1458@example.com,paid,2026-09-28 10:02:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1459,customer1459@example.com,paid,2026-09-28 19:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1460,customer1460@example.com,paid,2026-09-28 14:07:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1461,customer1461@example.com,paid,2026-09-28 08:32:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1462,customer1462@example.com,paid,2026-09-28 16:07:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1462,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1463,customer1463@example.com,paid,2026-09-28 16:13:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1464,customer1464@example.com,paid,2026-09-28 09:33:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1465,customer1465@example.com,paid,2026-09-28 10:51:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1465,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1466,customer1466@example.com,paid,2026-09-28 12:47:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1466,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1467,customer1467@example.com,paid,2026-09-28 12:47:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1468,customer1468@example.com,paid,2026-09-28 19:46:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1468,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1469,customer1469@example.com,paid,2026-09-28 20:55:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1469,,,,1,Cotton produce bags,35.00,SKU-2880
+#1469,,,,1,Reusable straw set,28.00,SKU-1180
+#1470,customer1470@example.com,paid,2026-09-28 15:48:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1470,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1471,customer1471@example.com,paid,2026-09-28 13:33:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1472,customer1472@example.com,paid,2026-09-28 20:58:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1472,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1473,customer1473@example.com,refunded,2026-09-28 10:08:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1473,,,,1,Cotton produce bags,35.00,SKU-2880
+#1473,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1474,customer1474@example.com,paid,2026-09-28 12:07:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1474,,,,1,Reusable straw set,28.00,SKU-1180
+#1474,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1475,customer1475@example.com,paid,2026-09-28 17:07:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1476,customer1476@example.com,paid,2026-09-28 18:51:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1476,,,,1,Cotton produce bags,35.00,SKU-2880
+#1477,customer1477@example.com,paid,2026-09-28 17:45:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1477,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1478,customer1478@example.com,paid,2026-09-28 11:55:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1479,customer1479@example.com,paid,2026-09-28 13:44:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1479,,,,1,Glass water bottle,34.00,SKU-3760
+#1480,customer1480@example.com,paid,2026-09-28 17:25:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1480,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1480,,,,1,Glass water bottle,34.00,SKU-3760
+#1481,customer1481@example.com,paid,2026-09-28 15:12:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1482,customer1482@example.com,paid,2026-09-28 16:39:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1482,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1482,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1483,customer1483@example.com,paid,2026-09-28 13:13:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1484,customer1484@example.com,paid,2026-09-28 17:03:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1485,customer1485@example.com,paid,2026-09-28 13:38:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1486,customer1486@example.com,paid,2026-09-28 08:16:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1487,customer1487@example.com,paid,2026-09-28 14:18:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1487,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1488,customer1488@example.com,paid,2026-09-29 10:08:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1488,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1489,customer1489@example.com,paid,2026-09-29 08:50:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1489,,,,1,Glass water bottle,34.00,SKU-3760
+#1490,customer1490@example.com,refunded,2026-09-29 12:41:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1491,customer1491@example.com,paid,2026-09-29 10:54:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1491,,,,1,Reusable straw set,28.00,SKU-1180
+#1491,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1492,customer1492@example.com,paid,2026-09-29 09:43:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1492,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1492,,,,1,Reusable straw set,28.00,SKU-1180
+#1493,customer1493@example.com,paid,2026-09-29 18:03:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1493,,,,1,Glass water bottle,34.00,SKU-3760
+#1494,customer1494@example.com,paid,2026-09-29 14:08:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1494,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1494,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1495,customer1495@example.com,paid,2026-09-29 10:55:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1495,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1495,,,,1,Glass water bottle,34.00,SKU-3760
+#1496,customer1496@example.com,paid,2026-09-29 13:34:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1496,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1496,,,,1,Reusable straw set,28.00,SKU-1180
+#1497,customer1497@example.com,paid,2026-09-29 15:29:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1497,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1498,customer1498@example.com,paid,2026-09-29 13:40:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1498,,,,1,Reusable straw set,28.00,SKU-1180
+#1498,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1499,customer1499@example.com,paid,2026-09-29 17:26:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1500,customer1500@example.com,paid,2026-09-29 10:45:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1500,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1501,customer1501@example.com,refunded,2026-09-29 18:21:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1501,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1502,customer1502@example.com,paid,2026-09-29 17:32:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1502,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1502,,,,1,Cotton produce bags,35.00,SKU-2880
+#1503,customer1503@example.com,paid,2026-09-29 08:21:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1504,customer1504@example.com,paid,2026-09-29 10:51:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1505,customer1505@example.com,paid,2026-09-29 15:24:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1506,customer1506@example.com,paid,2026-09-29 12:07:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1506,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1507,customer1507@example.com,paid,2026-09-29 19:33:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1508,customer1508@example.com,paid,2026-09-30 11:52:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1508,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1509,customer1509@example.com,paid,2026-09-30 21:49:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1509,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1510,customer1510@example.com,paid,2026-09-30 11:20:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1511,customer1511@example.com,paid,2026-09-30 10:06:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1512,customer1512@example.com,paid,2026-09-30 10:32:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1512,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1513,customer1513@example.com,paid,2026-09-30 19:14:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1514,customer1514@example.com,paid,2026-09-30 14:17:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1515,customer1515@example.com,paid,2026-09-30 12:54:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1515,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1515,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1516,customer1516@example.com,paid,2026-09-30 17:11:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1516,,,,1,Cotton produce bags,35.00,SKU-2880
+#1517,customer1517@example.com,paid,2026-09-30 20:42:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1518,customer1518@example.com,paid,2026-09-30 08:57:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1518,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1518,,,,1,Cotton produce bags,35.00,SKU-2880
+#1519,customer1519@example.com,paid,2026-09-30 14:13:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1519,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1519,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1520,customer1520@example.com,paid,2026-09-30 11:50:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1520,,,,1,Glass water bottle,34.00,SKU-3760
+#1520,,,,1,Spice jar set (6),33.00,SKU-2604
+#1521,customer1521@example.com,paid,2026-09-30 08:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1521,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1521,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1522,customer1522@example.com,paid,2026-09-30 15:30:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1523,customer1523@example.com,paid,2026-09-30 09:23:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1523,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1524,customer1524@example.com,paid,2026-09-30 11:23:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1525,customer1525@example.com,paid,2026-09-30 13:49:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1526,customer1526@example.com,paid,2026-09-30 09:45:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1526,,,,1,Cotton produce bags,35.00,SKU-2880
+#1527,customer1527@example.com,paid,2026-09-30 20:46:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1527,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1528,customer1528@example.com,paid,2026-09-30 14:31:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1529,customer1529@example.com,paid,2026-09-30 09:40:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1530,customer1530@example.com,paid,2026-09-30 12:23:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1530,,,,1,Reusable straw set,28.00,SKU-1180
+#1530,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1531,customer1531@example.com,paid,2026-09-30 14:41:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1532,customer1532@example.com,paid,2026-09-30 08:34:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1533,customer1533@example.com,paid,2026-09-30 11:17:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1533,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1533,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1534,customer1534@example.com,paid,2026-09-30 13:01:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1534,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1535,customer1535@example.com,paid,2026-10-01 09:48:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1535,,,,2,Cotton produce bags,35.00,SKU-2880
+#1536,customer1536@example.com,paid,2026-10-01 08:32:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1536,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1537,customer1537@example.com,paid,2026-10-01 13:05:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1538,customer1538@example.com,paid,2026-10-01 21:55:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1538,,,,1,Cotton produce bags,35.00,SKU-2880
+#1539,customer1539@example.com,paid,2026-10-01 08:41:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1540,customer1540@example.com,paid,2026-10-01 11:40:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1540,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1540,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1541,customer1541@example.com,paid,2026-10-01 21:30:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1541,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1541,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1542,customer1542@example.com,paid,2026-10-01 09:02:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1543,customer1543@example.com,paid,2026-10-01 10:31:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1543,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1544,customer1544@example.com,paid,2026-10-01 10:56:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1544,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1544,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1545,customer1545@example.com,paid,2026-10-01 21:19:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1546,customer1546@example.com,paid,2026-10-01 16:31:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1547,customer1547@example.com,paid,2026-10-01 17:24:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1547,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1548,customer1548@example.com,paid,2026-10-01 15:49:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1549,customer1549@example.com,paid,2026-10-01 10:09:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1549,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1549,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1550,customer1550@example.com,paid,2026-10-01 16:49:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1550,,,,1,Reusable straw set,28.00,SKU-1180
+#1551,customer1551@example.com,paid,2026-10-01 19:25:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1551,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1551,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1552,customer1552@example.com,paid,2026-10-01 16:08:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1552,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1552,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1553,customer1553@example.com,paid,2026-10-01 20:13:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1553,,,,1,Reusable straw set,28.00,SKU-1180
+#1554,customer1554@example.com,paid,2026-10-01 19:17:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1554,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1555,customer1555@example.com,paid,2026-10-01 18:48:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1555,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1556,customer1556@example.com,paid,2026-10-01 09:50:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1556,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1557,customer1557@example.com,paid,2026-10-02 12:36:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1557,,,,1,Cotton produce bags,35.00,SKU-2880
+#1558,customer1558@example.com,paid,2026-10-02 11:11:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1558,,,,1,Cotton produce bags,35.00,SKU-2880
+#1559,customer1559@example.com,paid,2026-10-02 16:22:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1559,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1560,customer1560@example.com,paid,2026-10-02 16:08:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1560,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1560,,,,1,Cotton produce bags,35.00,SKU-2880
+#1561,customer1561@example.com,paid,2026-10-02 15:35:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1561,,,,1,Cotton produce bags,35.00,SKU-2880
+#1561,,,,1,Reusable straw set,28.00,SKU-1180
+#1562,customer1562@example.com,paid,2026-10-02 19:31:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1562,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1562,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1563,customer1563@example.com,paid,2026-10-02 15:42:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1564,customer1564@example.com,paid,2026-10-02 11:32:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1564,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1564,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1565,customer1565@example.com,paid,2026-10-02 12:08:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1565,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1566,customer1566@example.com,paid,2026-10-02 10:15:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1567,customer1567@example.com,paid,2026-10-02 10:44:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1568,customer1568@example.com,paid,2026-10-02 21:44:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1568,,,,1,Glass water bottle,34.00,SKU-3760
+#1569,customer1569@example.com,paid,2026-10-02 15:22:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1570,customer1570@example.com,paid,2026-10-02 14:57:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1571,customer1571@example.com,paid,2026-10-03 20:39:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1572,customer1572@example.com,paid,2026-10-03 08:08:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1572,,,,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1573,customer1573@example.com,paid,2026-10-03 11:21:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1573,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1574,customer1574@example.com,paid,2026-10-03 10:11:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1575,customer1575@example.com,paid,2026-10-03 09:58:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1576,customer1576@example.com,paid,2026-10-03 21:35:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1577,customer1577@example.com,paid,2026-10-03 19:19:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1577,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1578,customer1578@example.com,paid,2026-10-03 21:40:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1578,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1579,customer1579@example.com,refunded,2026-10-03 13:01:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1579,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1580,customer1580@example.com,paid,2026-10-03 08:41:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1580,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1581,customer1581@example.com,paid,2026-10-03 16:47:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1581,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1582,customer1582@example.com,paid,2026-10-03 11:06:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1582,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1582,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1583,customer1583@example.com,paid,2026-10-03 19:32:00 -0400,2,Glass meal-prep box (3),30.00,SKU-3302
+#1584,customer1584@example.com,paid,2026-10-03 11:05:00 -0400,2,Glass meal-prep box (3),30.00,SKU-3302
+#1584,,,,1,Reusable straw set,28.00,SKU-1180
+#1585,customer1585@example.com,paid,2026-10-03 11:02:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1585,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1585,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1586,customer1586@example.com,paid,2026-10-03 14:07:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1587,customer1587@example.com,paid,2026-10-03 21:42:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1587,,,,1,Cotton produce bags,35.00,SKU-2880
+#1588,customer1588@example.com,paid,2026-10-03 16:45:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1589,customer1589@example.com,paid,2026-10-03 15:30:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1590,customer1590@example.com,paid,2026-10-03 14:13:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1591,customer1591@example.com,paid,2026-10-03 20:33:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1591,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1591,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1592,customer1592@example.com,paid,2026-10-03 09:16:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1592,,,,1,Reusable straw set,28.00,SKU-1180
+#1592,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1593,customer1593@example.com,paid,2026-10-03 20:15:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1593,,,,1,Glass water bottle,34.00,SKU-3760
+#1594,customer1594@example.com,paid,2026-10-03 18:39:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1595,customer1595@example.com,paid,2026-10-04 10:31:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1595,,,,1,Cotton produce bags,35.00,SKU-2880
+#1596,customer1596@example.com,paid,2026-10-04 17:58:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1597,customer1597@example.com,paid,2026-10-04 10:49:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1598,customer1598@example.com,paid,2026-10-04 21:26:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1598,,,,1,Glass water bottle,34.00,SKU-3760
+#1598,,,,1,Reusable straw set,28.00,SKU-1180
+#1599,customer1599@example.com,paid,2026-10-04 10:05:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1599,,,,1,Cotton produce bags,35.00,SKU-2880
+#1600,customer1600@example.com,paid,2026-10-04 10:23:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1600,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1600,,,,1,Cotton produce bags,35.00,SKU-2880
+#1601,customer1601@example.com,paid,2026-10-04 15:00:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1602,customer1602@example.com,paid,2026-10-04 18:45:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1603,customer1603@example.com,paid,2026-10-04 14:59:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1604,customer1604@example.com,paid,2026-10-04 19:32:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1604,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1605,customer1605@example.com,paid,2026-10-04 17:21:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1605,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1605,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1606,customer1606@example.com,paid,2026-10-04 19:26:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1606,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1607,customer1607@example.com,paid,2026-10-04 13:07:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1607,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1608,customer1608@example.com,paid,2026-10-04 21:40:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1609,customer1609@example.com,paid,2026-10-04 17:53:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1609,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1610,customer1610@example.com,paid,2026-10-04 16:22:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1610,,,,1,Reusable straw set,28.00,SKU-1180
+#1611,customer1611@example.com,refunded,2026-10-04 11:27:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1611,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1611,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1612,customer1612@example.com,paid,2026-10-04 15:45:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1612,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1613,customer1613@example.com,paid,2026-10-04 19:20:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1613,,,,1,Cotton produce bags,35.00,SKU-2880
+#1614,customer1614@example.com,paid,2026-10-04 14:38:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1615,customer1615@example.com,paid,2026-10-04 09:35:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1615,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1616,customer1616@example.com,paid,2026-10-04 10:47:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1616,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1617,customer1617@example.com,paid,2026-10-05 14:35:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1617,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1618,customer1618@example.com,paid,2026-10-05 11:28:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1619,customer1619@example.com,paid,2026-10-05 13:22:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1619,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1620,customer1620@example.com,paid,2026-10-05 11:57:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1620,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1620,,,,1,Cotton produce bags,35.00,SKU-2880
+#1621,customer1621@example.com,paid,2026-10-05 13:41:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1621,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1622,customer1622@example.com,paid,2026-10-05 11:19:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1622,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1623,customer1623@example.com,paid,2026-10-05 11:03:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1623,,,,2,Cotton produce bags,35.00,SKU-2880
+#1624,customer1624@example.com,paid,2026-10-05 15:07:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1624,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1625,customer1625@example.com,paid,2026-10-05 10:37:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1625,,,,1,Cotton produce bags,35.00,SKU-2880
+#1625,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1626,customer1626@example.com,paid,2026-10-05 11:15:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1626,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1627,customer1627@example.com,paid,2026-10-05 20:32:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1627,,,,1,Spice jar set (6),33.00,SKU-2604
+#1627,,,,1,Reusable straw set,28.00,SKU-1180
+#1628,customer1628@example.com,paid,2026-10-05 13:56:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1629,customer1629@example.com,paid,2026-10-05 14:51:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1629,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1629,,,,1,Glass water bottle,34.00,SKU-3760
+#1630,customer1630@example.com,paid,2026-10-05 13:43:00 -0400,2,Glass water bottle,34.00,SKU-3760
+#1630,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1631,customer1631@example.com,paid,2026-10-05 08:11:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1631,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1632,customer1632@example.com,paid,2026-10-05 19:47:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1632,,,,1,Reusable straw set,28.00,SKU-1180
+#1633,customer1633@example.com,paid,2026-10-05 15:23:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1634,customer1634@example.com,paid,2026-10-05 17:32:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1634,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1635,customer1635@example.com,paid,2026-10-05 10:16:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1635,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1636,customer1636@example.com,paid,2026-10-05 12:00:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1637,customer1637@example.com,paid,2026-10-05 13:46:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1637,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1638,customer1638@example.com,paid,2026-10-05 21:17:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1638,,,,1,Reusable straw set,28.00,SKU-1180
+#1638,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1639,customer1639@example.com,paid,2026-10-05 14:39:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1640,customer1640@example.com,paid,2026-10-05 14:50:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1640,,,,1,Reusable straw set,28.00,SKU-1180
+#1640,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1641,customer1641@example.com,paid,2026-10-05 08:37:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1642,customer1642@example.com,paid,2026-10-06 08:23:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1642,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1643,customer1643@example.com,paid,2026-10-06 09:16:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1644,customer1644@example.com,paid,2026-10-06 13:15:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1644,,,,1,Spice jar set (6),33.00,SKU-2604
+#1644,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1645,customer1645@example.com,paid,2026-10-06 14:56:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1645,,,,1,Spice jar set (6),33.00,SKU-2604
+#1646,customer1646@example.com,paid,2026-10-06 20:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1646,,,,2,Reusable straw set,28.00,SKU-1180
+#1647,customer1647@example.com,paid,2026-10-06 20:02:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1647,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1647,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1648,customer1648@example.com,paid,2026-10-06 16:53:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1648,,,,2,Glass water bottle,34.00,SKU-3760
+#1649,customer1649@example.com,paid,2026-10-06 16:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1650,customer1650@example.com,paid,2026-10-06 13:10:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1651,customer1651@example.com,paid,2026-10-06 20:09:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1651,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1652,customer1652@example.com,paid,2026-10-06 21:01:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1652,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1652,,,,1,Cotton produce bags,35.00,SKU-2880
+#1653,customer1653@example.com,paid,2026-10-06 14:05:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1653,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1653,,,,1,Reusable straw set,28.00,SKU-1180
+#1654,customer1654@example.com,paid,2026-10-06 13:53:00 -0400,2,Lunch box steel 2-tier,27.00,SKU-3017
+#1654,,,,1,Glass water bottle,34.00,SKU-3760
+#1655,customer1655@example.com,paid,2026-10-06 12:06:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1655,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1656,customer1656@example.com,paid,2026-10-06 12:30:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1656,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1656,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1657,customer1657@example.com,paid,2026-10-06 13:03:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1657,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1658,customer1658@example.com,paid,2026-10-06 08:23:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1659,customer1659@example.com,paid,2026-10-06 13:32:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1660,customer1660@example.com,paid,2026-10-06 11:40:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1661,customer1661@example.com,paid,2026-10-06 08:02:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1661,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1662,customer1662@example.com,paid,2026-10-06 17:47:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1662,,,,1,Reusable straw set,28.00,SKU-1180
+#1663,customer1663@example.com,paid,2026-10-06 11:22:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1664,customer1664@example.com,paid,2026-10-06 18:20:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1664,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1665,customer1665@example.com,paid,2026-10-06 10:48:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1666,customer1666@example.com,paid,2026-10-06 10:26:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1666,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1667,customer1667@example.com,paid,2026-10-06 19:12:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1668,customer1668@example.com,paid,2026-10-07 16:54:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1668,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1668,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1669,customer1669@example.com,paid,2026-10-07 10:48:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1669,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1670,customer1670@example.com,paid,2026-10-07 20:46:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1671,customer1671@example.com,paid,2026-10-07 16:32:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1672,customer1672@example.com,paid,2026-10-07 12:00:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1673,customer1673@example.com,paid,2026-10-07 19:27:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1674,customer1674@example.com,paid,2026-10-07 17:06:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1675,customer1675@example.com,paid,2026-10-07 08:42:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1676,customer1676@example.com,refunded,2026-10-07 13:38:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1676,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1677,customer1677@example.com,paid,2026-10-07 18:57:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1677,,,,1,Reusable straw set,28.00,SKU-1180
+#1677,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1678,customer1678@example.com,paid,2026-10-07 21:32:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1679,customer1679@example.com,paid,2026-10-07 16:52:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1679,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1680,customer1680@example.com,paid,2026-10-07 16:00:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1680,,,,1,Cotton produce bags,35.00,SKU-2880
+#1681,customer1681@example.com,paid,2026-10-07 15:52:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1681,,,,2,Cold brew bottle 1L,27.00,SKU-2041
+#1682,customer1682@example.com,paid,2026-10-07 10:16:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1682,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1683,customer1683@example.com,paid,2026-10-07 08:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1683,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1684,customer1684@example.com,paid,2026-10-07 09:28:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1684,,,,1,Glass water bottle,34.00,SKU-3760
+#1685,customer1685@example.com,paid,2026-10-07 08:55:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1686,customer1686@example.com,paid,2026-10-07 21:37:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1686,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1687,customer1687@example.com,paid,2026-10-07 19:16:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1688,customer1688@example.com,paid,2026-10-07 10:33:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1688,,,,1,Cotton produce bags,35.00,SKU-2880
+#1689,customer1689@example.com,paid,2026-10-07 11:21:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1689,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1690,customer1690@example.com,paid,2026-10-08 18:06:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1691,customer1691@example.com,paid,2026-10-08 18:00:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1691,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1692,customer1692@example.com,paid,2026-10-08 13:08:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1693,customer1693@example.com,paid,2026-10-08 09:15:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1694,customer1694@example.com,paid,2026-10-08 15:04:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1695,customer1695@example.com,paid,2026-10-08 15:21:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1695,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1696,customer1696@example.com,refunded,2026-10-08 11:43:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1696,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1697,customer1697@example.com,paid,2026-10-08 20:54:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1698,customer1698@example.com,paid,2026-10-08 15:08:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1698,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1698,,,,1,Reusable straw set,28.00,SKU-1180
+#1699,customer1699@example.com,refunded,2026-10-08 15:31:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1700,customer1700@example.com,paid,2026-10-08 21:38:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1700,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1701,customer1701@example.com,paid,2026-10-08 16:38:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1701,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1702,customer1702@example.com,paid,2026-10-08 21:54:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1702,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1703,customer1703@example.com,paid,2026-10-08 18:43:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1703,,,,1,Cotton produce bags,35.00,SKU-2880
+#1704,customer1704@example.com,paid,2026-10-08 19:36:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1704,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1704,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1705,customer1705@example.com,paid,2026-10-08 20:05:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1705,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1706,customer1706@example.com,refunded,2026-10-08 21:20:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1706,,,,2,Ceramic pour-over,27.00,SKU-1007
+#1707,customer1707@example.com,paid,2026-10-08 12:52:00 -0400,2,Glass meal-prep box (3),30.00,SKU-3302
+#1708,customer1708@example.com,paid,2026-10-08 09:45:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1708,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1708,,,,1,Travel cutlery case,31.00,SKU-0420
+#1709,customer1709@example.com,paid,2026-10-08 14:55:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1710,customer1710@example.com,paid,2026-10-08 10:40:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1710,,,,1,Glass water bottle,34.00,SKU-3760
+#1711,customer1711@example.com,paid,2026-10-08 21:43:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1711,,,,1,Cotton produce bags,35.00,SKU-2880
+#1711,,,,1,Reusable straw set,28.00,SKU-1180
+#1712,customer1712@example.com,paid,2026-10-08 14:46:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1713,customer1713@example.com,paid,2026-10-08 21:10:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1714,customer1714@example.com,paid,2026-10-08 09:05:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1714,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1714,,,,1,Glass water bottle,34.00,SKU-3760
+#1715,customer1715@example.com,paid,2026-10-08 08:07:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1716,customer1716@example.com,paid,2026-10-09 12:08:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1716,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1716,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1717,customer1717@example.com,paid,2026-10-09 08:53:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1717,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1718,customer1718@example.com,paid,2026-10-09 09:46:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1718,,,,2,Cold brew bottle 1L,27.00,SKU-2041
+#1719,customer1719@example.com,paid,2026-10-09 19:36:00 -0400,2,Beeswax wraps (pack 3),36.00,SKU-0915
+#1719,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1720,customer1720@example.com,paid,2026-10-09 20:57:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1721,customer1721@example.com,refunded,2026-10-09 20:49:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1722,customer1722@example.com,paid,2026-10-09 14:00:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1723,customer1723@example.com,paid,2026-10-09 11:55:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1724,customer1724@example.com,paid,2026-10-09 19:40:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1724,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1725,customer1725@example.com,paid,2026-10-09 17:17:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1725,,,,1,Cotton produce bags,35.00,SKU-2880
+#1725,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1726,customer1726@example.com,paid,2026-10-09 12:41:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1726,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1726,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1727,customer1727@example.com,paid,2026-10-09 10:12:00 -0400,2,Insulated tumbler 500ml,31.00,SKU-4401
+#1727,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1728,customer1728@example.com,paid,2026-10-09 21:00:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1729,customer1729@example.com,paid,2026-10-09 18:54:00 -0400,2,Ceramic pour-over,27.00,SKU-1007
+#1730,customer1730@example.com,paid,2026-10-09 19:27:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1730,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1730,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1731,customer1731@example.com,paid,2026-10-09 14:15:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1731,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1732,customer1732@example.com,paid,2026-10-09 17:57:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1733,customer1733@example.com,paid,2026-10-09 15:43:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1733,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1733,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1734,customer1734@example.com,paid,2026-10-09 20:19:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1735,customer1735@example.com,paid,2026-10-09 15:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1735,,,,1,Travel cutlery case,31.00,SKU-0420
+#1736,customer1736@example.com,paid,2026-10-09 12:49:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1736,,,,1,Glass water bottle,34.00,SKU-3760
+#1737,customer1737@example.com,paid,2026-10-10 14:35:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1737,,,,1,Cotton produce bags,35.00,SKU-2880
+#1737,,,,1,Reusable straw set,28.00,SKU-1180
+#1738,customer1738@example.com,paid,2026-10-10 09:00:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1739,customer1739@example.com,paid,2026-10-10 21:11:00 -0400,2,Reusable straw set,28.00,SKU-1180
+#1739,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1740,customer1740@example.com,paid,2026-10-10 16:14:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1740,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1741,customer1741@example.com,paid,2026-10-10 13:55:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1742,customer1742@example.com,paid,2026-10-10 10:11:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1742,,,,1,Cotton produce bags,35.00,SKU-2880
+#1742,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1743,customer1743@example.com,paid,2026-10-10 20:53:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1744,customer1744@example.com,paid,2026-10-10 09:16:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1745,customer1745@example.com,paid,2026-10-10 16:30:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1746,customer1746@example.com,paid,2026-10-10 10:12:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1746,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1746,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1747,customer1747@example.com,paid,2026-10-10 16:12:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1747,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1748,customer1748@example.com,paid,2026-10-10 13:40:00 -0400,2,Insulated tumbler 500ml,31.00,SKU-4401
+#1748,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1749,customer1749@example.com,paid,2026-10-10 09:06:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1749,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1750,customer1750@example.com,paid,2026-10-10 15:56:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1751,customer1751@example.com,paid,2026-10-10 21:28:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1751,,,,1,Glass water bottle,34.00,SKU-3760
+#1751,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1752,customer1752@example.com,paid,2026-10-10 15:52:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1753,customer1753@example.com,paid,2026-10-10 15:46:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1753,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1754,customer1754@example.com,paid,2026-10-10 12:53:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1754,,,,1,Cotton produce bags,35.00,SKU-2880
+#1754,,,,1,Reusable straw set,28.00,SKU-1180
+#1755,customer1755@example.com,paid,2026-10-10 10:08:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1756,customer1756@example.com,paid,2026-10-10 13:45:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1757,customer1757@example.com,paid,2026-10-11 18:01:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1758,customer1758@example.com,paid,2026-10-11 12:26:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1759,customer1759@example.com,paid,2026-10-11 21:07:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1759,,,,1,Cotton produce bags,35.00,SKU-2880
+#1759,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1760,customer1760@example.com,paid,2026-10-11 16:48:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1760,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1761,customer1761@example.com,paid,2026-10-11 09:30:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1761,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1761,,,,1,Cotton produce bags,35.00,SKU-2880
+#1762,customer1762@example.com,paid,2026-10-11 13:30:00 -0400,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1762,,,,1,Cotton produce bags,35.00,SKU-2880
+#1762,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1763,customer1763@example.com,paid,2026-10-11 15:59:00 -0400,1,Coffee filter (metal),36.00,SKU-1993
+#1763,,,,1,Reusable straw set,28.00,SKU-1180
+#1763,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1764,customer1764@example.com,paid,2026-10-11 21:25:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1765,customer1765@example.com,paid,2026-10-11 16:37:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1765,,,,1,Spice jar set (6),33.00,SKU-2604
+#1765,,,,1,Reusable straw set,28.00,SKU-1180
+#1766,customer1766@example.com,paid,2026-10-11 14:04:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1766,,,,1,Travel cutlery case,31.00,SKU-0420
+#1766,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1767,customer1767@example.com,paid,2026-10-11 15:08:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1767,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1768,customer1768@example.com,paid,2026-10-11 10:09:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1769,customer1769@example.com,paid,2026-10-11 12:15:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1769,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1769,,,,1,Glass water bottle,34.00,SKU-3760
+#1770,customer1770@example.com,paid,2026-10-11 19:44:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1770,,,,1,Spice jar set (6),33.00,SKU-2604
+#1771,customer1771@example.com,paid,2026-10-11 13:35:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1771,,,,2,Cotton produce bags,35.00,SKU-2880
+#1772,customer1772@example.com,paid,2026-10-11 11:31:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1773,customer1773@example.com,paid,2026-10-11 14:28:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1774,customer1774@example.com,paid,2026-10-11 16:29:00 -0400,1,Travel cutlery case,31.00,SKU-0420
+#1774,,,,1,Cotton produce bags,35.00,SKU-2880
+#1774,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1775,customer1775@example.com,paid,2026-10-11 18:18:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1776,customer1776@example.com,paid,2026-10-11 20:53:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1776,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1777,customer1777@example.com,paid,2026-10-11 13:34:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1778,customer1778@example.com,paid,2026-10-11 16:55:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1779,customer1779@example.com,paid,2026-10-11 15:11:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1779,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1779,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1780,customer1780@example.com,paid,2026-10-11 10:56:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1780,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1781,customer1781@example.com,paid,2026-10-11 20:11:00 -0400,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1781,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1782,customer1782@example.com,paid,2026-10-11 09:16:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1782,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1783,customer1783@example.com,paid,2026-10-11 15:04:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1784,customer1784@example.com,paid,2026-10-12 20:34:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1784,,,,1,Ceramic pour-over,27.00,SKU-1007
+#1785,customer1785@example.com,paid,2026-10-12 11:33:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1785,,,,1,Cotton produce bags,35.00,SKU-2880
+#1786,customer1786@example.com,paid,2026-10-12 10:58:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1786,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1786,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1787,customer1787@example.com,paid,2026-10-12 15:01:00 -0400,1,Spice jar set (6),33.00,SKU-2604
+#1787,,,,1,Reusable straw set,28.00,SKU-1180
+#1788,customer1788@example.com,paid,2026-10-12 20:45:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1788,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1788,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1789,customer1789@example.com,paid,2026-10-12 08:24:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1790,customer1790@example.com,paid,2026-10-12 18:57:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1791,customer1791@example.com,paid,2026-10-12 16:06:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1791,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1792,customer1792@example.com,paid,2026-10-12 21:34:00 -0400,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1793,customer1793@example.com,paid,2026-10-12 14:45:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1793,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1794,customer1794@example.com,paid,2026-10-12 18:05:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1795,customer1795@example.com,paid,2026-10-12 15:25:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1795,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1796,customer1796@example.com,paid,2026-10-12 20:02:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1797,customer1797@example.com,refunded,2026-10-12 21:00:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1797,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1798,customer1798@example.com,paid,2026-10-12 16:29:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1798,,,,1,Insulated tumbler 500ml,31.00,SKU-4401
+#1799,customer1799@example.com,paid,2026-10-12 18:50:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1799,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1799,,,,1,Cotton produce bags,35.00,SKU-2880
+#1800,customer1800@example.com,paid,2026-10-12 10:42:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1800,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1801,customer1801@example.com,paid,2026-10-12 19:03:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1801,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1801,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1802,customer1802@example.com,paid,2026-10-12 12:30:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1802,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1803,customer1803@example.com,paid,2026-10-12 09:48:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1803,,,,1,Cotton produce bags,35.00,SKU-2880
+#1803,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1804,customer1804@example.com,paid,2026-10-12 12:41:00 -0400,2,Bamboo utensil kit,29.00,SKU-2210
+#1805,customer1805@example.com,paid,2026-10-13 15:40:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1805,,,,1,Reusable straw set,28.00,SKU-1180
+#1805,,,,1,Coffee filter (metal),36.00,SKU-1993
+#1806,customer1806@example.com,paid,2026-10-13 10:16:00 -0400,1,Ceramic pour-over,27.00,SKU-1007
+#1807,customer1807@example.com,paid,2026-10-13 20:10:00 -0400,1,Silicone food bags (4),32.00,SKU-1555
+#1808,customer1808@example.com,paid,2026-10-13 12:23:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1808,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1809,customer1809@example.com,paid,2026-10-13 21:10:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1809,,,,1,Glass water bottle,34.00,SKU-3760
+#1809,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1810,customer1810@example.com,paid,2026-10-13 17:12:00 -0400,1,Cotton produce bags,35.00,SKU-2880
+#1811,customer1811@example.com,paid,2026-10-13 15:31:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1811,,,,1,Travel cutlery case,31.00,SKU-0420
+#1811,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1812,customer1812@example.com,paid,2026-10-13 11:12:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1812,,,,2,Glass water bottle,34.00,SKU-3760
+#1813,customer1813@example.com,refunded,2026-10-13 08:52:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1813,,,,1,Cotton produce bags,35.00,SKU-2880
+#1814,customer1814@example.com,paid,2026-10-13 13:21:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1814,,,,1,Glass water bottle,34.00,SKU-3760
+#1814,,,,1,Lunch box steel 2-tier,27.00,SKU-3017
+#1815,customer1815@example.com,paid,2026-10-13 17:34:00 -0400,1,Reusable straw set,28.00,SKU-1180
+#1815,,,,1,Cotton produce bags,35.00,SKU-2880
+#1816,customer1816@example.com,paid,2026-10-13 09:09:00 -0400,2,Cold brew bottle 1L,27.00,SKU-2041
+#1816,,,,1,Reusable straw set,28.00,SKU-1180
+#1817,customer1817@example.com,paid,2026-10-13 19:09:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
+#1817,,,,1,Glass water bottle,34.00,SKU-3760
+#1818,customer1818@example.com,paid,2026-10-13 08:46:00 -0400,1,Cold brew bottle 1L,27.00,SKU-2041
+#1818,,,,1,Silicone food bags (4),32.00,SKU-1555
+#1818,,,,1,Glass water bottle,34.00,SKU-3760
+#1819,customer1819@example.com,paid,2026-10-13 20:49:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1819,,,,1,Bamboo utensil kit,29.00,SKU-2210
+#1820,customer1820@example.com,paid,2026-10-13 17:31:00 -0400,2,Cotton produce bags,35.00,SKU-2880
+#1820,,,,1,Glass meal-prep box (3),30.00,SKU-3302
+#1821,customer1821@example.com,paid,2026-10-13 18:06:00 -0400,1,Glass water bottle,34.00,SKU-3760
+#1821,,,,2,Cotton produce bags,35.00,SKU-2880
+#1822,customer1822@example.com,paid,2026-10-13 18:35:00 -0400,1,Glass meal-prep box (3),30.00,SKU-3302
+#1822,,,,1,Beeswax wraps (pack 3),36.00,SKU-0915
+#1822,,,,1,Cold brew bottle 1L,27.00,SKU-2041
+#1823,customer1823@example.com,paid,2026-10-13 17:09:00 -0400,1,Bamboo utensil kit,29.00,SKU-2210
