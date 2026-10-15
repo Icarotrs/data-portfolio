@@ -40,3 +40,21 @@ Regra aplicada em todo o site, capas, imagens OG e textos do Upwork: só entra n
 - Telas e vídeos simulados: removidos "300 random reviews were checked by hand: 94% agreement", "spot-checked by hand", "Meta and TikTok spend 61% of the budget…" e a legenda "312 products were selling at a loss". As telas e os vídeos dos projetos 04 e 06 foram gerados de novo.
 - Capas 1600×1200, imagens OG e textos do Upwork gerados de novo.
 - Scripts de geração (`scripts/*.mjs`) corrigidos para rodar no Windows.
+
+# Mudanças — Fases 2 e 3: código real dos projetos (outubro de 2026)
+
+Todos os projetos de 02 a 06 continuam com `status: in-progress` no site. Só mude para `built` depois de rodar e confirmar (veja a tabela "Project code" no README).
+
+| # | Pasta | O que foi entregue | Testes |
+|---|---|---|---|
+| 02 | `integrations/apps-script/form-to-sheet-automation/` | Gatilho onFormSubmit com limpeza, gravação só nas colunas de entrada (as colunas de fórmula são ARRAYFORMULA), LockService, aba de resumo por QUERY, PDF semanal por e-mail, aba Settings, `setupDemo()` que cria a planilha e o formulário, `seedDemoData()` com pedidos fictícios | 17 (Node) |
+| 03 | `integrations/apps-script/low-stock-alerts/` | Importação do CSV da Shopify, venda média, dias de cobertura, ponto de reposição (prazo + 7 dias), pedido sugerido para 45 dias, status com ícone e rótulo, gatilho diário às 7h com e-mail, abas Reorder log e Settings, gerador de loja fictícia | 9 (Node) |
+| 04 | `integrations/apps-script/ai-review-classifier/` | Menu e gatilho noturno, lotes de 25, saída JSON com schema (Claude ou OpenAI), validação, sinalização abaixo de 80%, execução em partes que retoma por gatilho, aba Runs com o tempo real de cada execução, conferência manual às cegas de 300 avaliações com cálculo de concordância, chave nas Script Properties, 1.000 avaliações fictícias | 11 (Node) |
+| 05 | `integrations/python/messy-data-extractor/` | Leitura de CSV/Excel/PDF, mapeamento por fornecedor em JSON, limpeza (decimal europeu, moeda, datas mistas, nomes, SKUs, colunas divididas e unidas, duplicatas), saída em Google Sheets ou .xlsx com abas de dados, resumo e log, 4 arquivos fictícios com cada problema | 53 (pytest) |
+| 06 | `integrations/powerbi/ecommerce-profit-roas/` | Script que limpa as 8 tabelas da Olist e gera custo, taxas, atribuição e gasto em anúncios simulados (`is_simulated = TRUE`), totais de referência para conferir o relatório, `measures.dax` comentado, guia das quatro páginas com a formatação de margem negativa | 12 (pytest) |
+
+## O que falta do seu lado
+- 02 e 03: rodar o `setupDemo()` numa conta Google e confirmar que funciona.
+- 04: rodar com uma chave de API, ler o tempo na aba Runs, fazer a conferência manual das 300 avaliações e calcular a concordância. Só esses dois números podem voltar ao site.
+- 05: rodar `python -m extractor --year 2026` (ou com `--sheet-id`) e confirmar.
+- 06: baixar a Olist, rodar `prepare_data.py`, montar o relatório pelo REPORT-GUIDE.md e conferir com os totais de referência.
