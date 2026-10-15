@@ -1,3 +1,4 @@
+import { LavaBackground } from "@/components/layout/LavaBackground";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { site } from "@site";
@@ -53,7 +54,8 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="page-bg min-h-dvh">
+      <body className="min-h-dvh">
+        <LavaBackground />
         <a
           href="#main"
           className="label sr-only z-50 rounded-[3px] bg-cta px-3 py-2 text-cta-fg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

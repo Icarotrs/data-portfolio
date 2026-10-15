@@ -47,7 +47,7 @@ const en: Dictionary = {
     description:
       "Icaro Torres connects the tools small businesses and online stores already use, automates the manual work and adds AI where it saves time. Google Sheets, Apps Script, n8n, Make and the Claude API, plus clear dashboards.",
   },
-  nav: { projects: "Projects", services: "Services", contact: "Contact", hire: "Hire me", skip: "Skip to content", language: "Language" },
+  nav: { projects: "Examples", services: "Services", contact: "Contact", hire: "Hire me", skip: "Skip to content", language: "Language" },
   role: "Business Automation & AI Integration",
   kinds: { integration: "Integration", automation: "Automation", ai: "AI integration", extraction: "Data extraction", dashboard: "Dashboard" },
   hero: {
@@ -56,13 +56,13 @@ const en: Dictionary = {
     intro:
       "I connect the tools your business already uses, automate the manual work and add AI where it actually saves time. Plus clear dashboards to see the results.",
     cta: "Hire me on Upwork",
-    seeProjects: "See projects",
+    seeProjects: "See examples",
     steps: ["Connect", "Automate", "See results"],
   },
   projects: {
-    eyebrow: "Work",
-    title: "Projects",
-    intro: "Demo projects built around common small-business problems, using simulated or public data. Each one shows the problem, the build and the expected result.",
+    eyebrow: "Examples",
+    title: "Some of my specialties",
+    intro: "A few examples of what I build, not the full list. Each one is a demo built around a common small-business problem, with simulated or public data: open it to see the problem, the build and the expected result.",
     viewCase: "View case study",
   },
   services: {
@@ -110,7 +110,7 @@ const pt: Dictionary = {
     description:
       "Icaro Torres conecta as ferramentas que pequenas empresas e lojas online já usam, automatiza o trabalho manual e adiciona IA onde ela realmente economiza tempo. Google Sheets, Apps Script, n8n, Make e a API da Claude, além de dashboards claros.",
   },
-  nav: { projects: "Projetos", services: "Serviços", contact: "Contato", hire: "Contratar", skip: "Pular para o conteúdo", language: "Idioma" },
+  nav: { projects: "Exemplos", services: "Serviços", contact: "Contato", hire: "Contratar", skip: "Pular para o conteúdo", language: "Idioma" },
   role: "Automação de Processos e Integração de IA",
   kinds: { integration: "Integração", automation: "Automação", ai: "Integração de IA", extraction: "Extração de dados", dashboard: "Dashboard" },
   hero: {
@@ -119,13 +119,13 @@ const pt: Dictionary = {
     intro:
       "Conecto as ferramentas que sua empresa já usa, automatizo o trabalho manual e adiciono IA onde ela realmente economiza tempo. E dashboards claros para ver os resultados.",
     cta: "Contratar no Upwork",
-    seeProjects: "Ver projetos",
+    seeProjects: "Ver exemplos",
     steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
   projects: {
-    eyebrow: "Trabalhos",
-    title: "Projetos",
-    intro: "Projetos de demonstração montados em torno de problemas comuns de pequenas empresas, com dados simulados ou públicos. Cada um mostra o problema, a solução e o resultado esperado.",
+    eyebrow: "Exemplos",
+    title: "Algumas das minhas especialidades",
+    intro: "Alguns exemplos do que eu construo, não a lista completa. Cada um é uma demonstração montada em torno de um problema comum de pequenas empresas, com dados simulados ou públicos: abra para ver o problema, a solução e o resultado esperado.",
     viewCase: "Ver estudo de caso",
   },
   services: {
@@ -173,7 +173,7 @@ const es: Dictionary = {
     description:
       "Icaro Torres conecta las herramientas que ya usan las pequeñas empresas y tiendas online, automatiza el trabajo manual y añade IA donde de verdad ahorra tiempo. Google Sheets, Apps Script, n8n, Make y la API de Claude, además de dashboards claros.",
   },
-  nav: { projects: "Proyectos", services: "Servicios", contact: "Contacto", hire: "Contratar", skip: "Saltar al contenido", language: "Idioma" },
+  nav: { projects: "Ejemplos", services: "Servicios", contact: "Contacto", hire: "Contratar", skip: "Saltar al contenido", language: "Idioma" },
   role: "Automatización de Procesos e Integración de IA",
   kinds: { integration: "Integración", automation: "Automatización", ai: "Integración de IA", extraction: "Extracción de datos", dashboard: "Dashboard" },
   hero: {
@@ -182,13 +182,13 @@ const es: Dictionary = {
     intro:
       "Conecto las herramientas que tu empresa ya usa, automatizo el trabajo manual y añado IA donde de verdad ahorra tiempo. Y dashboards claros para ver los resultados.",
     cta: "Contratar en Upwork",
-    seeProjects: "Ver proyectos",
+    seeProjects: "Ver ejemplos",
     steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
   projects: {
-    eyebrow: "Trabajos",
-    title: "Proyectos",
-    intro: "Proyectos de demostración construidos sobre problemas comunes de pequeñas empresas, con datos simulados o públicos. Cada uno muestra el problema, la solución y el resultado esperado.",
+    eyebrow: "Ejemplos",
+    title: "Algunas de mis especialidades",
+    intro: "Algunos ejemplos de lo que construyo, no la lista completa. Cada uno es una demostración construida sobre un problema común de pequeñas empresas, con datos simulados o públicos: ábrelo para ver el problema, la solución y el resultado esperado.",
     viewCase: "Ver caso de estudio",
   },
   services: {

@@ -8,7 +8,7 @@ Projects, in order: Shopify → Sheets → AI → Alerts (n8n) · Form → Sheet
 
 - **Next.js 16** (App Router), fully static export (`out/`)
 - **Tailwind CSS v4**, Geist + Geist Mono, light/dark theme with no flash
-- Blurred orange background (a static 2560×1440 image, `public/bg/*.webp`, made by `scripts/render-bg.mjs`) under a fine grain (`public/bg/grain.png`), with frosted cards: translucent fill (no grain on the cards), square corners and accent corner ticks. No live `backdrop-filter` blur: it was recomputed on every scroll frame and made scrolling stutter
+- Animated "lava lamp" background (`src/components/layout/LavaBackground.tsx`): a tiny canvas (~240px wide) draws the blurred orange band from `public/bg/*.webp` (made by `scripts/render-bg.mjs`) plus soft blobs that drift and merge, stretched to fill the screen; it updates at ~20 fps, pauses while scrolling and in hidden tabs, and stays still for reduced motion. A fine frosted-glass texture (`public/bg/grain.png`) sits on top. Cards are a translucent fill with square corners and accent corner ticks; no live `backdrop-filter` blur (it made scrolling stutter)
 - Home page composition: connected nodes with pulses, a spinning torus and a wireframe cube (`site.config.ts → homeShapes`, drawn by `src/components/ui/Glyph.tsx` in SVG/CSS, no canvas). Project cards and pages have no animated shapes
 - Scroll-driven animations in pure CSS (`animation-timeline: view()`): sections rise in, project cards stack on top of each other while you scroll, screenshots zoom in. Browsers without support (or with reduced motion) show everything static
 - The hero title types itself like a command prompt (CSS only)

@@ -17,7 +17,11 @@
   --line: rgb(60 30 10 / 0.12);
   --line-strong: rgb(60 30 10 / 0.28);
   --card: rgb(255 251 247 / 0.72);
-  --grain: 0.55;
+  --grain: 0.7;
+  --lava-1: rgb(243 150 100 / 0.55);
+  --lava-2: rgb(248 200 150 / 0.6);
+  --lava-3: rgb(238 128 78 / 0.4);
+  --lava-4: rgb(244 236 229 / 0.85);
   --card-strong: rgb(255 251 247 / 0.95);
   --card-2: rgb(255 248 242 / 0.5);
   --card-border: rgb(255 255 255 / 0.7);
@@ -38,7 +42,11 @@
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.24);
   --card: rgb(18 10 8 / 0.72);
-  --grain: 0.75;
+  --grain: 0.9;
+  --lava-1: rgb(226 98 42 / 0.6);
+  --lava-2: rgb(222 140 64 / 0.5);
+  --lava-3: rgb(190 78 28 / 0.55);
+  --lava-4: rgb(18 6 4 / 0.85);
   --card-strong: rgb(18 10 8 / 0.95);
   --card-2: rgb(255 255 255 / 0.04);
   --card-border: rgb(255 255 255 / 0.1);
@@ -74,7 +82,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* No body background: the fixed .page-bg layer sits under the content. */
+/* No body background: the fixed .lava layer (or .page-bg on render pages) sits under the content. */
 body {
   color: var(--fg);
   font-family: var(--font-sans);
@@ -140,9 +148,9 @@ body {
   text-transform: uppercase;
 }
 
-/* Page background: the blurred band, fixed behind the content, with a
-   fine grain on top (frosted-glass texture; also hides gradient banding).
-   Both layers are static, so scrolling only moves the content above. */
+/* Static page background for the internal render pages (covers, OG
+   images): the blurred band plus the frosted texture. The live site uses
+   the animated .lava background below. */
 .page-bg::before,
 .page-bg::after {
   content: "";
@@ -156,6 +164,38 @@ body {
 }
 .page-bg::after {
   /* 256px tile drawn at 128px: a finer texture, and pixel-sharp on 2x screens. */
+  background: url("/bg/grain.png") 0 0 / 128px 128px repeat;
+  opacity: var(--grain);
+}
+
+/* ── Lava: the animated page background (LavaBackground.tsx) ──
+   A tiny canvas, stretched to fill the screen (the stretch blurs it), with
+   the frosted-glass texture on top. Until the canvas has drawn, the static
+   band image shows. --lava-1..3 are the warm blobs; --lava-4 is a dark
+   (light theme: pale) blob that carves the shapes. */
+.lava {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg-image) center / cover no-repeat, var(--bg);
+  pointer-events: none;
+}
+.lava-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.lava-canvas.ready {
+  opacity: 1;
+}
+.lava-glass {
+  position: absolute;
+  inset: 0;
+  /* 256px tile drawn at 128px: a fine texture, pixel-sharp on 2x screens. */
   background: url("/bg/grain.png") 0 0 / 128px 128px repeat;
   opacity: var(--grain);
 }
