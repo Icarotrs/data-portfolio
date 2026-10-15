@@ -45,6 +45,8 @@ Regra aplicada em todo o site, capas, imagens OG e textos do Upwork: só entra n
 
 Todos os projetos de 02 a 06 continuam com `status: in-progress` no site. Só mude para `built` depois de rodar e confirmar (veja a tabela "Project code" no README).
 
+No site: a OpenAI voltou às ferramentas do topo e ao serviço de IA, porque o projeto 04 agora aceita os dois provedores; e cada projeto ganhou o botão "Code", que leva à pasta do código no GitHub.
+
 | # | Pasta | O que foi entregue | Testes |
 |---|---|---|---|
 | 02 | `integrations/apps-script/form-to-sheet-automation/` | Gatilho onFormSubmit com limpeza, gravação só nas colunas de entrada (as colunas de fórmula são ARRAYFORMULA), LockService, aba de resumo por QUERY, PDF semanal por e-mail, aba Settings, `setupDemo()` que cria a planilha e o formulário, `seedDemoData()` com pedidos fictícios | 17 (Node) |
