@@ -17,7 +17,7 @@
   --line: rgb(60 30 10 / 0.12);
   --line-strong: rgb(60 30 10 / 0.28);
   --card: rgb(255 251 247 / 0.72);
-  --grain: 0.5;
+  --grain: 0.55;
   --card-strong: rgb(255 251 247 / 0.95);
   --card-2: rgb(255 248 242 / 0.5);
   --card-border: rgb(255 255 255 / 0.7);
@@ -38,7 +38,7 @@
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.24);
   --card: rgb(18 10 8 / 0.72);
-  --grain: 0.7;
+  --grain: 0.75;
   --card-strong: rgb(18 10 8 / 0.95);
   --card-2: rgb(255 255 255 / 0.04);
   --card-border: rgb(255 255 255 / 0.1);
@@ -155,7 +155,8 @@ body {
   background: var(--bg-image) center / cover no-repeat, var(--bg);
 }
 .page-bg::after {
-  background: url("/bg/grain.png") repeat;
+  /* 256px tile drawn at 128px: a finer texture, and pixel-sharp on 2x screens. */
+  background: url("/bg/grain.png") 0 0 / 128px 128px repeat;
   opacity: var(--grain);
 }
 
