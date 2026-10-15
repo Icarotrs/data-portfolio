@@ -1,0 +1,15 @@
+{
+  "supplier": "Lakeside Home Co.",
+  "match": "lakeside*.pdf",
+  "format": "pdf",
+  "decimal": ".",
+  "currency": "USD",
+  "columns": {
+    "sku": "SKU",
+    "product": "Product",
+    "unit_price": "Price",
+    "stock_qty": "Qty",
+    "updated_on": "Updated"
+  },
+  "split": { "source": "Size / Color", "into": ["size", "color"], "separator": "/" }
+}

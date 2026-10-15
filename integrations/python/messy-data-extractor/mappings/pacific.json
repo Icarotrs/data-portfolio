@@ -1,0 +1,16 @@
+{
+  "supplier": "Pacific Wholesale",
+  "match": "pacific*.xlsx",
+  "format": "xlsx",
+  "header_rows": 2,
+  "decimal": ".",
+  "date_order": "MDY",
+  "columns": {
+    "sku": "Item Code",
+    "product": "Item Description",
+    "unit_price": "Pricing Unit price",
+    "currency": "Pricing Currency",
+    "stock_qty": "Inventory On hand",
+    "updated_on": "Inventory Updated"
+  }
+}

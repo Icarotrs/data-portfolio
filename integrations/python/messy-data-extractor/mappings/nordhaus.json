@@ -1,0 +1,17 @@
+{
+  "supplier": "Nordhaus Supply",
+  "match": "nordhaus*.csv",
+  "format": "csv",
+  "encoding": null,
+  "delimiter": null,
+  "decimal": ",",
+  "date_order": "DMY",
+  "currency": "EUR",
+  "columns": {
+    "sku": "Art.-Nr.",
+    "product": "Bezeichnung",
+    "unit_price": "Preis",
+    "stock_qty": "Bestand",
+    "updated_on": "Datum"
+  }
+}

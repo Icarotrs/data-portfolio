@@ -1,0 +1,15 @@
+{
+  "supplier": "Maple Supplies",
+  "match": "maple*.csv",
+  "format": "csv",
+  "decimal": ".",
+  "date_order": "MDY",
+  "currency": "USD",
+  "columns": {
+    "sku": "Item #",
+    "unit_price": "Price (USD)",
+    "stock_qty": "Stock",
+    "updated_on": "Last update"
+  },
+  "merge": { "product": ["Name", "Variant"] }
+}

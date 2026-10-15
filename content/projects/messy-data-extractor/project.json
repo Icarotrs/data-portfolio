@@ -17,7 +17,7 @@
   },
   "note": "Build in progress. Screens and video are mock-ups with fictitious supplier files.",
   "links": {
-    "github": "",
+    "github": "https://github.com/Icarotrs/data-portfolio/tree/main/integrations/python/messy-data-extractor",
     "demo": ""
   },
   "media": {
