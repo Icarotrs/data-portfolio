@@ -5,7 +5,7 @@ A typical online store with thousands of reviews from Amazon and Shopify in a Go
 ## How I'd build it
 
 - An **Apps Script** workflow inside the same Google Sheet: a custom menu (*AI tagging → Tag new reviews*) plus a nightly trigger for new rows.
-- Reviews will be sent to the **Claude API** in batches of 25 with a fixed prompt. Each one will come back as strict JSON (**topic**, **sentiment**, a **one-line summary** and a **confidence** score) and be validated before it is written.
+- Reviews will be sent in batches of 25 to the **Claude API** or the **OpenAI API** (chosen in a Settings tab; the API key is kept in Script Properties, never in the code) with a fixed prompt. Each one will come back as strict JSON (**topic**, **sentiment**, a **one-line summary** and a **confidence** score) and be validated before it is written.
 - Results will be written **straight back into the sheet**, next to each review. Rows under 80% confidence will be flagged for a person to check.
 - Apps Script limits how long one run can take, so large sheets will be processed in parts: progress is saved and a trigger resumes the work until every row is done.
 - A **hand-check** tab with 300 random reviews, to measure agreement with a person before trusting the results.

@@ -70,7 +70,7 @@ const en: Dictionary = {
     title: "How I can help",
     items: [
       { title: "Process automation", tools: "Google Sheets · Apps Script · n8n · Make", body: "Connect the tools you already use and stop copy-pasting. Orders, forms, stock and emails that update themselves." },
-      { title: "AI integration", tools: "Claude API · n8n · Apps Script", body: "AI inside the workflows you already have: classify requests, summarize text, draft replies. Low-confidence results go to a person to check." },
+      { title: "AI integration", tools: "Claude & OpenAI APIs · n8n · Apps Script", body: "AI inside the workflows you already have: classify requests, summarize text, draft replies. Low-confidence results go to a person to check." },
       { title: "Data extraction & cleanup", tools: "Python · SQL · Power Query", body: "CSV, Excel, PDF and web data turned into clean, usable tables." },
       { title: "Dashboards & reporting", tools: "Power BI · Google Sheets · Looker Studio", body: "Clear reports that show what the automation saves and where the money goes." },
     ],
@@ -133,7 +133,7 @@ const pt: Dictionary = {
     title: "Como posso ajudar",
     items: [
       { title: "Automação de processos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecte as ferramentas que você já usa e pare de copiar e colar. Pedidos, formulários, estoque e e-mails que se atualizam sozinhos." },
-      { title: "Integração de IA", tools: "API da Claude · n8n · Apps Script", body: "IA dentro dos fluxos que você já tem: classificar pedidos, resumir textos, rascunhar respostas. Resultados de baixa confiança vão para uma pessoa conferir." },
+      { title: "Integração de IA", tools: "APIs da Claude e da OpenAI · n8n · Apps Script", body: "IA dentro dos fluxos que você já tem: classificar pedidos, resumir textos, rascunhar respostas. Resultados de baixa confiança vão para uma pessoa conferir." },
       { title: "Extração e limpeza de dados", tools: "Python · SQL · Power Query", body: "Dados de CSV, Excel, PDF e da web viram tabelas limpas e prontas para usar." },
       { title: "Dashboards e relatórios", tools: "Power BI · Google Sheets · Looker Studio", body: "Relatórios claros que mostram o que a automação economiza e para onde vai o dinheiro." },
     ],
@@ -196,7 +196,7 @@ const es: Dictionary = {
     title: "Cómo puedo ayudar",
     items: [
       { title: "Automatización de procesos", tools: "Google Sheets · Apps Script · n8n · Make", body: "Conecta las herramientas que ya usas y deja de copiar y pegar. Pedidos, formularios, stock y correos que se actualizan solos." },
-      { title: "Integración de IA", tools: "API de Claude · n8n · Apps Script", body: "IA dentro de los flujos que ya tienes: clasificar solicitudes, resumir textos, redactar respuestas. Los resultados de baja confianza pasan a una persona para revisarlos." },
+      { title: "Integración de IA", tools: "APIs de Claude y OpenAI · n8n · Apps Script", body: "IA dentro de los flujos que ya tienes: clasificar solicitudes, resumir textos, redactar respuestas. Los resultados de baja confianza pasan a una persona para revisarlos." },
       { title: "Extracción y limpieza de datos", tools: "Python · SQL · Power Query", body: "Datos de CSV, Excel, PDF y la web convertidos en tablas limpias y listas para usar." },
       { title: "Dashboards e informes", tools: "Power BI · Google Sheets · Looker Studio", body: "Informes claros que muestran lo que ahorra la automatización y adónde va el dinero." },
     ],

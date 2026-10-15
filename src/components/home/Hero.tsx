@@ -5,7 +5,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { Glyph } from "@/components/ui/Glyph";
 
-const tools = ["Google Sheets", "Apps Script", "n8n", "Make", "Claude API", "Power BI"];
+const tools = ["Google Sheets", "Apps Script", "n8n", "Make", "Claude & OpenAI APIs", "Power BI"];
 
 /**
  * Intro: the title types itself like a command prompt; on the right, the

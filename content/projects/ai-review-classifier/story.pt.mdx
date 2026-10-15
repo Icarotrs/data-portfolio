@@ -5,7 +5,7 @@ Uma loja online típica com milhares de avaliações da Amazon e da Shopify numa
 ## Como eu construiria
 
 - Um fluxo em **Apps Script** dentro da própria planilha: um menu (*AI tagging → Classificar avaliações novas*) e um gatilho noturno para as linhas novas.
-- As avaliações vão ser enviadas para a **API da Claude** em lotes de 25 com um prompt fixo. Cada uma vai voltar em JSON estrito (**tema**, **sentimento**, um **resumo de uma linha** e um índice de **confiança**) e ser validada antes de ser gravada.
+- As avaliações vão ser enviadas em lotes de 25 para a **API da Claude** ou a **API da OpenAI** (escolhida numa aba de Configurações; a chave fica nas Script Properties, nunca no código) com um prompt fixo. Cada uma vai voltar em JSON estrito (**tema**, **sentimento**, um **resumo de uma linha** e um índice de **confiança**) e ser validada antes de ser gravada.
 - Os resultados vão ser gravados **direto na planilha**, ao lado de cada avaliação. Linhas com menos de 80% de confiança vão ser sinalizadas para uma pessoa conferir.
 - O Apps Script limita o tempo de cada execução, então planilhas grandes vão ser processadas em partes: o progresso é salvo e um gatilho retoma o trabalho até terminar todas as linhas.
 - Uma aba de **conferência manual** com 300 avaliações aleatórias, para medir a concordância com uma pessoa antes de confiar nos resultados.

@@ -9,6 +9,7 @@
     "Google Sheets",
     "Apps Script",
     "Claude API",
+    "OpenAI API (optional)",
     "Power BI"
   ],
   "result": "Will run from a menu in Google Sheets or on a schedule; low-confidence rows go to a person to check. Accuracy will be measured against a 300-review hand check before any number is published.",
@@ -96,7 +97,7 @@
     }
   },
   "links": {
-    "github": "",
+    "github": "https://github.com/Icarotrs/data-portfolio/tree/main/integrations/apps-script/ai-review-classifier",
     "demo": ""
   }
 }

@@ -5,7 +5,7 @@ DESCRIPTION (538/600 characters)
 Demo project, build in progress. AI integration inside Google Sheets: an Apps Script workflow will send new customer reviews to the Claude API in batches of 25 and write the topic, sentiment and a one-line summary back into the sheet as validated JSON. It will run from a custom menu or a nightly trigger, resume large sheets in parts, and flag rows under 80% confidence for a person to check. A 300-review hand check will measure accuracy before any number is published. Fictitious reviews. Stack: Google Sheets, Apps Script, Claude API.
 
 SKILLS
-Google Sheets, Apps Script, Claude API, Power BI
+Google Sheets, Apps Script, Claude API, OpenAI API (optional), Power BI
 
 RESULT
 Will run from a menu in Google Sheets or on a schedule; low-confidence rows go to a person to check. Accuracy will be measured against a 300-review hand check before any number is published.
