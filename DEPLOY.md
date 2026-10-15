@@ -20,9 +20,13 @@ The site is a static export, so any static host works. Vercel is the simplest.
 3. Wait for Vercel to verify the domain and issue the HTTPS certificate.
 4. Update `site.config.ts → url` to the custom domain, commit and push.
 
+## Current deployment
+
+- Vercel project `icaro-data-portfolio`, connected to GitHub `Icarotrs/data-portfolio` (branch `main`). Every push to `main` deploys to production: https://icaro-data-portfolio.vercel.app
+
 ## Before sharing the link
 
-- Replace the placeholder Upwork and LinkedIn URLs in `site.config.ts`.
+- Check the Upwork and LinkedIn URLs in `site.config.ts` (set to the real profiles in October 2026).
 - Regenerate assets after changing names, titles or projects: `npm run build && npm run assets`, then commit `public/og` and `public/fallback`.
 - Upload `exports/covers/<slug>.png` and paste `exports/upwork/<slug>.txt` into each Upwork portfolio item.
 - Optional: check with PageSpeed Insights (mobile) at https://pagespeed.web.dev.

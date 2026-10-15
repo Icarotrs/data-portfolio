@@ -16,8 +16,8 @@ export const site = {
 
   // ── Links (all contact goes through Upwork) ─────────────────
   links: {
-    upwork: "https://www.upwork.com/freelancers/~YOUR_PROFILE_ID",
-    linkedin: "https://www.linkedin.com/in/YOUR_PROFILE",
+    upwork: "https://www.upwork.com/freelancers/~01840d98e344af4b2d",
+    linkedin: "https://www.linkedin.com/in/icarotrss/",
     github: "https://github.com/Icarotrs",
   },
 
