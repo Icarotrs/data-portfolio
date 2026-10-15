@@ -57,20 +57,24 @@ const SPOTS = [
 
 function Composition({ steps }: { steps: [string, string, string] }) {
   return (
-    <div aria-hidden="true" className="card rise relative hidden h-[480px] overflow-hidden sm:block" style={{ "--i": 3 } as CSSProperties}>
+    <div aria-hidden="true" className="card rise relative hidden h-[480px] overflow-hidden [container-type:size] sm:block" style={{ "--i": 3 } as CSSProperties}>
+      {/* Static dashed links; the pulses are HTML dots moved by CSS transforms (GPU). */}
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
         {SPOTS.slice(1).map((b, i) => {
           const a = SPOTS[i];
-          return (
-            <g key={i}>
-              <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--line-strong)" strokeWidth="1" strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />
-              <circle r="0.9" className="glyph-pulse" fill="var(--accent)">
-                <animateMotion dur="2.6s" begin={`-${i * 1.3}s`} repeatCount="indefinite" path={`M${a.x},${a.y} L${b.x},${b.y}`} />
-              </circle>
-            </g>
-          );
+          return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--line-strong)" strokeWidth="1" strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />;
         })}
       </svg>
+      {SPOTS.slice(1).map((b, i) => {
+        const a = SPOTS[i];
+        return (
+          <span
+            key={i}
+            className="glyph-pulse glyph-pulse-wide"
+            style={{ left: `${a.x}%`, top: `${a.y}%`, "--dx": b.x - a.x, "--dy": b.y - a.y, animationDuration: "2.6s", animationDelay: `-${i * 1.3}s` } as CSSProperties}
+          />
+        );
+      })}
       {site.homeShapes.map((shape, i) => (
         <div
           key={shape}

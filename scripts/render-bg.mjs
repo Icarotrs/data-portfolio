@@ -11,12 +11,12 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const W = 1920;
-const H = 1080;
+const W = 2560;
+const H = 1440;
 
 // A wide band sweeping from the lower left to the upper right, plus a thinner
 // warm highlight along its upper edge, heavily blurred.
-const svg = ({ base, band, glow }) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+const svg = ({ base, band, glow }) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 1920 1080" preserveAspectRatio="none">
   <defs>
     <filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="95"/></filter>
     <filter id="b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
@@ -48,7 +48,7 @@ try {
       c.width = img.width;
       c.height = img.height;
       c.getContext("2d").drawImage(img, 0, 0);
-      return c.toDataURL("image/webp", 0.8);
+      return c.toDataURL("image/webp", 0.95);
     }, png.toString("base64"));
     const out = path.join(ROOT, "public", "bg", `${name}.webp`);
     fs.mkdirSync(path.dirname(out), { recursive: true });

@@ -16,7 +16,8 @@
   --faint: #5e5046;
   --line: rgb(60 30 10 / 0.12);
   --line-strong: rgb(60 30 10 / 0.28);
-  --card: rgb(255 251 247 / 0.62);
+  --card: rgb(255 251 247 / 0.72);
+  --grain: 0.5;
   --card-strong: rgb(255 251 247 / 0.95);
   --card-2: rgb(255 248 242 / 0.5);
   --card-border: rgb(255 255 255 / 0.7);
@@ -36,7 +37,8 @@
   --faint: #ab9f97;
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.24);
-  --card: rgb(18 10 8 / 0.66);
+  --card: rgb(18 10 8 / 0.72);
+  --grain: 0.7;
   --card-strong: rgb(18 10 8 / 0.95);
   --card-2: rgb(255 255 255 / 0.04);
   --card-border: rgb(255 255 255 / 0.1);
@@ -101,6 +103,9 @@ body {
 }
 
 /* ── Cards: frosted glass, square corners, accent corner ticks ─
+   The frost is faked on purpose: a translucent fill plus a static grain
+   tile over an already-blurred background. A live backdrop-filter blur is
+   recomputed on every scroll frame and made scrolling stutter.
    Unlayered on purpose: the 3px radius wins over rounded-* utilities.
    The ticks are background layers, so .card never needs position. */
 .card {
@@ -110,12 +115,11 @@ body {
     linear-gradient(var(--tick), var(--tick)) left top / 1.5px 14px no-repeat,
     linear-gradient(var(--tick), var(--tick)) right bottom / 14px 1.5px no-repeat,
     linear-gradient(var(--tick), var(--tick)) right bottom / 1.5px 14px no-repeat,
+    url("/bg/grain-soft.png") repeat,
     var(--card);
   border: 1px solid var(--card-border);
   border-radius: 3px;
   box-shadow: var(--card-shadow);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
-  backdrop-filter: blur(22px) saturate(150%);
 }
 /* Cards that stack on top of each other need more opacity to stay legible. */
 .card-strong {
@@ -123,11 +127,9 @@ body {
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 12px 24px -18px rgb(0 0 0 / 0.6);
 }
 
-/* Bars and buttons share the square look. */
+/* Header and footer: the same frosted look without the corner ticks. */
 .glass {
-  background: var(--card);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
-  backdrop-filter: blur(22px) saturate(150%);
+  background: url("/bg/grain-soft.png") repeat, var(--card-strong);
 }
 
 /* Small mono labels used across the layout. */
@@ -139,14 +141,23 @@ body {
   text-transform: uppercase;
 }
 
-/* Page background: the blurred band, fixed behind the content. */
-.page-bg::before {
+/* Page background: the blurred band, fixed behind the content, with a
+   fine grain on top (frosted-glass texture; also hides gradient banding).
+   Both layers are static, so scrolling only moves the content above. */
+.page-bg::before,
+.page-bg::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--bg-image) center / cover no-repeat, var(--bg);
   pointer-events: none;
+}
+.page-bg::before {
+  background: var(--bg-image) center / cover no-repeat, var(--bg);
+}
+.page-bg::after {
+  background: url("/bg/grain.png") repeat;
+  opacity: var(--grain);
 }
 
 /* ── Load animation: hero lines rise in ───────────────────── */
@@ -323,11 +334,20 @@ body {
 }
 
 /* ── Glyphs: the animated shapes of the home composition ──────
-   Transforms and opacity only (compositor-friendly). Reduced motion
-   freezes them (see the global rule at the top) and hides the pulses. */
+   Only transform animations on HTML elements, which run on the GPU
+   compositor and never repaint. Reduced motion freezes them (see the
+   global rule at the top) and hides the pulses. */
 .glyph {
   color: var(--fg);
-  overflow: visible;
+}
+.glyph-box {
+  position: relative;
+  container-type: inline-size;
+}
+.glyph-tilt {
+  position: absolute;
+  inset: 0;
+  transform: scaleY(0.42);
 }
 .glyph-spin {
   animation: glyph-spin 14s linear infinite;
@@ -335,6 +355,31 @@ body {
 @keyframes glyph-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+/* A dot that travels (--dx, --dy) percent of its container: of the glyph
+   box (square, so cqw for both axes) or, with .glyph-pulse-wide, of the
+   home composition panel (cqw across, cqh down). */
+.glyph-pulse {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: glyph-pulse linear infinite;
+  --to-x: calc(var(--dx) * 1cqw);
+  --to-y: calc(var(--dy) * 1cqw);
+}
+.glyph-pulse-wide {
+  --to-y: calc(var(--dy) * 1cqh);
+}
+@keyframes glyph-pulse {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(var(--to-x), var(--to-y));
   }
 }
 .glyph-cube-wrap {
