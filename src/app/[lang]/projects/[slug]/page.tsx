@@ -9,7 +9,6 @@ import { ContactCard } from "@/components/layout/ContactCard";
 import { FlowDiagram } from "@/components/project/FlowDiagram";
 import { MediaGallery } from "@/components/project/MediaGallery";
 import { LinkButton } from "@/components/ui/LinkButton";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/icons";
 
 export const dynamicParams = false;
@@ -85,7 +84,6 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
             <span className="label text-accent">
               {project.number} · {dict.kinds[project.kind]}
             </span>
-            {project.status === "in-progress" && <StatusBadge label={t.status.inProgress} />}
           </p>
           <h1 className="mt-4 text-balance text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{project.title}</h1>
           <p className="mt-5 max-w-[60ch] text-pretty text-[17px] leading-relaxed text-muted">{project.summary}</p>

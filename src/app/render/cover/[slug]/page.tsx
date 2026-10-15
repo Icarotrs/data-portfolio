@@ -30,11 +30,6 @@ export default async function RenderCover({ params }: PageProps<"/render/cover/[
             <p className="font-mono text-lg uppercase tracking-[0.2em] text-faint">
               {en.kinds[project.kind]}
             </p>
-            {project.status === "in-progress" && (
-              <p className="rounded-[3px] border border-accent px-3 py-1 font-mono text-lg uppercase tracking-[0.2em] text-accent">
-                {en.project.status.inProgress}
-              </p>
-            )}
           </div>
           <h1 className="mt-6 text-balance text-7xl font-normal leading-[1.02] tracking-tight">
             {project.title}

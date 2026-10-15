@@ -4,7 +4,7 @@ Regra aplicada em todo o site, capas, imagens OG e textos do Upwork: só entra n
 
 ## Status dos projetos
 - Novo campo `status` em `project.json`: `built` ou `in-progress`. O build falha se faltar.
-- Só o 01 (n8n) é `built`. De 02 a 06 é `in-progress`, com o selo "In progress" / "Em andamento" / "En curso" no card da home, na página do projeto, na capa do Upwork e na imagem OG.
+- Só o 01 (n8n) é `built`. De 02 a 06 é `in-progress`. (O selo visual "Em andamento" foi removido depois, a pedido; o status continua no `project.json` e nos textos "How I'd build it".)
 - O build também falha se o título da segunda seção não bater com o status: "What I built" só para `built`, "How I'd build it" para `in-progress`, nas três línguas.
 
 ## Cenário em vez de cliente

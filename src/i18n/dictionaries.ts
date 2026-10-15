@@ -36,7 +36,6 @@ export interface Dictionary {
     nextProject: string;
     shotsNote: string;
     basis: { estimated: string; simulated: string; setting: string; public: string };
-    status: { inProgress: string };
   };
   theme: { dark: string; light: string; group: string };
 }
@@ -99,7 +98,6 @@ const en: Dictionary = {
     nextProject: "Next project",
     shotsNote: "Screens and videos are mock-ups of the deliverable with fictitious or simulated data.",
     basis: { estimated: "Estimated", simulated: "Simulated", setting: "Design rule", public: "Public data" },
-    status: { inProgress: "In progress" },
   },
   theme: { dark: "Dark theme", light: "Light theme", group: "Color theme" },
 };
@@ -162,7 +160,6 @@ const pt: Dictionary = {
     nextProject: "Próximo projeto",
     shotsNote: "Telas e vídeos são simulações da entrega com dados fictícios ou simulados.",
     basis: { estimated: "Estimado", simulated: "Simulado", setting: "Regra do projeto", public: "Dado público" },
-    status: { inProgress: "Em andamento" },
   },
   theme: { dark: "Tema escuro", light: "Tema claro", group: "Tema de cores" },
 };
@@ -225,7 +222,6 @@ const es: Dictionary = {
     nextProject: "Siguiente proyecto",
     shotsNote: "Las pantallas y videos son simulaciones de la entrega con datos ficticios o simulados.",
     basis: { estimated: "Estimado", simulated: "Simulado", setting: "Regla de diseño", public: "Dato público" },
-    status: { inProgress: "En curso" },
   },
   theme: { dark: "Tema oscuro", light: "Tema claro", group: "Tema de color" },
 };

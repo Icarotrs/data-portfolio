@@ -3,7 +3,6 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Project } from "@/lib/content";
 import { ArrowRight } from "@/components/ui/icons";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { SectionHeading } from "./SectionHeading";
 
 /**
@@ -42,7 +41,6 @@ function ProjectCard({ project: p, lang, dict }: { project: Project; lang: Local
         <div className="flex items-baseline gap-4">
           <span className="font-mono text-[44px] font-light leading-none text-accent">{p.number}</span>
           <span className="label text-faint">{dict.kinds[p.kind]}</span>
-          {p.status === "in-progress" && <StatusBadge label={dict.project.status.inProgress} />}
         </div>
         <h3 className="mt-6 text-[26px] leading-tight tracking-tight transition-colors group-hover:text-accent sm:text-[30px]">
           {p.title}
