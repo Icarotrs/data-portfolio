@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
  * Renders the project screenshots defined in scripts/shots/projects.mjs to
- * public/projects/<slug>/<file>.webp (1600×1000).
+ * public/projects/<slug>/<file>.webp (1600×1000), plus Portuguese and
+ * Spanish versions (<file>.pt.webp, <file>.es.webp) translated with
+ * scripts/shots/i18n.mjs.
  *
  *   npm run shots
  *
@@ -13,6 +15,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 import { shots, W, H } from "./shots/projects.mjs";
+import { translateDocument, pageArgs } from "./shots/i18n.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
@@ -43,8 +46,9 @@ const page = await browser.newPage({ viewport: { width: W, height: H }, deviceSc
 try {
   for (const [slug, list] of Object.entries(shots)) {
     if (only && slug !== only) continue;
-    for (const shot of list) {
+    for (const shot of list) for (const lang of ["en", "pt", "es"]) {
       await page.setContent(shot.html, { waitUntil: "load" });
+      if (lang !== "en") await page.evaluate(translateDocument, pageArgs(lang));
       await page.evaluate(() => document.fonts.ready);
       const png = await page.screenshot({ type: "png" });
       // Encode WebP in the browser (Chromium supports it natively).
@@ -58,7 +62,7 @@ try {
         c.getContext("2d").drawImage(img, 0, 0);
         return c.toDataURL("image/webp", 0.86);
       }, png.toString("base64"));
-      const out = path.join(ROOT, "public", "projects", slug, `${shot.file}.webp`);
+      const out = path.join(ROOT, "public", "projects", slug, `${shot.file}${lang === "en" ? "" : `.${lang}`}.webp`);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       fs.writeFileSync(out, Buffer.from(dataUrl.split(",")[1], "base64"));
       console.log("  ✓", path.relative(ROOT, out));

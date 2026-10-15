@@ -25,6 +25,9 @@ Projects, in order: Shopify → Sheets → AI → Alerts (n8n) · Form → Sheet
 - `/` picks a language (saved choice, then browser language, then English) and redirects to `/en/`, `/pt/` or `/es/`.
 - The EN · PT · ES switch in the header keeps the current page and saves the choice.
 
+- **Language by region.** On Vercel, `vercel.json` redirects `/` on the edge: a saved choice (cookie `lang`, set by the language switch) wins; otherwise the visitor's country (`x-vercel-ip-country`) picks `/pt/` or `/es/` for Portuguese- or Spanish-speaking countries and `/en/` for everyone else. Country and time-zone lists are in `src/i18n/regions.json`; after editing it run `node scripts/gen-vercel-json.mjs`. Elsewhere (local runs, other hosts) the `/` page falls back to the device's time zone.
+- **Translated screens and videos.** `npm run shots` and `npm run videos` also render Portuguese and Spanish versions (`<file>.pt.webp`, `demo.es.mp4`, …) by translating the mock-ups with `scripts/shots/i18n.mjs`; each language page uses its own files and falls back to English when one is missing.
+
 ## Projects
 
 Each project is a folder in `content/projects/<slug>/`:

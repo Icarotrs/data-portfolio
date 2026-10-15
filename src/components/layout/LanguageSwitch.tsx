@@ -24,6 +24,9 @@ export function LanguageSwitch({ lang, label }: { lang: Locale; label: string })
             aria-current={l === lang ? "true" : undefined}
             aria-label={LOCALE_LABELS[l].name}
             onClick={() => {
+              // Remembered in a cookie (read by the "/" redirect on Vercel's edge)
+              // and in localStorage.
+              document.cookie = `${LOCALE_STORAGE_KEY}=${l}; path=/; max-age=31536000; samesite=lax`;
               try {
                 localStorage.setItem(LOCALE_STORAGE_KEY, l);
               } catch {}

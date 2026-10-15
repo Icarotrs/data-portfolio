@@ -213,9 +213,26 @@ export function getProject(slug: string): Project | undefined {
 }
 
 /** A project with its texts in the given language (English fallback). */
+/**
+ * The language version of a media file, when it exists: "x.webp" →
+ * "x.pt.webp", "demo.mp4" → "demo.pt.mp4" (rendered by scripts/render-shots
+ * and render-videos). Falls back to the English file.
+ */
+function localMedia(src: string | undefined, locale: Locale): string | undefined {
+  if (!src || locale === "en") return src;
+  const alt = src.replace(/\.(webp|png|jpg|mp4)$/, `.${locale}.$1`);
+  return alt !== src && fs.existsSync(path.join(process.cwd(), "public", alt)) ? alt : src;
+}
+
 export function localize(p: Project, locale: Locale): Project {
   const t = p.i18n[locale];
-  if (!t) return p;
+  const video = p.media.video;
+  const media = {
+    ...p.media,
+    screenshots: p.media.screenshots.map((s, i) => ({ ...s, src: localMedia(s.src, locale) ?? s.src, alt: t?.alts?.[i] ?? s.alt })),
+    video: video ? { src: localMedia(video.src, locale) ?? video.src, poster: localMedia(video.poster, locale) } : undefined,
+  };
+  if (!t) return { ...p, media };
   return {
     ...p,
     title: t.title ?? p.title,
@@ -224,10 +241,7 @@ export function localize(p: Project, locale: Locale): Project {
     metric: { ...p.metric, value: t.metricValue ?? p.metric.value, label: t.metricLabel ?? p.metric.label },
     note: t.note ?? p.note,
     flow: p.flow?.map((f, i) => ({ ...f, label: t.flow?.[i] ?? f.label })),
-    media: {
-      ...p.media,
-      screenshots: p.media.screenshots.map((s, i) => ({ ...s, alt: t.alts?.[i] ?? s.alt })),
-    },
+    media,
   };
 }
 

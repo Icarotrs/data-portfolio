@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 /**
  * Renders the project demo videos defined in scripts/shots/videos.mjs to
- * public/projects/<slug>/demo.mp4 (1280×800, H.264, no audio) and demo.webm (VP9).
+ * public/projects/<slug>/demo.mp4 (1280×800, H.264, no audio) and demo.webm (VP9),
+ * plus Portuguese and Spanish versions (demo.pt.mp4, demo.es.mp4, …): the
+ * screens and captions are translated with scripts/shots/i18n.mjs.
+ *
+ *   npm run videos -- --lang=pt     (only one language)
  *
  *   npm run videos
  *   npm run videos -- --only=form-to-sheet-automation
@@ -18,10 +22,13 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { chromium } from "playwright-core";
 import { videos } from "./shots/videos.mjs";
+import { tr, translateDocument, pageArgs } from "./shots/i18n.mjs";
 import { W, H } from "./shots/kit.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
+const langArg = process.argv.find((a) => a.startsWith("--lang="))?.slice(7);
+const LANGS = langArg ? [langArg] : ["en", "pt", "es"];
 const OUT_W = 1280;
 const OUT_H = 800;
 
@@ -209,13 +216,19 @@ if (!executablePath) {
 
 const browser = await chromium.launch({ executablePath });
 try {
-  for (const [slug, video] of Object.entries(videos)) {
+  for (const [slug, video] of Object.entries(videos)) for (const lang of LANGS) {
     if (only && slug !== only) continue;
     const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
     page.on("pageerror", (e) => console.error("  page error:", e.message));
     await page.setContent(HOST);
     await page.evaluate((htmls) => window.__load(htmls), video.scenes.map((s) => s.html));
-    for (const [i, s] of video.scenes.entries()) await page.evaluate(([i, steps]) => window.__prep(i, steps), [i, s.prep]);
+    // Translate every scene before prep (prep stores some cells to restore later).
+    if (lang !== "en") for (const frame of page.frames().slice(1)) await frame.evaluate(translateDocument, pageArgs(lang));
+    const trOpts = (o) => (o && typeof o.text === "string" ? { ...o, text: tr(o.text, lang) } : o);
+    for (const [i, s] of video.scenes.entries()) {
+      const steps = s.prep.map(([fn, sel, o]) => [fn, sel, trOpts(o)]);
+      await page.evaluate(([i, steps]) => window.__prep(i, steps), [i, steps]);
+    }
 
     const v = {
       wait: (ms) => page.waitForTimeout(ms),
@@ -223,8 +236,8 @@ try {
         await page.evaluate((i) => window.__scene(i), i);
         await page.waitForTimeout(700);
       },
-      caption: (text) => page.evaluate((t) => window.__caption(t), text),
-      tip: (text) => page.evaluate((t) => window.__tip(t), text),
+      caption: (text) => page.evaluate((t) => window.__caption(t), tr(text, lang)),
+      tip: (text) => page.evaluate((t) => window.__tip(t), tr(text, lang)),
       async move(sel, { fx = 0.5, fy = 0.5, ms = 850 } = {}) {
         const r = await page.evaluate((s) => window.__rect(s), sel);
         if (!r) throw new Error(`${slug}: nothing matches "${sel}"`);
@@ -235,8 +248,8 @@ try {
         await page.evaluate(() => window.__click());
         await page.waitForTimeout(250);
       },
-      type: (sel, text) => page.evaluate(([s, t]) => window.__f("type", s, { text: t }), [sel, text]),
-      f: (fn, sel, opts) => page.evaluate(([fn, s, o]) => window.__f(fn, s, o), [fn, sel, opts ?? {}]),
+      type: (sel, text) => page.evaluate(([s, t]) => window.__f("type", s, { text: t }), [sel, tr(text, lang)]),
+      f: (fn, sel, opts) => page.evaluate(([fn, s, o]) => window.__f(fn, s, o), [fn, sel, trOpts(opts) ?? {}]),
     };
 
     // Capture every painted frame with its timestamp.
@@ -268,7 +281,7 @@ try {
     list.push(`file f${String(frames.length - 1).padStart(5, "0")}.jpg`);
     fs.writeFileSync(path.join(tmp, "list.txt"), list.join("\n"));
 
-    const out = path.join(ROOT, "public", "projects", slug, "demo.mp4");
+    const out = path.join(ROOT, "public", "projects", slug, `demo${lang === "en" ? "" : `.${lang}`}.mp4`);
     fs.mkdirSync(path.dirname(out), { recursive: true });
     execFileSync("ffmpeg", [
       "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", path.join(tmp, "list.txt"),

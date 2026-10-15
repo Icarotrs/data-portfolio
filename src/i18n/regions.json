@@ -1,0 +1,27 @@
+{
+  "_comment": "Language by region. Countries (ISO 3166-1 alpha-2) and time zones where Portuguese or Spanish is the main language; everywhere else gets English. Used by vercel.json (IP country, via scripts/gen-vercel-json.mjs) and by the / page (time zone fallback).",
+  "pt": {
+    "countries": ["BR", "PT", "AO", "MZ", "CV", "GW", "ST", "TL", "MO"],
+    "timeZones": [
+      "America/Sao_Paulo", "America/Araguaina", "America/Bahia", "America/Belem", "America/Boa_Vista", "America/Campo_Grande",
+      "America/Cuiaba", "America/Eirunepe", "America/Fortaleza", "America/Maceio", "America/Manaus", "America/Noronha",
+      "America/Porto_Velho", "America/Recife", "America/Rio_Branco", "America/Santarem", "Brazil/East", "Brazil/West", "Brazil/Acre",
+      "Europe/Lisbon", "Atlantic/Azores", "Atlantic/Madeira", "Africa/Luanda", "Africa/Maputo", "Atlantic/Cape_Verde",
+      "Africa/Bissau", "Africa/Sao_Tome", "Asia/Dili", "Asia/Macau"
+    ]
+  },
+  "es": {
+    "countries": ["ES", "MX", "AR", "CO", "PE", "VE", "CL", "EC", "GT", "CU", "BO", "DO", "HN", "PY", "SV", "NI", "CR", "PA", "UY", "PR", "GQ"],
+    "timeZones": [
+      "Europe/Madrid", "Africa/Ceuta", "Atlantic/Canary", "America/Mexico_City", "America/Cancun", "America/Merida", "America/Monterrey",
+      "America/Matamoros", "America/Chihuahua", "America/Ciudad_Juarez", "America/Ojinaga", "America/Mazatlan", "America/Bahia_Banderas",
+      "America/Hermosillo", "America/Tijuana", "America/Buenos_Aires", "America/Argentina/Buenos_Aires", "America/Argentina/Cordoba",
+      "America/Argentina/Salta", "America/Argentina/Jujuy", "America/Argentina/Tucuman", "America/Argentina/Catamarca",
+      "America/Argentina/La_Rioja", "America/Argentina/San_Juan", "America/Argentina/Mendoza", "America/Argentina/San_Luis",
+      "America/Argentina/Rio_Gallegos", "America/Argentina/Ushuaia", "America/Bogota", "America/Lima", "America/Caracas",
+      "America/Santiago", "America/Punta_Arenas", "Pacific/Easter", "America/Guayaquil", "Pacific/Galapagos", "America/Guatemala",
+      "America/Havana", "America/La_Paz", "America/Santo_Domingo", "America/Tegucigalpa", "America/Asuncion", "America/El_Salvador",
+      "America/Managua", "America/Costa_Rica", "America/Panama", "America/Montevideo", "America/Puerto_Rico", "Africa/Malabo"
+    ]
+  }
+}
