@@ -13,22 +13,10 @@ export interface Dictionary {
   hero: { eyebrow: string; title: string; intro: string; cta: string; seeProjects: string; steps: [string, string, string] };
   projects: { eyebrow: string; title: string; intro: string; viewCase: string };
   explorer: {
-    root: string;
-    menu: { file: string; view: string; help: string };
-    up: string;
-    viewIcons: string;
-    viewList: string;
-    /** "{n}" is replaced with the number of objects. */
-    objects: string;
-    columns: { name: string; type: string };
-    folderType: string;
-    emptyFolder: string;
-    noResults: string;
-    filterLabel: string;
-    filterPlaceholder: string;
+    foldersNav: string;
+    /** Title of the pop-up window, e.g. "PROJECT" → PROJECT_01.EXE */
+    file: string;
     close: string;
-    back: string;
-    hint: string;
     folders: Record<FolderId, string>;
   };
   services: {
@@ -84,23 +72,12 @@ const en: Dictionary = {
     viewCase: "View case study",
   },
   explorer: {
-    root: "PROJECTS",
-    menu: { file: "File", view: "View", help: "Help" },
-    up: "Up one level",
-    viewIcons: "Large icons",
-    viewList: "Details",
-    objects: "{n} object(s)",
-    columns: { name: "Name", type: "Type" },
-    folderType: "Folder",
-    emptyFolder: "No public projects in this folder yet.",
-    noResults: "No project matches this filter.",
-    filterLabel: "Filter projects",
-    filterPlaceholder: "filter by name or tool",
+    foldersNav: "Folders",
+    file: "PROJECT",
     close: "Close",
-    back: "Back",
-    hint: "Double-click opens · arrows move · Enter opens · Backspace goes up · Esc closes",
     folders: { automation: "Automation", "internal-systems": "Internal systems", data: "Data & analysis", experiments: "Experiments" },
   },
+
   services: {
     eyebrow: "Services",
     title: "How I can help",
@@ -164,23 +141,12 @@ const pt: Dictionary = {
     viewCase: "Ver estudo de caso",
   },
   explorer: {
-    root: "PROJETOS",
-    menu: { file: "Arquivo", view: "Exibir", help: "Ajuda" },
-    up: "Subir um nível",
-    viewIcons: "Ícones grandes",
-    viewList: "Detalhes",
-    objects: "{n} objeto(s)",
-    columns: { name: "Nome", type: "Tipo" },
-    folderType: "Pasta",
-    emptyFolder: "Ainda não há projetos públicos nesta pasta.",
-    noResults: "Nenhum projeto corresponde a este filtro.",
-    filterLabel: "Filtrar projetos",
-    filterPlaceholder: "filtrar por nome ou ferramenta",
+    foldersNav: "Pastas",
+    file: "PROJETO",
     close: "Fechar",
-    back: "Voltar",
-    hint: "Clique duplo abre · setas movem · Enter abre · Backspace sobe · Esc fecha",
     folders: { automation: "Automação", "internal-systems": "Sistemas internos", data: "Dados e análise", experiments: "Experimentos" },
   },
+
   services: {
     eyebrow: "Serviços",
     title: "Como posso ajudar",
@@ -244,23 +210,12 @@ const es: Dictionary = {
     viewCase: "Ver caso de estudio",
   },
   explorer: {
-    root: "PROYECTOS",
-    menu: { file: "Archivo", view: "Ver", help: "Ayuda" },
-    up: "Subir un nivel",
-    viewIcons: "Iconos grandes",
-    viewList: "Detalles",
-    objects: "{n} objeto(s)",
-    columns: { name: "Nombre", type: "Tipo" },
-    folderType: "Carpeta",
-    emptyFolder: "Todavía no hay proyectos públicos en esta carpeta.",
-    noResults: "Ningún proyecto coincide con este filtro.",
-    filterLabel: "Filtrar proyectos",
-    filterPlaceholder: "filtrar por nombre o herramienta",
+    foldersNav: "Carpetas",
+    file: "PROYECTO",
     close: "Cerrar",
-    back: "Volver",
-    hint: "Doble clic abre · flechas mueven · Enter abre · Retroceso sube · Esc cierra",
     folders: { automation: "Automatización", "internal-systems": "Sistemas internos", data: "Datos y análisis", experiments: "Experimentos" },
   },
+
   services: {
     eyebrow: "Servicios",
     title: "Cómo puedo ayudar",
