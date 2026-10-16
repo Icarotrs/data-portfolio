@@ -1,4 +1,4 @@
-import type { ProjectKind } from "@site";
+import type { FolderId, ProjectKind } from "@site";
 import type { Locale } from "./config";
 
 /**
@@ -12,6 +12,25 @@ export interface Dictionary {
   kinds: Record<ProjectKind, string>;
   hero: { eyebrow: string; title: string; intro: string; cta: string; seeProjects: string; steps: [string, string, string] };
   projects: { eyebrow: string; title: string; intro: string; viewCase: string };
+  explorer: {
+    root: string;
+    menu: { file: string; view: string; help: string };
+    up: string;
+    viewIcons: string;
+    viewList: string;
+    /** "{n}" is replaced with the number of objects. */
+    objects: string;
+    columns: { name: string; type: string };
+    folderType: string;
+    emptyFolder: string;
+    noResults: string;
+    filterLabel: string;
+    filterPlaceholder: string;
+    close: string;
+    back: string;
+    hint: string;
+    folders: Record<FolderId, string>;
+  };
   services: {
     eyebrow: string;
     title: string;
@@ -64,6 +83,24 @@ const en: Dictionary = {
     intro: "A few examples of what I build, not the full list. Each one is a demo built around a common small-business problem, with simulated or public data: open it to see the problem, the build and the expected result.",
     viewCase: "View case study",
   },
+  explorer: {
+    root: "PROJECTS",
+    menu: { file: "File", view: "View", help: "Help" },
+    up: "Up one level",
+    viewIcons: "Large icons",
+    viewList: "Details",
+    objects: "{n} object(s)",
+    columns: { name: "Name", type: "Type" },
+    folderType: "Folder",
+    emptyFolder: "No public projects in this folder yet.",
+    noResults: "No project matches this filter.",
+    filterLabel: "Filter projects",
+    filterPlaceholder: "filter by name or tool",
+    close: "Close",
+    back: "Back",
+    hint: "Double-click opens · arrows move · Enter opens · Backspace goes up · Esc closes",
+    folders: { automation: "Automation", "internal-systems": "Internal systems", data: "Data & analysis", experiments: "Experiments" },
+  },
   services: {
     eyebrow: "Services",
     title: "How I can help",
@@ -77,7 +114,7 @@ const en: Dictionary = {
   contact: {
     eyebrow: "Contact",
     title: "Let's talk?",
-    body: "Tell me what you still do by hand. Send me a message on Upwork.",
+    body: "Tell me what you still do by hand. Send me an email, or a message on Upwork.",
     cta: "Hire me on Upwork",
   },
   footer: { note: "Demo projects use public, simulated or fictitious data" },
@@ -126,6 +163,24 @@ const pt: Dictionary = {
     intro: "Alguns exemplos do que eu construo, não a lista completa. Cada um é uma demonstração montada em torno de um problema comum de pequenas empresas, com dados simulados ou públicos: abra para ver o problema, a solução e o resultado esperado.",
     viewCase: "Ver estudo de caso",
   },
+  explorer: {
+    root: "PROJETOS",
+    menu: { file: "Arquivo", view: "Exibir", help: "Ajuda" },
+    up: "Subir um nível",
+    viewIcons: "Ícones grandes",
+    viewList: "Detalhes",
+    objects: "{n} objeto(s)",
+    columns: { name: "Nome", type: "Tipo" },
+    folderType: "Pasta",
+    emptyFolder: "Ainda não há projetos públicos nesta pasta.",
+    noResults: "Nenhum projeto corresponde a este filtro.",
+    filterLabel: "Filtrar projetos",
+    filterPlaceholder: "filtrar por nome ou ferramenta",
+    close: "Fechar",
+    back: "Voltar",
+    hint: "Clique duplo abre · setas movem · Enter abre · Backspace sobe · Esc fecha",
+    folders: { automation: "Automação", "internal-systems": "Sistemas internos", data: "Dados e análise", experiments: "Experimentos" },
+  },
   services: {
     eyebrow: "Serviços",
     title: "Como posso ajudar",
@@ -139,7 +194,7 @@ const pt: Dictionary = {
   contact: {
     eyebrow: "Contato",
     title: "Vamos conversar?",
-    body: "Me conte o que você ainda faz à mão. Mande uma mensagem pelo Upwork.",
+    body: "Me conte o que você ainda faz à mão. Mande um e-mail ou uma mensagem pelo Upwork.",
     cta: "Contratar no Upwork",
   },
   footer: { note: "Projetos de demonstração com dados públicos, simulados ou fictícios" },
@@ -188,6 +243,24 @@ const es: Dictionary = {
     intro: "Algunos ejemplos de lo que construyo, no la lista completa. Cada uno es una demostración construida sobre un problema común de pequeñas empresas, con datos simulados o públicos: ábrelo para ver el problema, la solución y el resultado esperado.",
     viewCase: "Ver caso de estudio",
   },
+  explorer: {
+    root: "PROYECTOS",
+    menu: { file: "Archivo", view: "Ver", help: "Ayuda" },
+    up: "Subir un nivel",
+    viewIcons: "Iconos grandes",
+    viewList: "Detalles",
+    objects: "{n} objeto(s)",
+    columns: { name: "Nombre", type: "Tipo" },
+    folderType: "Carpeta",
+    emptyFolder: "Todavía no hay proyectos públicos en esta carpeta.",
+    noResults: "Ningún proyecto coincide con este filtro.",
+    filterLabel: "Filtrar proyectos",
+    filterPlaceholder: "filtrar por nombre o herramienta",
+    close: "Cerrar",
+    back: "Volver",
+    hint: "Doble clic abre · flechas mueven · Enter abre · Retroceso sube · Esc cierra",
+    folders: { automation: "Automatización", "internal-systems": "Sistemas internos", data: "Datos y análisis", experiments: "Experimentos" },
+  },
   services: {
     eyebrow: "Servicios",
     title: "Cómo puedo ayudar",
@@ -201,7 +274,7 @@ const es: Dictionary = {
   contact: {
     eyebrow: "Contacto",
     title: "¿Hablamos?",
-    body: "Cuéntame qué sigues haciendo a mano. Envíame un mensaje por Upwork.",
+    body: "Cuéntame qué sigues haciendo a mano. Envíame un correo o un mensaje por Upwork.",
     cta: "Contratar en Upwork",
   },
   footer: { note: "Proyectos de demostración con datos públicos, simulados o ficticios" },

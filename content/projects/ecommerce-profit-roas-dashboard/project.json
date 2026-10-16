@@ -4,6 +4,7 @@
   "title": "E-commerce Profit & ROAS Dashboard",
   "kind": "dashboard",
   "status": "in-progress",
+  "folder": "data",
   "summary": "Real margin per product and per order after shipping and fees, plus a marketing page with ad spend, sales and ROAS for every channel.",
   "stack": [
     "Power BI",
@@ -18,7 +19,7 @@
     "label": "orders in the public Olist dataset the report is built on (Brazilian marketplace, values in BRL)",
     "basis": "public"
   },
-  "note": "Build in progress. Public dataset from a Brazilian marketplace (Olist, values in BRL). Product cost and ad spend will be simulated (Olist does not publish them) and labeled as such. Screens and video are mock-ups.",
+  "note": "Public dataset from a Brazilian marketplace (Olist, values in BRL). Product cost and ad spend will be simulated (Olist does not publish them) and labeled as such. Screens and video are mock-ups.",
   "links": {
     "github": "https://github.com/Icarotrs/data-portfolio/tree/main/integrations/powerbi/ecommerce-profit-roas",
     "demo": ""
@@ -47,14 +48,14 @@
       "poster": "/projects/ecommerce-profit-roas-dashboard/overview.webp"
     }
   },
-  "upworkBlurb": "Demo project, build in progress. Power BI dashboard that shows real profit, not just revenue: net margin per product and per order after shipping, marketplace and payment fees, with loss-making products flagged. A Marketing page will compare simulated ad spend and sales per channel (ROAS, cost per new customer) and flag channels under 3× ROAS. Built on the public Olist dataset from a Brazilian marketplace (~99k orders, values in BRL); product cost and ad spend are simulated and labeled. Stack: Power BI, DAX, Power Query, SQL, Python.",
+  "upworkBlurb": "Demo project. Power BI dashboard that shows real profit, not just revenue: net margin per product and per order after shipping, marketplace and payment fees, with loss-making products flagged. A Marketing page will compare simulated ad spend and sales per channel (ROAS, cost per new customer) and flag channels under 3× ROAS. Built on the public Olist dataset from a Brazilian marketplace (~99k orders, values in BRL); product cost and ad spend are simulated and labeled. Stack: Power BI, DAX, Power Query, SQL, Python.",
   "i18n": {
     "pt": {
       "title": "Dashboard de Lucro e ROAS para E-commerce",
       "summary": "Margem real por produto e por pedido depois de frete e taxas, mais uma página de marketing com gasto em anúncios, vendas e ROAS de cada canal.",
       "result": "Margem líquida real por pedido e por produto, com os produtos com prejuízo destacados. Com o gasto simulado em anúncios, a página de Marketing vai destacar quais canais retornam menos de 3× de ROAS.",
       "metricLabel": "pedidos no dataset público da Olist usado no relatório (marketplace brasileiro, valores em R$)",
-      "note": "Construção em andamento. Dataset público de um marketplace brasileiro (Olist, valores em R$). O custo dos produtos e o gasto em anúncios vão ser simulados (a Olist não os publica) e identificados. Telas e vídeo são simulações.",
+      "note": "Dataset público de um marketplace brasileiro (Olist, valores em R$). O custo dos produtos e o gasto em anúncios vão ser simulados (a Olist não os publica) e identificados. Telas e vídeo são simulações.",
       "alts": [
         "Visão de lucro: faturamento, taxas, frete e margem líquida por mês e categoria",
         "Produtos ordenados por margem líquida, com os SKUs que dão prejuízo destacados",
@@ -73,7 +74,7 @@
       "summary": "Margen real por producto y por pedido después de envío y comisiones, más una página de marketing con gasto en anuncios, ventas y ROAS por canal.",
       "result": "Margen neto real por pedido y por producto, con los productos con pérdidas marcados. Con el gasto simulado en anuncios, la página de Marketing marcará qué canales devuelven menos de 3× de ROAS.",
       "metricLabel": "pedidos en el dataset público de Olist usado en el informe (marketplace brasileño, valores en BRL)",
-      "note": "Construcción en curso. Dataset público de un marketplace brasileño (Olist, valores en BRL). El costo de los productos y el gasto en anuncios serán simulados (Olist no los publica) y estarán identificados. Las pantallas y el video son simulaciones.",
+      "note": "Dataset público de un marketplace brasileño (Olist, valores en BRL). El costo de los productos y el gasto en anuncios serán simulados (Olist no los publica) y estarán identificados. Las pantallas y el video son simulaciones.",
       "alts": [
         "Vista de rentabilidad: facturación, comisiones, envío y margen neto por mes y categoría",
         "Productos ordenados por margen neto, con los SKUs que pierden dinero destacados",

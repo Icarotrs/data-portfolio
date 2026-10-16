@@ -1,8 +1,8 @@
 TITLE
 Low-Stock Alerts
 
-DESCRIPTION (497/600 characters)
-Demo project, build in progress. Low-stock alerts in Google Sheets + Apps Script for a small online store: 30 days of sales imported from a store CSV export, then per product the average daily sales, days of stock left, a reorder point (supplier lead time plus a one-week buffer) and a suggested order for 45 days. A script will check every morning at 7am and email purchasing what to reorder, with a reorder log and a Settings tab. Fictitious store data. Stack: Google Sheets, Apps Script, Gmail.
+DESCRIPTION (478/600 characters)
+Demo project. Low-stock alerts in Google Sheets + Apps Script for a small online store: 30 days of sales imported from a store CSV export, then per product the average daily sales, days of stock left, a reorder point (supplier lead time plus a one-week buffer) and a suggested order for 45 days. A script will check every morning at 7am and email purchasing what to reorder, with a reorder log and a Settings tab. Fictitious store data. Stack: Google Sheets, Apps Script, Gmail.
 
 SKILLS
 Google Sheets, Apps Script, Gmail, Shopify export

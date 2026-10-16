@@ -4,6 +4,7 @@
   "title": "Messy Data Extractor",
   "kind": "extraction",
   "status": "in-progress",
+  "folder": "data",
   "summary": "Data extraction from messy CSV, Excel and PDF files: tables will be pulled out, cleaned and merged into one consistent sheet.",
   "stack": [
     "Python (pandas, pdfplumber)",
@@ -15,7 +16,7 @@
     "label": "of retyping per week, estimated for 5 supplier files a week at about 45 minutes each (5 × 45 min ≈ 3.8 h)",
     "basis": "estimated"
   },
-  "note": "Build in progress. Screens and video are mock-ups with fictitious supplier files.",
+  "note": "Screens and video are mock-ups with fictitious supplier files.",
   "links": {
     "github": "https://github.com/Icarotrs/data-portfolio/tree/main/integrations/python/messy-data-extractor",
     "demo": ""
@@ -36,14 +37,14 @@
       "poster": "/projects/messy-data-extractor/before-after.webp"
     }
   },
-  "upworkBlurb": "Demo project, build in progress. Data extraction and cleanup pipeline in Python (pandas, pdfplumber): tables from messy CSV, Excel and text-based PDF files (semicolons, European decimals, two-row headers, mixed date formats) will be normalized and merged into one Google Sheet with a summary tab and a log of every fix. It handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format. Designed to save about 4 hours a week (estimate based on 5 supplier files a week at about 45 minutes each).",
+  "upworkBlurb": "Demo project. Data extraction and cleanup pipeline in Python (pandas, pdfplumber): tables from messy CSV, Excel and text-based PDF files (semicolons, European decimals, two-row headers, mixed date formats) will be normalized and merged into one Google Sheet with a summary tab and a log of every fix. It handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format. Designed to save about 4 hours a week (estimate based on 5 supplier files a week at about 45 minutes each).",
   "i18n": {
     "pt": {
       "title": "Extrator de Dados Bagunçados",
       "summary": "Extração de dados de arquivos CSV, Excel e PDF bagunçados: as tabelas vão ser extraídas, limpas e unidas numa planilha consistente.",
       "result": "Arquivos de fornecedores com datas, preços e colunas misturados vão virar uma tabela consistente, com registro de cada correção.",
       "metricLabel": "de redigitação por semana, estimadas para 5 arquivos de fornecedor por semana a cerca de 45 minutos cada (5 × 45 min ≈ 3,8 h)",
-      "note": "Construção em andamento. Telas e vídeo são simulações com arquivos fictícios de fornecedores.",
+      "note": "Telas e vídeo são simulações com arquivos fictícios de fornecedores.",
       "alts": [
         "Antes e depois: um CSV bagunçado de fornecedor virou uma planilha limpa e consistente",
         "Execução da importação: arquivos detectados, correções aplicadas e mudanças de preço desde a última importação"
@@ -60,7 +61,7 @@
       "summary": "Extracción de datos de archivos CSV, Excel y PDF desordenados: las tablas se extraerán, limpiarán y unirán en una hoja consistente.",
       "result": "Archivos de proveedores con fechas, precios y columnas mezclados se convertirán en una tabla consistente, con registro de cada corrección.",
       "metricLabel": "de reescritura por semana, estimadas para 5 archivos de proveedor por semana a cerca de 45 minutos cada uno (5 × 45 min ≈ 3,8 h)",
-      "note": "Construcción en curso. Las pantallas y el video son simulaciones con archivos ficticios de proveedores.",
+      "note": "Las pantallas y el video son simulaciones con archivos ficticios de proveedores.",
       "alts": [
         "Antes y después: un CSV desordenado de proveedor convertido en una hoja limpia y consistente",
         "Ejecución de la importación: archivos detectados, correcciones aplicadas y cambios de precio desde la última importación"

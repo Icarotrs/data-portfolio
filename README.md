@@ -34,7 +34,8 @@ Each project is a folder in `content/projects/<slug>/`:
 
 - `project.json` — metadata in English (validated at build time):
    - `order`, `number`, `title`, `kind` (`integration`, `automation`, `ai`, `extraction`, `dashboard`), `summary`
-   - `status`: `built` (the deliverable exists in this repo) or `in-progress` (shown with an "In progress" seal on the card, the page and the cover)
+   - `status`: `built` or `in-progress` (internal only, not shown on the site; it decides whether the story says "What I built" or "How I'd build it")
+   - `folder`: where the project is filed in the explorer (`automation`, `internal-systems`, `data`, `experiments`; order and list in `site.config.ts → folders`)
    - `stack` (array), `result` (one sentence), `metric` (`value` + `label`, and `basis` when the number is not measured: `estimated` — the label must state the assumption and the math —, `simulated`, `setting` for a design rule, or `public` for a fact about a public dataset; the card, page and cover show the seal)
    - optional `flow` (`[{ tool, label }]`), drawn as a step diagram on the project page
    - `media.screenshots` (`src` + `alt`), `media.video`, optional `note`, `links`

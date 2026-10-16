@@ -4,6 +4,7 @@
   "title": "Shopify → Sheets → AI → Alerts",
   "kind": "integration",
   "status": "built",
+  "folder": "automation",
   "summary": "Every new Shopify order is logged to Google Sheets, classified by AI for risk, priority and customer type, and flagged in Slack or by email when it needs a person.",
   "stack": [
     "n8n",

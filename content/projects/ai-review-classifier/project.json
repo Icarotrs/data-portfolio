@@ -4,6 +4,7 @@
   "title": "AI Review Classifier",
   "kind": "ai",
   "status": "in-progress",
+  "folder": "data",
   "summary": "A Google Sheets workflow that will send new reviews to the Claude API and write the topic, sentiment and a short summary straight back into the sheet.",
   "stack": [
     "Google Sheets",
@@ -18,7 +19,7 @@
     "label": "confidence threshold: rows below it will be flagged for a person to check",
     "basis": "setting"
   },
-  "note": "Build in progress. Screens and video are mock-ups with fictitious reviews.",
+  "note": "Screens and video are mock-ups with fictitious reviews.",
   "flow": [
     {
       "tool": "Google Sheets",
@@ -57,14 +58,14 @@
       "poster": "/projects/ai-review-classifier/tagged-sheet.webp"
     }
   },
-  "upworkBlurb": "Demo project, build in progress. AI integration inside Google Sheets: an Apps Script workflow will send new customer reviews to the Claude API in batches of 25 and write the topic, sentiment and a one-line summary back into the sheet as validated JSON. It will run from a custom menu or a nightly trigger, resume large sheets in parts, and flag rows under 80% confidence for a person to check. A 300-review hand check will measure accuracy before any number is published. Fictitious reviews. Stack: Google Sheets, Apps Script, Claude API.",
+  "upworkBlurb": "Demo project. AI integration inside Google Sheets: an Apps Script workflow will send new customer reviews to the Claude API in batches of 25 and write the topic, sentiment and a one-line summary back into the sheet as validated JSON. It will run from a custom menu or a nightly trigger, resume large sheets in parts, and flag rows under 80% confidence for a person to check. A 300-review hand check will measure accuracy before any number is published. Fictitious reviews. Stack: Google Sheets, Apps Script, Claude API.",
   "i18n": {
     "pt": {
       "title": "Classificador de Avaliações com IA",
       "summary": "Um fluxo no Google Sheets que vai enviar as avaliações novas para a API da Claude e gravar tema, sentimento e um resumo curto direto na planilha.",
       "result": "Vai rodar por um menu no Google Sheets ou em horário programado; as linhas de baixa confiança vão para uma pessoa conferir. A precisão vai ser medida com uma conferência manual de 300 avaliações antes de qualquer número ser publicado.",
       "metricLabel": "de limite de confiança: linhas abaixo dele vão ser sinalizadas para uma pessoa conferir",
-      "note": "Construção em andamento. Telas e vídeo são simulações com avaliações fictícias.",
+      "note": "Telas e vídeo são simulações com avaliações fictícias.",
       "flow": [
         "Avaliações novas chegam à planilha",
         "Enviadas em lotes de 25",
@@ -82,7 +83,7 @@
       "summary": "Un flujo en Google Sheets que enviará las reseñas nuevas a la API de Claude y escribirá el tema, el sentimiento y un resumen corto directamente en la hoja.",
       "result": "Se ejecutará desde un menú en Google Sheets o de forma programada; las filas de baja confianza pasan a una persona. La precisión se medirá con una revisión manual de 300 reseñas antes de publicar cualquier número.",
       "metricLabel": "de umbral de confianza: las filas por debajo se marcarán para que una persona las revise",
-      "note": "Construcción en curso. Las pantallas y el video son simulaciones con reseñas ficticias.",
+      "note": "Las pantallas y el video son simulaciones con reseñas ficticias.",
       "flow": [
         "Llegan reseñas nuevas a la hoja",
         "Enviadas en lotes de 25",

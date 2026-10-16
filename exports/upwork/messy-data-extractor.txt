@@ -1,8 +1,8 @@
 TITLE
 Messy Data Extractor
 
-DESCRIPTION (543/600 characters)
-Demo project, build in progress. Data extraction and cleanup pipeline in Python (pandas, pdfplumber): tables from messy CSV, Excel and text-based PDF files (semicolons, European decimals, two-row headers, mixed date formats) will be normalized and merged into one Google Sheet with a summary tab and a log of every fix. It handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format. Designed to save about 4 hours a week (estimate based on 5 supplier files a week at about 45 minutes each).
+DESCRIPTION (524/600 characters)
+Demo project. Data extraction and cleanup pipeline in Python (pandas, pdfplumber): tables from messy CSV, Excel and text-based PDF files (semicolons, European decimals, two-row headers, mixed date formats) will be normalized and merged into one Google Sheet with a summary tab and a log of every fix. It handles different delimiters, encodings and multi-row headers, with a mapping file for each new supplier format. Designed to save about 4 hours a week (estimate based on 5 supplier files a week at about 45 minutes each).
 
 SKILLS
 Python (pandas, pdfplumber), Google Sheets

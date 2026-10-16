@@ -1,8 +1,8 @@
 TITLE
 Form-to-Sheet Automation
 
-DESCRIPTION (527/600 characters)
-Demo project, build in progress. Google Forms to Google Sheets automation with Apps Script: each response will be cleaned and written into a formatted sheet without breaking formulas, dropdowns or formatting, with a lock against simultaneous submissions. A weekly summary will be exported as a PDF and emailed every Monday, with a Settings tab for recipients. Designed to save about 3 hours a week (estimate based on 20 responses a day at about 2 minutes each). Fictitious data. Stack: Google Forms, Sheets, Apps Script, Gmail.
+DESCRIPTION (508/600 characters)
+Demo project. Google Forms to Google Sheets automation with Apps Script: each response will be cleaned and written into a formatted sheet without breaking formulas, dropdowns or formatting, with a lock against simultaneous submissions. A weekly summary will be exported as a PDF and emailed every Monday, with a Settings tab for recipients. Designed to save about 3 hours a week (estimate based on 20 responses a day at about 2 minutes each). Fictitious data. Stack: Google Forms, Sheets, Apps Script, Gmail.
 
 SKILLS
 Google Forms, Google Sheets, Apps Script, Gmail

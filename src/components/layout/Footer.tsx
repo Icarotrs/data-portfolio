@@ -9,6 +9,9 @@ export function Footer({ dict }: { dict: Dictionary }) {
           © {new Date().getFullYear()} {site.name} · {dict.footer.note}
         </p>
         <p className="flex gap-4">
+          <a href={`mailto:${site.links.email}`} className="hover:text-accent">
+            Email
+          </a>
           {[
             ["Upwork", site.links.upwork],
             ["LinkedIn", site.links.linkedin],

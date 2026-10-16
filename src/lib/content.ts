@@ -1,7 +1,7 @@
 import "server-only";
 import fs from "node:fs";
 import path from "node:path";
-import { site, type ProjectKind } from "@site";
+import { site, type FolderId, type ProjectKind } from "@site";
 import type { Locale } from "@/i18n/config";
 
 /**
@@ -30,6 +30,8 @@ export interface Project {
   kind: ProjectKind;
   /** "built": the deliverable exists in this repo. "in-progress": planned build, described in the future tense. */
   status: ProjectStatus;
+  /** Explorer folder (site.config.ts → folders). */
+  folder: FolderId;
   summary: string;
   stack: string[];
   result: string;
@@ -109,6 +111,9 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
   if (metric.basis !== undefined && !METRIC_BASES.includes(metric.basis as MetricBasis)) {
     fail(slug, `"metric.basis" must be one of ${METRIC_BASES.join(", ")}`);
   }
+  if (!site.folders.includes(raw.folder as FolderId)) {
+    fail(slug, `"folder" must be one of ${site.folders.join(", ")} (got "${raw.folder}")`);
+  }
   if (!PROJECT_STATUSES.includes(raw.status as ProjectStatus)) {
     fail(slug, `"status" must be one of ${PROJECT_STATUSES.join(", ")} (got "${raw.status}")`);
   }
@@ -127,6 +132,7 @@ function validate(slug: string, raw: Record<string, unknown>): Project {
     title: requireString(slug, raw.title, "title"),
     kind,
     status: raw.status as ProjectStatus,
+    folder: raw.folder as FolderId,
     summary: requireString(slug, raw.summary, "summary"),
     stack: raw.stack as string[],
     result: requireString(slug, raw.result, "result"),

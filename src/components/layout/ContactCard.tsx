@@ -2,7 +2,7 @@ import { site } from "@site";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { LinkButton } from "@/components/ui/LinkButton";
 
-/** Last section on every page: the only call to action is Upwork. */
+/** Last section on every page: email first, then Upwork and the other profiles. */
 export function ContactCard({ dict }: { dict: Dictionary }) {
   const t = dict.contact;
   return (
@@ -16,7 +16,10 @@ export function ContactCard({ dict }: { dict: Dictionary }) {
           {t.body}
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <LinkButton href={site.links.upwork} external>
+          <a href={`mailto:${site.links.email}`} className="label inline-flex h-9 items-center justify-center gap-2 rounded-[3px] bg-cta px-3.5 text-cta-fg transition hover:opacity-90">
+            {site.links.email}
+          </a>
+          <LinkButton href={site.links.upwork} external variant="ghost">
             {t.cta}
           </LinkButton>
           <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-accent">
