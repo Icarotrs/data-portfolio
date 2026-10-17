@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
           <h1 className="mt-4 text-balance text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{project.title}</h1>
           <p className="mt-5 max-w-[60ch] text-pretty text-[17px] leading-relaxed text-muted">{project.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <LinkButton href={site.links.upwork} external>
+            <LinkButton href={`mailto:${site.links.email}`}>
               {t.hireForThis}
             </LinkButton>
             {project.links.github && (
@@ -150,7 +150,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
           <p className="mt-3 text-[15px] text-muted">{project.metric.label}</p>
           <p className="mt-6 border-t border-line pt-5 text-pretty text-[16px] leading-relaxed">{project.result}</p>
           <div className="mt-6 md:mt-auto md:pt-6">
-            <LinkButton href={site.links.upwork} external>
+            <LinkButton href={`mailto:${site.links.email}`}>
               {t.hire}
             </LinkButton>
           </div>

@@ -34,9 +34,7 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <LanguageSwitch lang={lang} label={dict.nav.language} />
           <ThemeSwitch labels={dict.theme} />
           <a
-            href={site.links.upwork}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${site.links.email}`}
             className="label hidden h-9 items-center rounded-[3px] bg-cta px-3.5 text-cta-fg transition hover:opacity-90 sm:inline-flex"
           >
             {dict.nav.hire}

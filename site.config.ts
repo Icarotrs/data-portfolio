@@ -19,6 +19,7 @@ export const site = {
   // ── Links ───────────────────────────────────────────────────
   links: {
     email: "icaro.trs@gmail.com",
+    /** Hidden on the site for now; kept for the Upwork exports. */
     upwork: "https://www.upwork.com/freelancers/~01840d98e344af4b2d",
     linkedin: "https://www.linkedin.com/in/icarotrss/",
     github: "https://github.com/Icarotrs",

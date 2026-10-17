@@ -31,7 +31,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           {dict.hero.intro}
         </p>
         <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--i": 15 } as CSSProperties}>
-          <LinkButton href={site.links.upwork} external>
+          <LinkButton href={`mailto:${site.links.email}`}>
             {dict.hero.cta}
           </LinkButton>
           <LinkButton href={`/${lang}/#projects`} variant="ghost">

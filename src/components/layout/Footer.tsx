@@ -13,7 +13,6 @@ export function Footer({ dict }: { dict: Dictionary }) {
             Email
           </a>
           {[
-            ["Upwork", site.links.upwork],
             ["LinkedIn", site.links.linkedin],
             ["GitHub", site.links.github],
           ].map(([label, href]) => (

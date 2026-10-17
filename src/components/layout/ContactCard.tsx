@@ -1,8 +1,7 @@
 import { site } from "@site";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { LinkButton } from "@/components/ui/LinkButton";
 
-/** Last section on every page: email first, then Upwork and the other profiles. */
+/** Last section on every page: email first, then the other profiles. */
 export function ContactCard({ dict }: { dict: Dictionary }) {
   const t = dict.contact;
   return (
@@ -19,9 +18,6 @@ export function ContactCard({ dict }: { dict: Dictionary }) {
           <a href={`mailto:${site.links.email}`} className="label inline-flex h-9 items-center justify-center gap-2 rounded-[3px] bg-cta px-3.5 text-cta-fg transition hover:opacity-90">
             {site.links.email}
           </a>
-          <LinkButton href={site.links.upwork} external variant="ghost">
-            {t.cta}
-          </LinkButton>
           <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="label text-muted hover:text-accent">
             LinkedIn
           </a>

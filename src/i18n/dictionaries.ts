@@ -24,7 +24,7 @@ export interface Dictionary {
     title: string;
     items: { title: string; tools: string; body: string }[];
   };
-  contact: { eyebrow: string; title: string; body: string; cta: string };
+  contact: { eyebrow: string; title: string; body: string };
   footer: { note: string };
   project: {
     allProjects: string;
@@ -61,7 +61,7 @@ const en: Dictionary = {
     title: "My portfolio",
     intro:
       "I connect the tools your business already uses, automate the manual work and add AI where it actually saves time. Plus clear dashboards to see the results.",
-    cta: "Hire me on Upwork",
+    cta: "Email me",
     seeProjects: "See examples",
     steps: ["Connect", "Automate", "See results"],
   },
@@ -91,8 +91,7 @@ const en: Dictionary = {
   contact: {
     eyebrow: "Contact",
     title: "Let's talk?",
-    body: "Tell me what you still do by hand. Send me an email, or a message on Upwork.",
-    cta: "Hire me on Upwork",
+    body: "Tell me what you still do by hand. Send me an email.",
   },
   footer: { note: "Demo projects use public, simulated or fictitious data" },
   project: {
@@ -106,7 +105,7 @@ const en: Dictionary = {
     type: "Type",
     data: "Data",
     clientData: "Client data",
-    hire: "Hire me on Upwork",
+    hire: "Email me",
     screenshots: "Screens",
     comingSoon: "coming soon",
     nextProject: "Next project",
@@ -130,7 +129,7 @@ const pt: Dictionary = {
     title: "Meu portfólio",
     intro:
       "Conecto as ferramentas que sua empresa já usa, automatizo o trabalho manual e adiciono IA onde ela realmente economiza tempo. E dashboards claros para ver os resultados.",
-    cta: "Contratar no Upwork",
+    cta: "Fale comigo por e-mail",
     seeProjects: "Ver exemplos",
     steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
@@ -160,8 +159,7 @@ const pt: Dictionary = {
   contact: {
     eyebrow: "Contato",
     title: "Vamos conversar?",
-    body: "Me conte o que você ainda faz à mão. Mande um e-mail ou uma mensagem pelo Upwork.",
-    cta: "Contratar no Upwork",
+    body: "Me conte o que você ainda faz à mão. Mande um e-mail.",
   },
   footer: { note: "Projetos de demonstração com dados públicos, simulados ou fictícios" },
   project: {
@@ -175,7 +173,7 @@ const pt: Dictionary = {
     type: "Tipo",
     data: "Dados",
     clientData: "Dados do cliente",
-    hire: "Contratar no Upwork",
+    hire: "Fale comigo por e-mail",
     screenshots: "Telas",
     comingSoon: "em breve",
     nextProject: "Próximo projeto",
@@ -199,7 +197,7 @@ const es: Dictionary = {
     title: "Mi portafolio",
     intro:
       "Conecto las herramientas que tu empresa ya usa, automatizo el trabajo manual y añado IA donde de verdad ahorra tiempo. Y dashboards claros para ver los resultados.",
-    cta: "Contratar en Upwork",
+    cta: "Escríbeme por correo",
     seeProjects: "Ver ejemplos",
     steps: ["Conectar", "Automatizar", "Ver resultados"],
   },
@@ -229,8 +227,7 @@ const es: Dictionary = {
   contact: {
     eyebrow: "Contacto",
     title: "¿Hablamos?",
-    body: "Cuéntame qué sigues haciendo a mano. Envíame un correo o un mensaje por Upwork.",
-    cta: "Contratar en Upwork",
+    body: "Cuéntame qué sigues haciendo a mano. Envíame un correo.",
   },
   footer: { note: "Proyectos de demostración con datos públicos, simulados o ficticios" },
   project: {
@@ -244,7 +241,7 @@ const es: Dictionary = {
     type: "Tipo",
     data: "Datos",
     clientData: "Datos del cliente",
-    hire: "Contratar en Upwork",
+    hire: "Escríbeme por correo",
     screenshots: "Pantallas",
     comingSoon: "próximamente",
     nextProject: "Siguiente proyecto",
